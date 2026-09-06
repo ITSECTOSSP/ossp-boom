@@ -7,6 +7,9 @@ def login(request):
 def admin_dashboard(request):
     return render(request, 'admin_dashboard.html')
 
+def superadmin_dashboard(request):
+    return render(request, 'superadmin_dashboard.html')
+
 def superadmin_view_details(request):
     return render(request, 'superadmin_view_details.html')
 
