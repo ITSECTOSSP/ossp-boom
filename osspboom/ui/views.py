@@ -12,3 +12,6 @@ def superadmin_view_details(request):
 
 def employee_dashboard(request):
     return render(request, 'employee_dashboard.html')
+
+def admin_view_details(request):
+    return render(request, 'admin_view_details.html')
