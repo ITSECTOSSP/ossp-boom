@@ -18,3 +18,6 @@ def admin_view_details(request):
 
 def admin_dtr(request):
     return render(request, 'admin_dtr.html')
+
+def superadmin_dtr(request):
+    return render(request, 'superadmin_dtr.html')
