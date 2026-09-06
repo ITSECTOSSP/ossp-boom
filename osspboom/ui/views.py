@@ -15,3 +15,6 @@ def employee_dashboard(request):
 
 def admin_view_details(request):
     return render(request, 'admin_view_details.html')
+
+def admin_dtr(request):
+    return render(request, 'admin_dtr.html')
