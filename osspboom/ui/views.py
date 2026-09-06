@@ -7,8 +7,8 @@ def login(request):
 def admin_dashboard(request):
     return render(request, 'admin_dashboard.html')
 
-def view_details(request):
-    return render(request, 'view_details.html')
+def superadmin_view_details(request):
+    return render(request, 'superadmin_view_details.html')
 
 def employee_dashboard(request):
     return render(request, 'employee_dashboard.html')
