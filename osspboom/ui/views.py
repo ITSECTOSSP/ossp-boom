@@ -9,3 +9,6 @@ def admin_dashboard(request):
 
 def view_details(request):
     return render(request, 'view_details.html')
+
+def employee_dashboard(request):
+    return render(request, 'employee_dashboard.html')
