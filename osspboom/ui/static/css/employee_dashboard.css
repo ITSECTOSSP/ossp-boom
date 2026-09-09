@@ -2309,3 +2309,3529 @@ body {
     }
 
 }
+
+/* =========================================
+   FLOATING ACTION BUTTON
+========================================= */
+
+.floating-actions {
+    position: fixed;
+
+    right: 30px;
+
+    bottom: 30px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-end;
+
+    z-index: 1000;
+}
+
+
+/* =========================================
+   FLOATING MENU
+========================================= */
+
+.floating-menu {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-end;
+
+    gap: 10px;
+
+    margin-bottom: 12px;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform: translateY(15px);
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease,
+        visibility 0.2s ease;
+}
+
+
+/* =========================================
+   SHOW MENU
+========================================= */
+
+.floating-actions.active .floating-menu {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform: translateY(0);
+
+}
+
+
+/* =========================================
+   MAIN FLOATING BUTTON
+========================================= */
+
+.floating-main {
+
+    width: 58px;
+
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #F2B705;
+
+    color: #ffffff;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.30);
+
+    transition:
+        transform 0.25s ease,
+        background 0.2s ease;
+}
+
+
+.floating-main:hover {
+
+    background: #c49405;
+
+    transform: scale(1.05);
+
+}
+
+
+.floating-actions.active .floating-main {
+
+    transform: rotate(45deg);
+
+}
+
+
+/* =========================================
+   FLOATING ACTION BUTTONS
+========================================= */
+
+.floating-action {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 11px 16px;
+
+    border: none;
+
+    border-radius: 25px;
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.20);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.floating-action i {
+
+    font-size: 14px;
+
+}
+
+/* =========================================
+   ADD EMPLOYEE
+========================================= */
+
+.add-action {
+
+    background: #075ca8;
+
+}
+
+
+.add-action:hover {
+
+    background: #063b73;
+
+    transform: translateX(-3px);
+
+    box-shadow:
+        0 6px 15px rgba(0, 0, 0, 0.25);
+
+}
+
+/* =========================================================
+   APPLY LEAVE MODAL
+========================================================= */
+
+.leave-modal-overlay {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.55);
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 9999;
+
+    padding: 20px;
+}
+
+.leave-modal-overlay.active {
+    display: flex;
+}
+
+
+/* =========================================================
+   MODAL BOX
+========================================================= */
+
+.leave-modal {
+    position: relative;
+
+    width: 100%;
+    max-width: 430px;
+
+    background: #ffffff;
+
+    border-radius: 20px;
+
+    padding: 35px 30px 30px;
+
+    text-align: center;
+
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+
+    animation: leaveModalShow 0.25s ease;
+}
+
+
+@keyframes leaveModalShow {
+
+    from {
+        opacity: 0;
+        transform: translateY(-15px) scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+========================================================= */
+
+.leave-modal-close {
+
+    position: absolute;
+
+    top: 15px;
+    right: 15px;
+
+    width: 35px;
+    height: 35px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #777;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: 0.2s ease;
+}
+
+
+.leave-modal-close:hover {
+
+    background: #f1f1f1;
+
+    color: #c92127;
+
+}
+
+
+/* =========================================================
+   MODAL ICON
+========================================================= */
+
+.leave-modal-icon {
+
+    width: 70px;
+    height: 70px;
+
+    margin: 0 auto 15px;
+
+    border-radius: 50%;
+
+    background: #eaf3ff;
+
+    color: #075ca8;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 30px;
+}
+
+
+/* =========================================================
+   MODAL TEXT
+========================================================= */
+
+.leave-modal h2 {
+
+    margin: 0;
+
+    color: #063b73;
+
+    font-size: 24px;
+
+    font-weight: 700;
+}
+
+
+.leave-modal p {
+
+    margin: 8px 0 25px;
+
+    color: #777;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   LEAVE TYPE OPTIONS
+========================================================= */
+
+.leave-type-options {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+
+/* =========================================================
+   LEAVE TYPE BUTTON
+========================================================= */
+
+.leave-type-btn {
+
+    width: 100%;
+
+    border: none;
+
+    border-radius: 12px;
+
+    padding: 15px 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+
+.leave-type-btn i {
+
+    width: 45px;
+    height: 45px;
+
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 20px;
+
+    flex-shrink: 0;
+}
+
+
+.leave-type-btn div {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+
+.leave-type-btn strong {
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    color: #333;
+}
+
+
+.leave-type-btn span {
+
+    font-size: 12px;
+
+    color: #777;
+}
+
+
+/* =========================================================
+   COS
+========================================================= */
+
+.cos-btn {
+
+    background: #eef6ff;
+}
+
+
+.cos-btn i {
+
+    background: #d7eaff;
+
+    color: #075ca8;
+}
+
+
+.cos-btn:hover {
+
+    background: #dceeff;
+
+    transform: translateY(-2px);
+
+}
+
+
+/* =========================================================
+   PLANTILLA
+========================================================= */
+
+.plantilla-btn {
+
+    background: #fff1f1;
+}
+
+
+.plantilla-btn i {
+
+    background: #ffe0e0;
+
+    color: #c92127;
+}
+
+
+.plantilla-btn:hover {
+
+    background: #ffe4e4;
+
+    transform: translateY(-2px);
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .leave-modal {
+
+        max-width: 100%;
+
+        padding: 32px 20px 25px;
+
+        border-radius: 18px;
+    }
+
+    .leave-modal h2 {
+
+        font-size: 22px;
+    }
+
+    .leave-type-btn {
+
+        padding: 13px 15px;
+    }
+
+}
+
+/* =========================================================
+   COS LEAVE APPLICATION MODAL
+========================================================= */
+
+.cos-modal-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        rgba(3, 25, 50, 0.70);
+
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+
+    z-index: 10000;
+
+    overflow-y: auto;
+}
+
+
+.cos-modal-overlay.active {
+
+    display: flex;
+
+}
+
+
+/* =========================================================
+   COS MODAL BOX
+========================================================= */
+
+.cos-leave-modal {
+
+    position: relative;
+
+    width: 100%;
+
+    max-width: 900px;
+
+    max-height: calc(100vh - 40px);
+
+    background: #ffffff;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.30);
+
+    overflow-y: auto;
+
+    animation:
+        cosModalShow 0.25s ease;
+
+}
+
+
+@keyframes cosModalShow {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(20px)
+            scale(0.97);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+/* =========================================================
+   COS MODAL HEADER
+========================================================= */
+
+.cos-modal-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 24px 28px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #063b73 0%,
+            #075ca8 100%
+        );
+
+    color: #ffffff;
+
+}
+
+
+.cos-modal-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    min-width: 0;
+
+}
+
+
+.cos-modal-icon {
+
+    width: 48px;
+
+    height: 48px;
+
+    min-width: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background:
+        rgba(255, 255, 255, 0.16);
+
+    color: #ffffff;
+
+    font-size: 21px;
+
+}
+
+
+.cos-modal-label {
+
+    display: block;
+
+    margin-bottom: 3px;
+
+    color:
+        rgba(255, 255, 255, 0.72);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+}
+
+
+.cos-modal-header h2 {
+
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 21px;
+
+    font-weight: 800;
+
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+========================================================= */
+
+.cos-close-btn {
+
+    width: 38px;
+
+    height: 38px;
+
+    min-width: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, 0.12);
+
+    color: #ffffff;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+
+.cos-close-btn:hover {
+
+    background:
+        rgba(255, 255, 255, 0.22);
+
+    transform: rotate(90deg);
+
+}
+
+
+/* =========================================================
+   COS PROGRESS
+========================================================= */
+
+.cos-progress {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    width: 100%;
+
+    padding: 22px 35px;
+
+    background: #f7f9fc;
+
+    border-bottom:
+        1px solid #e5e9ef;
+
+}
+
+
+.cos-progress-step {
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 7px;
+
+    min-width: 75px;
+
+    color: #9aa3ad;
+
+    text-align: center;
+
+}
+
+
+.cos-progress-step span {
+
+    width: 34px;
+
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #e3e7ec;
+
+    color: #7d8792;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+
+}
+
+
+.cos-progress-step small {
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+}
+
+
+.cos-progress-step.active {
+
+    color: #063b73;
+
+}
+
+
+.cos-progress-step.active span {
+
+    background: #075ca8;
+
+    color: #ffffff;
+
+    box-shadow:
+        0 4px 10px rgba(7, 92, 168, 0.25);
+
+}
+
+
+.cos-progress-step.completed {
+
+    color: #218838;
+
+}
+
+
+.cos-progress-step.completed span {
+
+    background: #218838;
+
+    color: #ffffff;
+
+}
+
+
+.cos-progress-line {
+
+    flex: 1;
+
+    height: 2px;
+
+    margin:
+        16px 8px 0;
+
+    background: #dfe4ea;
+
+}
+
+
+/* =========================================================
+   FORM STEPS
+========================================================= */
+
+.cos-form-step {
+
+    display: none;
+
+    padding: 30px;
+
+}
+
+
+.cos-form-step.active {
+
+    display: block;
+
+}
+
+
+/* =========================================================
+   STEP HEADING
+========================================================= */
+
+.cos-step-heading {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.cos-step-icon {
+
+    width: 44px;
+
+    height: 44px;
+
+    min-width: 44px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background: #eaf3ff;
+
+    color: #075ca8;
+
+    font-size: 18px;
+
+}
+
+
+.cos-step-heading h3 {
+
+    margin: 0 0 4px;
+
+    color: #063b73;
+
+    font-size: 18px;
+
+    font-weight: 800;
+
+}
+
+
+.cos-step-heading p {
+
+    margin: 0;
+
+    color: #777;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+}
+
+
+/* =========================================================
+   FORM GRID
+========================================================= */
+
+.cos-form-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+
+}
+
+
+.cos-field {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+    min-width: 0;
+
+}
+
+
+.cos-field.full-width {
+
+    grid-column: 1 / -1;
+
+}
+
+
+.cos-field label {
+
+    color: #344054;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+}
+
+
+.cos-field input,
+.cos-field select {
+
+    width: 100%;
+
+    height: 42px;
+
+    padding:
+        0 12px;
+
+    border:
+        1px solid #dfe4ea;
+
+    border-radius: 7px;
+
+    outline: none;
+
+    background: #ffffff;
+
+    color: #333;
+
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 500;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+
+}
+
+
+.cos-field input::placeholder {
+
+    color: #a0a6ad;
+
+}
+
+
+.cos-field input:focus,
+.cos-field select:focus {
+
+    border-color: #075ca8;
+
+    box-shadow:
+        0 0 0 3px rgba(7, 92, 168, 0.10);
+
+}
+
+
+.cos-field input[readonly] {
+
+    background: #f5f7fa;
+
+    color: #667085;
+
+    cursor: not-allowed;
+
+}
+
+
+/* =========================================================
+   STEP FOOTER
+========================================================= */
+
+.cos-step-footer {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 30px;
+
+    padding-top: 20px;
+
+    border-top:
+        1px solid #e7eaee;
+
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.cos-back-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    min-width: 100px;
+
+    height: 40px;
+
+    padding:
+        0 16px;
+
+    border:
+        1px solid #dfe4ea;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #667085;
+
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+
+}
+
+
+.cos-back-btn:hover {
+
+    background: #f5f7fa;
+
+    border-color: #cbd2da;
+
+    color: #063b73;
+
+}
+
+
+/* =========================================================
+   NEXT BUTTON
+========================================================= */
+
+.cos-next-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    min-width: 100px;
+
+    height: 40px;
+
+    padding:
+        0 18px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #063b73,
+            #075ca8
+        );
+
+    color: #ffffff;
+
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 10px rgba(7, 92, 168, 0.20);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+
+.cos-next-btn:hover {
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 6px 14px rgba(7, 92, 168, 0.28);
+
+}
+
+
+.cos-next-btn i,
+.cos-back-btn i {
+
+    font-size: 10px;
+
+}
+
+
+/* =========================================================
+   SICK LEAVE SECTION
+========================================================= */
+
+.cos-sick-section {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+
+    grid-column: 1 / -1;
+
+    padding: 18px;
+
+    border:
+        1px solid #e1e8f0;
+
+    border-radius: 10px;
+
+    background: #f7faff;
+
+}
+
+
+.cos-section-title {
+
+    grid-column: 1 / -1;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding-bottom: 10px;
+
+    border-bottom:
+        1px solid #e1e8f0;
+
+    color: #063b73;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+}
+
+
+.cos-section-title i {
+
+    color: #c92127;
+
+}
+
+
+/* =========================================================
+   REVIEW CONTAINER
+========================================================= */
+
+.cos-review-container {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+
+}
+
+
+.cos-review-section {
+
+    padding: 20px;
+
+    border:
+        1px solid #e3e7ec;
+
+    border-radius: 10px;
+
+    background: #f9fafb;
+
+}
+
+
+.cos-review-section h4 {
+
+    margin: 0 0 16px;
+
+    color: #063b73;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.4px;
+
+}
+
+
+.cos-review-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
+
+}
+
+
+.cos-review-grid > div {
+
+    min-width: 0;
+
+}
+
+
+.cos-review-grid .full-width {
+
+    grid-column: 1 / -1;
+
+}
+
+
+.cos-review-grid span {
+
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #89919b;
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+}
+
+
+.cos-review-grid strong {
+
+    display: block;
+
+    color: #344054;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    line-height: 1.5;
+
+    overflow-wrap: anywhere;
+
+}
+
+
+/* =========================================================
+   SUBMIT NOTE
+========================================================= */
+
+.cos-submit-note {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 9px;
+
+    padding: 13px 15px;
+
+    border:
+        1px solid #d9e8f8;
+
+    border-radius: 8px;
+
+    background: #eef6ff;
+
+    color: #526477;
+
+    font-size: 9px;
+
+    line-height: 1.5;
+
+}
+
+
+.cos-submit-note i {
+
+    margin-top: 1px;
+
+    color: #075ca8;
+
+    font-size: 11px;
+
+}
+
+
+/* =========================================================
+   SUBMIT BUTTON
+========================================================= */
+
+.cos-submit-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    min-width: 155px;
+
+    height: 40px;
+
+    padding:
+        0 18px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #c92127,
+            #a91d22
+        );
+
+    color: #ffffff;
+
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 10px rgba(201, 33, 39, 0.20);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+
+.cos-submit-btn:hover {
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 6px 14px rgba(201, 33, 39, 0.28);
+
+}
+
+
+/* =========================================================
+   SUCCESS MODAL
+========================================================= */
+
+.cos-success-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        rgba(3, 25, 50, 0.70);
+
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+
+    z-index: 11000;
+
+}
+
+
+.cos-success-overlay.active {
+
+    display: flex;
+
+}
+
+
+.cos-success-modal {
+
+    width: 100%;
+
+    max-width: 400px;
+
+    padding: 35px 30px;
+
+    border-radius: 16px;
+
+    background: #ffffff;
+
+    text-align: center;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.30);
+
+    animation:
+        cosSuccessShow 0.25s ease;
+
+}
+
+
+@keyframes cosSuccessShow {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            scale(0.95);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            scale(1);
+
+    }
+
+}
+
+
+.cos-success-icon {
+
+    width: 65px;
+
+    height: 65px;
+
+    margin: 0 auto 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #e7f6ec;
+
+    color: #218838;
+
+    font-size: 28px;
+
+}
+
+
+.cos-success-modal h2 {
+
+    margin: 0 0 8px;
+
+    color: #063b73;
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+}
+
+
+.cos-success-modal p {
+
+    margin: 0 0 22px;
+
+    color: #777;
+
+    font-size: 11px;
+
+    line-height: 1.6;
+
+}
+
+
+.cos-success-modal button {
+
+    min-width: 100px;
+
+    height: 38px;
+
+    padding:
+        0 20px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #075ca8;
+
+    color: #ffffff;
+
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+
+.cos-success-modal button:hover {
+
+    background: #063b73;
+
+    transform: translateY(-1px);
+
+}
+
+
+/* =========================================================
+   COS MODAL — TABLET
+========================================================= */
+
+@media screen and (max-width: 768px) {
+
+    .cos-modal-overlay {
+
+        padding: 12px;
+
+    }
+
+
+    .cos-leave-modal {
+
+        max-height:
+            calc(100vh - 24px);
+
+        border-radius: 15px;
+
+    }
+
+
+    .cos-modal-header {
+
+        padding: 20px;
+
+    }
+
+
+    .cos-modal-header h2 {
+
+        font-size: 18px;
+
+    }
+
+
+    .cos-progress {
+
+        padding:
+            18px 20px;
+
+    }
+
+
+    .cos-form-step {
+
+        padding: 22px;
+
+    }
+
+
+    .cos-form-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 14px;
+
+    }
+
+
+    .cos-field.full-width {
+
+        grid-column: auto;
+
+    }
+
+
+    .cos-sick-section {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .cos-review-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .cos-review-grid .full-width {
+
+        grid-column: auto;
+
+    }
+
+}
+
+
+/* =========================================================
+   COS MODAL — MOBILE
+========================================================= */
+
+@media screen and (max-width: 480px) {
+
+    .cos-modal-overlay {
+
+        padding: 8px;
+
+        align-items: flex-start;
+
+    }
+
+
+    .cos-leave-modal {
+
+        max-height:
+            calc(100vh - 16px);
+
+        border-radius: 13px;
+
+    }
+
+
+    .cos-modal-header {
+
+        padding:
+            16px;
+
+    }
+
+
+    .cos-modal-title {
+
+        gap: 10px;
+
+    }
+
+
+    .cos-modal-icon {
+
+        width: 40px;
+
+        height: 40px;
+
+        min-width: 40px;
+
+        border-radius: 9px;
+
+        font-size: 17px;
+
+    }
+
+
+    .cos-modal-label {
+
+        font-size: 7px;
+
+    }
+
+
+    .cos-modal-header h2 {
+
+        font-size: 15px;
+
+    }
+
+
+    .cos-close-btn {
+
+        width: 32px;
+
+        height: 32px;
+
+        min-width: 32px;
+
+        font-size: 15px;
+
+    }
+
+
+    .cos-progress {
+
+        padding:
+            15px 8px;
+
+        overflow-x: auto;
+
+    }
+
+
+    .cos-progress-step {
+
+        min-width: 60px;
+
+    }
+
+
+    .cos-progress-step span {
+
+        width: 29px;
+
+        height: 29px;
+
+        font-size: 10px;
+
+    }
+
+
+    .cos-progress-step small {
+
+        font-size: 7px;
+
+    }
+
+
+    .cos-progress-line {
+
+        margin-top: 14px;
+
+        margin-left: 3px;
+
+        margin-right: 3px;
+
+    }
+
+
+    .cos-form-step {
+
+        padding: 18px 15px;
+
+    }
+
+
+    .cos-step-heading {
+
+        gap: 10px;
+
+        margin-bottom: 18px;
+
+    }
+
+
+    .cos-step-icon {
+
+        width: 38px;
+
+        height: 38px;
+
+        min-width: 38px;
+
+        font-size: 15px;
+
+    }
+
+
+    .cos-step-heading h3 {
+
+        font-size: 15px;
+
+    }
+
+
+    .cos-step-heading p {
+
+        font-size: 8px;
+
+    }
+
+
+    .cos-field label {
+
+        font-size: 9px;
+
+    }
+
+
+    .cos-field input,
+    .cos-field select {
+
+        height: 39px;
+
+        font-size: 9px;
+
+        padding:
+            0 10px;
+
+    }
+
+
+    .cos-step-footer {
+
+        margin-top: 22px;
+
+        padding-top: 15px;
+
+    }
+
+
+    .cos-back-btn,
+    .cos-next-btn,
+    .cos-submit-btn {
+
+        min-width: 0;
+
+        height: 38px;
+
+        padding:
+            0 13px;
+
+        font-size: 9px;
+
+    }
+
+
+    .cos-submit-btn {
+
+        flex: 1;
+
+    }
+
+
+    .cos-sick-section {
+
+        padding: 13px;
+
+        gap: 13px;
+
+    }
+
+
+    .cos-section-title {
+
+        font-size: 9px;
+
+    }
+
+
+    .cos-review-section {
+
+        padding: 15px;
+
+    }
+
+
+    .cos-review-section h4 {
+
+        font-size: 10px;
+
+    }
+
+
+    .cos-review-grid {
+
+        gap: 12px;
+
+    }
+
+
+    .cos-review-grid span {
+
+        font-size: 8px;
+
+    }
+
+
+    .cos-review-grid strong {
+
+        font-size: 9px;
+
+    }
+
+
+    .cos-submit-note {
+
+        font-size: 8px;
+
+        padding: 11px;
+
+    }
+
+
+    .cos-success-modal {
+
+        max-width: 100%;
+
+        padding:
+            28px 20px;
+
+    }
+
+
+    .cos-success-modal h2 {
+
+        font-size: 17px;
+
+    }
+
+
+    .cos-success-modal p {
+
+        font-size: 9px;
+
+    }
+
+}
+
+
+/* =========================================================
+   COS MODAL — VERY SMALL MOBILE
+========================================================= */
+
+@media screen and (max-width: 360px) {
+
+    .cos-modal-header {
+
+        padding:
+            14px 12px;
+
+    }
+
+
+    .cos-modal-icon {
+
+        width: 36px;
+
+        height: 36px;
+
+        min-width: 36px;
+
+        font-size: 15px;
+
+    }
+
+
+    .cos-modal-header h2 {
+
+        font-size: 13px;
+
+    }
+
+
+    .cos-progress {
+
+        padding:
+            12px 4px;
+
+    }
+
+
+    .cos-progress-step {
+
+        min-width: 52px;
+
+    }
+
+
+    .cos-progress-step small {
+
+        font-size: 6px;
+
+    }
+
+
+    .cos-form-step {
+
+        padding:
+            15px 12px;
+
+    }
+
+
+    .cos-step-footer {
+
+        gap: 6px;
+
+    }
+
+
+    .cos-back-btn,
+    .cos-next-btn,
+    .cos-submit-btn {
+
+        padding:
+            0 10px;
+
+        font-size: 8px;
+
+    }
+
+}
+
+/* =========================================================
+   PLANTILLA LEAVE APPLICATION MODAL
+========================================================= */
+
+
+/* =========================================================
+   MODAL OVERLAY
+========================================================= */
+
+.plantilla-modal-overlay {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 25, 55, 0.68);
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 10001;
+
+    padding: 20px;
+
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+
+.plantilla-modal-overlay.active {
+    display: flex;
+}
+
+
+/* =========================================================
+   MAIN MODAL
+========================================================= */
+
+.plantilla-leave-modal {
+    width: 100%;
+    max-width: 900px;
+
+    max-height: calc(100vh - 40px);
+
+    background: #ffffff;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.30);
+
+    animation:
+        plantillaModalFadeIn 0.25s ease;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+@keyframes plantillaModalFadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.plantilla-modal-header {
+    background:
+        linear-gradient(
+            135deg,
+            #063b73 0%,
+            #075ca8 65%,
+            #c92127 100%
+        );
+
+    color: #ffffff;
+
+    padding: 22px 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    flex-shrink: 0;
+}
+
+
+.plantilla-modal-title-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+
+.plantilla-modal-icon {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 13px;
+
+    background: rgba(255, 255, 255, 0.16);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 21px;
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+
+.plantilla-modal-title {
+    margin: 0;
+
+    font-size: 21px;
+    font-weight: 800;
+
+    line-height: 1.2;
+}
+
+
+.plantilla-modal-label {
+    display: block;
+
+    margin-top: 4px;
+
+    font-size: 12px;
+
+    font-weight: 500;
+
+    opacity: 0.85;
+
+    letter-spacing: 0.3px;
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+========================================================= */
+
+.plantilla-close-btn {
+    width: 38px;
+    height: 38px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.13);
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 17px;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.plantilla-close-btn:hover {
+    background: rgba(255, 255, 255, 0.24);
+
+    transform: rotate(90deg);
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.plantilla-progress {
+    display: flex;
+    align-items: center;
+
+    padding: 22px 35px 18px;
+
+    background: #ffffff;
+
+    flex-shrink: 0;
+}
+
+
+.plantilla-progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    min-width: 90px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.plantilla-progress-step span {
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+
+    background: #e9eef5;
+
+    color: #7a8796;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+.plantilla-progress-step small {
+    margin-top: 7px;
+
+    font-size: 10px;
+
+    color: #8a96a3;
+
+    font-weight: 600;
+
+    text-align: center;
+
+    white-space: nowrap;
+}
+
+
+.plantilla-progress-step.active span {
+    background: #075ca8;
+
+    color: #ffffff;
+
+    transform: scale(1.08);
+
+    box-shadow:
+        0 5px 14px rgba(7, 92, 168, 0.25);
+}
+
+
+.plantilla-progress-step.active small {
+    color: #075ca8;
+}
+
+
+.plantilla-progress-step.completed span {
+    background: #063b73;
+
+    color: #ffffff;
+}
+
+
+.plantilla-progress-step.completed small {
+    color: #063b73;
+}
+
+
+.plantilla-progress-line {
+    flex: 1;
+
+    height: 2px;
+
+    background: #e4e9ef;
+
+    margin: 0 4px;
+
+    margin-bottom: 22px;
+}
+
+
+/* =========================================================
+   FORM STEP CONTAINER
+========================================================= */
+
+.plantilla-form-step {
+    display: none;
+
+    overflow-y: auto;
+
+    padding: 8px 35px 30px;
+
+    flex: 1;
+}
+
+
+.plantilla-form-step.active {
+    display: block;
+}
+
+
+/* =========================================================
+   STEP HEADING
+========================================================= */
+
+.plantilla-step-heading {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    margin-bottom: 24px;
+}
+
+
+.plantilla-step-icon {
+    width: 42px;
+    height: 42px;
+
+    min-width: 42px;
+
+    border-radius: 11px;
+
+    background: #edf5fc;
+
+    color: #075ca8;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 17px;
+}
+
+
+.plantilla-step-heading h3 {
+    margin: 0;
+
+    color: #063b73;
+
+    font-size: 18px;
+
+    font-weight: 800;
+}
+
+
+.plantilla-step-heading p {
+    margin: 4px 0 0;
+
+    color: #7b8794;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   FORM GRID
+========================================================= */
+
+.plantilla-form-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px 20px;
+}
+
+
+.plantilla-field {
+    display: flex;
+
+    flex-direction: column;
+
+    min-width: 0;
+}
+
+
+.plantilla-field.full-width {
+    grid-column: 1 / -1;
+}
+
+
+.plantilla-field label {
+    margin-bottom: 7px;
+
+    color: #344454;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+.plantilla-field input,
+.plantilla-field select {
+    width: 100%;
+
+    height: 44px;
+
+    border: 1px solid #d8e0e8;
+
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: #253443;
+
+    padding: 0 13px;
+
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: 12px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.plantilla-field input:focus,
+.plantilla-field select:focus {
+    border-color: #075ca8;
+
+    box-shadow:
+        0 0 0 3px rgba(7, 92, 168, 0.10);
+}
+
+
+.plantilla-field input::placeholder {
+    color: #a2acb7;
+}
+
+
+.plantilla-field input[readonly] {
+    background: #f5f7fa;
+
+    color: #566575;
+
+    cursor: default;
+}
+
+
+/* =========================================================
+   SELECT
+========================================================= */
+
+.plantilla-field select {
+    cursor: pointer;
+
+    appearance: auto;
+}
+
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.plantilla-section {
+    margin-top: 8px;
+
+    padding: 20px;
+
+    border: 1px solid #e1e7ee;
+
+    border-radius: 13px;
+
+    background: #fafbfd;
+}
+
+
+.plantilla-section + .plantilla-section {
+    margin-top: 18px;
+}
+
+
+.plantilla-section-title {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    margin-bottom: 18px;
+
+    color: #063b73;
+
+    font-size: 13px;
+
+    font-weight: 800;
+}
+
+
+.plantilla-section-title i {
+    color: #075ca8;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   STEP FOOTER
+========================================================= */
+
+.plantilla-step-footer {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-top: 30px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #edf0f4;
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.plantilla-back-btn {
+    height: 42px;
+
+    padding: 0 18px;
+
+    border: 1px solid #d7dfe7;
+
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: #596978;
+
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.plantilla-back-btn:hover {
+    background: #f3f6f9;
+
+    border-color: #c7d1dc;
+
+    color: #063b73;
+}
+
+
+/* =========================================================
+   NEXT BUTTON
+========================================================= */
+
+.plantilla-next-btn {
+    height: 42px;
+
+    padding: 0 20px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #075ca8;
+
+    color: #ffffff;
+
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    box-shadow:
+        0 5px 14px rgba(7, 92, 168, 0.18);
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.plantilla-next-btn:hover {
+    background: #063b73;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 7px 17px rgba(6, 59, 115, 0.22);
+}
+
+
+/* =========================================================
+   SUBMIT BUTTON
+========================================================= */
+
+.plantilla-submit-btn {
+    height: 42px;
+
+    padding: 0 20px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #c92127;
+
+    color: #ffffff;
+
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    box-shadow:
+        0 5px 14px rgba(201, 33, 39, 0.18);
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.plantilla-submit-btn:hover {
+    background: #a91c21;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 7px 17px rgba(201, 33, 39, 0.24);
+}
+
+
+/* =========================================================
+   REVIEW
+========================================================= */
+
+.plantilla-review-container {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+
+.plantilla-review-section {
+    border: 1px solid #e1e7ee;
+
+    border-radius: 13px;
+
+    overflow: hidden;
+
+    background: #ffffff;
+}
+
+
+.plantilla-review-section h4 {
+    margin: 0;
+
+    padding: 14px 17px;
+
+    background: #f5f8fb;
+
+    border-bottom: 1px solid #e1e7ee;
+
+    color: #063b73;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.plantilla-review-section h4 i {
+    color: #075ca8;
+
+    font-size: 13px;
+}
+
+
+.plantilla-review-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 0;
+}
+
+
+.plantilla-review-grid > div {
+    padding: 14px 17px;
+
+    border-bottom: 1px solid #edf0f4;
+}
+
+
+.plantilla-review-grid > div:nth-last-child(-n + 2) {
+    border-bottom: none;
+}
+
+
+.plantilla-review-grid > div:nth-child(odd) {
+    border-right: 1px solid #edf0f4;
+}
+
+
+.plantilla-review-grid span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #8a96a3;
+
+    font-size: 10px;
+
+    font-weight: 600;
+}
+
+
+.plantilla-review-grid strong {
+    display: block;
+
+    color: #344454;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    line-height: 1.5;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   SUBMIT NOTE
+========================================================= */
+
+.plantilla-submit-note {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    padding: 13px 15px;
+
+    border-radius: 10px;
+
+    background: #fff8e6;
+
+    border: 1px solid #f5df9f;
+
+    color: #76611e;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+
+.plantilla-submit-note i {
+    margin-top: 2px;
+
+    color: #F2B705;
+
+    font-size: 14px;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   SUCCESS MODAL
+========================================================= */
+
+.plantilla-success-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0, 25, 55, 0.68);
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 10002;
+
+    padding: 20px;
+
+    backdrop-filter: blur(4px);
+
+    -webkit-backdrop-filter: blur(4px);
+}
+
+
+.plantilla-success-overlay.active {
+    display: flex;
+}
+
+
+.plantilla-success-modal {
+    width: 100%;
+
+    max-width: 420px;
+
+    background: #ffffff;
+
+    border-radius: 18px;
+
+    padding: 35px 30px;
+
+    text-align: center;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.30);
+
+    animation:
+        plantillaSuccessFadeIn 0.25s ease;
+}
+
+
+@keyframes plantillaSuccessFadeIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(15px)
+            scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+/* =========================================================
+   SUCCESS ICON
+========================================================= */
+
+.plantilla-success-icon {
+    width: 68px;
+    height: 68px;
+
+    margin: 0 auto 18px;
+
+    border-radius: 50%;
+
+    background: #e9f7ef;
+
+    color: #1d9a57;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 28px;
+}
+
+
+.plantilla-success-modal h2 {
+    margin: 0 0 9px;
+
+    color: #063b73;
+
+    font-size: 21px;
+
+    font-weight: 800;
+}
+
+
+.plantilla-success-modal p {
+    margin: 0 auto 22px;
+
+    max-width: 330px;
+
+    color: #74808d;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+}
+
+
+.plantilla-success-modal button {
+    min-width: 110px;
+
+    height: 42px;
+
+    padding: 0 20px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #075ca8;
+
+    color: #ffffff;
+
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.plantilla-success-modal button:hover {
+    background: #063b73;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .plantilla-modal-overlay {
+        padding: 12px;
+    }
+
+
+    .plantilla-leave-modal {
+        max-height: calc(100vh - 24px);
+
+        border-radius: 15px;
+    }
+
+
+    .plantilla-modal-header {
+        padding: 18px 20px;
+    }
+
+
+    .plantilla-modal-title {
+        font-size: 18px;
+    }
+
+
+    .plantilla-modal-icon {
+        width: 43px;
+        height: 43px;
+
+        font-size: 18px;
+    }
+
+
+    .plantilla-progress {
+        padding:
+            18px
+            18px
+            14px;
+    }
+
+
+    .plantilla-progress-step {
+        min-width: 70px;
+    }
+
+
+    .plantilla-progress-step small {
+        font-size: 9px;
+    }
+
+
+    .plantilla-form-step {
+        padding:
+            8px
+            20px
+            25px;
+    }
+
+
+    .plantilla-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .plantilla-field.full-width {
+        grid-column: auto;
+    }
+
+
+    .plantilla-review-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .plantilla-review-grid > div:nth-child(odd) {
+        border-right: none;
+    }
+
+
+    .plantilla-review-grid > div:nth-last-child(-n + 2) {
+        border-bottom: 1px solid #edf0f4;
+    }
+
+
+    .plantilla-review-grid > div:last-child {
+        border-bottom: none;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .plantilla-modal-overlay {
+        padding: 8px;
+    }
+
+
+    .plantilla-leave-modal {
+        max-height: calc(100vh - 16px);
+
+        border-radius: 13px;
+    }
+
+
+    .plantilla-modal-header {
+        padding: 16px;
+    }
+
+
+    .plantilla-modal-title-area {
+        gap: 10px;
+    }
+
+
+    .plantilla-modal-title {
+        font-size: 16px;
+    }
+
+
+    .plantilla-modal-label {
+        font-size: 10px;
+    }
+
+
+    .plantilla-modal-icon {
+        width: 39px;
+        height: 39px;
+
+        min-width: 39px;
+
+        border-radius: 10px;
+
+        font-size: 16px;
+    }
+
+
+    .plantilla-close-btn {
+        width: 34px;
+        height: 34px;
+
+        font-size: 15px;
+    }
+
+
+    .plantilla-progress {
+        padding:
+            16px
+            8px
+            12px;
+    }
+
+
+    .plantilla-progress-step {
+        min-width: 55px;
+    }
+
+
+    .plantilla-progress-step span {
+        width: 29px;
+        height: 29px;
+
+        font-size: 11px;
+    }
+
+
+    .plantilla-progress-step small {
+        margin-top: 5px;
+
+        font-size: 7px;
+
+        white-space: normal;
+
+        line-height: 1.2;
+    }
+
+
+    .plantilla-progress-line {
+        margin-bottom: 19px;
+    }
+
+
+    .plantilla-form-step {
+        padding:
+            8px
+            15px
+            20px;
+    }
+
+
+    .plantilla-step-heading {
+        gap: 10px;
+
+        margin-bottom: 20px;
+    }
+
+
+    .plantilla-step-icon {
+        width: 37px;
+        height: 37px;
+
+        min-width: 37px;
+
+        font-size: 15px;
+    }
+
+
+    .plantilla-step-heading h3 {
+        font-size: 15px;
+    }
+
+
+    .plantilla-step-heading p {
+        font-size: 10px;
+
+        line-height: 1.4;
+    }
+
+
+    .plantilla-form-grid {
+        gap: 14px;
+    }
+
+
+    .plantilla-field label {
+        font-size: 11px;
+    }
+
+
+    .plantilla-field input,
+    .plantilla-field select {
+        height: 42px;
+
+        font-size: 11px;
+    }
+
+
+    .plantilla-section {
+        padding: 15px;
+    }
+
+
+    .plantilla-section-title {
+        font-size: 12px;
+    }
+
+
+    .plantilla-step-footer {
+        margin-top: 22px;
+
+        padding-top: 16px;
+    }
+
+
+    .plantilla-back-btn,
+    .plantilla-next-btn,
+    .plantilla-submit-btn {
+        height: 40px;
+
+        padding:
+            0
+            14px;
+
+        font-size: 10px;
+    }
+
+
+    .plantilla-review-section h4 {
+        font-size: 11px;
+    }
+
+
+    .plantilla-review-grid > div {
+        padding: 12px 14px;
+    }
+
+
+    .plantilla-review-grid span {
+        font-size: 9px;
+    }
+
+
+    .plantilla-review-grid strong {
+        font-size: 10px;
+    }
+
+
+    .plantilla-submit-note {
+        font-size: 9px;
+
+        padding: 11px 12px;
+    }
+
+
+    .plantilla-success-modal {
+        padding: 30px 22px;
+    }
+
+
+    .plantilla-success-icon {
+        width: 60px;
+        height: 60px;
+
+        font-size: 24px;
+    }
+
+
+    .plantilla-success-modal h2 {
+        font-size: 18px;
+    }
+
+
+    .plantilla-success-modal p {
+        font-size: 10px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .plantilla-modal-title {
+        font-size: 14px;
+    }
+
+
+    .plantilla-modal-label {
+        font-size: 9px;
+    }
+
+
+    .plantilla-progress-step {
+        min-width: 48px;
+    }
+
+
+    .plantilla-progress-step small {
+        font-size: 6.5px;
+    }
+
+
+    .plantilla-form-step {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+
+    .plantilla-step-footer {
+        gap: 8px;
+    }
+
+
+    .plantilla-back-btn,
+    .plantilla-next-btn,
+    .plantilla-submit-btn {
+        padding:
+            0
+            11px;
+    }
+
+}

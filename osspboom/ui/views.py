@@ -24,3 +24,4 @@ def admin_dtr(request):
 
 def superadmin_dtr(request):
     return render(request, 'superadmin_dtr.html')
+
