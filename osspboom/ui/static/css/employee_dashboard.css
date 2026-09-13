@@ -2930,7 +2930,8 @@ body {
         linear-gradient(
             135deg,
             #063b73 0%,
-            #075ca8 100%
+            #075ca8 65%,
+            #c92127 100%
         );
 
     color: #ffffff;

@@ -3187,3 +3187,1378 @@ body {
     }
 
 }
+
+/* =========================================================
+   PLANTILLA LEAVE APPLICATION MODAL
+========================================================= */
+
+
+/* =========================================================
+   MODAL OVERLAY
+========================================================= */
+
+.plantilla-modal-overlay {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 25, 55, 0.68);
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 20001;
+
+    padding: 20px;
+
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+
+.plantilla-modal-overlay.active {
+    display: flex;
+}
+
+
+/* =========================================================
+   MAIN MODAL
+========================================================= */
+
+.plantilla-leave-modal {
+    width: 100%;
+    max-width: 900px;
+
+    max-height: calc(100vh - 40px);
+
+    background: #ffffff;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.30);
+
+    animation:
+        plantillaModalFadeIn 0.25s ease;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+@keyframes plantillaModalFadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.plantilla-modal-header {
+    background:
+        linear-gradient(
+            135deg,
+            #063b73 0%,
+            #075ca8 65%,
+            #c92127 100%
+        );
+
+    color: #ffffff;
+
+    padding: 22px 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    flex-shrink: 0;
+}
+
+
+.plantilla-modal-title-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+
+.plantilla-modal-icon {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 13px;
+
+    background: rgba(255, 255, 255, 0.16);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 21px;
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+
+.plantilla-modal-title {
+    margin: 0;
+
+    font-size: 21px;
+    font-weight: 800;
+
+    line-height: 1.2;
+}
+
+
+.plantilla-modal-label {
+    display: block;
+
+    margin-top: 4px;
+
+    font-size: 12px;
+
+    font-weight: 500;
+
+    opacity: 0.85;
+
+    letter-spacing: 0.3px;
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+========================================================= */
+
+.plantilla-close-btn {
+    width: 38px;
+    height: 38px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.13);
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 17px;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.plantilla-close-btn:hover {
+    background: rgba(255, 255, 255, 0.24);
+
+    transform: rotate(90deg);
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.plantilla-progress {
+    display: flex;
+    align-items: center;
+
+    padding: 22px 35px 18px;
+
+    background: #ffffff;
+
+    flex-shrink: 0;
+}
+
+
+.plantilla-progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    min-width: 90px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.plantilla-progress-step span {
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+
+    background: #e9eef5;
+
+    color: #7a8796;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+.plantilla-progress-step small {
+    margin-top: 7px;
+
+    font-size: 10px;
+
+    color: #8a96a3;
+
+    font-weight: 600;
+
+    text-align: center;
+
+    white-space: nowrap;
+}
+
+
+.plantilla-progress-step.active span {
+    background: #075ca8;
+
+    color: #ffffff;
+
+    transform: scale(1.08);
+
+    box-shadow:
+        0 5px 14px rgba(7, 92, 168, 0.25);
+}
+
+
+.plantilla-progress-step.active small {
+    color: #075ca8;
+}
+
+
+.plantilla-progress-step.completed span {
+    background: #063b73;
+
+    color: #ffffff;
+}
+
+
+.plantilla-progress-step.completed small {
+    color: #063b73;
+}
+
+
+.plantilla-progress-line {
+    flex: 1;
+
+    height: 2px;
+
+    background: #e4e9ef;
+
+    margin: 0 4px;
+
+    margin-bottom: 22px;
+}
+
+
+/* =========================================================
+   FORM STEP CONTAINER
+========================================================= */
+
+.plantilla-form-step {
+    display: none;
+
+    overflow-y: auto;
+
+    padding: 8px 35px 30px;
+
+    flex: 1;
+}
+
+
+.plantilla-form-step.active {
+    display: block;
+}
+
+
+/* =========================================================
+   STEP HEADING
+========================================================= */
+
+.plantilla-step-heading {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    margin-bottom: 24px;
+}
+
+
+.plantilla-step-icon {
+    width: 42px;
+    height: 42px;
+
+    min-width: 42px;
+
+    border-radius: 11px;
+
+    background: #edf5fc;
+
+    color: #075ca8;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 17px;
+}
+
+
+.plantilla-step-heading h3 {
+    margin: 0;
+
+    color: #063b73;
+
+    font-size: 18px;
+
+    font-weight: 800;
+}
+
+
+.plantilla-step-heading p {
+    margin: 4px 0 0;
+
+    color: #7b8794;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   FORM GRID
+========================================================= */
+
+.plantilla-form-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px 20px;
+}
+
+
+.plantilla-field {
+    display: flex;
+
+    flex-direction: column;
+
+    min-width: 0;
+}
+
+
+.plantilla-field.full-width {
+    grid-column: 1 / -1;
+}
+
+
+.plantilla-field label {
+    margin-bottom: 7px;
+
+    color: #344454;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+.plantilla-field input,
+.plantilla-field select {
+    width: 95%;
+
+    height: 44px;
+
+    border: 1px solid #d8e0e8;
+
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: #253443;
+
+    padding: 0 13px;
+
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: 12px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.plantilla-field input:focus,
+.plantilla-field select:focus {
+    border-color: #075ca8;
+
+    box-shadow:
+        0 0 0 3px rgba(7, 92, 168, 0.10);
+}
+
+
+.plantilla-field input::placeholder {
+    color: #a2acb7;
+}
+
+
+.plantilla-field input[readonly] {
+    background: #f5f7fa;
+
+    color: #566575;
+
+    cursor: default;
+}
+
+
+/* =========================================================
+   SELECT
+========================================================= */
+
+.plantilla-field select {
+    cursor: pointer;
+
+    appearance: auto;
+}
+
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.plantilla-section {
+    margin-top: 8px;
+
+    padding: 20px;
+
+    border: 1px solid #e1e7ee;
+
+    border-radius: 13px;
+
+    background: #fafbfd;
+}
+
+
+.plantilla-section + .plantilla-section {
+    margin-top: 18px;
+}
+
+
+.plantilla-section-title {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    margin-bottom: 18px;
+
+    color: #063b73;
+
+    font-size: 13px;
+
+    font-weight: 800;
+}
+
+
+.plantilla-section-title i {
+    color: #075ca8;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   STEP FOOTER
+========================================================= */
+
+.plantilla-step-footer {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-top: 30px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #edf0f4;
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.plantilla-back-btn {
+    height: 42px;
+
+    padding: 0 18px;
+
+    border: 1px solid #d7dfe7;
+
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: #596978;
+
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.plantilla-back-btn:hover {
+    background: #f3f6f9;
+
+    border-color: #c7d1dc;
+
+    color: #063b73;
+}
+
+
+/* =========================================================
+   NEXT BUTTON
+========================================================= */
+
+.plantilla-next-btn {
+    height: 42px;
+
+    padding: 0 20px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #075ca8;
+
+    color: #ffffff;
+
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    box-shadow:
+        0 5px 14px rgba(7, 92, 168, 0.18);
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.plantilla-next-btn:hover {
+    background: #063b73;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 7px 17px rgba(6, 59, 115, 0.22);
+}
+
+
+/* =========================================================
+   SUBMIT BUTTON
+========================================================= */
+
+.plantilla-submit-btn {
+    height: 42px;
+
+    padding: 0 20px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #c92127;
+
+    color: #ffffff;
+
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    box-shadow:
+        0 5px 14px rgba(201, 33, 39, 0.18);
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.plantilla-submit-btn:hover {
+    background: #a91c21;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 7px 17px rgba(201, 33, 39, 0.24);
+}
+
+
+/* =========================================================
+   REVIEW
+========================================================= */
+
+.plantilla-review-container {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+
+.plantilla-review-section {
+    border: 1px solid #e1e7ee;
+
+    border-radius: 13px;
+
+    overflow: hidden;
+
+    background: #ffffff;
+}
+
+
+.plantilla-review-section h4 {
+    margin: 0;
+
+    padding: 14px 17px;
+
+    background: #f5f8fb;
+
+    border-bottom: 1px solid #e1e7ee;
+
+    color: #063b73;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.plantilla-review-section h4 i {
+    color: #075ca8;
+
+    font-size: 13px;
+}
+
+
+.plantilla-review-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 0;
+}
+
+
+.plantilla-review-grid > div {
+    padding: 14px 17px;
+
+    border-bottom: 1px solid #edf0f4;
+}
+
+
+.plantilla-review-grid > div:nth-last-child(-n + 2) {
+    border-bottom: none;
+}
+
+
+.plantilla-review-grid > div:nth-child(odd) {
+    border-right: 1px solid #edf0f4;
+}
+
+
+.plantilla-review-grid span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #8a96a3;
+
+    font-size: 10px;
+
+    font-weight: 600;
+}
+
+
+.plantilla-review-grid strong {
+    display: block;
+
+    color: #344454;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    line-height: 1.5;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   SUBMIT NOTE
+========================================================= */
+
+.plantilla-submit-note {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    padding: 13px 15px;
+
+    border-radius: 10px;
+
+    background: #fff8e6;
+
+    border: 1px solid #f5df9f;
+
+    color: #76611e;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+
+.plantilla-submit-note i {
+    margin-top: 2px;
+
+    color: #F2B705;
+
+    font-size: 14px;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   SUCCESS MODAL
+========================================================= */
+
+.plantilla-success-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0, 25, 55, 0.68);
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 10002;
+
+    padding: 20px;
+
+    backdrop-filter: blur(4px);
+
+    -webkit-backdrop-filter: blur(4px);
+}
+
+
+.plantilla-success-overlay.active {
+    display: flex;
+}
+
+
+.plantilla-success-modal {
+    width: 100%;
+
+    max-width: 420px;
+
+    background: #ffffff;
+
+    border-radius: 18px;
+
+    padding: 35px 30px;
+
+    text-align: center;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.30);
+
+    animation:
+        plantillaSuccessFadeIn 0.25s ease;
+}
+
+
+@keyframes plantillaSuccessFadeIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(15px)
+            scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+/* =========================================================
+   SUCCESS ICON
+========================================================= */
+
+.plantilla-success-icon {
+    width: 68px;
+    height: 68px;
+
+    margin: 0 auto 18px;
+
+    border-radius: 50%;
+
+    background: #e9f7ef;
+
+    color: #1d9a57;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 28px;
+}
+
+
+.plantilla-success-modal h2 {
+    margin: 0 0 9px;
+
+    color: #063b73;
+
+    font-size: 21px;
+
+    font-weight: 800;
+}
+
+
+.plantilla-success-modal p {
+    margin: 0 auto 22px;
+
+    max-width: 330px;
+
+    color: #74808d;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+}
+
+
+.plantilla-success-modal button {
+    min-width: 110px;
+
+    height: 42px;
+
+    padding: 0 20px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #075ca8;
+
+    color: #ffffff;
+
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.plantilla-success-modal button:hover {
+    background: #063b73;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .plantilla-modal-overlay {
+        padding: 12px;
+    }
+
+
+    .plantilla-leave-modal {
+        max-height: calc(100vh - 24px);
+
+        border-radius: 15px;
+    }
+
+
+    .plantilla-modal-header {
+        padding: 18px 20px;
+    }
+
+
+    .plantilla-modal-title {
+        font-size: 18px;
+    }
+
+
+    .plantilla-modal-icon {
+        width: 43px;
+        height: 43px;
+
+        font-size: 18px;
+    }
+
+
+    .plantilla-progress {
+        padding:
+            18px
+            18px
+            14px;
+    }
+
+
+    .plantilla-progress-step {
+        min-width: 70px;
+    }
+
+
+    .plantilla-progress-step small {
+        font-size: 9px;
+    }
+
+
+    .plantilla-form-step {
+        padding:
+            8px
+            20px
+            25px;
+    }
+
+
+    .plantilla-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .plantilla-field.full-width {
+        grid-column: auto;
+    }
+
+
+    .plantilla-review-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .plantilla-review-grid > div:nth-child(odd) {
+        border-right: none;
+    }
+
+
+    .plantilla-review-grid > div:nth-last-child(-n + 2) {
+        border-bottom: 1px solid #edf0f4;
+    }
+
+
+    .plantilla-review-grid > div:last-child {
+        border-bottom: none;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .plantilla-modal-overlay {
+        padding: 8px;
+    }
+
+
+    .plantilla-leave-modal {
+        max-height: calc(100vh - 16px);
+
+        border-radius: 13px;
+    }
+
+
+    .plantilla-modal-header {
+        padding: 16px;
+    }
+
+
+    .plantilla-modal-title-area {
+        gap: 10px;
+    }
+
+
+    .plantilla-modal-title {
+        font-size: 16px;
+    }
+
+
+    .plantilla-modal-label {
+        font-size: 10px;
+    }
+
+
+    .plantilla-modal-icon {
+        width: 39px;
+        height: 39px;
+
+        min-width: 39px;
+
+        border-radius: 10px;
+
+        font-size: 16px;
+    }
+
+
+    .plantilla-close-btn {
+        width: 34px;
+        height: 34px;
+
+        font-size: 15px;
+    }
+
+
+    .plantilla-progress {
+        padding:
+            16px
+            8px
+            12px;
+    }
+
+
+    .plantilla-progress-step {
+        min-width: 55px;
+    }
+
+
+    .plantilla-progress-step span {
+        width: 29px;
+        height: 29px;
+
+        font-size: 11px;
+    }
+
+
+    .plantilla-progress-step small {
+        margin-top: 5px;
+
+        font-size: 7px;
+
+        white-space: normal;
+
+        line-height: 1.2;
+    }
+
+
+    .plantilla-progress-line {
+        margin-bottom: 19px;
+    }
+
+
+    .plantilla-form-step {
+        padding:
+            8px
+            15px
+            20px;
+    }
+
+
+    .plantilla-step-heading {
+        gap: 10px;
+
+        margin-bottom: 20px;
+    }
+
+
+    .plantilla-step-icon {
+        width: 37px;
+        height: 37px;
+
+        min-width: 37px;
+
+        font-size: 15px;
+    }
+
+
+    .plantilla-step-heading h3 {
+        font-size: 15px;
+    }
+
+
+    .plantilla-step-heading p {
+        font-size: 10px;
+
+        line-height: 1.4;
+    }
+
+
+    .plantilla-form-grid {
+        gap: 14px;
+    }
+
+
+    .plantilla-field label {
+        font-size: 11px;
+    }
+
+
+    .plantilla-field input,
+    .plantilla-field select {
+        height: 42px;
+
+        font-size: 11px;
+    }
+
+
+    .plantilla-section {
+        padding: 15px;
+    }
+
+
+    .plantilla-section-title {
+        font-size: 12px;
+    }
+
+
+    .plantilla-step-footer {
+        margin-top: 22px;
+
+        padding-top: 16px;
+    }
+
+
+    .plantilla-back-btn,
+    .plantilla-next-btn,
+    .plantilla-submit-btn {
+        height: 40px;
+
+        padding:
+            0
+            14px;
+
+        font-size: 10px;
+    }
+
+
+    .plantilla-review-section h4 {
+        font-size: 11px;
+    }
+
+
+    .plantilla-review-grid > div {
+        padding: 12px 14px;
+    }
+
+
+    .plantilla-review-grid span {
+        font-size: 9px;
+    }
+
+
+    .plantilla-review-grid strong {
+        font-size: 10px;
+    }
+
+
+    .plantilla-submit-note {
+        font-size: 9px;
+
+        padding: 11px 12px;
+    }
+
+
+    .plantilla-success-modal {
+        padding: 30px 22px;
+    }
+
+
+    .plantilla-success-icon {
+        width: 60px;
+        height: 60px;
+
+        font-size: 24px;
+    }
+
+
+    .plantilla-success-modal h2 {
+        font-size: 18px;
+    }
+
+
+    .plantilla-success-modal p {
+        font-size: 10px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .plantilla-modal-title {
+        font-size: 14px;
+    }
+
+
+    .plantilla-modal-label {
+        font-size: 9px;
+    }
+
+
+    .plantilla-progress-step {
+        min-width: 48px;
+    }
+
+
+    .plantilla-progress-step small {
+        font-size: 6.5px;
+    }
+
+
+    .plantilla-form-step {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+
+    .plantilla-step-footer {
+        gap: 8px;
+    }
+
+
+    .plantilla-back-btn,
+    .plantilla-next-btn,
+    .plantilla-submit-btn {
+        padding:
+            0
+            11px;
+    }
+
+}

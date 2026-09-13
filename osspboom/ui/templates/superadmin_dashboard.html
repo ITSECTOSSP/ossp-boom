@@ -54,11 +54,19 @@
 @media screen and (min-width: 701px) {
 
     .floating-logo {
-        top: 72px !important;
-        width: 210px !important;
-        height: 68px !important;
-        padding: 0 !important;
-        gap: 12px !important;
+        position: absolute !important;
+
+        top: -20px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+
+        width: 150px !important;
+        height: 100px !important;
+
+        border-radius: 50% !important;
+
+        padding: 10px !important;
+        gap: 8px !important;
 
         display: flex !important;
         align-items: center !important;
@@ -68,10 +76,11 @@
     }
 
     .floating-logo img {
-        width: auto !important;
-        height: 62px !important;
-        max-width: 100px !important;
+        width: 65px !important;
+        height: 65px !important;
         object-fit: contain !important;
+        display: block !important;
+        flex-shrink: 0 !important;
     }
 
 }
@@ -436,24 +445,6 @@
 
 
 <!-- =========================================================
-     DESKTOP FLOATING LOGO
-========================================================= -->
-
-<div class="floating-logo">
-
-    <img
-        src="{% static 'image/osspboomlogo.png' %}"
-        alt="OSSP Logo">
-
-    <img
-        src="{% static 'image/footer5.png' %}"
-        alt="OSSP Logo">
-
-</div>
-
-
-
-<!-- =========================================================
      ADMIN DASHBOARD BODY
 ========================================================= -->
 
@@ -488,6 +479,27 @@
             <p>
                 Manage OSSP biometric employee records.
             </p>
+
+
+            <!-- =================================================
+                 DESKTOP LOGO
+                 IMPORTANT: INSIDE .dashboard-title
+                 (matches inspo file placement/behavior)
+            ================================================== -->
+
+            <div
+                class="floating-logo"
+                aria-label="OSSP logos">
+
+                <img
+                    src="{% static 'image/osspboomlogo.png' %}"
+                    alt="OSSP Logo">
+
+                <img
+                    src="{% static 'image/footer5.png' %}"
+                    alt="OSSP Logo">
+
+            </div>
 
 
             <!-- =================================================
@@ -2374,7 +2386,898 @@ function confirmDeleteEmployee() {
 
         </button>
 
+
+        <!-- APPLY LEAVE -->
+
+        <button
+            type="button"
+            class="floating-action add-action"
+            onclick="openPlantillaModal()">
+
+            <i class="fa-solid fa-person-walking-arrow-right"></i>
+
+            <span>
+                Apply Leave
+            </span>
+
+        </button>
+
     </div>
+
+
+<!-- =========================================================
+     PLANTILLA LEAVE APPLICATION MODAL
+========================================================= -->
+
+<div
+    id="plantillaLeaveModal"
+    class="plantilla-modal-overlay"
+    onclick="closePlantillaModal(event)">
+
+    <div
+        class="plantilla-leave-modal"
+        onclick="event.stopPropagation()">
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <div class="plantilla-modal-header">
+
+            <div class="plantilla-modal-title-area">
+
+                <div class="plantilla-modal-icon">
+                    <i class="fa-solid fa-user-tie"></i>
+                </div>
+
+                <div>
+                    <h2 class="plantilla-modal-title">
+                        Plantilla Leave Application
+                    </h2>
+
+                    <span class="plantilla-modal-label">
+                        Civil Service Form No. 6
+                    </span>
+                </div>
+
+            </div>
+
+            <button
+                type="button"
+                class="plantilla-close-btn"
+                onclick="closePlantillaModal()">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             PROGRESS
+        ================================================== -->
+
+        <div class="plantilla-progress">
+
+            <!-- STEP 1 -->
+            <div
+                class="plantilla-progress-step active"
+                id="plantillaStepIndicator1">
+
+                <span>1</span>
+                <small>Employee Info</small>
+
+            </div>
+
+            <div class="plantilla-progress-line"></div>
+
+
+            <!-- STEP 2 -->
+            <div
+                class="plantilla-progress-step"
+                id="plantillaStepIndicator2">
+
+                <span>2</span>
+                <small>Leave Details</small>
+
+            </div>
+
+            <div class="plantilla-progress-line"></div>
+
+
+            <!-- STEP 3 -->
+            <div
+                class="plantilla-progress-step"
+                id="plantillaStepIndicator3">
+
+                <span>3</span>
+                <small>Application Details</small>
+
+            </div>
+
+            <div class="plantilla-progress-line"></div>
+
+
+            <!-- STEP 4 -->
+            <div
+                class="plantilla-progress-step"
+                id="plantillaStepIndicator4">
+
+                <span>4</span>
+                <small>Review</small>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             STEP 1 — EMPLOYEE INFORMATION
+        ================================================== -->
+
+        <div
+            class="plantilla-form-step active"
+            id="plantillaFormStep1">
+
+            <div class="plantilla-step-heading">
+
+                <div class="plantilla-step-icon">
+                    <i class="fa-solid fa-id-card"></i>
+                </div>
+
+                <div>
+                    <h3>Employee Information</h3>
+
+                    <p>
+                        Please verify your personal and employment information.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="plantilla-form-grid">
+
+                <!-- EMPLOYEE ID -->
+                <div class="plantilla-field">
+
+                    <label>
+                        Employee ID
+                    </label>
+
+                    <input
+                        type="text"
+                        id="plantillaEmployeeID"
+                        value="OSSP-001"
+                        readonly>
+
+                </div>
+
+
+                <!-- DATE OF FILING -->
+                <div class="plantilla-field">
+
+                    <label>
+                        Date of Filing
+                    </label>
+
+                    <input
+                        type="date"
+                        id="plantillaDateOfFiling"
+                        readonly>
+
+                </div>
+
+
+                <!-- LAST NAME -->
+                <div class="plantilla-field">
+
+                    <label>
+                        Last Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="plantillaLastName"
+                        value="ALFEROS III"
+                        readonly>
+
+                </div>
+
+
+                <!-- FIRST NAME -->
+                <div class="plantilla-field">
+
+                    <label>
+                        First Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="plantillaFirstName"
+                        value="JOHN THOMAS"
+                        readonly>
+
+                </div>
+
+
+                <!-- MIDDLE NAME -->
+                <div class="plantilla-field">
+
+                    <label>
+                        Middle Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="plantillaMiddleName"
+                        value="N/A"
+                        readonly>
+
+                </div>
+
+
+                <!-- OFFICE -->
+                <div class="plantilla-field full-width">
+
+                    <label>
+                        Office / Department
+                    </label>
+
+                    <input
+                        type="text"
+                        id="plantillaOffice"
+                        value="Office of the Secretary to the Sangguniang Panlungsod"
+                        readonly>
+
+                </div>
+
+
+                <!-- POSITION -->
+                <div class="plantilla-field">
+
+                    <label>
+                        Position
+                    </label>
+
+                    <input
+                        type="text"
+                        id="plantillaPosition"
+                        placeholder="Position"
+                        readonly>
+
+                </div>
+
+
+                <!-- SALARY -->
+                <div class="plantilla-field">
+
+                    <label>
+                        Salary
+                    </label>
+
+                    <input
+                        type="text"
+                        id="plantillaSalary"
+                        placeholder="Salary"
+                        readonly>
+
+                </div>
+
+            </div>
+
+
+            <!-- FOOTER -->
+            <div class="plantilla-step-footer">
+
+                <button
+                    type="button"
+                    class="plantilla-next-btn"
+                    onclick="nextPlantillaStep(2)">
+
+                    Next
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             STEP 2 — TYPE OF LEAVE
+        ================================================== -->
+
+        <div
+            class="plantilla-form-step"
+            id="plantillaFormStep2">
+
+            <div class="plantilla-step-heading">
+
+                <div class="plantilla-step-icon">
+                    <i class="fa-solid fa-calendar-days"></i>
+                </div>
+
+                <div>
+                    <h3>Type of Leave</h3>
+
+                    <p>
+                        Select the type of leave you wish to apply for.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="plantilla-form-grid">
+
+                <!-- TYPE OF LEAVE -->
+                <div class="plantilla-field full-width">
+
+                    <label>
+                        Type of Leave to be Availed Of
+                    </label>
+
+                    <select
+                        id="plantillaLeaveType"
+                        onchange="handlePlantillaLeaveType()">
+
+                        <option value="">
+                            Select type of leave
+                        </option>
+
+                        <option value="Vacation Leave">
+                            Vacation Leave
+                        </option>
+
+                        <option value="Mandatory/Forced Leave">
+                            Mandatory / Forced Leave
+                        </option>
+
+                        <option value="Sick Leave">
+                            Sick Leave
+                        </option>
+
+                        <option value="Maternity Leave">
+                            Maternity Leave
+                        </option>
+
+                        <option value="Paternity Leave">
+                            Paternity Leave
+                        </option>
+
+                        <option value="Special Privilege Leave">
+                            Special Privilege Leave
+                        </option>
+
+                        <option value="Solo Parent Leave">
+                            Solo Parent Leave
+                        </option>
+
+                        <option value="Study Leave">
+                            Study Leave
+                        </option>
+
+                        <option value="10-Day VAWC Leave">
+                            10-Day VAWC Leave
+                        </option>
+
+                        <option value="Rehabilitation Privilege">
+                            Rehabilitation Privilege
+                        </option>
+
+                        <option value="Special Leave Benefits for Women">
+                            Special Leave Benefits for Women
+                        </option>
+
+                        <option value="Special Emergency (Calamity) Leave">
+                            Special Emergency (Calamity) Leave
+                        </option>
+
+                        <option value="Adoption Leave">
+                            Adoption Leave
+                        </option>
+
+                        <option value="Others">
+                            Others
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- OTHER LEAVE -->
+                <div
+                    class="plantilla-field full-width"
+                    id="plantillaOtherLeaveContainer"
+                    style="display: none;">
+
+                    <label>
+                        Specify Other Leave
+                    </label>
+
+                    <input
+                        type="text"
+                        id="plantillaOtherLeave"
+                        placeholder="Please specify">
+
+                </div>
+
+
+                <!-- NUMBER OF WORKING DAYS -->
+                <div class="plantilla-field">
+
+                    <label>
+                        Number of Working Days Applied For
+                    </label>
+
+                    <input
+                        type="number"
+                        id="plantillaWorkingDays"
+                        min="1"
+                        placeholder="Automatically calculated"
+                        readonly>
+
+                </div>
+
+
+                <!-- FROM -->
+                <div class="plantilla-field">
+
+                    <label>
+                        Inclusive Date — From
+                    </label>
+
+                    <input
+                        type="date"
+                        id="plantillaDateFrom"
+                        onchange="calculatePlantillaWorkingDays()">
+
+                </div>
+
+
+                <!-- TO -->
+                <div class="plantilla-field">
+
+                    <label>
+                        Inclusive Date — To
+                    </label>
+
+                    <input
+                        type="date"
+                        id="plantillaDateTo"
+                        onchange="calculatePlantillaWorkingDays()">
+
+                </div>
+
+            </div>
+
+
+            <!-- FOOTER -->
+            <div class="plantilla-step-footer">
+
+                <button
+                    type="button"
+                    class="plantilla-back-btn"
+                    onclick="showPlantillaStep(1)">
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Back
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="plantilla-next-btn"
+                    onclick="nextPlantillaStep(3)">
+
+                    Next
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             STEP 3 — APPLICATION DETAILS
+        ================================================== -->
+
+        <div
+            class="plantilla-form-step"
+            id="plantillaFormStep3">
+
+            <div class="plantilla-step-heading">
+
+                <div class="plantilla-step-icon">
+                    <i class="fa-solid fa-file-lines"></i>
+                </div>
+
+                <div>
+                    <h3>Application Details</h3>
+
+                    <p>
+                        Provide the details required for your leave application.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- LOCATION -->
+            <div class="plantilla-section">
+
+                <div class="plantilla-section-title">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    <span>
+                        Details of Leave
+                    </span>
+
+                </div>
+
+
+                <div class="plantilla-form-grid">
+
+                    <!-- LOCATION -->
+                    <div class="plantilla-field full-width">
+
+                        <label>
+                            Where will the leave be spent?
+                        </label>
+
+                        <select
+                            id="plantillaLeaveLocation"
+                            onchange="handlePlantillaLocation()">
+
+                            <option value="">
+                                Select location
+                            </option>
+
+                            <option value="Within the Philippines">
+                                Within the Philippines
+                            </option>
+
+                            <option value="Abroad">
+                                Abroad
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- ABROAD -->
+                    <div
+                        class="plantilla-field full-width"
+                        id="plantillaAbroadContainer"
+                        style="display: none;">
+
+                        <label>
+                            Specify Place Abroad
+                        </label>
+
+                        <input
+                            type="text"
+                            id="plantillaAbroadPlace"
+                            placeholder="Country / Place">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SICK LEAVE DETAILS -->
+            <div
+                class="plantilla-section"
+                id="plantillaSickSection"
+                style="display: none;">
+
+                <div class="plantilla-section-title">
+
+                    <i class="fa-solid fa-notes-medical"></i>
+
+                    <span>
+                        In Case of Sick Leave
+                    </span>
+
+                </div>
+
+
+                <div class="plantilla-form-grid">
+
+                    <!-- SICK LOCATION -->
+                    <div class="plantilla-field full-width">
+
+                        <label>
+                            Where was the illness treated?
+                        </label>
+
+                        <select
+                            id="plantillaSickLocation"
+                            onchange="handlePlantillaSickLocation()">
+
+                            <option value="">
+                                Select
+                            </option>
+
+                            <option value="In Hospital">
+                                In Hospital
+                            </option>
+
+                            <option value="Out Patient">
+                                Out Patient
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- ILLNESS -->
+                    <div
+                        class="plantilla-field full-width"
+                        id="plantillaSickSpecifyContainer"
+                        style="display: none;">
+
+                        <label>
+                            Specify Illness
+                        </label>
+
+                        <input
+                            type="text"
+                            id="plantillaSickSpecify"
+                            placeholder="Please specify illness">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- FOOTER -->
+            <div class="plantilla-step-footer">
+
+                <button
+                    type="button"
+                    class="plantilla-back-btn"
+                    onclick="showPlantillaStep(2)">
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Back
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="plantilla-next-btn"
+                    onclick="preparePlantillaReview()">
+
+                    Review
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             STEP 4 — REVIEW
+        ================================================== -->
+
+        <div
+            class="plantilla-form-step"
+            id="plantillaFormStep4">
+
+            <div class="plantilla-step-heading">
+
+                <div class="plantilla-step-icon">
+                    <i class="fa-solid fa-clipboard-check"></i>
+                </div>
+
+                <div>
+                    <h3>Review Application</h3>
+
+                    <p>
+                        Please review your information before submitting.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="plantilla-review-container">
+
+                <!-- EMPLOYEE -->
+                <div class="plantilla-review-section">
+
+                    <h4>
+                        <i class="fa-solid fa-user"></i>
+                        Employee Information
+                    </h4>
+
+
+                    <div class="plantilla-review-grid">
+
+                        <div>
+                            <span>Employee ID</span>
+                            <strong id="plantillaReviewEmployeeID">
+                                —
+                            </strong>
+                        </div>
+
+                        <div>
+                            <span>Name</span>
+                            <strong id="plantillaReviewName">
+                                —
+                            </strong>
+                        </div>
+
+                        <div>
+                            <span>Office / Department</span>
+                            <strong id="plantillaReviewOffice">
+                                —
+                            </strong>
+                        </div>
+
+                        <div>
+                            <span>Date of Filing</span>
+                            <strong id="plantillaReviewFilingDate">
+                                —
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LEAVE -->
+                <div class="plantilla-review-section">
+
+                    <h4>
+                        <i class="fa-solid fa-calendar-days"></i>
+                        Leave Details
+                    </h4>
+
+
+                    <div class="plantilla-review-grid">
+
+                        <div>
+                            <span>Type of Leave</span>
+                            <strong id="plantillaReviewLeaveType">
+                                —
+                            </strong>
+                        </div>
+
+                        <div>
+                            <span>Working Days</span>
+                            <strong id="plantillaReviewWorkingDays">
+                                —
+                            </strong>
+                        </div>
+
+                        <div>
+                            <span>Inclusive Dates</span>
+                            <strong id="plantillaReviewDates">
+                                —
+                            </strong>
+                        </div>
+
+                        <div>
+                            <span>Location</span>
+                            <strong id="plantillaReviewLocation">
+                                —
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SUBMISSION NOTE -->
+                <div class="plantilla-submit-note">
+
+                    <i class="fa-solid fa-circle-info"></i>
+
+                    <span>
+                        Please make sure all information is correct before submitting your application.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- FOOTER -->
+            <div class="plantilla-step-footer">
+
+                <button
+                    type="button"
+                    class="plantilla-back-btn"
+                    onclick="showPlantillaStep(3)">
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Back
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="plantilla-submit-btn"
+                    onclick="submitPlantillaLeave()">
+
+                    <i class="fa-solid fa-paper-plane"></i>
+
+                    Submit Application
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     PLANTILLA SUCCESS MODAL
+========================================================= -->
+
+<div
+    id="plantillaSuccessModal"
+    class="plantilla-success-overlay">
+
+    <div class="plantilla-success-modal">
+
+        <div class="plantilla-success-icon">
+
+            <i class="fa-solid fa-check"></i>
+
+        </div>
+
+        <h2>
+            Application Submitted!
+        </h2>
+
+        <p>
+            Your Plantilla leave application has been submitted successfully.
+        </p>
+
+        <button
+            type="button"
+            onclick="closePlantillaSuccessModal()">
+
+            Done
+
+        </button>
+
+    </div>
+
+</div>
 
 
     <!-- MAIN BUTTON -->
@@ -4053,6 +4956,8 @@ document.addEventListener(
 
 document.getElementById(
     "dtrResultModal"
+) && document.getElementById(
+    "dtrResultModal"
 ).addEventListener(
     "click",
     function(event) {
@@ -4078,14 +4983,1121 @@ document.addEventListener(
 
         if (event.key === "Escape") {
 
-            closeUploadDTR();
+            if (typeof closeUploadDTR === "function") {
+                closeUploadDTR();
+            }
 
-            closeDTRResult();
+            if (typeof closeDTRResult === "function") {
+                closeDTRResult();
+            }
 
         }
 
     }
 );
+
+
+/* =========================================================
+   PLANTILLA LEAVE APPLICATION
+========================================================= */
+
+let currentPlantillaStep = 1;
+
+
+/* =========================================================
+   OPEN PLANTILLA MODAL
+========================================================= */
+
+function openPlantillaModal() {
+
+    const modal = document.getElementById("plantillaLeaveModal");
+
+    if (!modal) return;
+
+    /* Close floating action menu */
+    const floatingActions = document.querySelector(".floating-actions");
+
+    if (floatingActions) {
+        floatingActions.classList.remove("active");
+    }
+
+    /* Open Plantilla modal */
+    modal.classList.add("active");
+
+    document.body.style.overflow = "hidden";
+
+    /* Start from Step 1 */
+    currentPlantillaStep = 1;
+
+    showPlantillaStep(1);
+
+    /* Set current date */
+    setPlantillaDateOfFiling();
+}
+
+
+/* =========================================================
+   CLOSE PLANTILLA MODAL
+========================================================= */
+
+function closePlantillaModal(event) {
+
+    if (
+        event &&
+        event.target !== event.currentTarget
+    ) {
+        return;
+    }
+
+    const modal =
+        document.getElementById("plantillaLeaveModal");
+
+    if (modal) {
+        modal.classList.remove("active");
+
+        document.body.style.overflow = "";
+    }
+}
+
+
+/* =========================================================
+   STEP NAVIGATION
+========================================================= */
+
+function showPlantillaStep(step) {
+
+    /* Hide all steps */
+    document
+        .querySelectorAll(".plantilla-form-step")
+        .forEach(function(formStep) {
+
+            formStep.classList.remove("active");
+
+        });
+
+
+    /* Show selected step */
+    const selectedStep =
+        document.getElementById(
+            "plantillaFormStep" + step
+        );
+
+    if (selectedStep) {
+
+        selectedStep.classList.add("active");
+
+    }
+
+
+    /* Reset progress indicators */
+    document
+        .querySelectorAll(".plantilla-progress-step")
+        .forEach(function(indicator) {
+
+            indicator.classList.remove("active");
+            indicator.classList.remove("completed");
+
+        });
+
+
+    /* Update progress */
+    for (let i = 1; i <= 4; i++) {
+
+        const indicator =
+            document.getElementById(
+                "plantillaStepIndicator" + i
+            );
+
+        if (!indicator) continue;
+
+
+        if (i < step) {
+
+            indicator.classList.add("completed");
+
+        }
+
+
+        if (i === step) {
+
+            indicator.classList.add("active");
+
+        }
+
+    }
+
+
+    currentPlantillaStep = step;
+}
+
+
+/* =========================================================
+   NEXT STEP
+========================================================= */
+
+function nextPlantillaStep(step) {
+
+
+    /* -----------------------------------------
+       STEP 1 → STEP 2
+    ----------------------------------------- */
+
+    if (step === 2) {
+
+        showPlantillaStep(2);
+
+        return;
+
+    }
+
+
+    /* -----------------------------------------
+       STEP 2 → STEP 3
+    ----------------------------------------- */
+
+    if (step === 3) {
+
+        const leaveType =
+            document.getElementById(
+                "plantillaLeaveType"
+            );
+
+        const otherLeave =
+            document.getElementById(
+                "plantillaOtherLeave"
+            );
+
+        const from =
+            document.getElementById(
+                "plantillaDateFrom"
+            );
+
+        const to =
+            document.getElementById(
+                "plantillaDateTo"
+            );
+
+
+        /* Leave type required */
+        if (
+            !leaveType ||
+            !leaveType.value
+        ) {
+
+            alert(
+                "Please select a type of leave."
+            );
+
+            return;
+
+        }
+
+
+        /* Others requires specification */
+        if (
+            leaveType.value === "Others"
+        ) {
+
+            if (
+                !otherLeave ||
+                !otherLeave.value.trim()
+            ) {
+
+                alert(
+                    "Please specify the type of leave."
+                );
+
+                return;
+
+            }
+
+        }
+
+
+        /* Dates required */
+        if (
+            !from ||
+            !from.value ||
+            !to ||
+            !to.value
+        ) {
+
+            alert(
+                "Please select the inclusive dates of your leave."
+            );
+
+            return;
+
+        }
+
+
+        /* Check date order */
+        const startDate =
+            new Date(
+                from.value + "T00:00:00"
+            );
+
+        const endDate =
+            new Date(
+                to.value + "T00:00:00"
+            );
+
+
+        if (endDate < startDate) {
+
+            alert(
+                "The To date cannot be earlier than the From date."
+            );
+
+            return;
+
+        }
+
+
+        /* Calculate working days */
+        calculatePlantillaWorkingDays();
+
+
+        showPlantillaStep(3);
+
+        return;
+
+    }
+
+}
+
+
+/* =========================================================
+   DATE OF FILING
+========================================================= */
+
+function setPlantillaDateOfFiling() {
+
+    const today = new Date();
+
+    const year =
+        today.getFullYear();
+
+    const month =
+        String(
+            today.getMonth() + 1
+        ).padStart(2, "0");
+
+    const day =
+        String(
+            today.getDate()
+        ).padStart(2, "0");
+
+
+    const dateString =
+        `${year}-${month}-${day}`;
+
+
+    const filingDate =
+        document.getElementById(
+            "plantillaDateOfFiling"
+        );
+
+
+    if (filingDate) {
+
+        filingDate.value =
+            dateString;
+
+    }
+
+
+    const reviewDate =
+        document.getElementById(
+            "plantillaReviewFilingDate"
+        );
+
+
+    if (reviewDate) {
+
+        reviewDate.textContent =
+            formatPlantillaDate(
+                dateString
+            );
+
+    }
+
+}
+
+
+/* =========================================================
+   FORMAT DATE
+========================================================= */
+
+function formatPlantillaDate(dateString) {
+
+    if (!dateString) return "";
+
+    const date =
+        new Date(
+            dateString + "T00:00:00"
+        );
+
+
+    return date.toLocaleDateString(
+        "en-US",
+        {
+            month: "long",
+            day: "numeric",
+            year: "numeric"
+        }
+    );
+
+}
+
+
+/* =========================================================
+   HANDLE TYPE OF LEAVE
+========================================================= */
+
+function handlePlantillaLeaveType() {
+
+    const leaveType =
+        document.getElementById(
+            "plantillaLeaveType"
+        );
+
+
+    const otherContainer =
+        document.getElementById(
+            "plantillaOtherLeaveContainer"
+        );
+
+
+    const sickSection =
+        document.getElementById(
+            "plantillaSickSection"
+        );
+
+
+    if (!leaveType) return;
+
+
+    /* Others */
+    if (
+        leaveType.value === "Others"
+    ) {
+
+        if (otherContainer) {
+
+            otherContainer.style.display =
+                "block";
+
+        }
+
+    } else {
+
+        if (otherContainer) {
+
+            otherContainer.style.display =
+                "none";
+
+        }
+
+    }
+
+
+    /* Sick Leave */
+    if (
+        leaveType.value === "Sick Leave"
+    ) {
+
+        if (sickSection) {
+
+            sickSection.style.display =
+                "block";
+
+        }
+
+    } else {
+
+        if (sickSection) {
+
+            sickSection.style.display =
+                "none";
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   HANDLE LOCATION
+========================================================= */
+
+function handlePlantillaLocation() {
+
+    const location =
+        document.getElementById(
+            "plantillaLeaveLocation"
+        );
+
+
+    const abroadContainer =
+        document.getElementById(
+            "plantillaAbroadContainer"
+        );
+
+
+    if (!location) return;
+
+
+    if (
+        location.value === "Abroad"
+    ) {
+
+        if (abroadContainer) {
+
+            abroadContainer.style.display =
+                "block";
+
+        }
+
+    } else {
+
+        if (abroadContainer) {
+
+            abroadContainer.style.display =
+                "none";
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   HANDLE SICK LEAVE LOCATION
+========================================================= */
+
+function handlePlantillaSickLocation() {
+
+    const location =
+        document.getElementById(
+            "plantillaSickLocation"
+        );
+
+
+    const specifyContainer =
+        document.getElementById(
+            "plantillaSickSpecifyContainer"
+        );
+
+
+    if (!location) return;
+
+
+    if (location.value) {
+
+        if (specifyContainer) {
+
+            specifyContainer.style.display =
+                "block";
+
+        }
+
+    } else {
+
+        if (specifyContainer) {
+
+            specifyContainer.style.display =
+                "none";
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   CALCULATE WORKING DAYS
+========================================================= */
+
+function calculatePlantillaWorkingDays() {
+
+    const from =
+        document.getElementById(
+            "plantillaDateFrom"
+        );
+
+    const to =
+        document.getElementById(
+            "plantillaDateTo"
+        );
+
+    const workingDays =
+        document.getElementById(
+            "plantillaWorkingDays"
+        );
+
+
+    if (
+        !from ||
+        !to ||
+        !workingDays
+    ) {
+
+        return;
+
+    }
+
+
+    if (
+        !from.value ||
+        !to.value
+    ) {
+
+        workingDays.value = "";
+
+        return;
+
+    }
+
+
+    const startDate =
+        new Date(
+            from.value + "T00:00:00"
+        );
+
+    const endDate =
+        new Date(
+            to.value + "T00:00:00"
+        );
+
+
+    if (endDate < startDate) {
+
+        workingDays.value = "";
+
+        return;
+
+    }
+
+
+    let count = 0;
+
+    const currentDate =
+        new Date(startDate);
+
+
+    while (
+        currentDate <= endDate
+    ) {
+
+        const day =
+            currentDate.getDay();
+
+
+        /*
+            0 = Sunday
+            6 = Saturday
+
+            Only weekdays are counted.
+        */
+
+        if (
+            day !== 0 &&
+            day !== 6
+        ) {
+
+            count++;
+
+        }
+
+
+        currentDate.setDate(
+            currentDate.getDate() + 1
+        );
+
+    }
+
+
+    workingDays.value =
+        count;
+
+}
+
+
+/* =========================================================
+   PREPARE REVIEW
+========================================================= */
+
+function preparePlantillaReview() {
+
+    const leaveType =
+        document.getElementById(
+            "plantillaLeaveType"
+        );
+
+    const otherLeave =
+        document.getElementById(
+            "plantillaOtherLeave"
+        );
+
+    const from =
+        document.getElementById(
+            "plantillaDateFrom"
+        );
+
+    const to =
+        document.getElementById(
+            "plantillaDateTo"
+        );
+
+    const location =
+        document.getElementById(
+            "plantillaLeaveLocation"
+        );
+
+
+    /* -----------------------------------------
+       VALIDATE LEAVE TYPE
+    ----------------------------------------- */
+
+    if (
+        !leaveType ||
+        !leaveType.value
+    ) {
+
+        alert(
+            "Please select a type of leave."
+        );
+
+        showPlantillaStep(2);
+
+        return;
+
+    }
+
+
+    /* -----------------------------------------
+       VALIDATE OTHERS
+    ----------------------------------------- */
+
+    if (
+        leaveType.value === "Others"
+    ) {
+
+        if (
+            !otherLeave ||
+            !otherLeave.value.trim()
+        ) {
+
+            alert(
+                "Please specify the type of leave."
+            );
+
+            showPlantillaStep(2);
+
+            return;
+
+        }
+
+    }
+
+
+    /* -----------------------------------------
+       VALIDATE DATES
+    ----------------------------------------- */
+
+    if (
+        !from ||
+        !from.value ||
+        !to ||
+        !to.value
+    ) {
+
+        alert(
+            "Please select the inclusive dates of your leave."
+        );
+
+        showPlantillaStep(2);
+
+        return;
+
+    }
+
+
+    const startDate =
+        new Date(
+            from.value + "T00:00:00"
+        );
+
+    const endDate =
+        new Date(
+            to.value + "T00:00:00"
+        );
+
+
+    if (
+        endDate < startDate
+    ) {
+
+        alert(
+            "The To date cannot be earlier than the From date."
+        );
+
+        showPlantillaStep(2);
+
+        return;
+
+    }
+
+
+    /* -----------------------------------------
+       CALCULATE DAYS
+    ----------------------------------------- */
+
+    calculatePlantillaWorkingDays();
+
+
+    /* -----------------------------------------
+       EMPLOYEE INFORMATION
+    ----------------------------------------- */
+
+    const employeeID =
+        document.getElementById(
+            "plantillaEmployeeID"
+        );
+
+    const lastName =
+        document.getElementById(
+            "plantillaLastName"
+        );
+
+    const firstName =
+        document.getElementById(
+            "plantillaFirstName"
+        );
+
+    const middleName =
+        document.getElementById(
+            "plantillaMiddleName"
+        );
+
+    const office =
+        document.getElementById(
+            "plantillaOffice"
+        );
+
+    const filingDate =
+        document.getElementById(
+            "plantillaDateOfFiling"
+        );
+
+
+    /* -----------------------------------------
+       REVIEW EMPLOYEE ID
+    ----------------------------------------- */
+
+    const reviewEmployeeID =
+        document.getElementById(
+            "plantillaReviewEmployeeID"
+        );
+
+    if (reviewEmployeeID) {
+
+        reviewEmployeeID.textContent =
+            employeeID
+                ? employeeID.value
+                : "—";
+
+    }
+
+
+    /* -----------------------------------------
+       REVIEW NAME
+    ----------------------------------------- */
+
+    const reviewName =
+        document.getElementById(
+            "plantillaReviewName"
+        );
+
+    if (reviewName) {
+
+        reviewName.textContent =
+            [
+                lastName
+                    ? lastName.value
+                    : "",
+
+                firstName
+                    ? firstName.value
+                    : "",
+
+                middleName
+                    ? middleName.value
+                    : ""
+
+            ]
+            .filter(Boolean)
+            .join(", ");
+
+    }
+
+
+    /* -----------------------------------------
+       REVIEW OFFICE
+    ----------------------------------------- */
+
+    const reviewOffice =
+        document.getElementById(
+            "plantillaReviewOffice"
+        );
+
+    if (reviewOffice) {
+
+        reviewOffice.textContent =
+            office
+                ? office.value
+                : "—";
+
+    }
+
+
+    /* -----------------------------------------
+       REVIEW FILING DATE
+    ----------------------------------------- */
+
+    const reviewFilingDate =
+        document.getElementById(
+            "plantillaReviewFilingDate"
+        );
+
+    if (reviewFilingDate) {
+
+        reviewFilingDate.textContent =
+            filingDate
+                ? formatPlantillaDate(
+                    filingDate.value
+                )
+                : "—";
+
+    }
+
+
+    /* -----------------------------------------
+       FINAL LEAVE TYPE
+    ----------------------------------------- */
+
+    let finalLeaveType =
+        leaveType.value;
+
+
+    if (
+        leaveType.value === "Others" &&
+        otherLeave &&
+        otherLeave.value.trim()
+    ) {
+
+        finalLeaveType =
+            otherLeave.value.trim();
+
+    }
+
+
+    const reviewLeaveType =
+        document.getElementById(
+            "plantillaReviewLeaveType"
+        );
+
+    if (reviewLeaveType) {
+
+        reviewLeaveType.textContent =
+            finalLeaveType ||
+            "Not specified";
+
+    }
+
+
+    /* -----------------------------------------
+       REVIEW WORKING DAYS
+    ----------------------------------------- */
+
+    const workingDays =
+        document.getElementById(
+            "plantillaWorkingDays"
+        );
+
+
+    const reviewWorkingDays =
+        document.getElementById(
+            "plantillaReviewWorkingDays"
+        );
+
+
+    if (reviewWorkingDays) {
+
+        reviewWorkingDays.textContent =
+            workingDays &&
+            workingDays.value
+                ? workingDays.value +
+                  " working day(s)"
+                : "Not specified";
+
+    }
+
+
+    /* -----------------------------------------
+       REVIEW DATES
+    ----------------------------------------- */
+
+    const reviewDates =
+        document.getElementById(
+            "plantillaReviewDates"
+        );
+
+
+    if (reviewDates) {
+
+        reviewDates.textContent =
+            formatPlantillaDate(
+                from.value
+            ) +
+            " — " +
+            formatPlantillaDate(
+                to.value
+            );
+
+    }
+
+
+    /* -----------------------------------------
+       FINAL LOCATION
+    ----------------------------------------- */
+
+    let finalLocation =
+        location
+            ? location.value
+            : "";
+
+
+    if (
+        location &&
+        location.value === "Abroad"
+    ) {
+
+        const abroad =
+            document.getElementById(
+                "plantillaAbroadPlace"
+            );
+
+
+        if (
+            abroad &&
+            abroad.value.trim()
+        ) {
+
+            finalLocation =
+                "Abroad — " +
+                abroad.value.trim();
+
+        }
+
+    }
+
+
+    const reviewLocation =
+        document.getElementById(
+            "plantillaReviewLocation"
+        );
+
+
+    if (reviewLocation) {
+
+        reviewLocation.textContent =
+            finalLocation ||
+            "Not specified";
+
+    }
+
+
+    /* -----------------------------------------
+       SHOW REVIEW
+    ----------------------------------------- */
+
+    showPlantillaStep(4);
+
+}
+
+
+/* =========================================================
+   SUBMIT PLANTILLA LEAVE
+========================================================= */
+
+function submitPlantillaLeave() {
+
+    /* Refresh filing date */
+    setPlantillaDateOfFiling();
+
+
+    const modal =
+        document.getElementById(
+            "plantillaLeaveModal"
+        );
+
+
+    const successModal =
+        document.getElementById(
+            "plantillaSuccessModal"
+        );
+
+
+    if (modal) {
+
+        modal.classList.remove(
+            "active"
+        );
+
+    }
+
+
+    if (successModal) {
+
+        successModal.classList.add(
+            "active"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   CLOSE SUCCESS MODAL
+========================================================= */
+
+function closePlantillaSuccessModal() {
+
+    const successModal =
+        document.getElementById(
+            "plantillaSuccessModal"
+        );
+
+
+    if (successModal) {
+
+        successModal.classList.remove(
+            "active"
+        );
+
+    }
+
+
+    document.body.style.overflow = "";
+
+}
+
 
 </script>
 
