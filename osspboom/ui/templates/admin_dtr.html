@@ -1,2748 +1,2149 @@
 {% load static %}
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>EMPLOYEE DASHBOARD</title>
 
-    <link rel="stylesheet"
-          href="{% static 'css/admin_dtr.css' %}?v=20260906">
+    <link rel="stylesheet" href="{% static 'css/admin_dtr.css' %}?v=20260906" />
 
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
 
-
-<style id="view-details-mobile-fix">
-
-/* =========================================================
+    <style id="view-details-mobile-fix">
+      /* =========================================================
    BACKGROUND
 ========================================================= */
 
-.main {
-    position: relative !important;
-    z-index: 1 !important;
-}
+      .main {
+        position: relative !important;
+        z-index: 1 !important;
+      }
 
+      .details-bg-image {
+        position: fixed !important;
+        inset: 0 !important;
+        z-index: -1 !important;
 
-.details-bg-image {
-    position: fixed !important;
-    inset: 0 !important;
-    z-index: -1 !important;
-
-    background-image:
-        linear-gradient(
+        background-image:
+          linear-gradient(
             135deg,
-            rgba(6, 59, 115, 0.70) 0%,
+            rgba(6, 59, 115, 0.7) 0%,
             rgba(7, 92, 168, 0.58) 50%,
             rgba(201, 33, 39, 0.65) 100%
-        ),
-        url("{% static 'image/bg.jpg' %}") !important;
+          ),
+          url("{% static 'image/bg.jpg' %}") !important;
 
-    background-size: cover !important;
-    background-position: center center !important;
-    background-repeat: no-repeat !important;
+        background-size: cover !important;
+        background-position: center center !important;
+        background-repeat: no-repeat !important;
 
-    pointer-events: none !important;
-}
+        pointer-events: none !important;
+      }
 
-
-/* =========================================
+      /* =========================================
    FLOATING LOGO
    DESKTOP ONLY
 ========================================= */
 
-.floating-logo {
+      .floating-logo {
+        position: absolute;
 
-    position: absolute;
+        top: -20px;
 
-    top: -20px;
+        left: 50%;
 
-    left: 50%;
+        transform: translateX(-50%);
 
-    transform: translateX(-50%);
+        width: 150px;
 
-    width: 150px;
+        height: 100px;
 
-    height: 100px;
+        border-radius: 50%;
 
-    border-radius: 50%;
+        display: flex;
 
-    display: flex;
+        align-items: center;
 
-    align-items: center;
+        justify-content: center;
 
-    justify-content: center;
+        gap: 8px;
 
-    gap: 8px;
+        padding: 10px;
 
-    padding: 10px;
+        z-index: 1500;
+      }
 
-    z-index: 1500;
-}
+      .floating-logo img {
+        width: 65px;
 
+        height: 65px;
 
-.floating-logo img {
+        object-fit: contain;
 
-    width: 65px;
+        display: block;
 
-    height: 65px;
+        flex-shrink: 0;
+      }
 
-    object-fit: contain;
-
-    display: block;
-
-    flex-shrink: 0;
-}
-
-/* =========================================================
+      /* =========================================================
    MOBILE LOGO
 ========================================================= */
 
-.mobile-logo {
-    display: none !important;
-}
+      .mobile-logo {
+        display: none !important;
+      }
 
-
-/* =========================================================
+      /* =========================================================
    NAVBAR LOGOUT BUTTON
 ========================================================= */
 
-.navbar-logout {
-    display: inline-flex !important;
+      .navbar-logout {
+        display: inline-flex !important;
 
-    align-items: center !important;
-    justify-content: center !important;
+        align-items: center !important;
+        justify-content: center !important;
 
-    gap: 7px !important;
+        gap: 7px !important;
 
-    min-width: 82px !important;
-    height: 36px !important;
+        min-width: 82px !important;
+        height: 36px !important;
 
-    padding: 8px 12px !important;
+        padding: 8px 12px !important;
 
-    border: none !important;
+        border: none !important;
 
-    border-radius: 7px !important;
+        border-radius: 7px !important;
 
-    background: #c92127 !important;
+        background: #c92127 !important;
 
-    color: #ffffff !important;
+        color: #ffffff !important;
 
-    font-family: 'Montserrat', sans-serif !important;
+        font-family: "Montserrat", sans-serif !important;
 
-    font-size: 11px !important;
+        font-size: 11px !important;
 
-    font-weight: 700 !important;
+        font-weight: 700 !important;
 
-    cursor: pointer !important;
+        cursor: pointer !important;
 
-    transition:
-        background 0.2s ease,
-        transform 0.2s ease,
-        box-shadow 0.2s ease !important;
+        transition:
+          background 0.2s ease,
+          transform 0.2s ease,
+          box-shadow 0.2s ease !important;
 
-    white-space: nowrap !important;
-}
+        white-space: nowrap !important;
+      }
 
+      .navbar-logout:hover {
+        background: #a91c21 !important;
 
-.navbar-logout:hover {
-    background: #a91c21 !important;
+        transform: translateY(-1px) !important;
 
-    transform: translateY(-1px) !important;
+        box-shadow: 0 5px 14px rgba(201, 33, 39, 0.25) !important;
+      }
 
-    box-shadow:
-        0 5px 14px rgba(201, 33, 39, 0.25) !important;
-}
+      .navbar-logout i {
+        font-size: 12px !important;
+      }
 
-
-.navbar-logout i {
-    font-size: 12px !important;
-}
-
-
-/* =========================================================
+      /* =========================================================
    ATTENDANCE TIME BUTTONS
 ========================================================= */
 
-.attendance-time-btn {
-    border: none;
-    background: transparent;
+      .attendance-time-btn {
+        border: none;
+        background: transparent;
 
-    font: inherit;
-    color: inherit;
+        font: inherit;
+        color: inherit;
 
-    cursor: pointer;
+        cursor: pointer;
 
-    padding: 7px 10px;
+        padding: 7px 10px;
 
-    border-radius: 7px;
+        border-radius: 7px;
 
-    transition:
-        background 0.2s ease,
-        transform 0.2s ease;
-}
+        transition:
+          background 0.2s ease,
+          transform 0.2s ease;
+      }
 
-.attendance-time-btn:hover {
-    background: rgba(7, 92, 168, 0.12);
-    transform: translateY(-1px);
-}
+      .attendance-time-btn:hover {
+        background: rgba(7, 92, 168, 0.12);
+        transform: translateY(-1px);
+      }
 
-.attendance-time-btn i {
-    margin-left: 5px;
-    font-size: 11px;
-}
+      .attendance-time-btn i {
+        margin-left: 5px;
+        font-size: 11px;
+      }
 
-
-/* =========================================================
+      /* =========================================================
    CURRENT DAY - CAMERA BUTTON
 ========================================================= */
 
-.attendance-time-btn.can-upload {
-    color: #075ca8;
-    font-weight: 700;
-}
+      .attendance-time-btn.can-upload {
+        color: #075ca8;
+        font-weight: 700;
+      }
 
-
-/* =========================================================
+      /* =========================================================
    CURRENT DAY - ATTENDANCE ALREADY RECORDED
 ========================================================= */
 
-.attendance-time-btn.attendance-recorded {
-    color: #075ca8;
-    font-weight: 700;
-}
+      .attendance-time-btn.attendance-recorded {
+        color: #075ca8;
+        font-weight: 700;
+      }
 
-
-/* =========================================================
+      /* =========================================================
    PAST DTR RECORD
 ========================================================= */
 
-.attendance-time-btn.past-record {
-    color: #333;
-}
+      .attendance-time-btn.past-record {
+        color: #333;
+      }
 
-
-/* =========================================================
+      /* =========================================================
    FUTURE RECORD
 ========================================================= */
 
-.attendance-time-btn.future-record {
-    color: #777;
-}
+      .attendance-time-btn.future-record {
+        color: #777;
+      }
 
-
-/* =========================================================
+      /* =========================================================
    PHOTO AVAILABLE
 ========================================================= */
 
-.attendance-time-btn.has-photo {
-    color: #075ca8;
-}
+      .attendance-time-btn.has-photo {
+        color: #075ca8;
+      }
 
-
-/* =========================================================
+      /* =========================================================
    ABSENT / EMPTY
 ========================================================= */
 
-.attendance-empty {
-    color: #999;
-    font-size: 12px;
-    font-style: italic;
-}
+      .attendance-empty {
+        color: #999;
+        font-size: 12px;
+        font-style: italic;
+      }
 
-
-/* =========================================================
+      /* =========================================================
    UPCOMING STATUS
 ========================================================= */
 
-.status.upcoming {
-    color: #777;
-}
+      .status.upcoming {
+        color: #777;
+      }
 
-
-/* =========================================================
+      /* =========================================================
    EXPORT DTR
 ========================================================= */
 
-.attendance-tools {
-    display: flex;
+      .attendance-tools {
+        display: flex;
 
-    align-items: center;
+        align-items: center;
 
-    justify-content: space-between;
+        justify-content: space-between;
 
-    gap: 10px;
+        gap: 10px;
 
-    flex-wrap: wrap;
-}
+        flex-wrap: wrap;
+      }
 
+      .export-dtr-btn {
+        display: inline-flex;
 
-.export-dtr-btn {
-    display: inline-flex;
+        align-items: center;
 
-    align-items: center;
+        justify-content: center;
 
-    justify-content: center;
+        gap: 7px;
 
-    gap: 7px;
+        min-width: 125px;
 
-    min-width: 125px;
+        height: 40px;
 
-    height: 40px;
+        padding: 9px 15px;
 
-    padding: 9px 15px;
+        border: none;
 
-    border: none;
+        border-radius: 8px;
 
-    border-radius: 8px;
+        background: #075ca8;
 
-    background: #075ca8;
+        color: #ffffff;
 
-    color: #ffffff;
+        font-family: "Montserrat", sans-serif;
 
-    font-family: 'Montserrat', sans-serif;
+        font-size: 11px;
 
-    font-size: 11px;
+        font-weight: 700;
 
-    font-weight: 700;
+        cursor: pointer;
 
-    cursor: pointer;
+        white-space: nowrap;
 
-    white-space: nowrap;
+        transition:
+          background 0.2s ease,
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
 
-    transition:
-        background 0.2s ease,
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-}
+      .export-dtr-btn:hover {
+        background: #063b73;
 
+        transform: translateY(-1px);
 
-.export-dtr-btn:hover {
-    background: #063b73;
+        box-shadow: 0 5px 14px rgba(7, 92, 168, 0.25);
+      }
 
-    transform: translateY(-1px);
+      .export-dtr-btn:active {
+        transform: translateY(0);
+      }
 
-    box-shadow:
-        0 5px 14px rgba(7, 92, 168, 0.25);
-}
+      .export-dtr-btn i {
+        font-size: 13px;
+      }
 
-
-.export-dtr-btn:active {
-    transform: translateY(0);
-}
-
-
-.export-dtr-btn i {
-    font-size: 13px;
-}
-
-
-/* =========================================================
+      /* =========================================================
    ATTENDANCE MODAL
 ========================================================= */
 
-.attendance-photo-modal {
-    position: fixed;
+      .attendance-photo-modal {
+        position: fixed;
 
-    inset: 0;
+        inset: 0;
 
-    width: 100%;
-    height: 100%;
+        width: 100%;
+        height: 100%;
 
-    display: none;
+        display: none;
 
-    align-items: center;
-    justify-content: center;
+        align-items: center;
+        justify-content: center;
 
-    background: rgba(0, 0, 0, 0.65);
+        background: rgba(0, 0, 0, 0.65);
 
-    z-index: 99999;
-
-    padding: 20px;
-
-    box-sizing: border-box;
-}
-
-.attendance-photo-modal.show {
-    display: flex;
-}
-
-
-/* =========================================================
-   MODAL BOX
-========================================================= */
-
-.attendance-photo-modal-box {
-    width: 100%;
-    max-width: 470px;
-
-    max-height: 92vh;
-
-    overflow-y: auto;
-
-    background: #ffffff;
-
-    border-radius: 16px;
-
-    padding: 25px;
-
-    box-sizing: border-box;
-
-    box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.25);
-
-    animation: attendanceModalIn 0.2s ease;
-}
-
-@keyframes attendanceModalIn {
-
-    from {
-        opacity: 0;
-        transform: translateY(15px) scale(0.97);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-
-}
-
-
-/* =========================================================
-   MODAL HEADER
-========================================================= */
-
-.attendance-modal-header {
-    display: flex;
-
-    align-items: center;
-    justify-content: space-between;
-
-    gap: 15px;
-
-    margin-bottom: 15px;
-}
-
-.attendance-modal-header h3 {
-    margin: 0;
-
-    font-size: 21px;
-
-    color: #063b73;
-}
-
-.attendance-modal-close {
-    width: 35px;
-    height: 35px;
-
-    border: none;
-
-    border-radius: 50%;
-
-    background: #f1f1f1;
-
-    color: #333;
-
-    cursor: pointer;
-
-    font-size: 16px;
-
-    transition: 0.2s ease;
-}
-
-.attendance-modal-close:hover {
-    background: #c92127;
-    color: white;
-}
-
-
-/* =========================================================
-   MODAL INFORMATION
-========================================================= */
-
-.attendance-modal-info {
-    background: #f5f7fa;
-
-    border-radius: 10px;
-
-    padding: 12px 15px;
-
-    margin-bottom: 18px;
-}
-
-.attendance-modal-info p {
-    margin: 4px 0;
-
-    color: #444;
-
-    font-size: 13px;
-}
-
-.attendance-modal-info strong {
-    color: #063b73;
-}
-
-
-/* =========================================================
-   SOURCE BADGE
-========================================================= */
-
-.dtr-source-badge {
-    display: inline-flex;
-
-    align-items: center;
-
-    gap: 6px;
-
-    padding: 6px 10px;
-
-    margin-top: 6px;
-
-    border-radius: 20px;
-
-    background: rgba(7, 92, 168, 0.10);
-
-    color: #075ca8;
-
-    font-size: 11px;
-
-    font-weight: 700;
-}
-
-
-/* =========================================================
-   MODAL MESSAGE
-========================================================= */
-
-.attendance-modal-message {
-    margin: 15px 0;
-
-    padding: 12px 14px;
-
-    border-radius: 9px;
-
-    background: #f7f7f7;
-
-    color: #555;
-
-    font-size: 13px;
-
-    line-height: 1.5;
-}
-
-.attendance-modal-message i {
-    margin-right: 5px;
-}
-
-
-/* =========================================================
-   PHOTO PREVIEW
-========================================================= */
-
-.attendance-photo-preview {
-    display: none;
-
-    width: 100%;
-
-    max-height: 350px;
-
-    object-fit: contain;
-
-    border-radius: 10px;
-
-    border: 1px solid #ddd;
-
-    background: #f5f5f5;
-
-    margin-bottom: 15px;
-}
-
-.attendance-photo-preview.show {
-    display: block;
-}
-
-
-/* =========================================================
-   CAMERA AREA
-========================================================= */
-
-.attendance-upload-area {
-    display: none;
-
-    border: 2px dashed #075ca8;
-
-    border-radius: 12px;
-
-    padding: 20px 15px;
-
-    text-align: center;
-
-    margin-bottom: 15px;
-
-    background: rgba(7, 92, 168, 0.04);
-}
-
-.attendance-upload-area.show {
-    display: block;
-}
-
-
-.attendance-upload-area > i {
-    font-size: 32px;
-
-    color: #075ca8;
-
-    margin-bottom: 8px;
-}
-
-
-.attendance-upload-area p {
-    margin: 5px 0;
-
-    font-size: 13px;
-
-    color: #555;
-}
-
-
-/* =========================================================
-   CAMERA PREVIEW
-========================================================= */
-
-.camera-preview-wrapper {
-    display: none;
-
-    width: 100%;
-
-    margin: 15px 0;
-
-    border-radius: 12px;
-
-    overflow: hidden;
-
-    background: #111;
-
-    border: 1px solid #ddd;
-
-    position: relative;
-}
-
-
-.camera-preview-wrapper.show {
-    display: block;
-}
-
-
-#attendanceCameraPreview {
-    display: block;
-
-    width: 100%;
-
-    height: 300px;
-
-    object-fit: cover;
-
-    background: #111;
-
-    transform: scaleX(-1);
-}
-
-
-#attendanceCameraCanvas {
-    display: none;
-}
-
-
-/* =========================================================
-   CAMERA STATUS
-========================================================= */
-
-.camera-status {
-    display: none;
-
-    margin: 10px 0;
-
-    padding: 9px 12px;
-
-    border-radius: 8px;
-
-    background: rgba(7, 92, 168, 0.08);
-
-    color: #075ca8;
-
-    font-size: 11px;
-
-    font-weight: 600;
-
-    line-height: 1.4;
-}
-
-.camera-status.show {
-    display: block;
-}
-
-
-/* =========================================================
-   CAMERA BUTTONS
-========================================================= */
-
-.camera-actions {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    flex-wrap: wrap;
-
-    gap: 8px;
-
-    margin-top: 12px;
-}
-
-
-.camera-btn {
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 7px;
-
-    min-width: 115px;
-
-    padding: 10px 14px;
-
-    border: none;
-
-    border-radius: 8px;
-
-    font-family: 'Montserrat', sans-serif;
-
-    font-size: 12px;
-
-    font-weight: 700;
-
-    cursor: pointer;
-
-    transition:
-        background 0.2s ease,
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-
-.camera-btn:hover {
-    transform: translateY(-1px);
-}
-
-
-.camera-open-btn {
-    background: #075ca8;
-
-    color: #ffffff;
-}
-
-
-.camera-open-btn:hover {
-    background: #063b73;
-
-    box-shadow:
-        0 5px 15px rgba(7, 92, 168, 0.20);
-}
-
-
-.camera-capture-btn {
-    display: none;
-
-    background: #c92127;
-
-    color: #ffffff;
-}
-
-
-.camera-capture-btn.show {
-    display: inline-flex;
-}
-
-
-.camera-capture-btn:hover {
-    background: #a91c21;
-}
-
-
-.camera-retake-btn {
-    display: none;
-
-    background: #f1f1f1;
-
-    color: #444;
-
-    border: 1px solid #ddd;
-}
-
-
-.camera-retake-btn.show {
-    display: inline-flex;
-}
-
-
-.camera-retake-btn:hover {
-    background: #e7e7e7;
-}
-
-
-.camera-use-btn {
-    display: none;
-
-    background: #075ca8;
-
-    color: #ffffff;
-}
-
-
-.camera-use-btn.show {
-    display: inline-flex;
-}
-
-
-.camera-use-btn:hover {
-    background: #063b73;
-}
-
-
-/* =========================================================
-   CAMERA CAPTURED PHOTO
-========================================================= */
-
-.camera-captured-preview {
-    display: none;
-
-    width: 100%;
-
-    max-height: 300px;
-
-    object-fit: contain;
-
-    border-radius: 10px;
-
-    background: #111;
-
-    border: 1px solid #ddd;
-
-    margin-top: 15px;
-}
-
-
-.camera-captured-preview.show {
-    display: block;
-}
-
-
-/* =========================================================
-   CAMERA ERROR
-========================================================= */
-
-.camera-error {
-    display: none;
-
-    margin-top: 10px;
-
-    padding: 10px 12px;
-
-    border-radius: 8px;
-
-    background: rgba(201, 33, 39, 0.08);
-
-    color: #c92127;
-
-    font-size: 11px;
-
-    line-height: 1.4;
-}
-
-
-.camera-error.show {
-    display: block;
-}
-
-
-/* =========================================================
-   LOGOUT MODAL
-========================================================= */
-
-.logout-modal {
-    position: fixed;
-
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    display: none;
-
-    align-items: center;
-    justify-content: center;
-
-    background: rgba(0, 0, 0, 0.60);
-
-    z-index: 100000;
-
-    padding: 20px;
-
-    box-sizing: border-box;
-}
-
-
-.logout-modal.show {
-    display: flex;
-}
-
-
-/* =========================================================
-   LOGOUT MODAL BOX
-========================================================= */
-
-.logout-modal-box {
-    width: 100%;
-
-    max-width: 380px;
-
-    background: #ffffff;
-
-    border-radius: 16px;
-
-    padding: 30px 25px;
-
-    text-align: center;
-
-    box-sizing: border-box;
-
-    box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.25);
-
-    animation: logoutModalIn 0.2s ease;
-}
-
-
-@keyframes logoutModalIn {
-
-    from {
-        opacity: 0;
-
-        transform:
-            translateY(15px)
-            scale(0.97);
-    }
-
-    to {
-        opacity: 1;
-
-        transform:
-            translateY(0)
-            scale(1);
-    }
-
-}
-
-
-/* =========================================================
-   LOGOUT ICON
-========================================================= */
-
-.logout-modal-icon {
-    width: 58px;
-
-    height: 58px;
-
-    margin: 0 auto 15px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border-radius: 50%;
-
-    background: rgba(201, 33, 39, 0.10);
-
-    color: #c92127;
-
-    font-size: 24px;
-}
-
-
-.logout-modal-box h3 {
-    margin: 0 0 8px;
-
-    color: #063b73;
-
-    font-size: 21px;
-
-    font-weight: 800;
-}
-
-
-.logout-modal-box p {
-    margin: 0;
-
-    color: #666;
-
-    font-size: 13px;
-
-    line-height: 1.5;
-}
-
-
-/* =========================================================
-   LOGOUT ACTIONS
-========================================================= */
-
-.logout-modal-actions {
-    display: flex;
-
-    justify-content: center;
-
-    gap: 10px;
-
-    margin-top: 22px;
-}
-
-
-.logout-cancel,
-.logout-confirm {
-    min-width: 105px;
-
-    padding: 10px 15px;
-
-    border-radius: 8px;
-
-    font-family: 'Montserrat', sans-serif;
-
-    font-size: 12px;
-
-    font-weight: 700;
-
-    cursor: pointer;
-
-    transition: 0.2s ease;
-
-    text-decoration: none;
-
-    box-sizing: border-box;
-}
-
-
-.logout-cancel {
-    border: 1px solid #ddd;
-
-    background: #f5f5f5;
-
-    color: #444;
-}
-
-
-.logout-cancel:hover {
-    background: #e8e8e8;
-}
-
-
-.logout-confirm {
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    border: none;
-
-    background: #c92127;
-
-    color: #ffffff;
-}
-
-
-.logout-confirm:hover {
-    background: #a91c21;
-
-    transform: translateY(-1px);
-}
-
-
-/* =========================================================
-   MODAL ACTIONS
-========================================================= */
-
-.attendance-modal-actions {
-    display: flex;
-
-    justify-content: flex-end;
-
-    gap: 10px;
-
-    margin-top: 15px;
-}
-
-
-.attendance-modal-cancel {
-    min-width: 95px;
-
-    padding: 10px 15px;
-
-    border-radius: 8px;
-
-    border: 1px solid #ddd;
-
-    background: #f5f5f5;
-
-    color: #444;
-
-    font-size: 13px;
-
-    font-weight: 700;
-
-    cursor: pointer;
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media screen and (max-width: 700px) {
-
-    .admin-navbar {
-        position: fixed !important;
-
-        top: 0 !important;
-        left: 0 !important;
-
-        width: 100% !important;
-
-        height: 76px !important;
-        min-height: 76px !important;
-
-        padding: 8px 10px !important;
-
-        display: flex !important;
-
-        flex-direction: row !important;
-
-        align-items: center !important;
-
-        justify-content: space-between !important;
-
-        flex-wrap: nowrap !important;
-
-        gap: 8px !important;
-
-        box-sizing: border-box !important;
-
-        z-index: 1000 !important;
-    }
-
-
-    .navbar-brand {
-        width: 112px !important;
-        max-width: 112px !important;
-
-        flex: 0 0 112px !important;
-
-        margin: 0 !important;
-        padding: 0 !important;
-
-        font-size: 10px !important;
-
-        line-height: 1.15 !important;
-
-        text-align: left !important;
-
-        white-space: normal !important;
-    }
-
-
-    .navbar-right {
-        flex: 1 1 auto !important;
-
-        width: auto !important;
-
-        min-width: 0 !important;
-
-        height: 100% !important;
-
-        display: flex !important;
-
-        align-items: center !important;
-
-        justify-content: flex-end !important;
-
-        gap: 6px !important;
-
-        flex-wrap: nowrap !important;
-    }
-
-
-    .navbar-welcome {
-        font-size: 10px !important;
-
-        white-space: nowrap !important;
-
-        line-height: 1.1 !important;
-    }
-
-
-    .navbar-datetime {
-        display: none !important;
-    }
-
-
-    /* =====================================================
-       MOBILE LOGOUT
-    ===================================================== */
-
-    .navbar-logout {
-        min-width: 64px !important;
-
-        width: 64px !important;
-
-        height: 36px !important;
-
-        padding: 7px 8px !important;
-
-        font-size: 10px !important;
-
-        white-space: nowrap !important;
-
-        justify-content: center !important;
-
-        gap: 5px !important;
-    }
-
-
-    .navbar-logout i {
-        font-size: 10px !important;
-    }
-
-
-    /* DESKTOP LOGO HIDDEN ON MOBILE */
-
-    .floating-logo {
-        display: none !important;
-    }
-
-
-    .main {
-        margin-top: 76px !important;
-
-        padding: 10px 10px 90px !important;
-
-        box-sizing: border-box !important;
-
-        width: 100% !important;
-    }
-
-
-    .employee-section {
-        width: 100% !important;
-    }
-
-
-    .topbar {
-        display: flex !important;
-
-        flex-direction: column !important;
-
-        align-items: stretch !important;
-
-        gap: 10px !important;
-
-        margin-bottom: 14px !important;
-    }
-
-
-    .topbar > div:first-child {
-        position: relative !important;
-
-        width: 100% !important;
-
-        min-height: 66px !important;
-
-        padding: 0 88px 0 3px !important;
-
-        box-sizing: border-box !important;
-    }
-
-
-    .topbar h1 {
-        margin: 0 !important;
-
-        font-size: 22px !important;
-
-        line-height: 1.1 !important;
-    }
-
-
-    .topbar p {
-        margin: 5px 0 0 !important;
-
-        font-size: 11px !important;
-
-        line-height: 1.3 !important;
-    }
-
-
-    /* MOBILE LOGOS */
-
-    .mobile-logo {
-        display: flex !important;
-
-        position: absolute !important;
-
-        top: 0 !important;
-        right: 0 !important;
-
-        width: 82px !important;
-        height: 58px !important;
-
-        margin: 0 !important;
-        padding: 0 !important;
-
-        align-items: center !important;
-        justify-content: center !important;
-
-        gap: 3px !important;
-
-        z-index: 20 !important;
-    }
-
-
-    .mobile-logo img {
-        display: block !important;
-
-        width: auto !important;
-
-        height: 34px !important;
-
-        max-width: 39px !important;
-
-        object-fit: contain !important;
-    }
-
-
-    .form-container {
-        width: 100% !important;
-
-        box-sizing: border-box !important;
-
-        overflow: hidden !important;
-    }
-
-
-    .employee-header {
-        display: flex !important;
-
-        align-items: center !important;
-
-        gap: 12px !important;
-
-        flex-wrap: nowrap !important;
-    }
-
-
-    .employee-avatar {
-        flex-shrink: 0 !important;
-    }
-
-
-    .employee-heading {
-        min-width: 0 !important;
-    }
-
-
-    .employee-heading h2 {
-        font-size: 18px !important;
-
-        line-height: 1.2 !important;
-
-        word-break: break-word !important;
-    }
-
-
-    .employee-heading p {
-        font-size: 12px !important;
-    }
-
-
-    .employee-info-grid {
-        display: grid !important;
-
-        grid-template-columns: 1fr !important;
-
-        gap: 10px !important;
-    }
-
-
-    .info-box {
-        width: 100% !important;
-
-        box-sizing: border-box !important;
-    }
-
-
-    .attendance-section {
-        width: 100% !important;
-
-        margin-top: 18px !important;
-    }
-
-
-    .attendance-section .topbar > div:first-child {
-        min-height: auto !important;
-
-        padding: 0 3px !important;
-    }
-
-
-    .attendance-section .topbar h1 {
-        font-size: 21px !important;
-    }
-
-
-    .attendance-section .topbar p {
-        font-size: 11px !important;
-    }
-
-
-    /* =====================================================
-       MOBILE ATTENDANCE TOOLS
-    ===================================================== */
-
-    .attendance-tools {
-        width: 100% !important;
-
-        display: flex !important;
-
-        flex-direction: column !important;
-
-        align-items: stretch !important;
-
-        gap: 8px !important;
-    }
-
-
-    .month-filter {
-        width: 100% !important;
-
-        box-sizing: border-box !important;
-    }
-
-
-    .month-filter input {
-        width: 100% !important;
-
-        box-sizing: border-box !important;
-    }
-
-
-    .export-dtr-btn {
-        width: 100% !important;
-
-        min-width: 0 !important;
-
-        height: 40px !important;
-    }
-
-
-    .table-container {
-        width: 100% !important;
-
-        box-sizing: border-box !important;
-
-        overflow: hidden !important;
-    }
-
-
-    .table-wrapper {
-        width: 100% !important;
-
-        overflow-x: auto !important;
-
-        -webkit-overflow-scrolling: touch !important;
-    }
-
-
-    #attendanceTable {
-        min-width: 850px !important;
-    }
-
-
-    #attendanceTable th,
-    #attendanceTable td {
-        white-space: nowrap !important;
-    }
-
-
-    .attendance-photo-modal {
-        padding: 12px;
-    }
-
-
-    .attendance-photo-modal-box {
-        max-width: 100%;
-
-        max-height: 94vh;
+        z-index: 99999;
 
         padding: 20px;
 
-        border-radius: 13px;
-    }
+        box-sizing: border-box;
+      }
 
+      .attendance-photo-modal.show {
+        display: flex;
+      }
 
-    #attendanceCameraPreview {
-        height: 280px;
-    }
+      /* =========================================================
+   MODAL BOX
+========================================================= */
 
+      .attendance-photo-modal-box {
+        width: 100%;
+        max-width: 470px;
 
-    .camera-actions {
-        gap: 7px;
-    }
+        max-height: 92vh;
 
+        overflow-y: auto;
 
-    .camera-btn {
-        min-width: 105px;
+        background: #ffffff;
 
-        padding: 9px 11px;
+        border-radius: 16px;
+
+        padding: 25px;
+
+        box-sizing: border-box;
+
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+
+        animation: attendanceModalIn 0.2s ease;
+      }
+
+      @keyframes attendanceModalIn {
+        from {
+          opacity: 0;
+          transform: translateY(15px) scale(0.97);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      /* =========================================================
+   MODAL HEADER
+========================================================= */
+
+      .attendance-modal-header {
+        display: flex;
+
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 15px;
+
+        margin-bottom: 15px;
+      }
+
+      .attendance-modal-header h3 {
+        margin: 0;
+
+        font-size: 21px;
+
+        color: #063b73;
+      }
+
+      .attendance-modal-close {
+        width: 35px;
+        height: 35px;
+
+        border: none;
+
+        border-radius: 50%;
+
+        background: #f1f1f1;
+
+        color: #333;
+
+        cursor: pointer;
+
+        font-size: 16px;
+
+        transition: 0.2s ease;
+      }
+
+      .attendance-modal-close:hover {
+        background: #c92127;
+        color: white;
+      }
+
+      /* =========================================================
+   MODAL INFORMATION
+========================================================= */
+
+      .attendance-modal-info {
+        background: #f5f7fa;
+
+        border-radius: 10px;
+
+        padding: 12px 15px;
+
+        margin-bottom: 18px;
+      }
+
+      .attendance-modal-info p {
+        margin: 4px 0;
+
+        color: #444;
+
+        font-size: 13px;
+      }
+
+      .attendance-modal-info strong {
+        color: #063b73;
+      }
+
+      /* =========================================================
+   SOURCE BADGE
+========================================================= */
+
+      .dtr-source-badge {
+        display: inline-flex;
+
+        align-items: center;
+
+        gap: 6px;
+
+        padding: 6px 10px;
+
+        margin-top: 6px;
+
+        border-radius: 20px;
+
+        background: rgba(7, 92, 168, 0.1);
+
+        color: #075ca8;
 
         font-size: 11px;
-    }
 
+        font-weight: 700;
+      }
 
-    .logout-modal {
-        padding: 12px;
-    }
+      /* =========================================================
+   MODAL MESSAGE
+========================================================= */
 
+      .attendance-modal-message {
+        margin: 15px 0;
 
-    .logout-modal-box {
-        max-width: 100%;
+        padding: 12px 14px;
 
-        padding: 25px 20px;
+        border-radius: 9px;
 
-        border-radius: 13px;
-    }
+        background: #f7f7f7;
 
-}
+        color: #555;
 
+        font-size: 13px;
 
-/* =========================================================
+        line-height: 1.5;
+      }
+
+      .attendance-modal-message i {
+        margin-right: 5px;
+      }
+
+      /* =========================================================
+   PHOTO PREVIEW
+========================================================= */
+
+      .attendance-photo-preview {
+        display: none;
+
+        width: 100%;
+
+        max-height: 350px;
+
+        object-fit: contain;
+
+        border-radius: 10px;
+
+        border: 1px solid #ddd;
+
+        background: #f5f5f5;
+
+        margin-bottom: 15px;
+      }
+
+      .attendance-photo-preview.show {
+        display: block;
+      }
+
+      /* =========================================================
+   CAMERA AREA
+========================================================= */
+
+      .attendance-upload-area {
+        display: none;
+
+        border: 2px dashed #075ca8;
+
+        border-radius: 12px;
+
+        padding: 20px 15px;
+
+        text-align: center;
+
+        margin-bottom: 15px;
+
+        background: rgba(7, 92, 168, 0.04);
+      }
+
+      .attendance-upload-area.show {
+        display: block;
+      }
+
+      .attendance-upload-area > i {
+        font-size: 32px;
+
+        color: #075ca8;
+
+        margin-bottom: 8px;
+      }
+
+      .attendance-upload-area p {
+        margin: 5px 0;
+
+        font-size: 13px;
+
+        color: #555;
+      }
+
+      /* =========================================================
+   CAMERA PREVIEW
+========================================================= */
+
+      .camera-preview-wrapper {
+        display: none;
+
+        width: 100%;
+
+        margin: 15px 0;
+
+        border-radius: 12px;
+
+        overflow: hidden;
+
+        background: #111;
+
+        border: 1px solid #ddd;
+
+        position: relative;
+      }
+
+      .camera-preview-wrapper.show {
+        display: block;
+      }
+
+      #attendanceCameraPreview {
+        display: block;
+
+        width: 100%;
+
+        height: 300px;
+
+        object-fit: cover;
+
+        background: #111;
+
+        transform: scaleX(-1);
+      }
+
+      #attendanceCameraCanvas {
+        display: none;
+      }
+
+      /* =========================================================
+   CAMERA STATUS
+========================================================= */
+
+      .camera-status {
+        display: none;
+
+        margin: 10px 0;
+
+        padding: 9px 12px;
+
+        border-radius: 8px;
+
+        background: rgba(7, 92, 168, 0.08);
+
+        color: #075ca8;
+
+        font-size: 11px;
+
+        font-weight: 600;
+
+        line-height: 1.4;
+      }
+
+      .camera-status.show {
+        display: block;
+      }
+
+      /* =========================================================
+   CAMERA BUTTONS
+========================================================= */
+
+      .camera-actions {
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        flex-wrap: wrap;
+
+        gap: 8px;
+
+        margin-top: 12px;
+      }
+
+      .camera-btn {
+        display: inline-flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 7px;
+
+        min-width: 115px;
+
+        padding: 10px 14px;
+
+        border: none;
+
+        border-radius: 8px;
+
+        font-family: "Montserrat", sans-serif;
+
+        font-size: 12px;
+
+        font-weight: 700;
+
+        cursor: pointer;
+
+        transition:
+          background 0.2s ease,
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .camera-btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .camera-open-btn {
+        background: #075ca8;
+
+        color: #ffffff;
+      }
+
+      .camera-open-btn:hover {
+        background: #063b73;
+
+        box-shadow: 0 5px 15px rgba(7, 92, 168, 0.2);
+      }
+
+      .camera-capture-btn {
+        display: none;
+
+        background: #c92127;
+
+        color: #ffffff;
+      }
+
+      .camera-capture-btn.show {
+        display: inline-flex;
+      }
+
+      .camera-capture-btn:hover {
+        background: #a91c21;
+      }
+
+      .camera-retake-btn {
+        display: none;
+
+        background: #f1f1f1;
+
+        color: #444;
+
+        border: 1px solid #ddd;
+      }
+
+      .camera-retake-btn.show {
+        display: inline-flex;
+      }
+
+      .camera-retake-btn:hover {
+        background: #e7e7e7;
+      }
+
+      .camera-use-btn {
+        display: none;
+
+        background: #075ca8;
+
+        color: #ffffff;
+      }
+
+      .camera-use-btn.show {
+        display: inline-flex;
+      }
+
+      .camera-use-btn:hover {
+        background: #063b73;
+      }
+
+      /* =========================================================
+   CAMERA CAPTURED PHOTO
+========================================================= */
+
+      .camera-captured-preview {
+        display: none;
+
+        width: 100%;
+
+        max-height: 300px;
+
+        object-fit: contain;
+
+        border-radius: 10px;
+
+        background: #111;
+
+        border: 1px solid #ddd;
+
+        margin-top: 15px;
+      }
+
+      .camera-captured-preview.show {
+        display: block;
+      }
+
+      /* =========================================================
+   CAMERA ERROR
+========================================================= */
+
+      .camera-error {
+        display: none;
+
+        margin-top: 10px;
+
+        padding: 10px 12px;
+
+        border-radius: 8px;
+
+        background: rgba(201, 33, 39, 0.08);
+
+        color: #c92127;
+
+        font-size: 11px;
+
+        line-height: 1.4;
+      }
+
+      .camera-error.show {
+        display: block;
+      }
+
+      /* =========================================================
+   LOGOUT MODAL
+========================================================= */
+
+      .logout-modal {
+        position: fixed;
+
+        inset: 0;
+
+        width: 100%;
+        height: 100%;
+
+        display: none;
+
+        align-items: center;
+        justify-content: center;
+
+        background: rgba(0, 0, 0, 0.6);
+
+        z-index: 100000;
+
+        padding: 20px;
+
+        box-sizing: border-box;
+      }
+
+      .logout-modal.show {
+        display: flex;
+      }
+
+      /* =========================================================
+   LOGOUT MODAL BOX
+========================================================= */
+
+      .logout-modal-box {
+        width: 100%;
+
+        max-width: 380px;
+
+        background: #ffffff;
+
+        border-radius: 16px;
+
+        padding: 30px 25px;
+
+        text-align: center;
+
+        box-sizing: border-box;
+
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+
+        animation: logoutModalIn 0.2s ease;
+      }
+
+      @keyframes logoutModalIn {
+        from {
+          opacity: 0;
+
+          transform: translateY(15px) scale(0.97);
+        }
+
+        to {
+          opacity: 1;
+
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      /* =========================================================
+   LOGOUT ICON
+========================================================= */
+
+      .logout-modal-icon {
+        width: 58px;
+
+        height: 58px;
+
+        margin: 0 auto 15px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        border-radius: 50%;
+
+        background: rgba(201, 33, 39, 0.1);
+
+        color: #c92127;
+
+        font-size: 24px;
+      }
+
+      .logout-modal-box h3 {
+        margin: 0 0 8px;
+
+        color: #063b73;
+
+        font-size: 21px;
+
+        font-weight: 800;
+      }
+
+      .logout-modal-box p {
+        margin: 0;
+
+        color: #666;
+
+        font-size: 13px;
+
+        line-height: 1.5;
+      }
+
+      /* =========================================================
+   LOGOUT ACTIONS
+========================================================= */
+
+      .logout-modal-actions {
+        display: flex;
+
+        justify-content: center;
+
+        gap: 10px;
+
+        margin-top: 22px;
+      }
+
+      .logout-cancel,
+      .logout-confirm {
+        min-width: 105px;
+
+        padding: 10px 15px;
+
+        border-radius: 8px;
+
+        font-family: "Montserrat", sans-serif;
+
+        font-size: 12px;
+
+        font-weight: 700;
+
+        cursor: pointer;
+
+        transition: 0.2s ease;
+
+        text-decoration: none;
+
+        box-sizing: border-box;
+      }
+
+      .logout-cancel {
+        border: 1px solid #ddd;
+
+        background: #f5f5f5;
+
+        color: #444;
+      }
+
+      .logout-cancel:hover {
+        background: #e8e8e8;
+      }
+
+      .logout-confirm {
+        display: inline-flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        border: none;
+
+        background: #c92127;
+
+        color: #ffffff;
+      }
+
+      .logout-confirm:hover {
+        background: #a91c21;
+
+        transform: translateY(-1px);
+      }
+
+      /* =========================================================
+   MODAL ACTIONS
+========================================================= */
+
+      .attendance-modal-actions {
+        display: flex;
+
+        justify-content: flex-end;
+
+        gap: 10px;
+
+        margin-top: 15px;
+      }
+
+      .attendance-modal-cancel {
+        min-width: 95px;
+
+        padding: 10px 15px;
+
+        border-radius: 8px;
+
+        border: 1px solid #ddd;
+
+        background: #f5f5f5;
+
+        color: #444;
+
+        font-size: 13px;
+
+        font-weight: 700;
+
+        cursor: pointer;
+      }
+
+      /* =========================================================
+   MOBILE
+========================================================= */
+
+      @media screen and (max-width: 700px) {
+        .admin-navbar {
+          position: fixed !important;
+
+          top: 0 !important;
+          left: 0 !important;
+
+          width: 100% !important;
+
+          height: 76px !important;
+          min-height: 76px !important;
+
+          padding: 8px 10px !important;
+
+          display: flex !important;
+
+          flex-direction: row !important;
+
+          align-items: center !important;
+
+          justify-content: space-between !important;
+
+          flex-wrap: nowrap !important;
+
+          gap: 8px !important;
+
+          box-sizing: border-box !important;
+
+          z-index: 1000 !important;
+        }
+
+        .navbar-brand {
+          width: 112px !important;
+          max-width: 112px !important;
+
+          flex: 0 0 112px !important;
+
+          margin: 0 !important;
+          padding: 0 !important;
+
+          font-size: 10px !important;
+
+          line-height: 1.15 !important;
+
+          text-align: left !important;
+
+          white-space: normal !important;
+        }
+
+        .navbar-right {
+          flex: 1 1 auto !important;
+
+          width: auto !important;
+
+          min-width: 0 !important;
+
+          height: 100% !important;
+
+          display: flex !important;
+
+          align-items: center !important;
+
+          justify-content: flex-end !important;
+
+          gap: 6px !important;
+
+          flex-wrap: nowrap !important;
+        }
+
+        .navbar-welcome {
+          font-size: 10px !important;
+
+          white-space: nowrap !important;
+
+          line-height: 1.1 !important;
+        }
+
+        .navbar-datetime {
+          display: none !important;
+        }
+
+        /* =====================================================
+       MOBILE LOGOUT
+    ===================================================== */
+
+        .navbar-logout {
+          min-width: 64px !important;
+
+          width: 64px !important;
+
+          height: 36px !important;
+
+          padding: 7px 8px !important;
+
+          font-size: 10px !important;
+
+          white-space: nowrap !important;
+
+          justify-content: center !important;
+
+          gap: 5px !important;
+        }
+
+        .navbar-logout i {
+          font-size: 10px !important;
+        }
+
+        /* DESKTOP LOGO HIDDEN ON MOBILE */
+
+        .floating-logo {
+          display: none !important;
+        }
+
+        .main {
+          margin-top: 76px !important;
+
+          padding: 10px 10px 90px !important;
+
+          box-sizing: border-box !important;
+
+          width: 100% !important;
+        }
+
+        .employee-section {
+          width: 100% !important;
+        }
+
+        .topbar {
+          display: flex !important;
+
+          flex-direction: column !important;
+
+          align-items: stretch !important;
+
+          gap: 10px !important;
+
+          margin-bottom: 14px !important;
+        }
+
+        .topbar > div:first-child {
+          position: relative !important;
+
+          width: 100% !important;
+
+          min-height: 66px !important;
+
+          padding: 0 88px 0 3px !important;
+
+          box-sizing: border-box !important;
+        }
+
+        .topbar h1 {
+          margin: 0 !important;
+
+          font-size: 22px !important;
+
+          line-height: 1.1 !important;
+        }
+
+        .topbar p {
+          margin: 5px 0 0 !important;
+
+          font-size: 11px !important;
+
+          line-height: 1.3 !important;
+        }
+
+        /* MOBILE LOGOS */
+
+        .mobile-logo {
+          display: flex !important;
+
+          position: absolute !important;
+
+          top: 0 !important;
+          right: 0 !important;
+
+          width: 82px !important;
+          height: 58px !important;
+
+          margin: 0 !important;
+          padding: 0 !important;
+
+          align-items: center !important;
+          justify-content: center !important;
+
+          gap: 3px !important;
+
+          z-index: 20 !important;
+        }
+
+        .mobile-logo img {
+          display: block !important;
+
+          width: auto !important;
+
+          height: 34px !important;
+
+          max-width: 39px !important;
+
+          object-fit: contain !important;
+        }
+
+        .form-container {
+          width: 100% !important;
+
+          box-sizing: border-box !important;
+
+          overflow: hidden !important;
+        }
+
+        .employee-header {
+          display: flex !important;
+
+          align-items: center !important;
+
+          gap: 12px !important;
+
+          flex-wrap: nowrap !important;
+        }
+
+        .employee-avatar {
+          flex-shrink: 0 !important;
+        }
+
+        .employee-heading {
+          min-width: 0 !important;
+        }
+
+        .employee-heading h2 {
+          font-size: 18px !important;
+
+          line-height: 1.2 !important;
+
+          word-break: break-word !important;
+        }
+
+        .employee-heading p {
+          font-size: 12px !important;
+        }
+
+        .employee-info-grid {
+          display: grid !important;
+
+          grid-template-columns: 1fr !important;
+
+          gap: 10px !important;
+        }
+
+        .info-box {
+          width: 100% !important;
+
+          box-sizing: border-box !important;
+        }
+
+        .attendance-section {
+          width: 100% !important;
+
+          margin-top: 18px !important;
+        }
+
+        .attendance-section .topbar > div:first-child {
+          min-height: auto !important;
+
+          padding: 0 3px !important;
+        }
+
+        .attendance-section .topbar h1 {
+          font-size: 21px !important;
+        }
+
+        .attendance-section .topbar p {
+          font-size: 11px !important;
+        }
+
+        /* =====================================================
+       MOBILE ATTENDANCE TOOLS
+    ===================================================== */
+
+        .attendance-tools {
+          width: 100% !important;
+
+          display: flex !important;
+
+          flex-direction: column !important;
+
+          align-items: stretch !important;
+
+          gap: 8px !important;
+        }
+
+        .month-filter {
+          width: 100% !important;
+
+          box-sizing: border-box !important;
+        }
+
+        .month-filter input {
+          width: 100% !important;
+
+          box-sizing: border-box !important;
+        }
+
+        .export-dtr-btn {
+          width: 100% !important;
+
+          min-width: 0 !important;
+
+          height: 40px !important;
+        }
+
+        .table-container {
+          width: 100% !important;
+
+          box-sizing: border-box !important;
+
+          overflow: hidden !important;
+        }
+
+        .table-wrapper {
+          width: 100% !important;
+
+          overflow-x: auto !important;
+
+          -webkit-overflow-scrolling: touch !important;
+        }
+
+        #attendanceTable {
+          min-width: 850px !important;
+        }
+
+        #attendanceTable th,
+        #attendanceTable td {
+          white-space: nowrap !important;
+        }
+
+        .attendance-photo-modal {
+          padding: 12px;
+        }
+
+        .attendance-photo-modal-box {
+          max-width: 100%;
+
+          max-height: 94vh;
+
+          padding: 20px;
+
+          border-radius: 13px;
+        }
+
+        #attendanceCameraPreview {
+          height: 280px;
+        }
+
+        .camera-actions {
+          gap: 7px;
+        }
+
+        .camera-btn {
+          min-width: 105px;
+
+          padding: 9px 11px;
+
+          font-size: 11px;
+        }
+
+        .logout-modal {
+          padding: 12px;
+        }
+
+        .logout-modal-box {
+          max-width: 100%;
+
+          padding: 25px 20px;
+
+          border-radius: 13px;
+        }
+      }
+
+      /* =========================================================
    VERY SMALL MOBILE
 ========================================================= */
 
-@media screen and (max-width: 400px) {
+      @media screen and (max-width: 400px) {
+        .navbar-brand {
+          width: 100px !important;
 
-    .navbar-brand {
-        width: 100px !important;
+          max-width: 100px !important;
 
-        max-width: 100px !important;
+          flex-basis: 100px !important;
 
-        flex-basis: 100px !important;
+          font-size: 9px !important;
+        }
 
-        font-size: 9px !important;
-    }
+        .navbar-welcome {
+          font-size: 9px !important;
+        }
 
+        .navbar-logout {
+          min-width: 58px !important;
 
-    .navbar-welcome {
-        font-size: 9px !important;
-    }
+          width: 58px !important;
 
+          font-size: 9px !important;
 
-    .navbar-logout {
-        min-width: 58px !important;
+          padding-left: 5px !important;
 
-        width: 58px !important;
+          padding-right: 5px !important;
+        }
 
-        font-size: 9px !important;
+        .navbar-logout i {
+          font-size: 9px !important;
+        }
 
-        padding-left: 5px !important;
+        .main {
+          padding-left: 8px !important;
 
-        padding-right: 5px !important;
-    }
+          padding-right: 8px !important;
 
+          padding-bottom: 80px !important;
+        }
 
-    .navbar-logout i {
-        font-size: 9px !important;
-    }
+        .topbar > div:first-child {
+          padding-right: 78px !important;
 
+          min-height: 60px !important;
+        }
 
-    .main {
-        padding-left: 8px !important;
+        .topbar h1 {
+          font-size: 20px !important;
+        }
 
-        padding-right: 8px !important;
+        .topbar p {
+          font-size: 10px !important;
+        }
 
-        padding-bottom: 80px !important;
-    }
+        .mobile-logo {
+          width: 72px !important;
 
+          height: 52px !important;
+        }
 
-    .topbar > div:first-child {
-        padding-right: 78px !important;
+        .mobile-logo img {
+          height: 30px !important;
 
-        min-height: 60px !important;
-    }
+          max-width: 34px !important;
+        }
 
+        .employee-heading h2 {
+          font-size: 16px !important;
+        }
 
-    .topbar h1 {
-        font-size: 20px !important;
-    }
+        .employee-heading p {
+          font-size: 11px !important;
+        }
 
+        .attendance-section .topbar h1 {
+          font-size: 19px !important;
+        }
 
-    .topbar p {
-        font-size: 10px !important;
-    }
+        #attendanceCameraPreview {
+          height: 240px;
+        }
 
+        .camera-btn {
+          min-width: 95px;
 
-    .mobile-logo {
-        width: 72px !important;
+          font-size: 10px;
+        }
 
-        height: 52px !important;
-    }
+        .logout-modal-actions {
+          flex-direction: column-reverse;
+        }
 
+        .logout-cancel,
+        .logout-confirm {
+          width: 100%;
+        }
 
-    .mobile-logo img {
-        height: 30px !important;
+        .export-dtr-btn {
+          font-size: 10px !important;
+        }
+      }
+    </style>
+  </head>
 
-        max-width: 34px !important;
-    }
-
-
-    .employee-heading h2 {
-        font-size: 16px !important;
-    }
-
-
-    .employee-heading p {
-        font-size: 11px !important;
-    }
-
-
-    .attendance-section .topbar h1 {
-        font-size: 19px !important;
-    }
-
-
-    #attendanceCameraPreview {
-        height: 240px;
-    }
-
-
-    .camera-btn {
-        min-width: 95px;
-
-        font-size: 10px;
-    }
-
-
-    .logout-modal-actions {
-        flex-direction: column-reverse;
-    }
-
-
-    .logout-cancel,
-    .logout-confirm {
-        width: 100%;
-    }
-
-
-    .export-dtr-btn {
-        font-size: 10px !important;
-    }
-
-}
-
-</style>
-
-</head>
-
-
-<body>
-
-
-<!-- =========================================================
+  <body>
+    <!-- =========================================================
      ADMIN NAVBAR
 ========================================================= -->
 
-<nav class="admin-navbar">
+    <nav class="admin-navbar">
+      <div class="navbar-brand">OSSP BIOMETRICS MANAGEMENT SYSTEM</div>
 
-    <div class="navbar-brand">
-        OSSP BIOMETRICS MANAGEMENT SYSTEM
-    </div>
-
-
-    <div class="navbar-right">
-
+      <div class="navbar-right">
         <div class="navbar-welcome">
-            Welcome, Admin<strong> Jessica</strong>
+          Welcome, Admin<strong> Jessica</strong>
         </div>
-
 
         <div class="navbar-datetime">
+          <div id="current-day">Thursday</div>
 
-            <div id="current-day">
-                Thursday
-            </div>
-
-            <div id="current-date-time">
-                September 4, 2026 | 10:03 AM
-            </div>
-
+          <div id="current-date-time">September 4, 2026 | 10:03 AM</div>
         </div>
-
 
         <!-- =================================================
              LOGOUT BUTTON
         ================================================== -->
 
-        <button
-            type="button"
-            class="navbar-logout"
-            onclick="openLogoutModal()">
+        <button type="button" class="navbar-logout" onclick="openLogoutModal()">
+          <i class="fa-solid fa-right-from-bracket"></i>
 
-            <i class="fa-solid fa-right-from-bracket"></i>
-
-            Logout
-
+          Logout
         </button>
+      </div>
+    </nav>
 
-    </div>
-
-</nav>
-
-
-
-<!-- =========================================================
+    <!-- =========================================================
      BACKGROUND IMAGE
 ========================================================= -->
 
-<div
-    class="details-bg-image"
-    aria-hidden="true">
-</div>
+    <div class="details-bg-image" aria-hidden="true"></div>
 
-
-
-<!-- =========================================================
+    <!-- =========================================================
      MAIN CONTENT
 ========================================================= -->
 
-<main class="main">
-
-
-    <!-- =====================================================
+    <main class="main">
+      <!-- =====================================================
          EMPLOYEE DETAILS
     ====================================================== -->
 
-    <section class="employee-section">
-
-
+      <section class="employee-section">
         <!-- TOP BAR -->
 
         <div class="topbar">
+          <div>
+            <h1>Employee Details</h1>
 
-    <div>
+            <p>View employee information and records.</p>
 
-        <h1>
-            Employee Details
-        </h1>
-
-        <p>
-            View employee information and records.
-        </p>
-
-
-        <!-- =================================================
+            <!-- =================================================
              DESKTOP LOGOS
         ================================================== -->
 
-        <div
-            class="floating-logo"
-            aria-label="OSSP logos">
-
-            <img
+            <div class="floating-logo" aria-label="OSSP logos">
+              <img
                 src="{% static 'image/osspboomlogo.png' %}"
-                alt="OSSP Logo">
+                alt="OSSP Logo"
+              />
 
-            <img
-                src="{% static 'image/footer5.png' %}"
-                alt="OSSP Logo">
+              <img src="{% static 'image/footer5.png' %}" alt="OSSP Logo" />
+            </div>
 
-        </div>
-
-
-        <!-- =================================================
+            <!-- =================================================
              MOBILE LOGOS
         ================================================== -->
 
-        <div
-            class="mobile-logo"
-            aria-label="OSSP logos">
-
-            <img
+            <div class="mobile-logo" aria-label="OSSP logos">
+              <img
                 src="{% static 'image/osspboomlogo.png' %}"
-                alt="OSSP Logo">
+                alt="OSSP Logo"
+              />
 
-            <img
-                src="{% static 'image/footer5.png' %}"
-                alt="OSSP Logo">
+              <img src="{% static 'image/footer5.png' %}" alt="OSSP Logo" />
+            </div>
+          </div>
 
-        </div>
-
-    </div>
-
-
-    <!-- =================================================
+          <!-- =================================================
          BACK BUTTON - FAR RIGHT
     ================================================== -->
 
-    <button
-        type="button"
-        class="back-btn"
-        onclick="history.back()">
-
-        <i class="fa-solid fa-arrow-left"></i>
-        Back
-
-    </button>
-
-</div>
-
-
+          <button type="button" class="back-btn" onclick="history.back()">
+            <i class="fa-solid fa-arrow-left"></i>
+            Back
+          </button>
+        </div>
 
         <!-- =================================================
              EMPLOYEE INFORMATION CARD
         ================================================== -->
 
         <div class="form-container">
+          <!-- EMPLOYEE HEADER -->
 
-
-            <!-- EMPLOYEE HEADER -->
-
-            <div class="employee-header">
-
-                <div class="employee-avatar">
-
-                    <i class="fa-solid fa-user"></i>
-
-                </div>
-
-
-                <div class="employee-heading">
-
-                    <h2>
-                        JESSICA BALINDAN DE AUSTRIA
-                    </h2>
-
-                    <p>
-                        Employee ID:
-
-                        <strong>
-                            OSSP-003
-                        </strong>
-                    </p>
-
-                </div>
-
+          <div class="employee-header">
+            <div class="employee-avatar">
+              <i class="fa-solid fa-user"></i>
             </div>
 
+            <div class="employee-heading">
+              <h2>JESSICA BALINDAN DE AUSTRIA</h2>
 
+              <p>
+                Employee ID:
 
-            <!-- EMPLOYEE INFORMATION -->
+                <strong> OSSP-003 </strong>
+              </p>
+            </div>
+          </div>
 
-            <div class="employee-info-grid">
+          <!-- EMPLOYEE INFORMATION -->
 
+          <div class="employee-info-grid">
+            <!-- CONTACT -->
 
-                <!-- CONTACT -->
+            <div class="info-box">
+              <h4>
+                <i class="fa-solid fa-address-book"></i>
 
-                <div class="info-box">
+                Contact
+              </h4>
 
-                    <h4>
+              <p>+63 900 000 0000</p>
 
-                        <i class="fa-solid fa-address-book"></i>
-
-                        Contact
-
-                    </h4>
-
-                    <p>
-                        +63 900 000 0000
-                    </p>
-
-                    <p>
-                        jessicadeaustria6@gmail.com
-                    </p>
-
-                </div>
-
-
-
-                <!-- BIRTHDATE -->
-
-                <div class="info-box">
-
-                    <h4>
-
-                        <i class="fa-solid fa-cake-candles"></i>
-
-                        Birthdate
-
-                    </h4>
-
-                    <p>
-                        June 23,2004
-                    </p>
-
-                </div>
-
-
-
-                <!-- ADDRESS -->
-
-                <div class="info-box">
-
-                    <h4>
-
-                        <i class="fa-solid fa-location-dot"></i>
-
-                        Address
-
-                    </h4>
-
-                    <p>
-                        Malolos, Bulacan
-                    </p>
-
-                </div>
-
-
-
-                <!-- SECTION -->
-
-                <div class="info-box">
-
-                    <h4>
-
-                        <i class="fa-solid fa-building"></i>
-
-                        Section
-
-                    </h4>
-
-                    <p>
-                        IT
-                    </p>
-
-                </div>
-
-
-
-                <!-- POSITION -->
-
-                <div class="info-box">
-
-                    <h4>
-
-                        <i class="fa-solid fa-briefcase"></i>
-
-                        Position
-
-                    </h4>
-
-                    <p>
-                        Office Aide
-                    </p>
-
-                </div>
-
+              <p>jessicadeaustria6@gmail.com</p>
             </div>
 
+            <!-- BIRTHDATE -->
+
+            <div class="info-box">
+              <h4>
+                <i class="fa-solid fa-cake-candles"></i>
+
+                Birthdate
+              </h4>
+
+              <p>June 23,2004</p>
+            </div>
+
+            <!-- ADDRESS -->
+
+            <div class="info-box">
+              <h4>
+                <i class="fa-solid fa-location-dot"></i>
+
+                Address
+              </h4>
+
+              <p>Malolos, Bulacan</p>
+            </div>
+
+            <!-- SECTION -->
+
+            <div class="info-box">
+              <h4>
+                <i class="fa-solid fa-building"></i>
+
+                Section
+              </h4>
+
+              <p>IT</p>
+            </div>
+
+            <!-- POSITION -->
+
+            <div class="info-box">
+              <h4>
+                <i class="fa-solid fa-briefcase"></i>
+
+                Position
+              </h4>
+
+              <p>Office Aide</p>
+            </div>
+          </div>
         </div>
+      </section>
 
-    </section>
-
-
-
-    <!-- =====================================================
+      <!-- =====================================================
          ATTENDANCE RECORDS
     ====================================================== -->
 
-    <section class="attendance-section">
-
-
+      <section class="attendance-section">
         <!-- ATTENDANCE HEADER -->
 
         <div class="topbar">
+          <div>
+            <h1>Attendance Records</h1>
 
-            <div>
-
-                <h1>
-                    Attendance Records
-                </h1>
-
-                <p>
-                    View the employee's attendance history.
-                </p>
-
-            </div>
-
+            <p>View the employee's attendance history.</p>
+          </div>
         </div>
-
-
 
         <!-- =================================================
              ATTENDANCE TABLE CONTAINER
         ================================================== -->
 
         <div class="table-container">
+          <!-- ATTENDANCE TOOLS -->
 
+          <div class="attendance-tools">
+            <div class="month-filter">
+              <i class="fa-solid fa-calendar-days"></i>
 
-            <!-- ATTENDANCE TOOLS -->
+              <input type="month" id="monthFilter" />
+            </div>
 
-            <div class="attendance-tools">
-
-                <div class="month-filter">
-
-                    <i class="fa-solid fa-calendar-days"></i>
-
-                    <input
-                        type="month"
-                        id="monthFilter">
-
-                </div>
-
-
-                <!-- =================================================
+            <!-- =================================================
                      EXPORT DTR BUTTON
                 ================================================== -->
 
-                <button
-                    type="button"
-                    class="export-dtr-btn"
-                    onclick="exportDTR()">
+            <button type="button" class="export-dtr-btn" onclick="exportDTR()">
+              <i class="fa-solid fa-file-export"></i>
 
-                    <i class="fa-solid fa-file-export"></i>
+              Export DTR
+            </button>
+          </div>
 
-                    Export DTR
-
-                </button>
-
-            </div>
-
-
-
-            <!-- =================================================
+          <!-- =================================================
                  ATTENDANCE TABLE
             ================================================== -->
 
-            <div class="table-wrapper">
+          <div class="table-wrapper">
+            <table id="attendanceTable">
+              <!-- TABLE HEADER -->
 
-                <table id="attendanceTable">
+              <thead>
+                <tr>
+                  <th>Employee</th>
 
+                  <th>Date</th>
 
-                    <!-- TABLE HEADER -->
+                  <th>Time In</th>
 
-                    <thead>
+                  <th>Break Out</th>
 
-                        <tr>
+                  <th>Break In</th>
 
-                            <th>
-                                Employee
-                            </th>
+                  <th>Time Out</th>
 
-                            <th>
-                                Date
-                            </th>
+                  <th>Status</th>
+                </tr>
+              </thead>
 
-                            <th>
-                                Time In
-                            </th>
+              <!-- TABLE BODY -->
 
-                            <th>
-                                Break Out
-                            </th>
-
-                            <th>
-                                Break In
-                            </th>
-
-                            <th>
-                                Time Out
-                            </th>
-
-                            <th>
-                                Status
-                            </th>
-
-                        </tr>
-
-                    </thead>
-
-
-                    <!-- TABLE BODY -->
-
-                    <tbody id="attendanceTableBody">
-                    </tbody>
-
-
-                </table>
-
-            </div>
-
+              <tbody id="attendanceTableBody"></tbody>
+            </table>
+          </div>
         </div>
+      </section>
+    </main>
 
-    </section>
-
-</main>
-
-
-
-<!-- =========================================================
+    <!-- =========================================================
      ATTENDANCE PHOTO / CAMERA MODAL
 ========================================================= -->
 
-<div
-    class="attendance-photo-modal"
-    id="attendancePhotoModal">
-
-
-    <div class="attendance-photo-modal-box">
-
-
+    <div class="attendance-photo-modal" id="attendancePhotoModal">
+      <div class="attendance-photo-modal-box">
         <!-- HEADER -->
 
         <div class="attendance-modal-header">
+          <h3 id="attendanceModalTitle">Attendance Record</h3>
 
-            <h3 id="attendanceModalTitle">
-                Attendance Record
-            </h3>
-
-
-            <button
-                type="button"
-                class="attendance-modal-close"
-                onclick="closeAttendanceModal()">
-
-                <i class="fa-solid fa-xmark"></i>
-
-            </button>
-
+          <button
+            type="button"
+            class="attendance-modal-close"
+            onclick="closeAttendanceModal()"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
         </div>
-
-
 
         <!-- INFORMATION -->
 
         <div class="attendance-modal-info">
+          <p>
+            <strong> Employee: </strong>
 
-            <p>
+            JESSICA BALINDAN DE AUSTRIA
+          </p>
 
-                <strong>
-                    Employee:
-                </strong>
+          <p>
+            <strong> Date: </strong>
 
-                JESSICA BALINDAN DE AUSTRIA
+            <span id="attendanceModalDate"></span>
+          </p>
 
-            </p>
+          <p>
+            <strong id="attendanceModalTimeLabel"> Time: </strong>
 
+            <span id="attendanceModalTime"></span>
+          </p>
 
-            <p>
+          <span class="dtr-source-badge" id="attendanceSourceBadge">
+            <i class="fa-solid fa-file-lines"></i>
 
-                <strong>
-                    Date:
-                </strong>
-
-                <span id="attendanceModalDate"></span>
-
-            </p>
-
-
-            <p>
-
-                <strong id="attendanceModalTimeLabel">
-                    Time:
-                </strong>
-
-                <span id="attendanceModalTime"></span>
-
-            </p>
-
-
-            <span
-                class="dtr-source-badge"
-                id="attendanceSourceBadge">
-
-                <i class="fa-solid fa-file-lines"></i>
-
-                <span id="attendanceSourceText">
-                    Source: Attendance System
-                </span>
-
-            </span>
-
+            <span id="attendanceSourceText"> Source: Attendance System </span>
+          </span>
         </div>
-
-
 
         <!-- PHOTO PREVIEW -->
 
         <img
-            id="attendancePhotoPreview"
-            class="attendance-photo-preview"
-            src=""
-            alt="Attendance Photo">
-
-
+          id="attendancePhotoPreview"
+          class="attendance-photo-preview"
+          src=""
+          alt="Attendance Photo"
+        />
 
         <!-- MESSAGE -->
 
-        <div
-            id="attendanceModalMessage"
-            class="attendance-modal-message">
-
-        </div>
-
-
+        <div id="attendanceModalMessage" class="attendance-modal-message"></div>
 
         <!-- =================================================
              CAMERA AREA
         ================================================== -->
 
-        <div
-            id="attendanceUploadArea"
-            class="attendance-upload-area">
+        <div id="attendanceUploadArea" class="attendance-upload-area">
+          <i class="fa-solid fa-camera"></i>
 
-            <i class="fa-solid fa-camera"></i>
+          <p>Take your attendance photo.</p>
 
+          <p>
+            Your device camera will be used to capture your attendance photo.
+          </p>
 
-            <p>
-                Take your attendance photo.
-            </p>
+          <!-- CAMERA PREVIEW -->
 
+          <div id="cameraPreviewWrapper" class="camera-preview-wrapper">
+            <video id="attendanceCameraPreview" autoplay playsinline></video>
 
-            <p>
-                Your device camera will be used
-                to capture your attendance photo.
-            </p>
+            <canvas id="attendanceCameraCanvas"> </canvas>
+          </div>
 
+          <!-- CAMERA STATUS -->
 
-            <!-- CAMERA PREVIEW -->
+          <div id="cameraStatus" class="camera-status">
+            <i class="fa-solid fa-circle-info"></i>
 
-            <div
-                id="cameraPreviewWrapper"
-                class="camera-preview-wrapper">
+            Camera is ready.
+          </div>
 
-                <video
-                    id="attendanceCameraPreview"
-                    autoplay
-                    playsinline>
-                </video>
+          <!-- CAMERA ERROR -->
 
-                <canvas
-                    id="attendanceCameraCanvas">
-                </canvas>
+          <div id="cameraError" class="camera-error"></div>
 
-            </div>
+          <!-- CAPTURED PHOTO -->
 
+          <img
+            id="cameraCapturedPreview"
+            class="camera-captured-preview"
+            src=""
+            alt="Captured Attendance Photo"
+          />
 
-            <!-- CAMERA STATUS -->
+          <!-- CAMERA BUTTONS -->
 
-            <div
-                id="cameraStatus"
-                class="camera-status">
+          <div class="camera-actions">
+            <!-- OPEN CAMERA -->
 
-                <i class="fa-solid fa-circle-info"></i>
+            <button
+              type="button"
+              id="openCameraButton"
+              class="camera-btn camera-open-btn"
+              onclick="startAttendanceCamera()"
+            >
+              <i class="fa-solid fa-camera"></i>
 
-                Camera is ready.
+              Open Camera
+            </button>
 
-            </div>
+            <!-- CAPTURE -->
 
+            <button
+              type="button"
+              id="captureCameraButton"
+              class="camera-btn camera-capture-btn"
+              onclick="captureAttendancePhoto()"
+            >
+              <i class="fa-solid fa-camera"></i>
 
-            <!-- CAMERA ERROR -->
+              Capture Photo
+            </button>
 
-            <div
-                id="cameraError"
-                class="camera-error">
+            <!-- RETAKE -->
 
-            </div>
+            <button
+              type="button"
+              id="retakeCameraButton"
+              class="camera-btn camera-retake-btn"
+              onclick="retakeAttendancePhoto()"
+            >
+              <i class="fa-solid fa-rotate-right"></i>
 
+              Retake
+            </button>
 
-            <!-- CAPTURED PHOTO -->
+            <!-- USE PHOTO -->
 
-            <img
-                id="cameraCapturedPreview"
-                class="camera-captured-preview"
-                src=""
-                alt="Captured Attendance Photo">
+            <button
+              type="button"
+              id="useCameraButton"
+              class="camera-btn camera-use-btn"
+              onclick="useCapturedAttendancePhoto()"
+            >
+              <i class="fa-solid fa-check"></i>
 
-
-            <!-- CAMERA BUTTONS -->
-
-            <div class="camera-actions">
-
-
-                <!-- OPEN CAMERA -->
-
-                <button
-                    type="button"
-                    id="openCameraButton"
-                    class="camera-btn camera-open-btn"
-                    onclick="startAttendanceCamera()">
-
-                    <i class="fa-solid fa-camera"></i>
-
-                    Open Camera
-
-                </button>
-
-
-                <!-- CAPTURE -->
-
-                <button
-                    type="button"
-                    id="captureCameraButton"
-                    class="camera-btn camera-capture-btn"
-                    onclick="captureAttendancePhoto()">
-
-                    <i class="fa-solid fa-camera"></i>
-
-                    Capture Photo
-
-                </button>
-
-
-                <!-- RETAKE -->
-
-                <button
-                    type="button"
-                    id="retakeCameraButton"
-                    class="camera-btn camera-retake-btn"
-                    onclick="retakeAttendancePhoto()">
-
-                    <i class="fa-solid fa-rotate-right"></i>
-
-                    Retake
-
-                </button>
-
-
-                <!-- USE PHOTO -->
-
-                <button
-                    type="button"
-                    id="useCameraButton"
-                    class="camera-btn camera-use-btn"
-                    onclick="useCapturedAttendancePhoto()">
-
-                    <i class="fa-solid fa-check"></i>
-
-                    Use Photo
-
-                </button>
-
-            </div>
-
+              Use Photo
+            </button>
+          </div>
         </div>
-
-
 
         <!-- ACTIONS -->
 
         <div class="attendance-modal-actions">
-
-            <button
-                type="button"
-                class="attendance-modal-cancel"
-                onclick="closeAttendanceModal()">
-
-                Close
-
-            </button>
-
+          <button
+            type="button"
+            class="attendance-modal-cancel"
+            onclick="closeAttendanceModal()"
+          >
+            Close
+          </button>
         </div>
-
+      </div>
     </div>
 
-</div>
-
-
-
-<!-- =========================================================
+    <!-- =========================================================
      LOGOUT MODAL
 ========================================================= -->
 
-<div
-    class="logout-modal"
-    id="logoutModal">
-
-
-    <div class="logout-modal-box">
-
-
+    <div class="logout-modal" id="logoutModal">
+      <div class="logout-modal-box">
         <!-- LOGOUT ICON -->
 
         <div class="logout-modal-icon">
-
-            <i class="fa-solid fa-right-from-bracket"></i>
-
+          <i class="fa-solid fa-right-from-bracket"></i>
         </div>
-
 
         <!-- TITLE -->
 
-        <h3>
-            Logout
-        </h3>
-
+        <h3>Logout</h3>
 
         <!-- MESSAGE -->
 
-        <p>
-            Are you sure you want to logout?
-        </p>
-
+        <p>Are you sure you want to logout?</p>
 
         <!-- ACTIONS -->
 
         <div class="logout-modal-actions">
+          <button
+            type="button"
+            class="logout-cancel"
+            onclick="closeLogoutModal()"
+          >
+            Cancel
+          </button>
 
-
-            <button
-                type="button"
-                class="logout-cancel"
-                onclick="closeLogoutModal()">
-
-                Cancel
-
-            </button>
-
-
-            <a
-                href="#"
-                class="logout-confirm">
-
-                Yes, Logout
-
-            </a>
-
+          <a href="#" class="logout-confirm"> Yes, Logout </a>
         </div>
-
+      </div>
     </div>
 
-</div>
-
-
-
-<!-- =========================================================
+    <!-- =========================================================
      JAVASCRIPT
 ========================================================= -->
 
-<script>
+    <script>
+      const EMPLOYEE_NAME = "JESSICA BALINDAN DE AUSTRIA";
 
-const EMPLOYEE_NAME =
-    "JESSICA BALINDAN DE AUSTRIA";
+      const EMPLOYEE_ID = "OSSP-002";
 
-const EMPLOYEE_ID =
-    "OSSP-002";
-
-
-/* =========================================================
+      /* =========================================================
    DTR RECORDS
 ========================================================= */
 
-const dtrRecords = {
-
-    "2026-09-02": {
-
-        "Time In": {
-
+      const dtrRecords = {
+        "2026-09-02": {
+          "Time In": {
             time: "08:00 AM",
 
-            photo:
-                "{% static 'image/biosample1.jpeg' %}"
+            photo: "{% static 'image/biosample1.jpeg' %}",
+          },
 
-        },
-
-        "Break Out": {
-
+          "Break Out": {
             time: "12:00 PM",
 
-            photo:
-                "{% static 'image/biosample2.jpeg' %}"
+            photo: "{% static 'image/biosample2.jpeg' %}",
+          },
 
-        },
-
-        "Break In": {
-
+          "Break In": {
             time: "01:10 PM",
 
-            photo: ""
+            photo: "",
+          },
 
-        },
-
-        "Time Out": {
-
+          "Time Out": {
             time: "05:00 PM",
 
-            photo:
-                "{% static 'image/biosample3.jpeg' %}"
+            photo: "{% static 'image/biosample3.jpeg' %}",
+          },
+        },
+      };
 
-        }
-
-    }
-
-};
-
-
-/* =========================================================
+      /* =========================================================
    STORAGE
 ========================================================= */
 
-const ATTENDANCE_STORAGE_KEY =
-    `ossp_attendance_${EMPLOYEE_ID}`;
+      const ATTENDANCE_STORAGE_KEY = `ossp_attendance_${EMPLOYEE_ID}`;
 
+      let attendanceRecords = JSON.parse(
+        localStorage.getItem(ATTENDANCE_STORAGE_KEY) || "{}",
+      );
 
-let attendanceRecords =
-    JSON.parse(
-        localStorage.getItem(
-            ATTENDANCE_STORAGE_KEY
-        ) || "{}"
-    );
-
-
-/* =========================================================
+      /* =========================================================
    ATTENDANCE TYPES
 ========================================================= */
 
-const attendanceTypes = [
+      const attendanceTypes = ["Time In", "Break Out", "Break In", "Time Out"];
 
-    "Time In",
-
-    "Break Out",
-
-    "Break In",
-
-    "Time Out"
-
-];
-
-
-/* =========================================================
+      /* =========================================================
    CAMERA VARIABLES
 ========================================================= */
 
-let attendanceCameraStream =
-    null;
+      let attendanceCameraStream = null;
 
-let capturedAttendancePhoto =
-    null;
+      let capturedAttendancePhoto = null;
 
-
-/* =========================================================
+      /* =========================================================
    DATE FUNCTIONS
 ========================================================= */
 
-function getTodayString() {
+      function getTodayString() {
+        const today = new Date();
 
-    const today =
-        new Date();
+        const year = today.getFullYear();
 
-    const year =
-        today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, "0");
 
-    const month =
-        String(
-            today.getMonth() + 1
-        ).padStart(
-            2,
-            "0"
-        );
+        const day = String(today.getDate()).padStart(2, "0");
 
-    const day =
-        String(
-            today.getDate()
-        ).padStart(
-            2,
-            "0"
-        );
+        return `${year}-${month}-${day}`;
+      }
 
-    return `${year}-${month}-${day}`;
+      function formatDate(dateString) {
+        const date = new Date(dateString + "T00:00:00");
 
-}
+        return date.toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+      }
 
+      function getDayName(dateString) {
+        const date = new Date(dateString + "T00:00:00");
 
-function formatDate(
-    dateString
-) {
+        return date.toLocaleDateString("en-US", {
+          weekday: "long",
+        });
+      }
 
-    const date =
-        new Date(
-            dateString +
-            "T00:00:00"
-        );
+      function addDays(dateString, numberOfDays) {
+        const date = new Date(dateString + "T00:00:00");
 
-    return date.toLocaleDateString(
-        "en-US",
-        {
-            year: "numeric",
-            month: "long",
-            day: "numeric"
-        }
-    );
+        date.setDate(date.getDate() + numberOfDays);
 
-}
+        const year = date.getFullYear();
 
+        const month = String(date.getMonth() + 1).padStart(2, "0");
 
-function getDayName(
-    dateString
-) {
+        const day = String(date.getDate()).padStart(2, "0");
 
-    const date =
-        new Date(
-            dateString +
-            "T00:00:00"
-        );
+        return `${year}-${month}-${day}`;
+      }
 
-    return date.toLocaleDateString(
-        "en-US",
-        {
-            weekday: "long"
-        }
-    );
+      function getCurrentAttendanceTime() {
+        const now = new Date();
 
-}
+        return now.toLocaleTimeString("en-US", {
+          hour: "numeric",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
+        });
+      }
 
-
-function addDays(
-    dateString,
-    numberOfDays
-) {
-
-    const date =
-        new Date(
-            dateString +
-            "T00:00:00"
-        );
-
-    date.setDate(
-        date.getDate() +
-        numberOfDays
-    );
-
-    const year =
-        date.getFullYear();
-
-    const month =
-        String(
-            date.getMonth() + 1
-        ).padStart(
-            2,
-            "0"
-        );
-
-    const day =
-        String(
-            date.getDate()
-        ).padStart(
-            2,
-            "0"
-        );
-
-    return `${year}-${month}-${day}`;
-
-}
-
-
-function getCurrentAttendanceTime() {
-
-    const now =
-        new Date();
-
-    return now.toLocaleTimeString(
-        "en-US",
-        {
-            hour: "numeric",
-            minute: "2-digit",
-            second: "2-digit",
-            hour12: true
-        }
-    );
-
-}
-
-
-/* =========================================================
+      /* =========================================================
    STORAGE FUNCTIONS
 ========================================================= */
 
-function saveAttendanceStorage() {
+      function saveAttendanceStorage() {
+        localStorage.setItem(
+          ATTENDANCE_STORAGE_KEY,
+          JSON.stringify(attendanceRecords),
+        );
+      }
 
-    localStorage.setItem(
-        ATTENDANCE_STORAGE_KEY,
-        JSON.stringify(
-            attendanceRecords
-        )
-    );
+      function getAttendanceRecord(dateString, entryType) {
+        if (!attendanceRecords[dateString]) {
+          return null;
+        }
 
-}
+        return attendanceRecords[dateString][entryType] || null;
+      }
 
-
-function getAttendanceRecord(
-    dateString,
-    entryType
-) {
-
-    if (
-        !attendanceRecords[dateString]
-    ) {
-
-        return null;
-
-    }
-
-    return (
-        attendanceRecords[dateString][entryType]
-        || null
-    );
-
-}
-
-
-/* =========================================================
+      /* =========================================================
    CREATE ATTENDANCE BUTTON
 ========================================================= */
 
-function createAttendanceButton(
-    dateString,
-    entryType,
-    time,
-    photo,
-    source
-) {
+      function createAttendanceButton(
+        dateString,
+        entryType,
+        time,
+        photo,
+        source,
+      ) {
+        const icon = photo ? "fa-image" : "fa-file-lines";
 
-    const icon =
-        photo
-            ? "fa-image"
-            : "fa-file-lines";
+        const buttonClass =
+          source === "DTR" ? "past-record" : "attendance-recorded";
 
-    const buttonClass =
-        source === "DTR"
-            ? "past-record"
-            : "attendance-recorded";
-
-    return `
+        return `
 
         <button
 
@@ -2779,49 +2180,28 @@ function createAttendanceButton(
         </button>
 
     `;
+      }
 
-}
-
-
-/* =========================================================
+      /* =========================================================
    CREATE ATTENDANCE ROW
 ========================================================= */
 
-function createAttendanceRow(
-    dateString
-) {
+      function createAttendanceRow(dateString) {
+        const today = getTodayString();
 
-    const today =
-        getTodayString();
+        const row = document.createElement("tr");
 
-    const row =
-        document.createElement(
-            "tr"
-        );
+        row.dataset.attendanceDate = dateString;
 
-    row.dataset.attendanceDate =
-        dateString;
+        const employeeCell = document.createElement("td");
 
+        employeeCell.textContent = EMPLOYEE_NAME;
 
-    const employeeCell =
-        document.createElement(
-            "td"
-        );
+        row.appendChild(employeeCell);
 
-    employeeCell.textContent =
-        EMPLOYEE_NAME;
+        const dateCell = document.createElement("td");
 
-    row.appendChild(
-        employeeCell
-    );
-
-
-    const dateCell =
-        document.createElement(
-            "td"
-        );
-
-    dateCell.innerHTML = `
+        dateCell.innerHTML = `
 
         ${dateString}
 
@@ -2838,90 +2218,44 @@ function createAttendanceRow(
 
     `;
 
-    row.appendChild(
-        dateCell
-    );
+        row.appendChild(dateCell);
 
+        let dateType = "future";
 
-    let dateType =
-        "future";
+        if (dateString < today) {
+          dateType = "past";
+        } else if (dateString === today) {
+          dateType = "today";
+        }
 
-    if (
-        dateString < today
-    ) {
+        attendanceTypes.forEach(function (entryType) {
+          const cell = document.createElement("td");
 
-        dateType =
-            "past";
+          const dtr = dtrRecords[dateString]
+            ? dtrRecords[dateString][entryType]
+            : null;
 
-    }
+          const attendance = getAttendanceRecord(dateString, entryType);
 
-    else if (
-        dateString === today
-    ) {
-
-        dateType =
-            "today";
-
-    }
-
-
-    attendanceTypes.forEach(
-        function(entryType) {
-
-            const cell =
-                document.createElement(
-                    "td"
-                );
-
-            const dtr =
-                dtrRecords[dateString]
-                ? dtrRecords[dateString][entryType]
-                : null;
-
-            const attendance =
-                getAttendanceRecord(
-                    dateString,
-                    entryType
-                );
-
-
-            if (
-                dateType === "past"
-            ) {
-
-                if (
-                    attendance
-                ) {
-
-                    cell.innerHTML =
-                        createAttendanceButton(
-                            dateString,
-                            entryType,
-                            attendance.time,
-                            attendance.photo,
-                            "ATTENDANCE"
-                        );
-
-                }
-
-                else if (
-                    dtr
-                ) {
-
-                    cell.innerHTML =
-                        createAttendanceButton(
-                            dateString,
-                            entryType,
-                            dtr.time,
-                            dtr.photo,
-                            "DTR"
-                        );
-
-                }
-
-                else {
-
-                    cell.innerHTML = `
+          if (dateType === "past") {
+            if (attendance) {
+              cell.innerHTML = createAttendanceButton(
+                dateString,
+                entryType,
+                attendance.time,
+                attendance.photo,
+                "ATTENDANCE",
+              );
+            } else if (dtr) {
+              cell.innerHTML = createAttendanceButton(
+                dateString,
+                entryType,
+                dtr.time,
+                dtr.photo,
+                "DTR",
+              );
+            } else {
+              cell.innerHTML = `
 
                         <span
                             class="attendance-empty"
@@ -2930,34 +2264,18 @@ function createAttendanceRow(
                         </span>
 
                     `;
-
-                }
-
             }
-
-
-            else if (
-                dateType === "today"
-            ) {
-
-                if (
-                    attendance
-                ) {
-
-                    cell.innerHTML =
-                        createAttendanceButton(
-                            dateString,
-                            entryType,
-                            attendance.time,
-                            attendance.photo,
-                            "ATTENDANCE"
-                        );
-
-                }
-
-                else {
-
-                    cell.innerHTML = `
+          } else if (dateType === "today") {
+            if (attendance) {
+              cell.innerHTML = createAttendanceButton(
+                dateString,
+                entryType,
+                attendance.time,
+                attendance.photo,
+                "ATTENDANCE",
+              );
+            } else {
+              cell.innerHTML = `
 
                         <button
 
@@ -2990,15 +2308,9 @@ function createAttendanceRow(
                         </button>
 
                     `;
-
-                }
-
             }
-
-
-            else {
-
-                cell.innerHTML = `
+          } else {
+            cell.innerHTML = `
 
                     <span
                         class="attendance-empty"
@@ -3007,89 +2319,38 @@ function createAttendanceRow(
                     </span>
 
                 `;
+          }
 
-            }
+          row.appendChild(cell);
+        });
 
+        const statusCell = document.createElement("td");
 
-            row.appendChild(
-                cell
-            );
+        let status = "Absent";
 
-        }
-    );
+        if (dateType === "future") {
+          status = "Upcoming";
+        } else {
+          const hasAttendance = attendanceTypes.some(function (entryType) {
+            return !!getAttendanceRecord(dateString, entryType);
+          });
 
+          const hasDTR = !!dtrRecords[dateString];
 
-    const statusCell =
-        document.createElement(
-            "td"
-        );
-
-    let status =
-        "Absent";
-
-
-    if (
-        dateType === "future"
-    ) {
-
-        status =
-            "Upcoming";
-
-    }
-
-    else {
-
-        const hasAttendance =
-            attendanceTypes.some(
-                function(entryType) {
-
-                    return !!getAttendanceRecord(
-                        dateString,
-                        entryType
-                    );
-
-                }
-            );
-
-        const hasDTR =
-            !!dtrRecords[dateString];
-
-        if (
-            hasAttendance ||
-            hasDTR
-        ) {
-
-            status =
-                "Present";
-
+          if (hasAttendance || hasDTR) {
+            status = "Present";
+          }
         }
 
-    }
+        let statusClass = "absent";
 
+        if (status === "Present") {
+          statusClass = "present";
+        } else if (status === "Upcoming") {
+          statusClass = "upcoming";
+        }
 
-    let statusClass =
-        "absent";
-
-    if (
-        status === "Present"
-    ) {
-
-        statusClass =
-            "present";
-
-    }
-
-    else if (
-        status === "Upcoming"
-    ) {
-
-        statusClass =
-            "upcoming";
-
-    }
-
-
-    statusCell.innerHTML = `
+        statusCell.innerHTML = `
 
         <span
             class="status ${statusClass}"
@@ -3101,323 +2362,187 @@ function createAttendanceRow(
 
     `;
 
-    row.appendChild(
-        statusCell
-    );
+        row.appendChild(statusCell);
 
+        return row;
+      }
 
-    return row;
-
-}
-
-
-/* =========================================================
+      /* =========================================================
    GENERATE ATTENDANCE TABLE
 ========================================================= */
 
-function generateAttendanceTable() {
+      function generateAttendanceTable() {
+        const tbody = document.getElementById("attendanceTableBody");
 
-    const tbody =
-        document.getElementById(
-            "attendanceTableBody"
-        );
+        if (!tbody) {
+          return;
+        }
 
-    if (!tbody) {
-        return;
-    }
+        tbody.innerHTML = "";
 
-    tbody.innerHTML =
-        "";
+        const today = getTodayString();
 
-    const today =
-        getTodayString();
+        const startDate = addDays(today, -7);
 
-    const startDate =
-        addDays(
-            today,
-            -7
-        );
+        const endDate = addDays(today, 1);
 
-    const endDate =
-        addDays(
-            today,
-            1
-        );
+        let currentDate = startDate;
 
-    let currentDate =
-        startDate;
+        while (currentDate <= endDate) {
+          const row = createAttendanceRow(currentDate);
 
-    while (
-        currentDate <=
-        endDate
-    ) {
+          tbody.appendChild(row);
 
-        const row =
-            createAttendanceRow(
-                currentDate
-            );
+          currentDate = addDays(currentDate, 1);
+        }
 
-        tbody.appendChild(
-            row
-        );
+        attachAttendanceEvents();
+      }
 
-        currentDate =
-            addDays(
-                currentDate,
-                1
-            );
-
-    }
-
-    attachAttendanceEvents();
-
-}
-
-
-/* =========================================================
+      /* =========================================================
    ATTENDANCE EVENTS
 ========================================================= */
 
-function attachAttendanceEvents() {
+      function attachAttendanceEvents() {
+        document
+          .querySelectorAll(".attendance-time-btn")
+          .forEach(function (button) {
+            button.addEventListener("click", function () {
+              openAttendanceRecord(this);
+            });
+          });
+      }
 
-    document
-        .querySelectorAll(
-            ".attendance-time-btn"
-        )
-        .forEach(
-            function(button) {
-
-                button.addEventListener(
-                    "click",
-                    function() {
-
-                        openAttendanceRecord(
-                            this
-                        );
-
-                    }
-                );
-
-            }
-        );
-
-}
-
-
-/* =========================================================
+      /* =========================================================
    ATTENDANCE MODAL ELEMENTS
 ========================================================= */
 
-const attendanceModal =
-    document.getElementById(
-        "attendancePhotoModal"
-    );
+      const attendanceModal = document.getElementById("attendancePhotoModal");
 
-const attendanceModalTitle =
-    document.getElementById(
-        "attendanceModalTitle"
-    );
+      const attendanceModalTitle = document.getElementById(
+        "attendanceModalTitle",
+      );
 
-const attendanceModalDate =
-    document.getElementById(
-        "attendanceModalDate"
-    );
+      const attendanceModalDate = document.getElementById(
+        "attendanceModalDate",
+      );
 
-const attendanceModalTime =
-    document.getElementById(
-        "attendanceModalTime"
-    );
+      const attendanceModalTime = document.getElementById(
+        "attendanceModalTime",
+      );
 
-const attendanceModalTimeLabel =
-    document.getElementById(
-        "attendanceModalTimeLabel"
-    );
+      const attendanceModalTimeLabel = document.getElementById(
+        "attendanceModalTimeLabel",
+      );
 
-const attendancePhotoPreview =
-    document.getElementById(
-        "attendancePhotoPreview"
-    );
+      const attendancePhotoPreview = document.getElementById(
+        "attendancePhotoPreview",
+      );
 
-const attendanceModalMessage =
-    document.getElementById(
-        "attendanceModalMessage"
-    );
+      const attendanceModalMessage = document.getElementById(
+        "attendanceModalMessage",
+      );
 
-const attendanceUploadArea =
-    document.getElementById(
-        "attendanceUploadArea"
-    );
+      const attendanceUploadArea = document.getElementById(
+        "attendanceUploadArea",
+      );
 
-const attendanceSourceText =
-    document.getElementById(
-        "attendanceSourceText"
-    );
+      const attendanceSourceText = document.getElementById(
+        "attendanceSourceText",
+      );
 
-
-/* =========================================================
+      /* =========================================================
    CAMERA ELEMENTS
 ========================================================= */
 
-const cameraPreviewWrapper =
-    document.getElementById(
-        "cameraPreviewWrapper"
-    );
+      const cameraPreviewWrapper = document.getElementById(
+        "cameraPreviewWrapper",
+      );
 
-const attendanceCameraPreview =
-    document.getElementById(
-        "attendanceCameraPreview"
-    );
+      const attendanceCameraPreview = document.getElementById(
+        "attendanceCameraPreview",
+      );
 
-const attendanceCameraCanvas =
-    document.getElementById(
-        "attendanceCameraCanvas"
-    );
+      const attendanceCameraCanvas = document.getElementById(
+        "attendanceCameraCanvas",
+      );
 
-const cameraStatus =
-    document.getElementById(
-        "cameraStatus"
-    );
+      const cameraStatus = document.getElementById("cameraStatus");
 
-const cameraError =
-    document.getElementById(
-        "cameraError"
-    );
+      const cameraError = document.getElementById("cameraError");
 
-const cameraCapturedPreview =
-    document.getElementById(
-        "cameraCapturedPreview"
-    );
+      const cameraCapturedPreview = document.getElementById(
+        "cameraCapturedPreview",
+      );
 
-const openCameraButton =
-    document.getElementById(
-        "openCameraButton"
-    );
+      const openCameraButton = document.getElementById("openCameraButton");
 
-const captureCameraButton =
-    document.getElementById(
-        "captureCameraButton"
-    );
+      const captureCameraButton = document.getElementById(
+        "captureCameraButton",
+      );
 
-const retakeCameraButton =
-    document.getElementById(
-        "retakeCameraButton"
-    );
+      const retakeCameraButton = document.getElementById("retakeCameraButton");
 
-const useCameraButton =
-    document.getElementById(
-        "useCameraButton"
-    );
+      const useCameraButton = document.getElementById("useCameraButton");
 
-
-/* =========================================================
+      /* =========================================================
    SELECTED ATTENDANCE
 ========================================================= */
 
-let selectedAttendanceButton =
-    null;
+      let selectedAttendanceButton = null;
 
-
-/* =========================================================
+      /* =========================================================
    OPEN ATTENDANCE RECORD
 ========================================================= */
 
-function openAttendanceRecord(
-    button
-) {
+      function openAttendanceRecord(button) {
+        selectedAttendanceButton = button;
 
-    selectedAttendanceButton =
-        button;
+        capturedAttendancePhoto = null;
 
-    capturedAttendancePhoto =
-        null;
+        const recordDate = button.dataset.date;
 
+        const entryType = button.dataset.entry || "";
 
-    const recordDate =
-        button.dataset.date;
+        const time = button.dataset.time || "";
 
-    const entryType =
-        button.dataset.entry ||
-        "";
+        const photo = button.dataset.photo || "";
 
-    const time =
-        button.dataset.time ||
-        "";
+        const source = button.dataset.source || "";
 
-    const photo =
-        button.dataset.photo ||
-        "";
+        const today = getTodayString();
 
-    const source =
-        button.dataset.source ||
-        "";
+        resetCameraUI();
 
-    const today =
-        getTodayString();
+        attendancePhotoPreview.classList.remove("show");
 
+        attendancePhotoPreview.src = "";
 
-    resetCameraUI();
+        attendanceUploadArea.classList.remove("show");
 
+        attendanceModalDate.textContent = formatDate(recordDate);
 
-    attendancePhotoPreview
-        .classList
-        .remove(
-            "show"
-        );
-
-    attendancePhotoPreview.src =
-        "";
-
-
-    attendanceUploadArea
-        .classList
-        .remove(
-            "show"
-        );
-
-
-    attendanceModalDate.textContent =
-        formatDate(
-            recordDate
-        );
-
-
-    /* =====================================================
+        /* =====================================================
        PAST
     ===================================================== */
 
-    if (
-        recordDate < today
-    ) {
+        if (recordDate < today) {
+          attendanceModalTitle.textContent = "Past Attendance Record";
 
-        attendanceModalTitle.textContent =
-            "Past Attendance Record";
+          attendanceModalTimeLabel.textContent =
+            source === "DTR" ? "DTR Time:" : "Attendance Time:";
 
-        attendanceModalTimeLabel.textContent =
+          attendanceModalTime.textContent = time;
+
+          attendanceSourceText.textContent =
             source === "DTR"
-                ? "DTR Time:"
-                : "Attendance Time:";
+              ? "Source: Uploaded DTR"
+              : "Source: Attendance Photo";
 
-        attendanceModalTime.textContent =
-            time;
+          if (photo) {
+            attendancePhotoPreview.src = photo;
 
-        attendanceSourceText.textContent =
-            source === "DTR"
-                ? "Source: Uploaded DTR"
-                : "Source: Attendance Photo";
-
-
-        if (
-            photo
-        ) {
-
-            attendancePhotoPreview.src =
-                photo;
-
-            attendancePhotoPreview
-                .classList
-                .add(
-                    "show"
-                );
+            attendancePhotoPreview.classList.add("show");
 
             attendanceModalMessage.innerHTML = `
 
@@ -3445,11 +2570,7 @@ function openAttendanceRecord(
                 has already passed.
 
             `;
-
-        }
-
-        else {
-
+          } else {
             attendanceModalMessage.innerHTML = `
 
                 <i class="fa-solid fa-calendar-xmark"></i>
@@ -3473,42 +2594,27 @@ function openAttendanceRecord(
                 has already passed.
 
             `;
+          }
 
+          attendanceModal.classList.add("show");
+
+          return;
         }
 
-
-        attendanceModal
-            .classList
-            .add(
-                "show"
-            );
-
-        return;
-
-    }
-
-
-    /* =====================================================
+        /* =====================================================
        FUTURE
     ===================================================== */
 
-    if (
-        recordDate > today
-    ) {
+        if (recordDate > today) {
+          attendanceModalTitle.textContent = "Future Attendance";
 
-        attendanceModalTitle.textContent =
-            "Future Attendance";
+          attendanceModalTimeLabel.textContent = "Status:";
 
-        attendanceModalTimeLabel.textContent =
-            "Status:";
+          attendanceModalTime.textContent = "Not yet available";
 
-        attendanceModalTime.textContent =
-            "Not yet available";
+          attendanceSourceText.textContent = "Source: Attendance System";
 
-        attendanceSourceText.textContent =
-            "Source: Attendance System";
-
-        attendanceModalMessage.innerHTML = `
+          attendanceModalMessage.innerHTML = `
 
             <i class="fa-solid fa-calendar-days"></i>
 
@@ -3522,48 +2628,29 @@ function openAttendanceRecord(
 
         `;
 
-        attendanceModal
-            .classList
-            .add(
-                "show"
-            );
+          attendanceModal.classList.add("show");
 
-        return;
+          return;
+        }
 
-    }
-
-
-    /* =====================================================
+        /* =====================================================
        TODAY
     ===================================================== */
 
-    attendanceModalTitle.textContent =
-        entryType;
+        attendanceModalTitle.textContent = entryType;
 
-    attendanceModalTimeLabel.textContent =
-        "Attendance Time:";
+        attendanceModalTimeLabel.textContent = "Attendance Time:";
 
-    attendanceSourceText.textContent =
-        "Source: Attendance Photo";
+        attendanceSourceText.textContent = "Source: Attendance Photo";
 
+        if (photo) {
+          attendanceModalTime.textContent = time;
 
-    if (
-        photo
-    ) {
+          attendancePhotoPreview.src = photo;
 
-        attendanceModalTime.textContent =
-            time;
+          attendancePhotoPreview.classList.add("show");
 
-        attendancePhotoPreview.src =
-            photo;
-
-        attendancePhotoPreview
-            .classList
-            .add(
-                "show"
-            );
-
-        attendanceModalMessage.innerHTML = `
+          attendanceModalMessage.innerHTML = `
 
             <i class="fa-solid fa-circle-check"></i>
 
@@ -3583,16 +2670,10 @@ function openAttendanceRecord(
             attendance photo was captured.
 
         `;
+        } else {
+          attendanceModalTime.textContent = "Not recorded";
 
-    }
-
-
-    else {
-
-        attendanceModalTime.textContent =
-            "Not recorded";
-
-        attendanceModalMessage.innerHTML = `
+          attendanceModalMessage.innerHTML = `
 
             <i class="fa-solid fa-circle-exclamation"></i>
 
@@ -3613,88 +2694,53 @@ function openAttendanceRecord(
 
         `;
 
-        attendanceUploadArea
-            .classList
-            .add(
-                "show"
-            );
+          attendanceUploadArea.classList.add("show");
+        }
 
-    }
+        attendanceModal.classList.add("show");
+      }
 
-
-    attendanceModal
-        .classList
-        .add(
-            "show"
-        );
-
-}
-
-
-/* =========================================================
+      /* =========================================================
    START CAMERA
 ========================================================= */
 
-async function startAttendanceCamera() {
+      async function startAttendanceCamera() {
+        clearCameraError();
 
-    clearCameraError();
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+          showCameraError(
+            "Camera access is not supported by this browser or device.",
+          );
 
+          return;
+        }
 
-    if (
-        !navigator.mediaDevices ||
-        !navigator.mediaDevices.getUserMedia
-    ) {
+        stopAttendanceCamera();
 
-        showCameraError(
-            "Camera access is not supported by this browser or device."
-        );
+        try {
+          attendanceCameraStream = await navigator.mediaDevices.getUserMedia({
+            video: {
+              facingMode: {
+                ideal: "user",
+              },
 
-        return;
+              width: {
+                ideal: 1280,
+              },
 
-    }
+              height: {
+                ideal: 720,
+              },
+            },
 
+            audio: false,
+          });
 
-    stopAttendanceCamera();
+          attendanceCameraPreview.srcObject = attendanceCameraStream;
 
+          cameraPreviewWrapper.classList.add("show");
 
-    try {
-
-        attendanceCameraStream =
-            await navigator.mediaDevices.getUserMedia({
-
-                video: {
-
-                    facingMode: {
-                        ideal: "user"
-                    },
-
-                    width: {
-                        ideal: 1280
-                    },
-
-                    height: {
-                        ideal: 720
-                    }
-
-                },
-
-                audio: false
-
-            });
-
-
-        attendanceCameraPreview.srcObject =
-            attendanceCameraStream;
-
-
-        cameraPreviewWrapper
-            .classList
-            .add(
-                "show"
-            );
-
-
-        cameraStatus.innerHTML = `
+          cameraStatus.innerHTML = `
 
             <i class="fa-solid fa-circle-check"></i>
 
@@ -3704,216 +2750,92 @@ async function startAttendanceCamera() {
 
         `;
 
+          cameraStatus.classList.add("show");
 
-        cameraStatus
-            .classList
-            .add(
-                "show"
-            );
+          openCameraButton.style.display = "none";
 
+          captureCameraButton.classList.add("show");
 
-        openCameraButton.style.display =
-            "none";
+          retakeCameraButton.classList.remove("show");
 
+          useCameraButton.classList.remove("show");
+        } catch (error) {
+          console.error("Camera error:", error);
 
-        captureCameraButton
-            .classList
-            .add(
-                "show"
-            );
+          let message = "Unable to access the camera.";
 
-
-        retakeCameraButton
-            .classList
-            .remove(
-                "show"
-            );
-
-
-        useCameraButton
-            .classList
-            .remove(
-                "show"
-            );
-
-
-    }
-
-    catch (error) {
-
-        console.error(
-            "Camera error:",
-            error
-        );
-
-
-        let message =
-            "Unable to access the camera.";
-
-
-        if (
-            error.name ===
-            "NotAllowedError"
-        ) {
-
+          if (error.name === "NotAllowedError") {
             message =
-                "Camera permission was denied. Please allow camera access in your browser settings and try again.";
-
-        }
-
-        else if (
-            error.name ===
-            "NotFoundError"
-        ) {
-
+              "Camera permission was denied. Please allow camera access in your browser settings and try again.";
+          } else if (error.name === "NotFoundError") {
+            message = "No camera was found on this device.";
+          } else if (error.name === "NotReadableError") {
             message =
-                "No camera was found on this device.";
-
-        }
-
-        else if (
-            error.name ===
-            "NotReadableError"
-        ) {
-
+              "The camera is already being used by another application.";
+          } else if (error.name === "SecurityError") {
             message =
-                "The camera is already being used by another application.";
+              "Camera access requires a secure connection such as HTTPS or localhost.";
+          }
 
+          showCameraError(message);
         }
+      }
 
-        else if (
-            error.name ===
-            "SecurityError"
-        ) {
-
-            message =
-                "Camera access requires a secure connection such as HTTPS or localhost.";
-
-        }
-
-
-        showCameraError(
-            message
-        );
-
-    }
-
-}
-
-
-/* =========================================================
+      /* =========================================================
    CAPTURE ATTENDANCE PHOTO
 ========================================================= */
 
-function captureAttendancePhoto() {
+      function captureAttendancePhoto() {
+        if (!attendanceCameraStream) {
+          showCameraError("Please open the camera first.");
 
-    if (
-        !attendanceCameraStream
-    ) {
+          return;
+        }
 
-        showCameraError(
-            "Please open the camera first."
-        );
+        const video = attendanceCameraPreview;
 
-        return;
+        if (!video.videoWidth || !video.videoHeight) {
+          showCameraError(
+            "The camera is not ready yet. Please wait a moment and try again.",
+          );
 
-    }
+          return;
+        }
 
+        const canvas = attendanceCameraCanvas;
 
-    const video =
-        attendanceCameraPreview;
+        canvas.width = video.videoWidth;
 
+        canvas.height = video.videoHeight;
 
-    if (
-        !video.videoWidth ||
-        !video.videoHeight
-    ) {
+        const context = canvas.getContext("2d");
 
-        showCameraError(
-            "The camera is not ready yet. Please wait a moment and try again."
-        );
-
-        return;
-
-    }
-
-
-    const canvas =
-        attendanceCameraCanvas;
-
-
-    canvas.width =
-        video.videoWidth;
-
-    canvas.height =
-        video.videoHeight;
-
-
-    const context =
-        canvas.getContext(
-            "2d"
-        );
-
-
-    /*
+        /*
        Mirror the captured image so it matches
        the front-camera preview.
     */
 
-    context.save();
+        context.save();
 
-    context.translate(
-        canvas.width,
-        0
-    );
+        context.translate(canvas.width, 0);
 
-    context.scale(
-        -1,
-        1
-    );
+        context.scale(-1, 1);
 
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-    context.drawImage(
-        video,
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
+        context.restore();
 
+        capturedAttendancePhoto = canvas.toDataURL("image/jpeg", 0.9);
 
-    context.restore();
+        cameraCapturedPreview.src = capturedAttendancePhoto;
 
+        cameraCapturedPreview.classList.add("show");
 
-    capturedAttendancePhoto =
-        canvas.toDataURL(
-            "image/jpeg",
-            0.90
-        );
+        stopAttendanceCamera();
 
+        cameraPreviewWrapper.classList.remove("show");
 
-    cameraCapturedPreview.src =
-        capturedAttendancePhoto;
-
-
-    cameraCapturedPreview
-        .classList
-        .add(
-            "show"
-        );
-
-
-    stopAttendanceCamera();
-
-
-    cameraPreviewWrapper
-        .classList
-        .remove(
-            "show"
-        );
-
-
-    cameraStatus.innerHTML = `
+        cameraStatus.innerHTML = `
 
         <i class="fa-solid fa-circle-check"></i>
 
@@ -3922,348 +2844,157 @@ function captureAttendancePhoto() {
 
     `;
 
+        cameraStatus.classList.add("show");
 
-    cameraStatus
-        .classList
-        .add(
-            "show"
-        );
+        captureCameraButton.classList.remove("show");
 
+        openCameraButton.style.display = "none";
 
-    captureCameraButton
-        .classList
-        .remove(
-            "show"
-        );
+        retakeCameraButton.classList.add("show");
 
+        useCameraButton.classList.add("show");
+      }
 
-    openCameraButton.style.display =
-        "none";
-
-
-    retakeCameraButton
-        .classList
-        .add(
-            "show"
-        );
-
-
-    useCameraButton
-        .classList
-        .add(
-            "show"
-        );
-
-}
-
-
-/* =========================================================
+      /* =========================================================
    RETAKE PHOTO
 ========================================================= */
 
-function retakeAttendancePhoto() {
+      function retakeAttendancePhoto() {
+        capturedAttendancePhoto = null;
 
-    capturedAttendancePhoto =
-        null;
+        cameraCapturedPreview.src = "";
 
+        cameraCapturedPreview.classList.remove("show");
 
-    cameraCapturedPreview.src =
-        "";
+        retakeCameraButton.classList.remove("show");
 
+        useCameraButton.classList.remove("show");
 
-    cameraCapturedPreview
-        .classList
-        .remove(
-            "show"
-        );
+        startAttendanceCamera();
+      }
 
-
-    retakeCameraButton
-        .classList
-        .remove(
-            "show"
-        );
-
-
-    useCameraButton
-        .classList
-        .remove(
-            "show"
-        );
-
-
-    startAttendanceCamera();
-
-}
-
-
-/* =========================================================
+      /* =========================================================
    USE CAPTURED PHOTO
 ========================================================= */
 
-function useCapturedAttendancePhoto() {
+      function useCapturedAttendancePhoto() {
+        if (!capturedAttendancePhoto) {
+          return;
+        }
 
-    if (
-        !capturedAttendancePhoto
-    ) {
+        saveAttendancePhoto(capturedAttendancePhoto);
+      }
 
-        return;
-
-    }
-
-
-    saveAttendancePhoto(
-        capturedAttendancePhoto
-    );
-
-}
-
-
-/* =========================================================
+      /* =========================================================
    SAVE ATTENDANCE PHOTO
 ========================================================= */
 
-function saveAttendancePhoto(
-    photoData
-) {
+      function saveAttendancePhoto(photoData) {
+        if (!selectedAttendanceButton || !photoData) {
+          return;
+        }
 
-    if (
-        !selectedAttendanceButton ||
-        !photoData
-    ) {
+        const recordDate = selectedAttendanceButton.dataset.date;
 
-        return;
+        const today = getTodayString();
 
-    }
+        if (recordDate !== today) {
+          alert("Attendance photo capture is only available for today's date.");
 
+          return;
+        }
 
-    const recordDate =
-        selectedAttendanceButton.dataset.date;
+        const entryType = selectedAttendanceButton.dataset.entry;
 
-    const today =
-        getTodayString();
+        const actualUploadTime = getCurrentAttendanceTime();
 
+        if (!attendanceRecords[recordDate]) {
+          attendanceRecords[recordDate] = {};
+        }
 
-    if (
-        recordDate !== today
-    ) {
+        attendanceRecords[recordDate][entryType] = {
+          time: actualUploadTime,
 
-        alert(
-            "Attendance photo capture is only available for today's date."
-        );
+          photo: photoData,
+        };
 
-        return;
+        saveAttendanceStorage();
 
-    }
+        stopAttendanceCamera();
 
+        closeAttendanceModal();
 
-    const entryType =
-        selectedAttendanceButton.dataset.entry;
+        generateAttendanceTable();
+      }
 
-
-    const actualUploadTime =
-        getCurrentAttendanceTime();
-
-
-    if (
-        !attendanceRecords[recordDate]
-    ) {
-
-        attendanceRecords[recordDate] =
-            {};
-
-    }
-
-
-    attendanceRecords[
-        recordDate
-    ][
-        entryType
-    ] = {
-
-        time:
-            actualUploadTime,
-
-        photo:
-            photoData
-
-    };
-
-
-    saveAttendanceStorage();
-
-
-    stopAttendanceCamera();
-
-
-    closeAttendanceModal();
-
-
-    generateAttendanceTable();
-
-}
-
-
-/* =========================================================
+      /* =========================================================
    STOP CAMERA
 ========================================================= */
 
-function stopAttendanceCamera() {
+      function stopAttendanceCamera() {
+        if (attendanceCameraStream) {
+          attendanceCameraStream.getTracks().forEach(function (track) {
+            track.stop();
+          });
 
-    if (
-        attendanceCameraStream
-    ) {
+          attendanceCameraStream = null;
+        }
 
-        attendanceCameraStream
-            .getTracks()
-            .forEach(
-                function(track) {
+        if (attendanceCameraPreview) {
+          attendanceCameraPreview.srcObject = null;
+        }
+      }
 
-                    track.stop();
-
-                }
-            );
-
-
-        attendanceCameraStream =
-            null;
-
-    }
-
-
-    if (
-        attendanceCameraPreview
-    ) {
-
-        attendanceCameraPreview.srcObject =
-            null;
-
-    }
-
-}
-
-
-/* =========================================================
+      /* =========================================================
    RESET CAMERA UI
 ========================================================= */
 
-function resetCameraUI() {
+      function resetCameraUI() {
+        stopAttendanceCamera();
 
-    stopAttendanceCamera();
+        capturedAttendancePhoto = null;
 
+        if (cameraPreviewWrapper) {
+          cameraPreviewWrapper.classList.remove("show");
+        }
 
-    capturedAttendancePhoto =
-        null;
+        if (cameraCapturedPreview) {
+          cameraCapturedPreview.src = "";
 
+          cameraCapturedPreview.classList.remove("show");
+        }
 
-    if (
-        cameraPreviewWrapper
-    ) {
+        if (cameraStatus) {
+          cameraStatus.innerHTML = "";
 
-        cameraPreviewWrapper
-            .classList
-            .remove(
-                "show"
-            );
+          cameraStatus.classList.remove("show");
+        }
 
-    }
+        clearCameraError();
 
+        if (openCameraButton) {
+          openCameraButton.style.display = "inline-flex";
+        }
 
-    if (
-        cameraCapturedPreview
-    ) {
+        if (captureCameraButton) {
+          captureCameraButton.classList.remove("show");
+        }
 
-        cameraCapturedPreview.src =
-            "";
+        if (retakeCameraButton) {
+          retakeCameraButton.classList.remove("show");
+        }
 
-        cameraCapturedPreview
-            .classList
-            .remove(
-                "show"
-            );
+        if (useCameraButton) {
+          useCameraButton.classList.remove("show");
+        }
+      }
 
-    }
-
-
-    if (
-        cameraStatus
-    ) {
-
-        cameraStatus.innerHTML =
-            "";
-
-        cameraStatus
-            .classList
-            .remove(
-                "show"
-            );
-
-    }
-
-
-    clearCameraError();
-
-
-    if (
-        openCameraButton
-    ) {
-
-        openCameraButton.style.display =
-            "inline-flex";
-
-    }
-
-
-    if (
-        captureCameraButton
-    ) {
-
-        captureCameraButton
-            .classList
-            .remove(
-                "show"
-            );
-
-    }
-
-
-    if (
-        retakeCameraButton
-    ) {
-
-        retakeCameraButton
-            .classList
-            .remove(
-                "show"
-            );
-
-    }
-
-
-    if (
-        useCameraButton
-    ) {
-
-        useCameraButton
-            .classList
-            .remove(
-                "show"
-            );
-
-    }
-
-}
-
-
-/* =========================================================
+      /* =========================================================
    CAMERA ERROR
 ========================================================= */
 
-function showCameraError(
-    message
-) {
-
-    cameraError.innerHTML = `
+      function showCameraError(message) {
+        cameraError.innerHTML = `
 
         <i class="fa-solid fa-triangle-exclamation"></i>
 
@@ -4271,589 +3002,282 @@ function showCameraError(
 
     `;
 
+        cameraError.classList.add("show");
+      }
 
-    cameraError
-        .classList
-        .add(
-            "show"
-        );
+      function clearCameraError() {
+        cameraError.innerHTML = "";
 
-}
+        cameraError.classList.remove("show");
+      }
 
-
-function clearCameraError() {
-
-    cameraError.innerHTML =
-        "";
-
-    cameraError
-        .classList
-        .remove(
-            "show"
-        );
-
-}
-
-
-/* =========================================================
+      /* =========================================================
    CLOSE ATTENDANCE MODAL
 ========================================================= */
 
-function closeAttendanceModal() {
+      function closeAttendanceModal() {
+        stopAttendanceCamera();
 
-    stopAttendanceCamera();
+        resetCameraUI();
 
+        attendanceModal.classList.remove("show");
 
-    resetCameraUI();
+        selectedAttendanceButton = null;
 
+        capturedAttendancePhoto = null;
+      }
 
-    attendanceModal
-        .classList
-        .remove(
-            "show"
-        );
-
-
-    selectedAttendanceButton =
-        null;
-
-
-    capturedAttendancePhoto =
-        null;
-
-}
-
-
-/* =========================================================
+      /* =========================================================
    ATTENDANCE MODAL CLICK OUTSIDE
 ========================================================= */
 
-attendanceModal.addEventListener(
-    "click",
-    function(event) {
-
-        if (
-            event.target ===
-            attendanceModal
-        ) {
-
-            closeAttendanceModal();
-
+      attendanceModal.addEventListener("click", function (event) {
+        if (event.target === attendanceModal) {
+          closeAttendanceModal();
         }
+      });
 
-    }
-);
-
-
-/* =========================================================
+      /* =========================================================
    ESC KEY
 ========================================================= */
 
-document.addEventListener(
-    "keydown",
-    function(event) {
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          closeAttendanceModal();
 
-        if (
-            event.key ===
-            "Escape"
-        ) {
-
-            closeAttendanceModal();
-
-            closeLogoutModal();
-
+          closeLogoutModal();
         }
+      });
 
-    }
-);
-
-
-/* =========================================================
+      /* =========================================================
    MONTH FILTER
 ========================================================= */
 
-document
-    .getElementById(
-        "monthFilter"
-    )
-    .addEventListener(
-        "change",
-        function() {
+      document
+        .getElementById("monthFilter")
+        .addEventListener("change", function () {
+          const selectedMonth = this.value;
 
-            const selectedMonth =
-                this.value;
+          const rows = document.querySelectorAll("#attendanceTable tbody tr");
 
-            const rows =
-                document.querySelectorAll(
-                    "#attendanceTable tbody tr"
-                );
+          rows.forEach(function (row) {
+            const recordDate = row.dataset.attendanceDate;
 
+            if (!selectedMonth) {
+              row.style.display = "";
 
-            rows.forEach(
-                function(row) {
+              return;
+            }
 
-                    const recordDate =
-                        row.dataset.attendanceDate;
+            const recordMonth = recordDate.substring(0, 7);
 
+            row.style.display = recordMonth === selectedMonth ? "" : "none";
+          });
+        });
 
-                    if (
-                        !selectedMonth
-                    ) {
-
-                        row.style.display =
-                            "";
-
-                        return;
-
-                    }
-
-
-                    const recordMonth =
-                        recordDate.substring(
-                            0,
-                            7
-                        );
-
-
-                    row.style.display =
-                        recordMonth ===
-                        selectedMonth
-                            ? ""
-                            : "none";
-
-                }
-            );
-
-        }
-    );
-
-
-/* =========================================================
+      /* =========================================================
    EXPORT DTR
 ========================================================= */
 
-function exportDTR() {
+      function exportDTR() {
+        const selectedMonth = document.getElementById("monthFilter").value;
 
-    const selectedMonth =
-        document.getElementById(
-            "monthFilter"
-        ).value;
+        const rows = document.querySelectorAll("#attendanceTable tbody tr");
 
+        let csv = "";
 
-    const rows =
-        document.querySelectorAll(
-            "#attendanceTable tbody tr"
-        );
-
-
-    let csv =
-        "";
-
-
-    /*
+        /*
        CSV HEADER
     */
 
-    csv +=
-        "Employee,Date,Time In,Break Out,Break In,Time Out,Status\n";
+        csv += "Employee,Date,Time In,Break Out,Break In,Time Out,Status\n";
 
+        let exportedRows = 0;
 
-    let exportedRows =
-        0;
+        rows.forEach(function (row) {
+          if (row.style.display === "none") {
+            return;
+          }
 
+          const cells = row.querySelectorAll("td");
 
-    rows.forEach(
-        function(row) {
+          if (cells.length < 7) {
+            return;
+          }
 
-            if (
-                row.style.display ===
-                "none"
-            ) {
+          const employee = cells[0].innerText.trim();
 
-                return;
+          const date = cells[1].innerText.trim().replace(/\s+/g, " ");
 
-            }
+          const timeIn = cells[2].innerText.trim();
 
+          const breakOut = cells[3].innerText.trim();
 
-            const cells =
-                row.querySelectorAll(
-                    "td"
-                );
+          const breakIn = cells[4].innerText.trim();
 
+          const timeOut = cells[5].innerText.trim();
 
-            if (
-                cells.length < 7
-            ) {
+          const status = cells[6].innerText.trim();
 
-                return;
+          function escapeCSV(value) {
+            return `"${String(value).replace(/"/g, '""')}"`;
+          }
 
-            }
+          csv += [
+            escapeCSV(employee),
 
+            escapeCSV(date),
 
-            const employee =
-                cells[0]
-                    .innerText
-                    .trim();
+            escapeCSV(timeIn),
 
+            escapeCSV(breakOut),
 
-            const date =
-                cells[1]
-                    .innerText
-                    .trim()
-                    .replace(
-                        /\s+/g,
-                        " "
-                    );
+            escapeCSV(breakIn),
 
+            escapeCSV(timeOut),
 
-            const timeIn =
-                cells[2]
-                    .innerText
-                    .trim();
+            escapeCSV(status),
+          ].join(",");
 
+          csv += "\n";
 
-            const breakOut =
-                cells[3]
-                    .innerText
-                    .trim();
+          exportedRows++;
+        });
 
+        if (exportedRows === 0) {
+          alert("There are no attendance records available to export.");
 
-            const breakIn =
-                cells[4]
-                    .innerText
-                    .trim();
-
-
-            const timeOut =
-                cells[5]
-                    .innerText
-                    .trim();
-
-
-            const status =
-                cells[6]
-                    .innerText
-                    .trim();
-
-
-            function escapeCSV(value) {
-
-                return `"${String(value)
-                    .replace(
-                        /"/g,
-                        '""'
-                    )}"`;
-
-            }
-
-
-            csv += [
-
-                escapeCSV(employee),
-
-                escapeCSV(date),
-
-                escapeCSV(timeIn),
-
-                escapeCSV(breakOut),
-
-                escapeCSV(breakIn),
-
-                escapeCSV(timeOut),
-
-                escapeCSV(status)
-
-            ].join(",");
-
-
-            csv += "\n";
-
-
-            exportedRows++;
-
+          return;
         }
-    );
 
-
-    if (
-        exportedRows === 0
-    ) {
-
-        alert(
-            "There are no attendance records available to export."
-        );
-
-        return;
-
-    }
-
-
-    /*
+        /*
        CREATE CSV FILE
     */
 
-    const blob =
-        new Blob(
-            [
-                "\uFEFF" +
-                csv
-            ],
-            {
-                type:
-                    "text/csv;charset=utf-8;"
-            }
-        );
+        const blob = new Blob(["\uFEFF" + csv], {
+          type: "text/csv;charset=utf-8;",
+        });
 
+        const url = URL.createObjectURL(blob);
 
-    const url =
-        URL.createObjectURL(
-            blob
-        );
+        const link = document.createElement("a");
 
+        link.href = url;
 
-    const link =
-        document.createElement(
-            "a"
-        );
-
-
-    link.href =
-        url;
-
-
-    /*
+        /*
        FILE NAME
     */
 
-    const monthName =
-        selectedMonth
-            ? selectedMonth.replace(
-                "-",
-                "_"
-            )
-            : "All_Records";
+        const monthName = selectedMonth
+          ? selectedMonth.replace("-", "_")
+          : "All_Records";
 
+        link.download = `${EMPLOYEE_ID}_DTR_${monthName}.csv`;
 
-    link.download =
-        `${EMPLOYEE_ID}_DTR_${monthName}.csv`;
+        document.body.appendChild(link);
 
+        link.click();
 
-    document.body.appendChild(
-        link
-    );
+        document.body.removeChild(link);
 
+        URL.revokeObjectURL(url);
+      }
 
-    link.click();
-
-
-    document.body.removeChild(
-        link
-    );
-
-
-    URL.revokeObjectURL(
-        url
-    );
-
-}
-
-
-/* =========================================================
+      /* =========================================================
    LIVE DATE AND TIME
 ========================================================= */
 
-function updateDateTime() {
+      function updateDateTime() {
+        const now = new Date();
 
-    const now =
-        new Date();
+        const day = now.toLocaleDateString("en-US", {
+          weekday: "long",
+        });
 
+        const date = now.toLocaleDateString("en-US", {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        });
 
-    const day =
-        now.toLocaleDateString(
-            "en-US",
-            {
-                weekday: "long"
-            }
-        );
+        const time = now.toLocaleTimeString("en-US", {
+          hour: "numeric",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
+        });
 
+        document.getElementById("current-day").textContent = day;
 
-    const date =
-        now.toLocaleDateString(
-            "en-US",
-            {
-                month: "long",
-                day: "numeric",
-                year: "numeric"
-            }
-        );
+        document.getElementById("current-date-time").textContent =
+          `${date} | ${time}`;
+      }
 
+      updateDateTime();
 
-    const time =
-        now.toLocaleTimeString(
-            "en-US",
-            {
-                hour: "numeric",
-                minute: "2-digit",
-                second: "2-digit",
-                hour12: true
-            }
-        );
+      setInterval(updateDateTime, 1000);
 
-
-    document.getElementById(
-        "current-day"
-    ).textContent =
-        day;
-
-
-    document.getElementById(
-        "current-date-time"
-    ).textContent =
-        `${date} | ${time}`;
-
-}
-
-
-updateDateTime();
-
-
-setInterval(
-    updateDateTime,
-    1000
-);
-
-
-/* =========================================================
+      /* =========================================================
    LOGOUT MODAL
 ========================================================= */
 
-function openLogoutModal() {
+      function openLogoutModal() {
+        const logoutModal = document.getElementById("logoutModal");
 
-    const logoutModal =
-        document.getElementById(
-            "logoutModal"
-        );
+        if (logoutModal) {
+          logoutModal.classList.add("show");
+        }
+      }
 
+      function closeLogoutModal() {
+        const logoutModal = document.getElementById("logoutModal");
 
-    if (
-        logoutModal
-    ) {
+        if (logoutModal) {
+          logoutModal.classList.remove("show");
+        }
+      }
 
-        logoutModal
-            .classList
-            .add(
-                "show"
-            );
-
-    }
-
-}
-
-
-function closeLogoutModal() {
-
-    const logoutModal =
-        document.getElementById(
-            "logoutModal"
-        );
-
-
-    if (
-        logoutModal
-    ) {
-
-        logoutModal
-            .classList
-            .remove(
-                "show"
-            );
-
-    }
-
-}
-
-
-/* =========================================================
+      /* =========================================================
    LOGOUT MODAL CLICK OUTSIDE
 ========================================================= */
 
-document
-    .getElementById(
-        "logoutModal"
-    )
-    .addEventListener(
-        "click",
-        function(event) {
+      document
+        .getElementById("logoutModal")
+        .addEventListener("click", function (event) {
+          if (event.target === this) {
+            closeLogoutModal();
+          }
+        });
 
-            if (
-                event.target ===
-                this
-            ) {
-
-                closeLogoutModal();
-
-            }
-
-        }
-    );
-
-
-/* =========================================================
+      /* =========================================================
    CLEAN UP CAMERA WHEN LEAVING PAGE
 ========================================================= */
 
-window.addEventListener(
-    "beforeunload",
-    function() {
-
+      window.addEventListener("beforeunload", function () {
         stopAttendanceCamera();
+      });
 
-    }
-);
-
-
-/* =========================================================
+      /* =========================================================
    GENERATE INITIAL TABLE
 ========================================================= */
 
-generateAttendanceTable();
+      generateAttendanceTable();
 
-
-/* =========================================================
+      /* =========================================================
    AUTO REFRESH WHEN DATE CHANGES
 ========================================================= */
 
-let lastKnownDate =
-    getTodayString();
+      let lastKnownDate = getTodayString();
 
+      setInterval(function () {
+        const currentDate = getTodayString();
 
-setInterval(
-    function() {
+        if (currentDate !== lastKnownDate) {
+          lastKnownDate = currentDate;
 
-        const currentDate =
-            getTodayString();
-
-
-        if (
-            currentDate !==
-            lastKnownDate
-        ) {
-
-            lastKnownDate =
-                currentDate;
-
-
-            generateAttendanceTable();
-
+          generateAttendanceTable();
         }
-
-    },
-    1000
-);
-
-</script>
-
-
-</body>
-
+      }, 1000);
+    </script>
+  </body>
 </html>
