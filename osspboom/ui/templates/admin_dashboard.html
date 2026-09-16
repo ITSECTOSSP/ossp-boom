@@ -492,7 +492,9 @@
 
                     <button
                       type="button"
-                      onclick="filterDivision('ADMINISTRATIVE DIVISION')"
+                      onclick="
+                        filterDivision('ADMINISTRATIVE DIVISION')
+                      "
                     >
                       Administrative Division
                     </button>
@@ -1727,6 +1729,18 @@
 
     <div class="floating-actions">
       <div class="floating-menu">
+        <!-- ADD EMPLOYEE -->
+
+        <button
+          type="button"
+          class="floating-action upload-action"
+          onclick="openAddEmployeeModal()"
+        >
+          <i class="fa-solid fa-user-plus"></i>
+
+          <span> Add Employee </span>
+        </button>
+
         <!-- MY DTR -->
 
         <button
@@ -1760,6 +1774,319 @@
 
           <span> Apply Leave </span>
         </button>
+      </div>
+
+      <!-- =========================================================
+     ADD EMPLOYEE MODAL
+========================================================= -->
+
+      <div class="edit-modal-overlay" id="addEmployeeModal">
+        <div class="edit-modal">
+          <!-- HEADER -->
+
+          <div class="edit-modal-header">
+            <div class="edit-modal-title">
+              <div class="edit-modal-icon">
+                <i class="fa-solid fa-user-plus"></i>
+              </div>
+
+              <div>
+                <h2>Add New Employee</h2>
+
+                <p id="addEmployeeAutoID">Employee No. auto-generated</p>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              class="edit-modal-close"
+              onclick="closeAddEmployeeModal()"
+            >
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+
+          <!-- BODY -->
+
+          <div class="edit-modal-body">
+            <!-- EMPLOYEE NO -->
+
+            <div class="edit-form-group">
+              <label for="addEmployeeNo">
+                <i class="fa-solid fa-id-badge"></i>
+
+                Employee No.
+              </label>
+
+              <input type="text" id="addEmployeeNo" readonly />
+            </div>
+
+            <!-- FIRST NAME -->
+
+            <div class="edit-form-group">
+              <label for="addFirstName">
+                <i class="fa-solid fa-user"></i>
+
+                First Name
+              </label>
+
+              <input
+                type="text"
+                id="addFirstName"
+                placeholder="Enter first name"
+              />
+            </div>
+
+            <!-- MIDDLE NAME -->
+
+            <div class="edit-form-group">
+              <label for="addMiddleName">
+                <i class="fa-solid fa-user"></i>
+
+                Middle Name
+              </label>
+
+              <input
+                type="text"
+                id="addMiddleName"
+                placeholder="Enter middle name"
+              />
+            </div>
+
+            <!-- LAST NAME -->
+
+            <div class="edit-form-group">
+              <label for="addLastName">
+                <i class="fa-solid fa-user"></i>
+
+                Last Name
+              </label>
+
+              <input
+                type="text"
+                id="addLastName"
+                placeholder="Enter last name"
+              />
+            </div>
+
+            <!-- CONTACT -->
+
+            <div class="edit-form-group">
+              <label for="addContact">
+                <i class="fa-solid fa-phone"></i>
+
+                Contact
+              </label>
+
+              <input
+                type="text"
+                id="addContact"
+                placeholder="Enter contact number"
+              />
+            </div>
+
+            <!-- EMAIL -->
+
+            <div class="edit-form-group">
+              <label for="addEmail">
+                <i class="fa-solid fa-envelope"></i>
+
+                Email
+              </label>
+
+              <input
+                type="text"
+                id="addEmail"
+                placeholder="Enter email address"
+              />
+            </div>
+
+            <!-- BIRTHDATE -->
+
+            <div class="edit-form-group">
+              <label for="addBirthdate">
+                <i class="fa-solid fa-calendar-days"></i>
+
+                Birthdate
+              </label>
+
+              <input type="date" id="addBirthdate" />
+            </div>
+
+            <!-- ADDRESS -->
+
+            <div class="edit-form-group edit-full-width">
+              <label for="addAddress">
+                <i class="fa-solid fa-location-dot"></i>
+
+                Address
+              </label>
+
+              <textarea
+                id="addAddress"
+                rows="3"
+                placeholder="Enter complete address"
+              ></textarea>
+            </div>
+
+            <!-- SECTION -->
+
+            <div class="edit-form-group">
+              <label for="addSection">
+                <i class="fa-solid fa-building"></i>
+
+                Section
+              </label>
+
+              <div class="edit-section-dropdown" id="addSectionDropdown">
+                <button
+                  type="button"
+                  class="edit-section-select"
+                  onclick="toggleAddSectionDropdown(event)"
+                >
+                  <span id="addSectionText"> Select Division / Section </span>
+
+                  <i class="fa-solid fa-chevron-down"></i>
+                </button>
+
+                <div class="edit-section-menu" id="addSectionMenu">
+                  <button type="button" data-value="">
+                    Select Division / Section
+                  </button>
+
+                  <button type="button" data-value="Administrative Division">
+                    Administrative Division
+                  </button>
+
+                  <button
+                    type="button"
+                    data-value="Record and Correspondence Section"
+                  >
+                    Record and Correspondence Section
+                  </button>
+
+                  <button type="button" data-value="Personnel Section">
+                    Personnel Section
+                  </button>
+
+                  <button type="button" data-value="General Services Section">
+                    General Services Section
+                  </button>
+
+                  <button
+                    type="button"
+                    data-value="Finance and Accounting Section"
+                  >
+                    Finance and Accounting Section
+                  </button>
+
+                  <button type="button" data-value="IT Section">
+                    IT Section
+                  </button>
+
+                  <button
+                    type="button"
+                    data-value="Journal and Minutes Division"
+                  >
+                    Journal and Minutes Division
+                  </button>
+
+                  <button
+                    type="button"
+                    data-value="Journal Transcription Section"
+                  >
+                    Journal Transcription Section
+                  </button>
+
+                  <button type="button" data-value="Minutes Section">
+                    Minutes Section
+                  </button>
+
+                  <button type="button" data-value="Committee Affairs Section">
+                    Committee Affairs Section
+                  </button>
+
+                  <button
+                    type="button"
+                    data-value="Special Committee Section"
+                  >
+                    Special Committee Section
+                  </button>
+
+                  <button
+                    type="button"
+                    data-value="Legislative Services Division"
+                  >
+                    Legislative Services Division
+                  </button>
+
+                  <button
+                    type="button"
+                    data-value="Ordinance and Resolution Section"
+                  >
+                    Ordinance and Resolution Section
+                  </button>
+
+                  <button
+                    type="button"
+                    data-value="Agenda and Briefing Section"
+                  >
+                    Agenda and Briefing Section
+                  </button>
+
+                  <button
+                    type="button"
+                    data-value="Reference and Archives Section"
+                  >
+                    Reference and Archives Section
+                  </button>
+                </div>
+
+                <input type="hidden" id="addSection" value="" />
+              </div>
+            </div>
+
+            <!-- POSITION -->
+
+            <div class="edit-form-group">
+              <label for="addPosition">
+                <i class="fa-solid fa-briefcase"></i>
+
+                Position
+              </label>
+
+              <input
+                type="text"
+                id="addPosition"
+                placeholder="Enter position"
+              />
+            </div>
+          </div>
+
+          <!-- FOOTER -->
+
+          <div class="edit-modal-footer">
+            <button
+              type="button"
+              class="edit-cancel-btn"
+              onclick="closeAddEmployeeModal()"
+            >
+              <i class="fa-solid fa-xmark"></i>
+
+              Cancel
+            </button>
+
+            <button
+              type="button"
+              class="edit-save-btn"
+              onclick="saveNewEmployee()"
+            >
+              <i class="fa-solid fa-check"></i>
+
+              Add Employee
+            </button>
+          </div>
+        </div>
       </div>
 
       <!-- =========================================================
@@ -3316,6 +3643,218 @@
 
         floatingActions.classList.toggle("active");
       }
+
+      /* =========================================================
+   ADD EMPLOYEE
+========================================================= */
+
+      function generateNextEmployeeID() {
+        const rows = document.querySelectorAll("#employeeTable tbody tr");
+
+        let maxNum = 0;
+
+        rows.forEach(function (row) {
+          const idText = row.cells[0] ? row.cells[0].textContent.trim() : "";
+
+          const match = idText.match(/OSSP-(\d+)/);
+
+          if (match) {
+            const num = parseInt(match[1], 10);
+
+            if (num > maxNum) {
+              maxNum = num;
+            }
+          }
+        });
+
+        const nextNum = maxNum + 1;
+
+        return "OSSP-" + String(nextNum).padStart(3, "0");
+      }
+
+      function openAddEmployeeModal() {
+        document.querySelector(".floating-actions").classList.remove("active");
+
+        document.getElementById("addFirstName").value = "";
+
+        document.getElementById("addMiddleName").value = "";
+
+        document.getElementById("addLastName").value = "";
+
+        document.getElementById("addContact").value = "";
+
+        document.getElementById("addEmail").value = "";
+
+        document.getElementById("addBirthdate").value = "";
+
+        document.getElementById("addAddress").value = "";
+
+        document.getElementById("addPosition").value = "";
+
+        selectAddSection("", "Select Division / Section");
+
+        document.getElementById("addEmployeeNo").value =
+          generateNextEmployeeID();
+
+        document.getElementById("addEmployeeModal").classList.add("active");
+      }
+
+      function closeAddEmployeeModal() {
+        const modal = document.getElementById("addEmployeeModal");
+
+        if (modal) {
+          modal.classList.remove("active");
+        }
+      }
+
+      function toggleAddSectionDropdown(event) {
+        event.stopPropagation();
+
+        document
+          .getElementById("addSectionDropdown")
+          .classList.toggle("active");
+      }
+
+      function selectAddSection(value, text) {
+        document.getElementById("addSection").value = value;
+
+        document.getElementById("addSectionText").textContent =
+          text || "Select Division / Section";
+
+        document
+          .getElementById("addSectionDropdown")
+          .classList.remove("active");
+      }
+
+      document
+        .querySelectorAll("#addSectionMenu button")
+        .forEach(function (button) {
+          button.addEventListener("click", function (event) {
+            event.stopPropagation();
+
+            selectAddSection(this.dataset.value, this.textContent.trim());
+          });
+        });
+
+      document.addEventListener("click", function (event) {
+        const dropdown = document.getElementById("addSectionDropdown");
+
+        if (dropdown && !dropdown.contains(event.target)) {
+          dropdown.classList.remove("active");
+        }
+      });
+
+      function saveNewEmployee() {
+        const firstName = document.getElementById("addFirstName").value.trim();
+
+        const middleName =
+          document.getElementById("addMiddleName").value.trim() || "N/A";
+
+        const lastName = document.getElementById("addLastName").value.trim();
+
+        const section = document.getElementById("addSection").value;
+
+        const position = document.getElementById("addPosition").value.trim();
+
+        const employeeNo = document.getElementById("addEmployeeNo").value;
+
+        if (!firstName || !lastName) {
+          alert("Please enter the employee's first and last name.");
+
+          return;
+        }
+
+        if (!section) {
+          alert("Please select a Division / Section.");
+
+          return;
+        }
+
+        if (!position) {
+          alert("Please enter a Position.");
+
+          return;
+        }
+
+        const tbody = document.querySelector("#employeeTable tbody");
+
+        const newRow = document.createElement("tr");
+
+        newRow.innerHTML =
+          "<td>" +
+          employeeNo +
+          "</td>" +
+          "<td>" +
+          firstName +
+          "</td>" +
+          "<td>" +
+          middleName +
+          "</td>" +
+          "<td>" +
+          lastName +
+          "</td>" +
+          "<td>" +
+          section +
+          "</td>" +
+          "<td>" +
+          position +
+          "</td>" +
+          '<td class="action-column">' +
+          '<div class="action-dropdown">' +
+          '<button type="button" class="action-btn" onclick="toggleActionMenu(this)" title="Employee Actions">' +
+          '<i class="fa-solid fa-ellipsis"></i>' +
+          "</button>" +
+          '<div class="action-menu">' +
+          '<button type="button" onclick="viewEmployee(\'' +
+          employeeNo +
+          '\')">' +
+          '<i class="fa-solid fa-eye"></i>' +
+          "<span> View Details </span>" +
+          "</button>" +
+          '<button type="button" onclick="editEmployee(\'' +
+          employeeNo +
+          '\')">' +
+          '<i class="fa-solid fa-pen"></i>' +
+          "<span> Edit </span>" +
+          "</button>" +
+          '<button type="button" class="delete-action" onclick="deleteEmployee(\'' +
+          employeeNo +
+          '\')">' +
+          '<i class="fa-solid fa-trash"></i>' +
+          "<span> Delete </span>" +
+          "</button>" +
+          "</div>" +
+          "</div>" +
+          "</td>";
+
+        tbody.appendChild(newRow);
+
+        closeAddEmployeeModal();
+
+        alert(employeeNo + " has been added successfully.");
+
+        if (typeof applyEmployeeFilters === "function") {
+          applyEmployeeFilters();
+        }
+      }
+
+      document
+        .getElementById("addEmployeeModal")
+        .addEventListener("click", function (event) {
+          if (event.target === this) {
+            closeAddEmployeeModal();
+          }
+        });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          const modal = document.getElementById("addEmployeeModal");
+
+          if (modal && modal.classList.contains("active")) {
+            closeAddEmployeeModal();
+          }
+        }
+      });
 
       /* =========================================================
    UPLOAD DTR

@@ -1324,13 +1324,13 @@
           gap: 8px !important;
         }
 
-        .month-filter {
+        .date-range-filter {
           width: 100% !important;
 
           box-sizing: border-box !important;
         }
 
-        .month-filter input {
+        .date-range-filter input[type="date"] {
           width: 100% !important;
 
           box-sizing: border-box !important;
@@ -1361,7 +1361,7 @@
         }
 
         #attendanceTable {
-          min-width: 850px !important;
+          min-width: 1150px !important;
         }
 
         #attendanceTable th,
@@ -1517,6 +1517,7 @@
         }
       }
     </style>
+
   </head>
 
   <body>
@@ -1733,10 +1734,27 @@
           <!-- ATTENDANCE TOOLS -->
 
           <div class="attendance-tools">
-            <div class="month-filter">
-              <i class="fa-solid fa-calendar-days"></i>
+            <!-- =================================================
+                     DATE RANGE FILTER
+                ================================================== -->
 
-              <input type="month" id="monthFilter" />
+            <div class="date-range-filter">
+              <i class="fa-solid fa-calendar-week"></i>
+
+              <input type="date" id="dateFromFilter" />
+
+              <span class="date-range-separator"> to </span>
+
+              <input type="date" id="dateToFilter" />
+
+              <button
+                type="button"
+                class="date-range-clear"
+                onclick="clearDateRangeFilter()"
+                title="Clear date range"
+              >
+                <i class="fa-solid fa-xmark"></i>
+              </button>
             </div>
 
             <!-- =================================================
@@ -1771,6 +1789,12 @@
                   <th>Break In</th>
 
                   <th>Time Out</th>
+
+                  <th>Encoded By</th>
+
+                  <th>Date Encoded</th>
+
+                  <th>Remarks</th>
 
                   <th>Status</th>
                 </tr>
@@ -2005,6 +2029,13 @@
       const EMPLOYEE_ID = "OSSP-003";
 
       /* =========================================================
+   CURRENT LOGGED-IN ADMIN
+   (used to stamp Encoded By / Date Encoded)
+========================================================= */
+
+      const CURRENT_ADMIN_NAME = "Admin Jessica";
+
+      /* =========================================================
    DTR RECORDS
 ========================================================= */
 
@@ -2045,6 +2076,92 @@
       let attendanceRecords = JSON.parse(
         localStorage.getItem(ATTENDANCE_STORAGE_KEY) || "{}",
       );
+
+      /* =========================================================
+   DTR METADATA
+   (Encoded By / Date Encoded / Remarks)
+========================================================= */
+
+      const DTR_METADATA_KEY = `ossp_dtr_metadata_${EMPLOYEE_ID}`;
+
+      const defaultDtrMetadata = {
+        "2026-09-02": {
+          encodedBy: "Admin Jessica",
+
+          dateEncoded: "September 2, 2026",
+
+          remarks: "",
+
+          remarksOther: "",
+        },
+      };
+
+      let dtrMetadata = JSON.parse(
+        localStorage.getItem(DTR_METADATA_KEY) || "{}",
+      );
+
+      function saveDtrMetadata() {
+        localStorage.setItem(DTR_METADATA_KEY, JSON.stringify(dtrMetadata));
+      }
+
+      function getDtrMetadata(dateString) {
+        if (dtrMetadata[dateString]) {
+          return dtrMetadata[dateString];
+        }
+
+        if (defaultDtrMetadata[dateString]) {
+          return defaultDtrMetadata[dateString];
+        }
+
+        const hasDTR = !!dtrRecords[dateString];
+
+        const hasAttendance = attendanceTypes.some(function (entryType) {
+          return !!getAttendanceRecord(dateString, entryType);
+        });
+
+        if (hasAttendance) {
+          return {
+            encodedBy: "Employee (Self-Recorded)",
+
+            dateEncoded: formatDate(dateString),
+
+            remarks: "",
+
+            remarksOther: "",
+          };
+        }
+
+        if (hasDTR) {
+          return {
+            encodedBy: "",
+
+            dateEncoded: "",
+
+            remarks: "",
+
+            remarksOther: "",
+          };
+        }
+
+        return {
+          encodedBy: "",
+
+          dateEncoded: "",
+
+          remarks: "",
+
+          remarksOther: "",
+        };
+      }
+
+      function updateDtrMetadata(dateString, changes) {
+        const current =
+          dtrMetadata[dateString] || defaultDtrMetadata[dateString] || {};
+
+        dtrMetadata[dateString] = Object.assign({}, current, changes);
+
+        saveDtrMetadata();
+      }
 
       /* =========================================================
    ATTENDANCE TYPES
@@ -2117,6 +2234,61 @@
           second: "2-digit",
           hour12: true,
         });
+      }
+
+      /* =========================================================
+   TIME FORMAT CONVERSION
+   (for the editable time inputs)
+========================================================= */
+
+      function convertTo24Hour(timeStr) {
+        if (!timeStr) {
+          return "";
+        }
+
+        const match = timeStr.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
+
+        if (!match) {
+          return "";
+        }
+
+        let hours = parseInt(match[1], 10);
+
+        const minutes = match[2];
+
+        const period = match[3].toUpperCase();
+
+        if (period === "PM" && hours !== 12) {
+          hours += 12;
+        }
+
+        if (period === "AM" && hours === 12) {
+          hours = 0;
+        }
+
+        return String(hours).padStart(2, "0") + ":" + minutes;
+      }
+
+      function convertTo12Hour(timeStr) {
+        if (!timeStr) {
+          return "";
+        }
+
+        const parts = timeStr.split(":");
+
+        let hours = parseInt(parts[0], 10);
+
+        const minutes = parts[1];
+
+        const period = hours >= 12 ? "PM" : "AM";
+
+        hours = hours % 12;
+
+        if (hours === 0) {
+          hours = 12;
+        }
+
+        return String(hours).padStart(2, "0") + ":" + minutes + " " + period;
       }
 
       /* =========================================================
@@ -2194,6 +2366,34 @@
       }
 
       /* =========================================================
+   CREATE EDIT-TIME ICON
+========================================================= */
+
+      function createEditTimeIcon(dateString, entryType) {
+        return `
+
+        <button
+
+            type="button"
+
+            class="edit-time-icon-btn"
+
+            data-date="${dateString}"
+
+            data-entry="${entryType}"
+
+            title="Edit time"
+
+        >
+
+            <i class="fa-solid fa-pen"></i>
+
+        </button>
+
+    `;
+      }
+
+      /* =========================================================
    CREATE ATTENDANCE ROW
 ========================================================= */
 
@@ -2250,21 +2450,23 @@
 
           if (dateType === "past") {
             if (attendance) {
-              cell.innerHTML = createAttendanceButton(
-                dateString,
-                entryType,
-                attendance.time,
-                attendance.photo,
-                "ATTENDANCE",
-              );
+              cell.innerHTML =
+                createAttendanceButton(
+                  dateString,
+                  entryType,
+                  attendance.time,
+                  attendance.photo,
+                  "ATTENDANCE",
+                ) + createEditTimeIcon(dateString, entryType);
             } else if (dtr) {
-              cell.innerHTML = createAttendanceButton(
-                dateString,
-                entryType,
-                dtr.time,
-                dtr.photo,
-                "DTR",
-              );
+              cell.innerHTML =
+                createAttendanceButton(
+                  dateString,
+                  entryType,
+                  dtr.time,
+                  dtr.photo,
+                  "DTR",
+                ) + createEditTimeIcon(dateString, entryType);
             } else {
               cell.innerHTML = `
 
@@ -2278,13 +2480,14 @@
             }
           } else if (dateType === "today") {
             if (attendance) {
-              cell.innerHTML = createAttendanceButton(
-                dateString,
-                entryType,
-                attendance.time,
-                attendance.photo,
-                "ATTENDANCE",
-              );
+              cell.innerHTML =
+                createAttendanceButton(
+                  dateString,
+                  entryType,
+                  attendance.time,
+                  attendance.photo,
+                  "ATTENDANCE",
+                ) + createEditTimeIcon(dateString, entryType);
             } else {
               cell.innerHTML = `
 
@@ -2334,6 +2537,92 @@
 
           row.appendChild(cell);
         });
+
+        /* =====================================================
+       ENCODED BY / DATE ENCODED / REMARKS
+    ===================================================== */
+
+        const metadata = getDtrMetadata(dateString);
+
+        const encodedByCell = document.createElement("td");
+
+        encodedByCell.innerHTML = metadata.encodedBy
+          ? `<span class="encoded-value">${metadata.encodedBy}</span>`
+          : `<span class="encoded-value empty">—</span>`;
+
+        row.appendChild(encodedByCell);
+
+        const dateEncodedCell = document.createElement("td");
+
+        dateEncodedCell.innerHTML = metadata.dateEncoded
+          ? `<span class="encoded-value">${metadata.dateEncoded}</span>`
+          : `<span class="encoded-value empty">—</span>`;
+
+        row.appendChild(dateEncodedCell);
+
+        const remarksCell = document.createElement("td");
+
+        const remarksValue = metadata.remarks || "";
+
+        const remarksOtherValue = metadata.remarksOther || "";
+
+        remarksCell.innerHTML = `
+
+        <div class="remarks-cell">
+
+            <select
+                class="remarks-select"
+                data-date="${dateString}"
+            >
+
+                <option value="" ${remarksValue === "" ? "selected" : ""}>
+                    -- Select --
+                </option>
+
+                <option
+                    value="Sick Leave"
+                    ${remarksValue === "Sick Leave" ? "selected" : ""}
+                >
+                    Sick Leave
+                </option>
+
+                <option
+                    value="Vacation Leave"
+                    ${remarksValue === "Vacation Leave" ? "selected" : ""}
+                >
+                    Vacation Leave
+                </option>
+
+                <option
+                    value="Others"
+                    ${remarksValue === "Others" ? "selected" : ""}
+                >
+                    Others
+                </option>
+
+            </select>
+
+            <input
+
+                type="text"
+
+                class="remarks-other-input"
+
+                data-date="${dateString}"
+
+                placeholder="Please specify"
+
+                value="${remarksOtherValue}"
+
+                style="display:${remarksValue === "Others" ? "inline-block" : "none"};"
+
+            />
+
+        </div>
+
+    `;
+
+        row.appendChild(remarksCell);
 
         const statusCell = document.createElement("td");
 
@@ -2408,6 +2697,8 @@
         }
 
         attachAttendanceEvents();
+
+        applyAttendanceFilters();
       }
 
       /* =========================================================
@@ -2422,6 +2713,217 @@
               openAttendanceRecord(this);
             });
           });
+
+        document
+          .querySelectorAll(".edit-time-icon-btn")
+          .forEach(function (button) {
+            button.addEventListener("click", function (event) {
+              event.stopPropagation();
+
+              startEditTime(this);
+            });
+          });
+
+        document
+          .querySelectorAll(".remarks-select")
+          .forEach(function (select) {
+            select.addEventListener("change", function () {
+              handleRemarksChange(this);
+            });
+          });
+
+        document
+          .querySelectorAll(".remarks-other-input")
+          .forEach(function (input) {
+            input.addEventListener("blur", function () {
+              handleRemarksOtherBlur(this);
+            });
+          });
+      }
+
+      /* =========================================================
+   EDIT TIME
+========================================================= */
+
+      function startEditTime(button) {
+        const dateString = button.dataset.date;
+
+        const entryType = button.dataset.entry;
+
+        const cell = button.closest("td");
+
+        const attendance = getAttendanceRecord(dateString, entryType);
+
+        const dtr = dtrRecords[dateString]
+          ? dtrRecords[dateString][entryType]
+          : null;
+
+        const existingTime = attendance
+          ? attendance.time
+          : dtr
+            ? dtr.time
+            : "";
+
+        const value24 = convertTo24Hour(existingTime);
+
+        cell.innerHTML = `
+
+        <div class="time-edit-form">
+
+            <input
+                type="time"
+                class="time-edit-input"
+                value="${value24}"
+            />
+
+            <button
+                type="button"
+                class="time-edit-save"
+                title="Save"
+            >
+                <i class="fa-solid fa-check"></i>
+            </button>
+
+            <button
+                type="button"
+                class="time-edit-cancel"
+                title="Cancel"
+            >
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+    `;
+
+        cell
+          .querySelector(".time-edit-save")
+          .addEventListener("click", function () {
+            saveEditedTime(dateString, entryType, cell);
+          });
+
+        cell
+          .querySelector(".time-edit-cancel")
+          .addEventListener("click", function () {
+            generateAttendanceTable();
+          });
+      }
+
+      function saveEditedTime(dateString, entryType, cell) {
+        const input = cell.querySelector(".time-edit-input");
+
+        if (!input || !input.value) {
+          alert("Please select a time.");
+
+          return;
+        }
+
+        const newTime = convertTo12Hour(input.value);
+
+        const attendance = getAttendanceRecord(dateString, entryType);
+
+        const dtr = dtrRecords[dateString]
+          ? dtrRecords[dateString][entryType]
+          : null;
+
+        if (attendance) {
+          attendanceRecords[dateString][entryType].time = newTime;
+
+          saveAttendanceStorage();
+        } else if (dtr) {
+          dtrRecords[dateString][entryType].time = newTime;
+        } else {
+          if (!dtrRecords[dateString]) {
+            dtrRecords[dateString] = {};
+          }
+
+          dtrRecords[dateString][entryType] = {
+            time: newTime,
+
+            photo: "",
+          };
+        }
+
+        updateDtrMetadata(dateString, {
+          encodedBy: CURRENT_ADMIN_NAME,
+
+          dateEncoded: formatDate(getTodayString()),
+        });
+
+        generateAttendanceTable();
+      }
+
+      /* =========================================================
+   REMARKS
+========================================================= */
+
+      function handleRemarksChange(select) {
+        const dateString = select.dataset.date;
+
+        const value = select.value;
+
+        const cell = select.closest(".remarks-cell");
+
+        const otherInput = cell.querySelector(".remarks-other-input");
+
+        if (value === "Others") {
+          otherInput.style.display = "inline-block";
+        } else {
+          otherInput.style.display = "none";
+
+          otherInput.value = "";
+        }
+
+        updateDtrMetadata(dateString, {
+          remarks: value,
+
+          remarksOther: value === "Others" ? otherInput.value : "",
+
+          encodedBy: CURRENT_ADMIN_NAME,
+
+          dateEncoded: formatDate(getTodayString()),
+        });
+
+        refreshEncodedCells(select.closest("tr"));
+      }
+
+      function handleRemarksOtherBlur(input) {
+        const dateString = input.dataset.date;
+
+        updateDtrMetadata(dateString, {
+          remarksOther: input.value.trim(),
+
+          encodedBy: CURRENT_ADMIN_NAME,
+
+          dateEncoded: formatDate(getTodayString()),
+        });
+
+        refreshEncodedCells(input.closest("tr"));
+      }
+
+      function refreshEncodedCells(row) {
+        if (!row) {
+          return;
+        }
+
+        const cells = row.querySelectorAll("td");
+
+        /*
+       Column order:
+       0 Employee, 1 Date, 2 Time In, 3 Break Out,
+       4 Break In, 5 Time Out, 6 Encoded By,
+       7 Date Encoded, 8 Remarks, 9 Status
+    */
+
+        if (cells[6]) {
+          cells[6].innerHTML = `<span class="encoded-value">${CURRENT_ADMIN_NAME}</span>`;
+        }
+
+        if (cells[7]) {
+          cells[7].innerHTML = `<span class="encoded-value">${formatDate(
+            getTodayString(),
+          )}</span>`;
+        }
       }
 
       /* =========================================================
@@ -3061,37 +3563,82 @@
       });
 
       /* =========================================================
-   MONTH FILTER
+   ATTENDANCE FILTERS
+   (DATE RANGE FILTER)
 ========================================================= */
 
+      function applyAttendanceFilters() {
+        const fromDate = document.getElementById("dateFromFilter").value;
+
+        const toDate = document.getElementById("dateToFilter").value;
+
+        const rows = document.querySelectorAll("#attendanceTable tbody tr");
+
+        rows.forEach(function (row) {
+          const recordDate = row.dataset.attendanceDate;
+
+          let visible = true;
+
+          if (fromDate && recordDate < fromDate) {
+            visible = false;
+          }
+
+          if (toDate && recordDate > toDate) {
+            visible = false;
+          }
+
+          row.style.display = visible ? "" : "none";
+        });
+      }
+
+      function clearDateRangeFilter() {
+        document.getElementById("dateFromFilter").value = "";
+
+        document.getElementById("dateToFilter").value = "";
+
+        applyAttendanceFilters();
+      }
+
       document
-        .getElementById("monthFilter")
+        .getElementById("dateFromFilter")
         .addEventListener("change", function () {
-          const selectedMonth = this.value;
+          applyAttendanceFilters();
+        });
 
-          const rows = document.querySelectorAll("#attendanceTable tbody tr");
-
-          rows.forEach(function (row) {
-            const recordDate = row.dataset.attendanceDate;
-
-            if (!selectedMonth) {
-              row.style.display = "";
-
-              return;
-            }
-
-            const recordMonth = recordDate.substring(0, 7);
-
-            row.style.display = recordMonth === selectedMonth ? "" : "none";
-          });
+      document
+        .getElementById("dateToFilter")
+        .addEventListener("change", function () {
+          applyAttendanceFilters();
         });
 
       /* =========================================================
    EXPORT DTR
 ========================================================= */
 
+      function getRemarksTextForExport(cell) {
+        const select = cell.querySelector(".remarks-select");
+
+        const otherInput = cell.querySelector(".remarks-other-input");
+
+        if (!select) {
+          return "";
+        }
+
+        const value = select.value;
+
+        if (value === "Others") {
+          return otherInput && otherInput.value.trim()
+            ? "Others - " + otherInput.value.trim()
+            : "Others";
+        }
+
+        return value;
+      }
+
       function exportDTR() {
-        const selectedMonth = document.getElementById("monthFilter").value;
+        const fromDate = document.getElementById("dateFromFilter").value;
+
+        const toDate = document.getElementById("dateToFilter").value;
 
         const rows = document.querySelectorAll("#attendanceTable tbody tr");
 
@@ -3101,7 +3648,8 @@
        CSV HEADER
     */
 
-        csv += "Employee,Date,Time In,Break Out,Break In,Time Out,Status\n";
+        csv +=
+          "Employee,Date,Time In,Break Out,Break In,Time Out,Encoded By,Date Encoded,Remarks,Status\n";
 
         let exportedRows = 0;
 
@@ -3112,7 +3660,7 @@
 
           const cells = row.querySelectorAll("td");
 
-          if (cells.length < 7) {
+          if (cells.length < 10) {
             return;
           }
 
@@ -3128,7 +3676,13 @@
 
           const timeOut = cells[5].innerText.trim();
 
-          const status = cells[6].innerText.trim();
+          const encodedBy = cells[6].innerText.trim();
+
+          const dateEncoded = cells[7].innerText.trim();
+
+          const remarks = getRemarksTextForExport(cells[8]);
+
+          const status = cells[9].innerText.trim();
 
           function escapeCSV(value) {
             return `"${String(value).replace(/"/g, '""')}"`;
@@ -3146,6 +3700,12 @@
             escapeCSV(breakIn),
 
             escapeCSV(timeOut),
+
+            escapeCSV(encodedBy),
+
+            escapeCSV(dateEncoded),
+
+            escapeCSV(remarks),
 
             escapeCSV(status),
           ].join(",");
@@ -3179,11 +3739,14 @@
        FILE NAME
     */
 
-        const monthName = selectedMonth
-          ? selectedMonth.replace("-", "_")
-          : "All_Records";
+        let fileLabel = "All_Records";
 
-        link.download = `${EMPLOYEE_ID}_DTR_${monthName}.csv`;
+        if (fromDate || toDate) {
+          fileLabel =
+            (fromDate || "start") + "_to_" + (toDate || "end");
+        }
+
+        link.download = `${EMPLOYEE_ID}_DTR_${fileLabel}.csv`;
 
         document.body.appendChild(link);
 
