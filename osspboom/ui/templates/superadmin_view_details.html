@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>EMPLOYEE DASHBOARD</title>
+    <title>SUPER ADMIN DASHBOARD</title>
 
     <link
       rel="stylesheet"
@@ -187,15 +187,6 @@
       }
 
       /* =========================================================
-   CURRENT DAY - CAMERA BUTTON
-========================================================= */
-
-      .attendance-time-btn.can-upload {
-        color: #075ca8;
-        font-weight: 700;
-      }
-
-      /* =========================================================
    CURRENT DAY - ATTENDANCE ALREADY RECORDED
 ========================================================= */
 
@@ -229,12 +220,26 @@
       }
 
       /* =========================================================
-   ABSENT / EMPTY
+   ABSENT / EMPTY / NOT RECORDED
 ========================================================= */
 
       .attendance-empty {
         color: #999;
         font-size: 12px;
+        font-style: italic;
+      }
+
+      /* =========================================================
+   ENCODED / REMARKS VALUES
+========================================================= */
+
+      .encoded-value {
+        font-size: 12px;
+        color: #333;
+      }
+
+      .encoded-value.empty {
+        color: #999;
         font-style: italic;
       }
 
@@ -318,7 +323,7 @@
       }
 
       /* =========================================================
-   ATTENDANCE MODAL
+   ATTENDANCE VIEW MODAL
 ========================================================= */
 
       .attendance-photo-modal {
@@ -530,285 +535,6 @@
       }
 
       .attendance-photo-preview.show {
-        display: block;
-      }
-
-      /* =========================================================
-   CAMERA AREA
-========================================================= */
-
-      .attendance-upload-area {
-        display: none;
-
-        border: 2px dashed #075ca8;
-
-        border-radius: 12px;
-
-        padding: 20px 15px;
-
-        text-align: center;
-
-        margin-bottom: 15px;
-
-        background: rgba(7, 92, 168, 0.04);
-      }
-
-      .attendance-upload-area.show {
-        display: block;
-      }
-
-      .attendance-upload-area > i {
-        font-size: 32px;
-
-        color: #075ca8;
-
-        margin-bottom: 8px;
-      }
-
-      .attendance-upload-area p {
-        margin: 5px 0;
-
-        font-size: 13px;
-
-        color: #555;
-      }
-
-      /* =========================================================
-   CAMERA PREVIEW
-========================================================= */
-
-      .camera-preview-wrapper {
-        display: none;
-
-        width: 100%;
-
-        margin: 15px 0;
-
-        border-radius: 12px;
-
-        overflow: hidden;
-
-        background: #111;
-
-        border: 1px solid #ddd;
-
-        position: relative;
-      }
-
-      .camera-preview-wrapper.show {
-        display: block;
-      }
-
-      #attendanceCameraPreview {
-        display: block;
-
-        width: 100%;
-
-        height: 300px;
-
-        object-fit: cover;
-
-        background: #111;
-
-        transform: scaleX(-1);
-      }
-
-      #attendanceCameraCanvas {
-        display: none;
-      }
-
-      /* =========================================================
-   CAMERA STATUS
-========================================================= */
-
-      .camera-status {
-        display: none;
-
-        margin: 10px 0;
-
-        padding: 9px 12px;
-
-        border-radius: 8px;
-
-        background: rgba(7, 92, 168, 0.08);
-
-        color: #075ca8;
-
-        font-size: 11px;
-
-        font-weight: 600;
-
-        line-height: 1.4;
-      }
-
-      .camera-status.show {
-        display: block;
-      }
-
-      /* =========================================================
-   CAMERA BUTTONS
-========================================================= */
-
-      .camera-actions {
-        display: flex;
-
-        align-items: center;
-
-        justify-content: center;
-
-        flex-wrap: wrap;
-
-        gap: 8px;
-
-        margin-top: 12px;
-      }
-
-      .camera-btn {
-        display: inline-flex;
-
-        align-items: center;
-
-        justify-content: center;
-
-        gap: 7px;
-
-        min-width: 115px;
-
-        padding: 10px 14px;
-
-        border: none;
-
-        border-radius: 8px;
-
-        font-family: "Montserrat", sans-serif;
-
-        font-size: 12px;
-
-        font-weight: 700;
-
-        cursor: pointer;
-
-        transition:
-          background 0.2s ease,
-          transform 0.2s ease,
-          box-shadow 0.2s ease;
-      }
-
-      .camera-btn:hover {
-        transform: translateY(-1px);
-      }
-
-      .camera-open-btn {
-        background: #075ca8;
-
-        color: #ffffff;
-      }
-
-      .camera-open-btn:hover {
-        background: #063b73;
-
-        box-shadow: 0 5px 15px rgba(7, 92, 168, 0.2);
-      }
-
-      .camera-capture-btn {
-        display: none;
-
-        background: #c92127;
-
-        color: #ffffff;
-      }
-
-      .camera-capture-btn.show {
-        display: inline-flex;
-      }
-
-      .camera-capture-btn:hover {
-        background: #a91c21;
-      }
-
-      .camera-retake-btn {
-        display: none;
-
-        background: #f1f1f1;
-
-        color: #444;
-
-        border: 1px solid #ddd;
-      }
-
-      .camera-retake-btn.show {
-        display: inline-flex;
-      }
-
-      .camera-retake-btn:hover {
-        background: #e7e7e7;
-      }
-
-      .camera-use-btn {
-        display: none;
-
-        background: #075ca8;
-
-        color: #ffffff;
-      }
-
-      .camera-use-btn.show {
-        display: inline-flex;
-      }
-
-      .camera-use-btn:hover {
-        background: #063b73;
-      }
-
-      /* =========================================================
-   CAMERA CAPTURED PHOTO
-========================================================= */
-
-      .camera-captured-preview {
-        display: none;
-
-        width: 100%;
-
-        max-height: 300px;
-
-        object-fit: contain;
-
-        border-radius: 10px;
-
-        background: #111;
-
-        border: 1px solid #ddd;
-
-        margin-top: 15px;
-      }
-
-      .camera-captured-preview.show {
-        display: block;
-      }
-
-      /* =========================================================
-   CAMERA ERROR
-========================================================= */
-
-      .camera-error {
-        display: none;
-
-        margin-top: 10px;
-
-        padding: 10px 12px;
-
-        border-radius: 8px;
-
-        background: rgba(201, 33, 39, 0.08);
-
-        color: #c92127;
-
-        font-size: 11px;
-
-        line-height: 1.4;
-      }
-
-      .camera-error.show {
         display: block;
       }
 
@@ -1324,13 +1050,13 @@
           gap: 8px !important;
         }
 
-        .month-filter {
+        .date-range-filter {
           width: 100% !important;
 
           box-sizing: border-box !important;
         }
 
-        .month-filter input {
+        .date-range-filter input[type="date"] {
           width: 100% !important;
 
           box-sizing: border-box !important;
@@ -1361,7 +1087,7 @@
         }
 
         #attendanceTable {
-          min-width: 850px !important;
+          min-width: 1150px !important;
         }
 
         #attendanceTable th,
@@ -1381,22 +1107,6 @@
           padding: 20px;
 
           border-radius: 13px;
-        }
-
-        #attendanceCameraPreview {
-          height: 280px;
-        }
-
-        .camera-actions {
-          gap: 7px;
-        }
-
-        .camera-btn {
-          min-width: 105px;
-
-          padding: 9px 11px;
-
-          font-size: 11px;
         }
 
         .logout-modal {
@@ -1491,16 +1201,6 @@
 
         .attendance-section .topbar h1 {
           font-size: 19px !important;
-        }
-
-        #attendanceCameraPreview {
-          height: 240px;
-        }
-
-        .camera-btn {
-          min-width: 95px;
-
-          font-size: 10px;
         }
 
         .logout-modal-actions {
@@ -1733,10 +1433,27 @@
           <!-- ATTENDANCE TOOLS -->
 
           <div class="attendance-tools">
-            <div class="month-filter">
-              <i class="fa-solid fa-calendar-days"></i>
+            <!-- =================================================
+                     DATE RANGE FILTER
+                ================================================== -->
 
-              <input type="month" id="monthFilter" />
+            <div class="date-range-filter">
+              <i class="fa-solid fa-calendar-week"></i>
+
+              <input type="date" id="dateFromFilter" />
+
+              <span class="date-range-separator"> to </span>
+
+              <input type="date" id="dateToFilter" />
+
+              <button
+                type="button"
+                class="date-range-clear"
+                onclick="clearDateRangeFilter()"
+                title="Clear date range"
+              >
+                <i class="fa-solid fa-xmark"></i>
+              </button>
             </div>
 
             <!-- =================================================
@@ -1772,6 +1489,12 @@
 
                   <th>Time Out</th>
 
+                  <th>Encoded By</th>
+
+                  <th>Date Encoded</th>
+
+                  <th>Remarks</th>
+
                   <th>Status</th>
                 </tr>
               </thead>
@@ -1786,7 +1509,7 @@
     </main>
 
     <!-- =========================================================
-     ATTENDANCE PHOTO / CAMERA MODAL
+     ATTENDANCE VIEW MODAL (READ-ONLY - NO CAMERA CAPTURE)
 ========================================================= -->
 
     <div class="attendance-photo-modal" id="attendancePhotoModal">
@@ -1845,105 +1568,6 @@
         <!-- MESSAGE -->
 
         <div id="attendanceModalMessage" class="attendance-modal-message"></div>
-
-        <!-- =================================================
-             CAMERA AREA
-        ================================================== -->
-
-        <div id="attendanceUploadArea" class="attendance-upload-area">
-          <i class="fa-solid fa-camera"></i>
-
-          <p>Take your attendance photo.</p>
-
-          <p>
-            Your device camera will be used to capture your attendance photo.
-          </p>
-
-          <!-- CAMERA PREVIEW -->
-
-          <div id="cameraPreviewWrapper" class="camera-preview-wrapper">
-            <video id="attendanceCameraPreview" autoplay playsinline></video>
-
-            <canvas id="attendanceCameraCanvas"> </canvas>
-          </div>
-
-          <!-- CAMERA STATUS -->
-
-          <div id="cameraStatus" class="camera-status">
-            <i class="fa-solid fa-circle-info"></i>
-
-            Camera is ready.
-          </div>
-
-          <!-- CAMERA ERROR -->
-
-          <div id="cameraError" class="camera-error"></div>
-
-          <!-- CAPTURED PHOTO -->
-
-          <img
-            id="cameraCapturedPreview"
-            class="camera-captured-preview"
-            src=""
-            alt="Captured Attendance Photo"
-          />
-
-          <!-- CAMERA BUTTONS -->
-
-          <div class="camera-actions">
-            <!-- OPEN CAMERA -->
-
-            <button
-              type="button"
-              id="openCameraButton"
-              class="camera-btn camera-open-btn"
-              onclick="startAttendanceCamera()"
-            >
-              <i class="fa-solid fa-camera"></i>
-
-              Open Camera
-            </button>
-
-            <!-- CAPTURE -->
-
-            <button
-              type="button"
-              id="captureCameraButton"
-              class="camera-btn camera-capture-btn"
-              onclick="captureAttendancePhoto()"
-            >
-              <i class="fa-solid fa-camera"></i>
-
-              Capture Photo
-            </button>
-
-            <!-- RETAKE -->
-
-            <button
-              type="button"
-              id="retakeCameraButton"
-              class="camera-btn camera-retake-btn"
-              onclick="retakeAttendancePhoto()"
-            >
-              <i class="fa-solid fa-rotate-right"></i>
-
-              Retake
-            </button>
-
-            <!-- USE PHOTO -->
-
-            <button
-              type="button"
-              id="useCameraButton"
-              class="camera-btn camera-use-btn"
-              onclick="useCapturedAttendancePhoto()"
-            >
-              <i class="fa-solid fa-check"></i>
-
-              Use Photo
-            </button>
-          </div>
-        </div>
 
         <!-- ACTIONS -->
 
@@ -2038,6 +1662,8 @@
 
       /* =========================================================
    STORAGE
+   (READ-ONLY - this page never writes attendance records,
+   it only reads what has already been recorded elsewhere)
 ========================================================= */
 
       const ATTENDANCE_STORAGE_KEY = `ossp_attendance_${EMPLOYEE_ID}`;
@@ -2047,18 +1673,86 @@
       );
 
       /* =========================================================
+   DTR METADATA
+   (Encoded By / Date Encoded / Remarks)
+
+   NOTE: This view is READ-ONLY. It reads the same
+   metadata that the Admin panel writes to, but this
+   page never writes to it and provides no controls
+   to edit it.
+========================================================= */
+
+      const DTR_METADATA_KEY = `ossp_dtr_metadata_${EMPLOYEE_ID}`;
+
+      const defaultDtrMetadata = {
+        "2026-09-02": {
+          encodedBy: "Admin Jessica",
+
+          dateEncoded: "September 2, 2026",
+
+          remarks: "",
+
+          remarksOther: "",
+        },
+      };
+
+      let dtrMetadata = JSON.parse(
+        localStorage.getItem(DTR_METADATA_KEY) || "{}",
+      );
+
+      function getDtrMetadata(dateString) {
+        if (dtrMetadata[dateString]) {
+          return dtrMetadata[dateString];
+        }
+
+        if (defaultDtrMetadata[dateString]) {
+          return defaultDtrMetadata[dateString];
+        }
+
+        const hasAttendance = attendanceTypes.some(function (entryType) {
+          return !!getAttendanceRecord(dateString, entryType);
+        });
+
+        if (hasAttendance) {
+          return {
+            encodedBy: "Employee (Self-Recorded)",
+
+            dateEncoded: formatDate(dateString),
+
+            remarks: "",
+
+            remarksOther: "",
+          };
+        }
+
+        return {
+          encodedBy: "",
+
+          dateEncoded: "",
+
+          remarks: "",
+
+          remarksOther: "",
+        };
+      }
+
+      function getRemarksDisplayText(metadata) {
+        if (!metadata.remarks) {
+          return "";
+        }
+
+        if (metadata.remarks === "Others" && metadata.remarksOther) {
+          return "Others - " + metadata.remarksOther;
+        }
+
+        return metadata.remarks;
+      }
+
+      /* =========================================================
    ATTENDANCE TYPES
 ========================================================= */
 
       const attendanceTypes = ["Time In", "Break Out", "Break In", "Time Out"];
-
-      /* =========================================================
-   CAMERA VARIABLES
-========================================================= */
-
-      let attendanceCameraStream = null;
-
-      let capturedAttendancePhoto = null;
 
       /* =========================================================
    DATE FUNCTIONS
@@ -2108,27 +1802,9 @@
         return `${year}-${month}-${day}`;
       }
 
-      function getCurrentAttendanceTime() {
-        const now = new Date();
-
-        return now.toLocaleTimeString("en-US", {
-          hour: "numeric",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: true,
-        });
-      }
-
       /* =========================================================
    STORAGE FUNCTIONS
 ========================================================= */
-
-      function saveAttendanceStorage() {
-        localStorage.setItem(
-          ATTENDANCE_STORAGE_KEY,
-          JSON.stringify(attendanceRecords),
-        );
-      }
 
       function getAttendanceRecord(dateString, entryType) {
         if (!attendanceRecords[dateString]) {
@@ -2248,7 +1924,15 @@
 
           const attendance = getAttendanceRecord(dateString, entryType);
 
-          if (dateType === "past") {
+          if (dateType === "past" || dateType === "today") {
+            /*
+           This view is read-only: it only ever displays
+           a clickable button when there is an actual
+           recorded entry to look at (from the attendance
+           system or an uploaded DTR). There is no camera
+           capture on this page.
+        */
+
             if (attendance) {
               cell.innerHTML = createAttendanceButton(
                 dateString,
@@ -2265,7 +1949,7 @@
                 dtr.photo,
                 "DTR",
               );
-            } else {
+            } else if (dateType === "past") {
               cell.innerHTML = `
 
                         <span
@@ -2275,48 +1959,14 @@
                         </span>
 
                     `;
-            }
-          } else if (dateType === "today") {
-            if (attendance) {
-              cell.innerHTML = createAttendanceButton(
-                dateString,
-                entryType,
-                attendance.time,
-                attendance.photo,
-                "ATTENDANCE",
-              );
             } else {
               cell.innerHTML = `
 
-                        <button
-
-                            type="button"
-
-                            class="
-                                attendance-time-btn
-                                can-upload
-                                current-attendance
-                            "
-
-                            data-date="${dateString}"
-
-                            data-entry="${entryType}"
-
-                            data-source="ATTENDANCE"
-
+                        <span
+                            class="attendance-empty"
                         >
-
-                            <span
-                                class="attendance-time-value"
-                            >
-                                Take Photo
-                            </span>
-
-                            <i
-                                class="fa-solid fa-camera"
-                            ></i>
-
-                        </button>
+                            Not Recorded
+                        </span>
 
                     `;
             }
@@ -2334,6 +1984,39 @@
 
           row.appendChild(cell);
         });
+
+        /* =====================================================
+       ENCODED BY / DATE ENCODED / REMARKS
+       (READ-ONLY DISPLAY)
+    ===================================================== */
+
+        const metadata = getDtrMetadata(dateString);
+
+        const encodedByCell = document.createElement("td");
+
+        encodedByCell.innerHTML = metadata.encodedBy
+          ? `<span class="encoded-value">${metadata.encodedBy}</span>`
+          : `<span class="encoded-value empty">—</span>`;
+
+        row.appendChild(encodedByCell);
+
+        const dateEncodedCell = document.createElement("td");
+
+        dateEncodedCell.innerHTML = metadata.dateEncoded
+          ? `<span class="encoded-value">${metadata.dateEncoded}</span>`
+          : `<span class="encoded-value empty">—</span>`;
+
+        row.appendChild(dateEncodedCell);
+
+        const remarksCell = document.createElement("td");
+
+        const remarksText = getRemarksDisplayText(metadata);
+
+        remarksCell.innerHTML = remarksText
+          ? `<span class="encoded-value">${remarksText}</span>`
+          : `<span class="encoded-value empty">—</span>`;
+
+        row.appendChild(remarksCell);
 
         const statusCell = document.createElement("td");
 
@@ -2408,6 +2091,8 @@
         }
 
         attachAttendanceEvents();
+
+        applyAttendanceFilters();
       }
 
       /* =========================================================
@@ -2454,47 +2139,9 @@
         "attendanceModalMessage",
       );
 
-      const attendanceUploadArea = document.getElementById(
-        "attendanceUploadArea",
-      );
-
       const attendanceSourceText = document.getElementById(
         "attendanceSourceText",
       );
-
-      /* =========================================================
-   CAMERA ELEMENTS
-========================================================= */
-
-      const cameraPreviewWrapper = document.getElementById(
-        "cameraPreviewWrapper",
-      );
-
-      const attendanceCameraPreview = document.getElementById(
-        "attendanceCameraPreview",
-      );
-
-      const attendanceCameraCanvas = document.getElementById(
-        "attendanceCameraCanvas",
-      );
-
-      const cameraStatus = document.getElementById("cameraStatus");
-
-      const cameraError = document.getElementById("cameraError");
-
-      const cameraCapturedPreview = document.getElementById(
-        "cameraCapturedPreview",
-      );
-
-      const openCameraButton = document.getElementById("openCameraButton");
-
-      const captureCameraButton = document.getElementById(
-        "captureCameraButton",
-      );
-
-      const retakeCameraButton = document.getElementById("retakeCameraButton");
-
-      const useCameraButton = document.getElementById("useCameraButton");
 
       /* =========================================================
    SELECTED ATTENDANCE
@@ -2504,12 +2151,11 @@
 
       /* =========================================================
    OPEN ATTENDANCE RECORD
+   (READ-ONLY VIEW - NO CAMERA / NO CAPTURE)
 ========================================================= */
 
       function openAttendanceRecord(button) {
         selectedAttendanceButton = button;
-
-        capturedAttendancePhoto = null;
 
         const recordDate = button.dataset.date;
 
@@ -2523,13 +2169,9 @@
 
         const today = getTodayString();
 
-        resetCameraUI();
-
         attendancePhotoPreview.classList.remove("show");
 
         attendancePhotoPreview.src = "";
-
-        attendanceUploadArea.classList.remove("show");
 
         attendanceModalDate.textContent = formatDate(recordDate);
 
@@ -2574,12 +2216,6 @@
                 The attendance photo is stored
                 separately from the DTR.
 
-                <br><br>
-
-                Photo capture is no longer
-                available because this date
-                has already passed.
-
             `;
           } else {
             attendanceModalMessage.innerHTML = `
@@ -2597,12 +2233,6 @@
 
                 was recorded from the
                 uploaded DTR.
-
-                <br><br>
-
-                Photo capture is no longer
-                available because this date
-                has already passed.
 
             `;
           }
@@ -2632,11 +2262,6 @@
             This attendance date has not
             arrived yet.
 
-            <br><br>
-
-            Camera access will become available
-            on the actual attendance date.
-
         `;
 
           attendanceModal.classList.add("show");
@@ -2648,7 +2273,7 @@
        TODAY
     ===================================================== */
 
-        attendanceModalTitle.textContent = entryType;
+        attendanceModalTitle.textContent = entryType || "Attendance Record";
 
         attendanceModalTimeLabel.textContent = "Attendance Time:";
 
@@ -2695,331 +2320,13 @@
 
             <br><br>
 
-            Open your device camera to record
-            your attendance.
-
-            <br><br>
-
-            The actual camera capture time will
-            become your attendance time.
+            This is a view-only screen, so
+            attendance cannot be recorded from here.
 
         `;
-
-          attendanceUploadArea.classList.add("show");
         }
 
         attendanceModal.classList.add("show");
-      }
-
-      /* =========================================================
-   START CAMERA
-========================================================= */
-
-      async function startAttendanceCamera() {
-        clearCameraError();
-
-        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-          showCameraError(
-            "Camera access is not supported by this browser or device.",
-          );
-
-          return;
-        }
-
-        stopAttendanceCamera();
-
-        try {
-          attendanceCameraStream = await navigator.mediaDevices.getUserMedia({
-            video: {
-              facingMode: {
-                ideal: "user",
-              },
-
-              width: {
-                ideal: 1280,
-              },
-
-              height: {
-                ideal: 720,
-              },
-            },
-
-            audio: false,
-          });
-
-          attendanceCameraPreview.srcObject = attendanceCameraStream;
-
-          cameraPreviewWrapper.classList.add("show");
-
-          cameraStatus.innerHTML = `
-
-            <i class="fa-solid fa-circle-check"></i>
-
-            Camera is ready.
-            Position your face inside the camera
-            and click <strong>Capture Photo</strong>.
-
-        `;
-
-          cameraStatus.classList.add("show");
-
-          openCameraButton.style.display = "none";
-
-          captureCameraButton.classList.add("show");
-
-          retakeCameraButton.classList.remove("show");
-
-          useCameraButton.classList.remove("show");
-        } catch (error) {
-          console.error("Camera error:", error);
-
-          let message = "Unable to access the camera.";
-
-          if (error.name === "NotAllowedError") {
-            message =
-              "Camera permission was denied. Please allow camera access in your browser settings and try again.";
-          } else if (error.name === "NotFoundError") {
-            message = "No camera was found on this device.";
-          } else if (error.name === "NotReadableError") {
-            message =
-              "The camera is already being used by another application.";
-          } else if (error.name === "SecurityError") {
-            message =
-              "Camera access requires a secure connection such as HTTPS or localhost.";
-          }
-
-          showCameraError(message);
-        }
-      }
-
-      /* =========================================================
-   CAPTURE ATTENDANCE PHOTO
-========================================================= */
-
-      function captureAttendancePhoto() {
-        if (!attendanceCameraStream) {
-          showCameraError("Please open the camera first.");
-
-          return;
-        }
-
-        const video = attendanceCameraPreview;
-
-        if (!video.videoWidth || !video.videoHeight) {
-          showCameraError(
-            "The camera is not ready yet. Please wait a moment and try again.",
-          );
-
-          return;
-        }
-
-        const canvas = attendanceCameraCanvas;
-
-        canvas.width = video.videoWidth;
-
-        canvas.height = video.videoHeight;
-
-        const context = canvas.getContext("2d");
-
-        /*
-       Mirror the captured image so it matches
-       the front-camera preview.
-    */
-
-        context.save();
-
-        context.translate(canvas.width, 0);
-
-        context.scale(-1, 1);
-
-        context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-        context.restore();
-
-        capturedAttendancePhoto = canvas.toDataURL("image/jpeg", 0.9);
-
-        cameraCapturedPreview.src = capturedAttendancePhoto;
-
-        cameraCapturedPreview.classList.add("show");
-
-        stopAttendanceCamera();
-
-        cameraPreviewWrapper.classList.remove("show");
-
-        cameraStatus.innerHTML = `
-
-        <i class="fa-solid fa-circle-check"></i>
-
-        Photo captured successfully.
-        You can retake the photo or use this photo.
-
-    `;
-
-        cameraStatus.classList.add("show");
-
-        captureCameraButton.classList.remove("show");
-
-        openCameraButton.style.display = "none";
-
-        retakeCameraButton.classList.add("show");
-
-        useCameraButton.classList.add("show");
-      }
-
-      /* =========================================================
-   RETAKE PHOTO
-========================================================= */
-
-      function retakeAttendancePhoto() {
-        capturedAttendancePhoto = null;
-
-        cameraCapturedPreview.src = "";
-
-        cameraCapturedPreview.classList.remove("show");
-
-        retakeCameraButton.classList.remove("show");
-
-        useCameraButton.classList.remove("show");
-
-        startAttendanceCamera();
-      }
-
-      /* =========================================================
-   USE CAPTURED PHOTO
-========================================================= */
-
-      function useCapturedAttendancePhoto() {
-        if (!capturedAttendancePhoto) {
-          return;
-        }
-
-        saveAttendancePhoto(capturedAttendancePhoto);
-      }
-
-      /* =========================================================
-   SAVE ATTENDANCE PHOTO
-========================================================= */
-
-      function saveAttendancePhoto(photoData) {
-        if (!selectedAttendanceButton || !photoData) {
-          return;
-        }
-
-        const recordDate = selectedAttendanceButton.dataset.date;
-
-        const today = getTodayString();
-
-        if (recordDate !== today) {
-          alert("Attendance photo capture is only available for today's date.");
-
-          return;
-        }
-
-        const entryType = selectedAttendanceButton.dataset.entry;
-
-        const actualUploadTime = getCurrentAttendanceTime();
-
-        if (!attendanceRecords[recordDate]) {
-          attendanceRecords[recordDate] = {};
-        }
-
-        attendanceRecords[recordDate][entryType] = {
-          time: actualUploadTime,
-
-          photo: photoData,
-        };
-
-        saveAttendanceStorage();
-
-        stopAttendanceCamera();
-
-        closeAttendanceModal();
-
-        generateAttendanceTable();
-      }
-
-      /* =========================================================
-   STOP CAMERA
-========================================================= */
-
-      function stopAttendanceCamera() {
-        if (attendanceCameraStream) {
-          attendanceCameraStream.getTracks().forEach(function (track) {
-            track.stop();
-          });
-
-          attendanceCameraStream = null;
-        }
-
-        if (attendanceCameraPreview) {
-          attendanceCameraPreview.srcObject = null;
-        }
-      }
-
-      /* =========================================================
-   RESET CAMERA UI
-========================================================= */
-
-      function resetCameraUI() {
-        stopAttendanceCamera();
-
-        capturedAttendancePhoto = null;
-
-        if (cameraPreviewWrapper) {
-          cameraPreviewWrapper.classList.remove("show");
-        }
-
-        if (cameraCapturedPreview) {
-          cameraCapturedPreview.src = "";
-
-          cameraCapturedPreview.classList.remove("show");
-        }
-
-        if (cameraStatus) {
-          cameraStatus.innerHTML = "";
-
-          cameraStatus.classList.remove("show");
-        }
-
-        clearCameraError();
-
-        if (openCameraButton) {
-          openCameraButton.style.display = "inline-flex";
-        }
-
-        if (captureCameraButton) {
-          captureCameraButton.classList.remove("show");
-        }
-
-        if (retakeCameraButton) {
-          retakeCameraButton.classList.remove("show");
-        }
-
-        if (useCameraButton) {
-          useCameraButton.classList.remove("show");
-        }
-      }
-
-      /* =========================================================
-   CAMERA ERROR
-========================================================= */
-
-      function showCameraError(message) {
-        cameraError.innerHTML = `
-
-        <i class="fa-solid fa-triangle-exclamation"></i>
-
-        ${message}
-
-    `;
-
-        cameraError.classList.add("show");
-      }
-
-      function clearCameraError() {
-        cameraError.innerHTML = "";
-
-        cameraError.classList.remove("show");
       }
 
       /* =========================================================
@@ -3027,15 +2334,9 @@
 ========================================================= */
 
       function closeAttendanceModal() {
-        stopAttendanceCamera();
-
-        resetCameraUI();
-
         attendanceModal.classList.remove("show");
 
         selectedAttendanceButton = null;
-
-        capturedAttendancePhoto = null;
       }
 
       /* =========================================================
@@ -3061,29 +2362,52 @@
       });
 
       /* =========================================================
-   MONTH FILTER
+   ATTENDANCE FILTERS
+   (DATE RANGE FILTER)
 ========================================================= */
 
+      function applyAttendanceFilters() {
+        const fromDate = document.getElementById("dateFromFilter").value;
+
+        const toDate = document.getElementById("dateToFilter").value;
+
+        const rows = document.querySelectorAll("#attendanceTable tbody tr");
+
+        rows.forEach(function (row) {
+          const recordDate = row.dataset.attendanceDate;
+
+          let visible = true;
+
+          if (fromDate && recordDate < fromDate) {
+            visible = false;
+          }
+
+          if (toDate && recordDate > toDate) {
+            visible = false;
+          }
+
+          row.style.display = visible ? "" : "none";
+        });
+      }
+
+      function clearDateRangeFilter() {
+        document.getElementById("dateFromFilter").value = "";
+
+        document.getElementById("dateToFilter").value = "";
+
+        applyAttendanceFilters();
+      }
+
       document
-        .getElementById("monthFilter")
+        .getElementById("dateFromFilter")
         .addEventListener("change", function () {
-          const selectedMonth = this.value;
+          applyAttendanceFilters();
+        });
 
-          const rows = document.querySelectorAll("#attendanceTable tbody tr");
-
-          rows.forEach(function (row) {
-            const recordDate = row.dataset.attendanceDate;
-
-            if (!selectedMonth) {
-              row.style.display = "";
-
-              return;
-            }
-
-            const recordMonth = recordDate.substring(0, 7);
-
-            row.style.display = recordMonth === selectedMonth ? "" : "none";
-          });
+      document
+        .getElementById("dateToFilter")
+        .addEventListener("change", function () {
+          applyAttendanceFilters();
         });
 
       /* =========================================================
@@ -3091,7 +2415,9 @@
 ========================================================= */
 
       function exportDTR() {
-        const selectedMonth = document.getElementById("monthFilter").value;
+        const fromDate = document.getElementById("dateFromFilter").value;
+
+        const toDate = document.getElementById("dateToFilter").value;
 
         const rows = document.querySelectorAll("#attendanceTable tbody tr");
 
@@ -3101,7 +2427,8 @@
        CSV HEADER
     */
 
-        csv += "Employee,Date,Time In,Break Out,Break In,Time Out,Status\n";
+        csv +=
+          "Employee,Date,Time In,Break Out,Break In,Time Out,Encoded By,Date Encoded,Remarks,Status\n";
 
         let exportedRows = 0;
 
@@ -3112,7 +2439,7 @@
 
           const cells = row.querySelectorAll("td");
 
-          if (cells.length < 7) {
+          if (cells.length < 10) {
             return;
           }
 
@@ -3128,7 +2455,13 @@
 
           const timeOut = cells[5].innerText.trim();
 
-          const status = cells[6].innerText.trim();
+          const encodedBy = cells[6].innerText.trim();
+
+          const dateEncoded = cells[7].innerText.trim();
+
+          const remarks = cells[8].innerText.trim();
+
+          const status = cells[9].innerText.trim();
 
           function escapeCSV(value) {
             return `"${String(value).replace(/"/g, '""')}"`;
@@ -3146,6 +2479,12 @@
             escapeCSV(breakIn),
 
             escapeCSV(timeOut),
+
+            escapeCSV(encodedBy),
+
+            escapeCSV(dateEncoded),
+
+            escapeCSV(remarks),
 
             escapeCSV(status),
           ].join(",");
@@ -3179,11 +2518,13 @@
        FILE NAME
     */
 
-        const monthName = selectedMonth
-          ? selectedMonth.replace("-", "_")
-          : "All_Records";
+        let fileLabel = "All_Records";
 
-        link.download = `${EMPLOYEE_ID}_DTR_${monthName}.csv`;
+        if (fromDate || toDate) {
+          fileLabel = (fromDate || "start") + "_to_" + (toDate || "end");
+        }
+
+        link.download = `${EMPLOYEE_ID}_DTR_${fileLabel}.csv`;
 
         document.body.appendChild(link);
 
@@ -3259,14 +2600,6 @@
             closeLogoutModal();
           }
         });
-
-      /* =========================================================
-   CLEAN UP CAMERA WHEN LEAVING PAGE
-========================================================= */
-
-      window.addEventListener("beforeunload", function () {
-        stopAttendanceCamera();
-      });
 
       /* =========================================================
    GENERATE INITIAL TABLE
