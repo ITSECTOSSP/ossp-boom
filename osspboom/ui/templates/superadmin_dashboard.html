@@ -348,6 +348,357 @@
         }
       }
     </style>
+
+    <!-- =========================================================
+     REPORT CONTAINER CSS
+========================================================= -->
+    <style id="report-container-styles">
+      .report-container {
+        position: relative;
+        /* FIX: was z-index: 1, same level as .admin-dashboard::after
+           (the blue/red gradient overlay). Since ::after paints last
+           among same-z-index siblings, it was rendering on top of this
+           card and tinting/washing it out — unlike .employee-table-container
+           below, which keeps the default z-index: 2 from
+           ".admin-dashboard > *" and so sits cleanly above the overlay. */
+        z-index: 2;
+
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+
+        padding: 16px;
+
+        margin: 0 0 18px;
+
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+      }
+
+      .report-container-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        margin: 0 0 12px;
+      }
+
+      .report-container-header h2 {
+        margin: 0;
+        font-size: 16px;
+        color: #1f2937;
+      }
+
+      .report-container-header h2 i {
+        color: #075ca8;
+        margin-right: 8px;
+      }
+
+      .report-updated {
+        font-size: 11px;
+        color: #8a94a3;
+      }
+
+      .report-summary {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+
+        margin: 0 0 16px;
+      }
+
+      .report-card {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        padding: 14px 16px;
+
+        border-radius: 10px;
+
+        background: #f7f9fc;
+        border: 1px solid #e9edf3;
+
+        cursor: pointer;
+        user-select: none;
+
+        transition:
+          background 0.15s ease,
+          border-color 0.15s ease,
+          transform 0.15s ease,
+          box-shadow 0.15s ease;
+      }
+
+      .report-card:hover {
+        background: #eef3fa;
+        border-color: #d7e2ee;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 10px rgba(7, 92, 168, 0.1);
+      }
+
+      .report-card:focus-visible {
+        outline: 2px solid #075ca8;
+        outline-offset: 2px;
+      }
+
+      .report-card:active {
+        transform: translateY(0);
+      }
+
+      .report-card.active {
+        background: #eaf3fb;
+        border-color: #075ca8;
+        box-shadow: 0 0 0 1px #075ca8 inset;
+      }
+
+      .report-card i {
+        width: 42px;
+        height: 42px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 50%;
+
+        font-size: 17px;
+
+        color: #ffffff;
+
+        flex-shrink: 0;
+      }
+
+      .report-card.present i {
+        background: #1f9d55;
+      }
+
+      .report-card.leave i {
+        background: #c92127;
+      }
+
+      .report-card.total i {
+        background: #075ca8;
+      }
+
+      .report-card-info {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .report-card-value {
+        font-size: 22px;
+        font-weight: 700;
+        color: #1f2937;
+        line-height: 1.1;
+      }
+
+      .report-card-label {
+        font-size: 12px;
+        color: #6b7280;
+      }
+
+      /* =========================================================
+   ATTENDANCE DETAIL PANEL
+   Shown when a report card (Present / On Leave / Total) is clicked.
+========================================================= */
+
+      .report-detail-panel {
+        max-height: 0;
+        overflow: hidden;
+
+        margin: 0 0 0;
+
+        border: 1px solid transparent;
+        border-radius: 10px;
+
+        background: #f7f9fc;
+
+        opacity: 0;
+
+        transition:
+          max-height 0.25s ease,
+          opacity 0.2s ease,
+          margin 0.25s ease,
+          border-color 0.2s ease;
+      }
+
+      .report-detail-panel.open {
+        max-height: 320px;
+
+        margin: 0 0 16px;
+
+        border-color: #e9edf3;
+
+        opacity: 1;
+      }
+
+      .report-detail-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 12px;
+
+        padding: 10px 14px;
+
+        border-bottom: 1px solid #e9edf3;
+
+        position: sticky;
+        top: 0;
+
+        background: #f7f9fc;
+      }
+
+      .report-detail-header h3 {
+        margin: 0;
+        font-size: 13px;
+        font-weight: 700;
+        color: #1f2937;
+      }
+
+      .report-detail-close {
+        width: 26px;
+        height: 26px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border: none;
+        border-radius: 50%;
+
+        background: transparent;
+        color: #6b7280;
+
+        cursor: pointer;
+
+        transition:
+          background 0.15s ease,
+          color 0.15s ease;
+      }
+
+      .report-detail-close:hover {
+        background: #e5e9f0;
+        color: #1f2937;
+      }
+
+      .report-detail-list {
+        list-style: none;
+
+        margin: 0;
+        padding: 6px;
+
+        max-height: 270px;
+        overflow-y: auto;
+      }
+
+      .report-detail-list li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        gap: 10px;
+
+        padding: 9px 10px;
+
+        border-radius: 7px;
+
+        font-size: 13px;
+        color: #1f2937;
+      }
+
+      .report-detail-list li:hover {
+        background: #eef3fa;
+      }
+
+      .report-detail-name {
+        font-weight: 600;
+      }
+
+      .report-detail-meta {
+        flex-shrink: 0;
+
+        font-size: 11px;
+        color: #8a94a3;
+
+        white-space: nowrap;
+      }
+
+      .report-detail-empty {
+        justify-content: center !important;
+
+        color: #9aa3b1;
+        font-size: 13px;
+      }
+
+      .report-division-table-wrapper {
+        overflow-x: auto;
+
+        border: 1px solid #e9edf3;
+        border-radius: 8px;
+      }
+
+      table.report-division-table {
+        width: 100%;
+        border-collapse: collapse;
+
+        font-size: 13px;
+      }
+
+      table.report-division-table thead th {
+        background: #075ca8;
+        color: #ffffff;
+
+        text-align: left;
+
+        padding: 10px 12px;
+
+        white-space: nowrap;
+      }
+
+      table.report-division-table thead th:not(:first-child) {
+        text-align: center;
+      }
+
+      table.report-division-table tbody td {
+        padding: 9px 12px;
+
+        border-bottom: 1px solid #eef2f6;
+
+        white-space: nowrap;
+      }
+
+      table.report-division-table tbody td:not(:first-child) {
+        text-align: center;
+      }
+
+      table.report-division-table tbody tr:last-child td {
+        border-bottom: 0;
+      }
+
+      table.report-division-table tbody tr:hover {
+        background: #f7f9fc;
+      }
+
+      .report-empty-row td {
+        text-align: center !important;
+        color: #9aa3b1;
+        padding: 14px;
+      }
+
+      @media screen and (max-width: 700px) {
+        .report-summary {
+          grid-template-columns: 1fr;
+        }
+
+        .report-detail-panel.open {
+          max-height: 260px;
+        }
+
+        .report-detail-list {
+          max-height: 210px;
+        }
+      }
+    </style>
   </head>
 
   <body>
@@ -449,6 +800,113 @@
       </div>
 
       <!-- =========================================================
+         ATTENDANCE REPORT CONTAINER
+    ========================================================= -->
+
+      <div class="report-container" id="attendanceReportContainer">
+        <div class="report-container-header">
+          <h2><i class="fa-solid fa-chart-column"></i>Attendance Report</h2>
+          <span class="report-updated" id="reportUpdatedLabel"></span>
+        </div>
+
+        <!-- OVERALL SUMMARY -->
+        <div class="report-summary">
+          <div
+            class="report-card present"
+            data-filter="present"
+            role="button"
+            tabindex="0"
+            aria-pressed="false"
+            title="Show present employees"
+            onclick="toggleAttendanceDetail('present')"
+            onkeydown="handleReportCardKeydown(event, 'present')"
+          >
+            <i class="fa-solid fa-circle-check"></i>
+            <div class="report-card-info">
+              <span class="report-card-value" id="reportTotalPresent">0</span>
+              <span class="report-card-label">Present</span>
+            </div>
+          </div>
+
+          <div
+            class="report-card leave"
+            data-filter="leave"
+            role="button"
+            tabindex="0"
+            aria-pressed="false"
+            title="Show employees on leave"
+            onclick="toggleAttendanceDetail('leave')"
+            onkeydown="handleReportCardKeydown(event, 'leave')"
+          >
+            <i class="fa-solid fa-person-walking-arrow-right"></i>
+            <div class="report-card-info">
+              <span class="report-card-value" id="reportTotalLeave">0</span>
+              <span class="report-card-label">On Leave</span>
+            </div>
+          </div>
+
+          <div
+            class="report-card total"
+            data-filter="total"
+            role="button"
+            tabindex="0"
+            aria-pressed="false"
+            title="Show all employees"
+            onclick="toggleAttendanceDetail('total')"
+            onkeydown="handleReportCardKeydown(event, 'total')"
+          >
+            <i class="fa-solid fa-users"></i>
+            <div class="report-card-info">
+              <span class="report-card-value" id="reportTotalEmployees">0</span>
+              <span class="report-card-label">Total Employees</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- =================================================
+             ATTENDANCE DETAIL PANEL
+             Populated by toggleAttendanceDetail() in the script
+             below. Hidden until a report card is clicked.
+        ================================================== -->
+        <div class="report-detail-panel" id="reportDetailPanel" hidden>
+          <div class="report-detail-header">
+            <h3 id="reportDetailTitle">Employees</h3>
+
+            <button
+              type="button"
+              class="report-detail-close"
+              onclick="closeAttendanceDetail()"
+              aria-label="Close employee list"
+            >
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+
+          <ul class="report-detail-list" id="reportDetailList"></ul>
+        </div>
+
+        <!-- PER DIVISION BREAKDOWN -->
+        <div class="report-division-table-wrapper">
+          <table class="report-division-table" id="reportDivisionTable">
+            <thead>
+              <tr>
+                <th>Division / Section</th>
+                <th>Present</th>
+                <th>On Leave</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+
+            <tbody id="reportDivisionTableBody">
+              <tr class="report-empty-row">
+                <td colspan="4">No data available.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- =========================================================
          EMPLOYEE TABLE
     ========================================================= -->
 
@@ -492,7 +950,9 @@
 
                     <button
                       type="button"
-                      onclick="filterDivision('ADMINISTRATIVE DIVISION')"
+                      onclick="
+                        filterDivision('ADMINISTRATIVE DIVISION')
+                      "
                     >
                       Administrative Division
                     </button>
@@ -615,7 +1075,7 @@
           <tbody>
             <!-- EMPLOYEE 001 -->
 
-            <tr>
+            <tr data-status="Present">
               <td>OSSP-001</td>
               <td>Angelo</td>
               <td>Aquino</td>
@@ -624,49 +1084,21 @@
               <td>Executive Assistant</td>
 
               <td class="action-column">
-                <div class="action-dropdown">
-                  <button
-                    type="button"
-                    class="action-btn"
-                    onclick="toggleActionMenu(this)"
-                    title="Employee Actions"
-                  >
-                    <i class="fa-solid fa-ellipsis"></i>
-                  </button>
-
-                  <div class="action-menu">
-                    <button
-                      type="button"
-                      onclick="window.location.href='{% url 'superadmin_view_details' %}'"
-                    >
-                      <i class="fa-solid fa-eye"></i>
-
-                      <span> View Details </span>
-                    </button>
-
-                    <button type="button" onclick="editEmployee('OSSP-001')">
-                      <i class="fa-solid fa-pen"></i>
-
-                      <span> Edit </span>
-                    </button>
-
-                    <button
-                      type="button"
-                      class="delete-action"
-                      onclick="deleteEmployee('OSSP-001')"
-                    >
-                      <i class="fa-solid fa-trash"></i>
-
-                      <span> Delete </span>
-                    </button>
-                  </div>
-                </div>
+                <button
+                  type="button"
+                  class="view-only-btn"
+                  onclick="window.location.href='{% url 'superadmin_view_details' %}'"
+                  title="View Details"
+                >
+                  <i class="fa-solid fa-eye"></i>
+                  <span>View</span>
+                </button>
               </td>
             </tr>
 
             <!-- EMPLOYEE 002 -->
 
-            <tr>
+            <tr data-status="Present">
               <td>OSSP-002</td>
               <td>Jessica</td>
               <td>Balindan</td>
@@ -675,42 +1107,21 @@
               <td>COS</td>
 
               <td class="action-column">
-                <div class="action-dropdown">
-                  <button
-                    type="button"
-                    class="action-btn"
-                    onclick="toggleActionMenu(this)"
-                  >
-                    <i class="fa-solid fa-ellipsis"></i>
-                  </button>
-
-                  <div class="action-menu">
-                    <button type="button" onclick="viewEmployee('OSSP-002')">
-                      <i class="fa-solid fa-eye"></i>
-                      <span>View Details</span>
-                    </button>
-
-                    <button type="button" onclick="editEmployee('OSSP-002')">
-                      <i class="fa-solid fa-pen"></i>
-                      <span>Edit</span>
-                    </button>
-
-                    <button
-                      type="button"
-                      class="delete-action"
-                      onclick="deleteEmployee('OSSP-002')"
-                    >
-                      <i class="fa-solid fa-trash"></i>
-                      <span>Delete</span>
-                    </button>
-                  </div>
-                </div>
+                <button
+                  type="button"
+                  class="view-only-btn"
+                  onclick="viewEmployee('OSSP-002')"
+                  title="View Details"
+                >
+                  <i class="fa-solid fa-eye"></i>
+                  <span>View</span>
+                </button>
               </td>
             </tr>
 
             <!-- EMPLOYEE 003 -->
 
-            <tr>
+            <tr data-status="Leave">
               <td>OSSP-003</td>
               <td>Rowell</td>
               <td>Agripa</td>
@@ -719,42 +1130,21 @@
               <td>Office Aide</td>
 
               <td class="action-column">
-                <div class="action-dropdown">
-                  <button
-                    type="button"
-                    class="action-btn"
-                    onclick="toggleActionMenu(this)"
-                  >
-                    <i class="fa-solid fa-ellipsis"></i>
-                  </button>
-
-                  <div class="action-menu">
-                    <button type="button" onclick="viewEmployee('OSSP-003')">
-                      <i class="fa-solid fa-eye"></i>
-                      <span>View Details</span>
-                    </button>
-
-                    <button type="button" onclick="editEmployee('OSSP-003')">
-                      <i class="fa-solid fa-pen"></i>
-                      <span>Edit</span>
-                    </button>
-
-                    <button
-                      type="button"
-                      class="delete-action"
-                      onclick="deleteEmployee('OSSP-003')"
-                    >
-                      <i class="fa-solid fa-trash"></i>
-                      <span>Delete</span>
-                    </button>
-                  </div>
-                </div>
+                <button
+                  type="button"
+                  class="view-only-btn"
+                  onclick="viewEmployee('OSSP-003')"
+                  title="View Details"
+                >
+                  <i class="fa-solid fa-eye"></i>
+                  <span>View</span>
+                </button>
               </td>
             </tr>
 
             <!-- EMPLOYEE 004 -->
 
-            <tr>
+            <tr data-status="Present">
               <td>OSSP-004</td>
               <td>María</td>
               <td>N/A</td>
@@ -763,42 +1153,21 @@
               <td>Administrative Officer</td>
 
               <td class="action-column">
-                <div class="action-dropdown">
-                  <button
-                    type="button"
-                    class="action-btn"
-                    onclick="toggleActionMenu(this)"
-                  >
-                    <i class="fa-solid fa-ellipsis"></i>
-                  </button>
-
-                  <div class="action-menu">
-                    <button type="button" onclick="viewEmployee('OSSP-004')">
-                      <i class="fa-solid fa-eye"></i>
-                      <span>View Details</span>
-                    </button>
-
-                    <button type="button" onclick="editEmployee('OSSP-004')">
-                      <i class="fa-solid fa-pen"></i>
-                      <span>Edit</span>
-                    </button>
-
-                    <button
-                      type="button"
-                      class="delete-action"
-                      onclick="deleteEmployee('OSSP-004')"
-                    >
-                      <i class="fa-solid fa-trash"></i>
-                      <span>Delete</span>
-                    </button>
-                  </div>
-                </div>
+                <button
+                  type="button"
+                  class="view-only-btn"
+                  onclick="viewEmployee('OSSP-004')"
+                  title="View Details"
+                >
+                  <i class="fa-solid fa-eye"></i>
+                  <span>View</span>
+                </button>
               </td>
             </tr>
 
             <!-- EMPLOYEE 005 -->
 
-            <tr>
+            <tr data-status="Present">
               <td>OSSP-005</td>
               <td>Daniel</td>
               <td>N/A</td>
@@ -807,42 +1176,21 @@
               <td>Records Officer</td>
 
               <td class="action-column">
-                <div class="action-dropdown">
-                  <button
-                    type="button"
-                    class="action-btn"
-                    onclick="toggleActionMenu(this)"
-                  >
-                    <i class="fa-solid fa-ellipsis"></i>
-                  </button>
-
-                  <div class="action-menu">
-                    <button type="button" onclick="viewEmployee('OSSP-005')">
-                      <i class="fa-solid fa-eye"></i>
-                      <span>View Details</span>
-                    </button>
-
-                    <button type="button" onclick="editEmployee('OSSP-005')">
-                      <i class="fa-solid fa-pen"></i>
-                      <span>Edit</span>
-                    </button>
-
-                    <button
-                      type="button"
-                      class="delete-action"
-                      onclick="deleteEmployee('OSSP-005')"
-                    >
-                      <i class="fa-solid fa-trash"></i>
-                      <span>Delete</span>
-                    </button>
-                  </div>
-                </div>
+                <button
+                  type="button"
+                  class="view-only-btn"
+                  onclick="viewEmployee('OSSP-005')"
+                  title="View Details"
+                >
+                  <i class="fa-solid fa-eye"></i>
+                  <span>View</span>
+                </button>
               </td>
             </tr>
 
             <!-- EMPLOYEE 006 -->
 
-            <tr>
+            <tr data-status="Leave">
               <td>OSSP-006</td>
               <td>Patricia</td>
               <td>N/A</td>
@@ -851,42 +1199,21 @@
               <td>Administrative Assistant</td>
 
               <td class="action-column">
-                <div class="action-dropdown">
-                  <button
-                    type="button"
-                    class="action-btn"
-                    onclick="toggleActionMenu(this)"
-                  >
-                    <i class="fa-solid fa-ellipsis"></i>
-                  </button>
-
-                  <div class="action-menu">
-                    <button type="button" onclick="viewEmployee('OSSP-006')">
-                      <i class="fa-solid fa-eye"></i>
-                      <span>View Details</span>
-                    </button>
-
-                    <button type="button" onclick="editEmployee('OSSP-006')">
-                      <i class="fa-solid fa-pen"></i>
-                      <span>Edit</span>
-                    </button>
-
-                    <button
-                      type="button"
-                      class="delete-action"
-                      onclick="deleteEmployee('OSSP-006')"
-                    >
-                      <i class="fa-solid fa-trash"></i>
-                      <span>Delete</span>
-                    </button>
-                  </div>
-                </div>
+                <button
+                  type="button"
+                  class="view-only-btn"
+                  onclick="viewEmployee('OSSP-006')"
+                  title="View Details"
+                >
+                  <i class="fa-solid fa-eye"></i>
+                  <span>View</span>
+                </button>
               </td>
             </tr>
 
             <!-- EMPLOYEE 007 -->
 
-            <tr>
+            <tr data-status="Present">
               <td>OSSP-007</td>
               <td>Carlo</td>
               <td>N/A</td>
@@ -895,42 +1222,21 @@
               <td>Legislative Staff</td>
 
               <td class="action-column">
-                <div class="action-dropdown">
-                  <button
-                    type="button"
-                    class="action-btn"
-                    onclick="toggleActionMenu(this)"
-                  >
-                    <i class="fa-solid fa-ellipsis"></i>
-                  </button>
-
-                  <div class="action-menu">
-                    <button type="button" onclick="viewEmployee('OSSP-007')">
-                      <i class="fa-solid fa-eye"></i>
-                      <span>View Details</span>
-                    </button>
-
-                    <button type="button" onclick="editEmployee('OSSP-007')">
-                      <i class="fa-solid fa-pen"></i>
-                      <span>Edit</span>
-                    </button>
-
-                    <button
-                      type="button"
-                      class="delete-action"
-                      onclick="deleteEmployee('OSSP-007')"
-                    >
-                      <i class="fa-solid fa-trash"></i>
-                      <span>Delete</span>
-                    </button>
-                  </div>
-                </div>
+                <button
+                  type="button"
+                  class="view-only-btn"
+                  onclick="viewEmployee('OSSP-007')"
+                  title="View Details"
+                >
+                  <i class="fa-solid fa-eye"></i>
+                  <span>View</span>
+                </button>
               </td>
             </tr>
 
             <!-- EMPLOYEE 008 -->
 
-            <tr>
+            <tr data-status="Present">
               <td>OSSP-008</td>
               <td>Sophia</td>
               <td>N/A</td>
@@ -939,42 +1245,21 @@
               <td>Records Officer</td>
 
               <td class="action-column">
-                <div class="action-dropdown">
-                  <button
-                    type="button"
-                    class="action-btn"
-                    onclick="toggleActionMenu(this)"
-                  >
-                    <i class="fa-solid fa-ellipsis"></i>
-                  </button>
-
-                  <div class="action-menu">
-                    <button type="button" onclick="viewEmployee('OSSP-008')">
-                      <i class="fa-solid fa-eye"></i>
-                      <span>View Details</span>
-                    </button>
-
-                    <button type="button" onclick="editEmployee('OSSP-008')">
-                      <i class="fa-solid fa-pen"></i>
-                      <span>Edit</span>
-                    </button>
-
-                    <button
-                      type="button"
-                      class="delete-action"
-                      onclick="deleteEmployee('OSSP-008')"
-                    >
-                      <i class="fa-solid fa-trash"></i>
-                      <span>Delete</span>
-                    </button>
-                  </div>
-                </div>
+                <button
+                  type="button"
+                  class="view-only-btn"
+                  onclick="viewEmployee('OSSP-008')"
+                  title="View Details"
+                >
+                  <i class="fa-solid fa-eye"></i>
+                  <span>View</span>
+                </button>
               </td>
             </tr>
 
             <!-- EMPLOYEE 009 -->
 
-            <tr>
+            <tr data-status="Leave">
               <td>OSSP-009</td>
               <td>Gabriel</td>
               <td>N/A</td>
@@ -983,42 +1268,21 @@
               <td>Administrative Officer</td>
 
               <td class="action-column">
-                <div class="action-dropdown">
-                  <button
-                    type="button"
-                    class="action-btn"
-                    onclick="toggleActionMenu(this)"
-                  >
-                    <i class="fa-solid fa-ellipsis"></i>
-                  </button>
-
-                  <div class="action-menu">
-                    <button type="button" onclick="viewEmployee('OSSP-009')">
-                      <i class="fa-solid fa-eye"></i>
-                      <span>View Details</span>
-                    </button>
-
-                    <button type="button" onclick="editEmployee('OSSP-009')">
-                      <i class="fa-solid fa-pen"></i>
-                      <span>Edit</span>
-                    </button>
-
-                    <button
-                      type="button"
-                      class="delete-action"
-                      onclick="deleteEmployee('OSSP-009')"
-                    >
-                      <i class="fa-solid fa-trash"></i>
-                      <span>Delete</span>
-                    </button>
-                  </div>
-                </div>
+                <button
+                  type="button"
+                  class="view-only-btn"
+                  onclick="viewEmployee('OSSP-009')"
+                  title="View Details"
+                >
+                  <i class="fa-solid fa-eye"></i>
+                  <span>View</span>
+                </button>
               </td>
             </tr>
 
             <!-- EMPLOYEE 010 -->
 
-            <tr>
+            <tr data-status="Present">
               <td>OSSP-010</td>
               <td>Andrea</td>
               <td>N/A</td>
@@ -1027,42 +1291,21 @@
               <td>Legislative Officer</td>
 
               <td class="action-column">
-                <div class="action-dropdown">
-                  <button
-                    type="button"
-                    class="action-btn"
-                    onclick="toggleActionMenu(this)"
-                  >
-                    <i class="fa-solid fa-ellipsis"></i>
-                  </button>
-
-                  <div class="action-menu">
-                    <button type="button" onclick="viewEmployee('OSSP-010')">
-                      <i class="fa-solid fa-eye"></i>
-                      <span>View Details</span>
-                    </button>
-
-                    <button type="button" onclick="editEmployee('OSSP-010')">
-                      <i class="fa-solid fa-pen"></i>
-                      <span>Edit</span>
-                    </button>
-
-                    <button
-                      type="button"
-                      class="delete-action"
-                      onclick="deleteEmployee('OSSP-010')"
-                    >
-                      <i class="fa-solid fa-trash"></i>
-                      <span>Delete</span>
-                    </button>
-                  </div>
-                </div>
+                <button
+                  type="button"
+                  class="view-only-btn"
+                  onclick="viewEmployee('OSSP-010')"
+                  title="View Details"
+                >
+                  <i class="fa-solid fa-eye"></i>
+                  <span>View</span>
+                </button>
               </td>
             </tr>
 
             <!-- EMPLOYEE 011 -->
 
-            <tr>
+            <tr data-status="Present">
               <td>OSSP-011</td>
               <td>Kevin</td>
               <td>N/A</td>
@@ -1071,42 +1314,21 @@
               <td>Executive Assistant</td>
 
               <td class="action-column">
-                <div class="action-dropdown">
-                  <button
-                    type="button"
-                    class="action-btn"
-                    onclick="toggleActionMenu(this)"
-                  >
-                    <i class="fa-solid fa-ellipsis"></i>
-                  </button>
-
-                  <div class="action-menu">
-                    <button type="button" onclick="viewEmployee('OSSP-011')">
-                      <i class="fa-solid fa-eye"></i>
-                      <span>View Details</span>
-                    </button>
-
-                    <button type="button" onclick="editEmployee('OSSP-011')">
-                      <i class="fa-solid fa-pen"></i>
-                      <span>Edit</span>
-                    </button>
-
-                    <button
-                      type="button"
-                      class="delete-action"
-                      onclick="deleteEmployee('OSSP-011')"
-                    >
-                      <i class="fa-solid fa-trash"></i>
-                      <span>Delete</span>
-                    </button>
-                  </div>
-                </div>
+                <button
+                  type="button"
+                  class="view-only-btn"
+                  onclick="viewEmployee('OSSP-011')"
+                  title="View Details"
+                >
+                  <i class="fa-solid fa-eye"></i>
+                  <span>View</span>
+                </button>
               </td>
             </tr>
 
             <!-- EMPLOYEE 012 -->
 
-            <tr>
+            <tr data-status="Leave">
               <td>OSSP-012</td>
               <td>Christine</td>
               <td>N/A</td>
@@ -1115,42 +1337,21 @@
               <td>Records Staff</td>
 
               <td class="action-column">
-                <div class="action-dropdown">
-                  <button
-                    type="button"
-                    class="action-btn"
-                    onclick="toggleActionMenu(this)"
-                  >
-                    <i class="fa-solid fa-ellipsis"></i>
-                  </button>
-
-                  <div class="action-menu">
-                    <button type="button" onclick="viewEmployee('OSSP-012')">
-                      <i class="fa-solid fa-eye"></i>
-                      <span>View Details</span>
-                    </button>
-
-                    <button type="button" onclick="editEmployee('OSSP-012')">
-                      <i class="fa-solid fa-pen"></i>
-                      <span>Edit</span>
-                    </button>
-
-                    <button
-                      type="button"
-                      class="delete-action"
-                      onclick="deleteEmployee('OSSP-012')"
-                    >
-                      <i class="fa-solid fa-trash"></i>
-                      <span>Delete</span>
-                    </button>
-                  </div>
-                </div>
+                <button
+                  type="button"
+                  class="view-only-btn"
+                  onclick="viewEmployee('OSSP-012')"
+                  title="View Details"
+                >
+                  <i class="fa-solid fa-eye"></i>
+                  <span>View</span>
+                </button>
               </td>
             </tr>
 
             <!-- EMPLOYEE 013 -->
 
-            <tr>
+            <tr data-status="Present">
               <td>OSSP-013</td>
               <td>Joshua</td>
               <td>N/A</td>
@@ -1159,42 +1360,21 @@
               <td>Administrative Staff</td>
 
               <td class="action-column">
-                <div class="action-dropdown">
-                  <button
-                    type="button"
-                    class="action-btn"
-                    onclick="toggleActionMenu(this)"
-                  >
-                    <i class="fa-solid fa-ellipsis"></i>
-                  </button>
-
-                  <div class="action-menu">
-                    <button type="button" onclick="viewEmployee('OSSP-013')">
-                      <i class="fa-solid fa-eye"></i>
-                      <span>View Details</span>
-                    </button>
-
-                    <button type="button" onclick="editEmployee('OSSP-013')">
-                      <i class="fa-solid fa-pen"></i>
-                      <span>Edit</span>
-                    </button>
-
-                    <button
-                      type="button"
-                      class="delete-action"
-                      onclick="deleteEmployee('OSSP-013')"
-                    >
-                      <i class="fa-solid fa-trash"></i>
-                      <span>Delete</span>
-                    </button>
-                  </div>
-                </div>
+                <button
+                  type="button"
+                  class="view-only-btn"
+                  onclick="viewEmployee('OSSP-013')"
+                  title="View Details"
+                >
+                  <i class="fa-solid fa-eye"></i>
+                  <span>View</span>
+                </button>
               </td>
             </tr>
 
             <!-- EMPLOYEE 014 -->
 
-            <tr>
+            <tr data-status="Present">
               <td>OSSP-014</td>
               <td>Samantha</td>
               <td>N/A</td>
@@ -1203,42 +1383,21 @@
               <td>Legislative Staff</td>
 
               <td class="action-column">
-                <div class="action-dropdown">
-                  <button
-                    type="button"
-                    class="action-btn"
-                    onclick="toggleActionMenu(this)"
-                  >
-                    <i class="fa-solid fa-ellipsis"></i>
-                  </button>
-
-                  <div class="action-menu">
-                    <button type="button" onclick="viewEmployee('OSSP-014')">
-                      <i class="fa-solid fa-eye"></i>
-                      <span>View Details</span>
-                    </button>
-
-                    <button type="button" onclick="editEmployee('OSSP-014')">
-                      <i class="fa-solid fa-pen"></i>
-                      <span>Edit</span>
-                    </button>
-
-                    <button
-                      type="button"
-                      class="delete-action"
-                      onclick="deleteEmployee('OSSP-014')"
-                    >
-                      <i class="fa-solid fa-trash"></i>
-                      <span>Delete</span>
-                    </button>
-                  </div>
-                </div>
+                <button
+                  type="button"
+                  class="view-only-btn"
+                  onclick="viewEmployee('OSSP-014')"
+                  title="View Details"
+                >
+                  <i class="fa-solid fa-eye"></i>
+                  <span>View</span>
+                </button>
               </td>
             </tr>
 
             <!-- EMPLOYEE 015 -->
 
-            <tr>
+            <tr data-status="Leave">
               <td>OSSP-015</td>
               <td>Mark</td>
               <td>N/A</td>
@@ -1247,42 +1406,21 @@
               <td>Records Officer</td>
 
               <td class="action-column">
-                <div class="action-dropdown">
-                  <button
-                    type="button"
-                    class="action-btn"
-                    onclick="toggleActionMenu(this)"
-                  >
-                    <i class="fa-solid fa-ellipsis"></i>
-                  </button>
-
-                  <div class="action-menu">
-                    <button type="button" onclick="viewEmployee('OSSP-015')">
-                      <i class="fa-solid fa-eye"></i>
-                      <span>View Details</span>
-                    </button>
-
-                    <button type="button" onclick="editEmployee('OSSP-015')">
-                      <i class="fa-solid fa-pen"></i>
-                      <span>Edit</span>
-                    </button>
-
-                    <button
-                      type="button"
-                      class="delete-action"
-                      onclick="deleteEmployee('OSSP-015')"
-                    >
-                      <i class="fa-solid fa-trash"></i>
-                      <span>Delete</span>
-                    </button>
-                  </div>
-                </div>
+                <button
+                  type="button"
+                  class="view-only-btn"
+                  onclick="viewEmployee('OSSP-015')"
+                  title="View Details"
+                >
+                  <i class="fa-solid fa-eye"></i>
+                  <span>View</span>
+                </button>
               </td>
             </tr>
 
             <!-- EMPLOYEE 016 -->
 
-            <tr>
+            <tr data-status="Present">
               <td>OSSP-016</td>
               <td>Nicole</td>
               <td>N/A</td>
@@ -1291,42 +1429,21 @@
               <td>Administrative Officer</td>
 
               <td class="action-column">
-                <div class="action-dropdown">
-                  <button
-                    type="button"
-                    class="action-btn"
-                    onclick="toggleActionMenu(this)"
-                  >
-                    <i class="fa-solid fa-ellipsis"></i>
-                  </button>
-
-                  <div class="action-menu">
-                    <button type="button" onclick="viewEmployee('OSSP-016')">
-                      <i class="fa-solid fa-eye"></i>
-                      <span>View Details</span>
-                    </button>
-
-                    <button type="button" onclick="editEmployee('OSSP-016')">
-                      <i class="fa-solid fa-pen"></i>
-                      <span>Edit</span>
-                    </button>
-
-                    <button
-                      type="button"
-                      class="delete-action"
-                      onclick="deleteEmployee('OSSP-016')"
-                    >
-                      <i class="fa-solid fa-trash"></i>
-                      <span>Delete</span>
-                    </button>
-                  </div>
-                </div>
+                <button
+                  type="button"
+                  class="view-only-btn"
+                  onclick="viewEmployee('OSSP-016')"
+                  title="View Details"
+                >
+                  <i class="fa-solid fa-eye"></i>
+                  <span>View</span>
+                </button>
               </td>
             </tr>
 
             <!-- EMPLOYEE 017 -->
 
-            <tr>
+            <tr data-status="Present">
               <td>OSSP-017</td>
               <td>Adrian</td>
               <td>N/A</td>
@@ -1335,42 +1452,21 @@
               <td>Legislative Officer</td>
 
               <td class="action-column">
-                <div class="action-dropdown">
-                  <button
-                    type="button"
-                    class="action-btn"
-                    onclick="toggleActionMenu(this)"
-                  >
-                    <i class="fa-solid fa-ellipsis"></i>
-                  </button>
-
-                  <div class="action-menu">
-                    <button type="button" onclick="viewEmployee('OSSP-017')">
-                      <i class="fa-solid fa-eye"></i>
-                      <span>View Details</span>
-                    </button>
-
-                    <button type="button" onclick="editEmployee('OSSP-017')">
-                      <i class="fa-solid fa-pen"></i>
-                      <span>Edit</span>
-                    </button>
-
-                    <button
-                      type="button"
-                      class="delete-action"
-                      onclick="deleteEmployee('OSSP-017')"
-                    >
-                      <i class="fa-solid fa-trash"></i>
-                      <span>Delete</span>
-                    </button>
-                  </div>
-                </div>
+                <button
+                  type="button"
+                  class="view-only-btn"
+                  onclick="viewEmployee('OSSP-017')"
+                  title="View Details"
+                >
+                  <i class="fa-solid fa-eye"></i>
+                  <span>View</span>
+                </button>
               </td>
             </tr>
 
             <!-- EMPLOYEE 018 -->
 
-            <tr>
+            <tr data-status="Leave">
               <td>OSSP-018</td>
               <td>Hannah</td>
               <td>N/A</td>
@@ -1379,42 +1475,21 @@
               <td>Records Staff</td>
 
               <td class="action-column">
-                <div class="action-dropdown">
-                  <button
-                    type="button"
-                    class="action-btn"
-                    onclick="toggleActionMenu(this)"
-                  >
-                    <i class="fa-solid fa-ellipsis"></i>
-                  </button>
-
-                  <div class="action-menu">
-                    <button type="button" onclick="viewEmployee('OSSP-018')">
-                      <i class="fa-solid fa-eye"></i>
-                      <span>View Details</span>
-                    </button>
-
-                    <button type="button" onclick="editEmployee('OSSP-018')">
-                      <i class="fa-solid fa-pen"></i>
-                      <span>Edit</span>
-                    </button>
-
-                    <button
-                      type="button"
-                      class="delete-action"
-                      onclick="deleteEmployee('OSSP-018')"
-                    >
-                      <i class="fa-solid fa-trash"></i>
-                      <span>Delete</span>
-                    </button>
-                  </div>
-                </div>
+                <button
+                  type="button"
+                  class="view-only-btn"
+                  onclick="viewEmployee('OSSP-018')"
+                  title="View Details"
+                >
+                  <i class="fa-solid fa-eye"></i>
+                  <span>View</span>
+                </button>
               </td>
             </tr>
 
             <!-- EMPLOYEE 019 -->
 
-            <tr>
+            <tr data-status="Present">
               <td>OSSP-019</td>
               <td>Francis</td>
               <td>N/A</td>
@@ -1423,42 +1498,21 @@
               <td>Executive Assistant</td>
 
               <td class="action-column">
-                <div class="action-dropdown">
-                  <button
-                    type="button"
-                    class="action-btn"
-                    onclick="toggleActionMenu(this)"
-                  >
-                    <i class="fa-solid fa-ellipsis"></i>
-                  </button>
-
-                  <div class="action-menu">
-                    <button type="button" onclick="viewEmployee('OSSP-019')">
-                      <i class="fa-solid fa-eye"></i>
-                      <span>View Details</span>
-                    </button>
-
-                    <button type="button" onclick="editEmployee('OSSP-019')">
-                      <i class="fa-solid fa-pen"></i>
-                      <span>Edit</span>
-                    </button>
-
-                    <button
-                      type="button"
-                      class="delete-action"
-                      onclick="deleteEmployee('OSSP-019')"
-                    >
-                      <i class="fa-solid fa-trash"></i>
-                      <span>Delete</span>
-                    </button>
-                  </div>
-                </div>
+                <button
+                  type="button"
+                  class="view-only-btn"
+                  onclick="viewEmployee('OSSP-019')"
+                  title="View Details"
+                >
+                  <i class="fa-solid fa-eye"></i>
+                  <span>View</span>
+                </button>
               </td>
             </tr>
 
             <!-- EMPLOYEE 020 -->
 
-            <tr>
+            <tr data-status="Present">
               <td>OSSP-020</td>
               <td>Bianca</td>
               <td>N/A</td>
@@ -1467,36 +1521,15 @@
               <td>Administrative Assistant</td>
 
               <td class="action-column">
-                <div class="action-dropdown">
-                  <button
-                    type="button"
-                    class="action-btn"
-                    onclick="toggleActionMenu(this)"
-                  >
-                    <i class="fa-solid fa-ellipsis"></i>
-                  </button>
-
-                  <div class="action-menu">
-                    <button type="button" onclick="viewEmployee('OSSP-020')">
-                      <i class="fa-solid fa-eye"></i>
-                      <span>View Details</span>
-                    </button>
-
-                    <button type="button" onclick="editEmployee('OSSP-020')">
-                      <i class="fa-solid fa-pen"></i>
-                      <span>Edit</span>
-                    </button>
-
-                    <button
-                      type="button"
-                      class="delete-action"
-                      onclick="deleteEmployee('OSSP-020')"
-                    >
-                      <i class="fa-solid fa-trash"></i>
-                      <span>Delete</span>
-                    </button>
-                  </div>
-                </div>
+                <button
+                  type="button"
+                  class="view-only-btn"
+                  onclick="viewEmployee('OSSP-020')"
+                  title="View Details"
+                >
+                  <i class="fa-solid fa-eye"></i>
+                  <span>View</span>
+                </button>
               </td>
             </tr>
           </tbody>
@@ -1505,118 +1538,35 @@
     </main>
 
     <!-- =========================================================
-     EDIT SECTION DROPDOWN CSS
+     VIEW-ONLY ACTION BUTTON CSS
 ========================================================= -->
 
     <style>
-      .edit-section-dropdown {
-        position: relative;
-        width: 100%;
-      }
-
-      .edit-section-select {
-        width: 100%;
-
-        min-height: 46px;
-
-        padding: 12px 14px;
-
-        border: 1px solid #d9dfe8;
-
-        border-radius: 8px;
-
-        background: #fff;
-
-        color: #333;
-
-        display: flex;
-
+      .view-only-btn {
+        display: inline-flex;
         align-items: center;
+        justify-content: center;
+        gap: 6px;
 
-        justify-content: space-between;
+        padding: 7px 12px;
 
-        gap: 10px;
-
-        cursor: pointer;
-
-        font: inherit;
-
-        text-align: left;
-      }
-
-      .edit-section-select i {
-        transition: transform 0.2s ease;
-
-        flex-shrink: 0;
-      }
-
-      .edit-section-dropdown.active .edit-section-select i {
-        transform: rotate(180deg);
-      }
-
-      .edit-section-menu {
-        position: absolute;
-
-        left: 0;
-        right: 0;
-
-        top: calc(100% + 5px);
-
-        display: none;
-
-        max-height: 210px;
-
-        overflow-y: auto;
-
-        background: #fff;
-
-        border: 1px solid #d9dfe8;
-
-        border-radius: 8px;
-
-        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.15);
-
-        z-index: 10001;
-
-        padding: 5px;
-      }
-
-      .edit-section-dropdown.active .edit-section-menu {
-        display: block;
-      }
-
-      .edit-section-menu button {
-        width: 100%;
-
-        border: 0;
-
-        background: transparent;
-
-        padding: 11px 12px;
-
+        border: 1px solid #075ca8;
         border-radius: 6px;
 
-        text-align: left;
+        background: #eaf3fb;
+        color: #075ca8;
+
+        font: inherit;
+        font-size: 12px;
 
         cursor: pointer;
 
-        font: inherit;
-
-        color: #333;
+        white-space: nowrap;
       }
 
-      .edit-section-menu button:hover {
-        background: #f0f4f9;
-      }
-
-      .edit-section-menu::-webkit-scrollbar {
-        width: 7px;
-      }
-
-      .edit-section-menu::-webkit-scrollbar-thumb {
-        background: #aeb8c5;
-
-        border-radius: 10px;
+      .view-only-btn:hover {
+        background: #075ca8;
+        color: #ffffff;
       }
     </style>
 
@@ -1625,99 +1575,14 @@
 ========================================================= -->
 
     <script>
-      function toggleActionMenu(button) {
-        const currentDropdown = button.closest(".action-dropdown");
-
-        document
-          .querySelectorAll(".action-dropdown")
-          .forEach(function (dropdown) {
-            if (dropdown !== currentDropdown) {
-              dropdown.classList.remove("active");
-            }
-          });
-
-        currentDropdown.classList.toggle("active");
-      }
-
-      /* =========================================================
-   CLOSE ACTION MENU WHEN CLICKING OUTSIDE
-========================================================= */
-
-      document.addEventListener("click", function (event) {
-        if (!event.target.closest(".action-dropdown")) {
-          document
-            .querySelectorAll(".action-dropdown")
-            .forEach(function (dropdown) {
-              dropdown.classList.remove("active");
-            });
-        }
-      });
-
       /* =========================================================
    VIEW EMPLOYEE
+   Super Admin has view-only access — edit and delete actions
+   have been removed from this dashboard.
 ========================================================= */
 
       function viewEmployee(employeeID) {
         alert("View Details for " + employeeID);
-      }
-
-      /* =========================================================
-   DELETE EMPLOYEE
-========================================================= */
-
-      let employeeToDelete = null;
-
-      function deleteEmployee(employeeID) {
-        employeeToDelete = employeeID;
-
-        document.getElementById("deleteEmployeeID").textContent = employeeID;
-
-        document
-          .querySelectorAll(".action-dropdown")
-          .forEach(function (dropdown) {
-            dropdown.classList.remove("active");
-          });
-
-        document.getElementById("deleteEmployeeModal").style.display = "flex";
-      }
-
-      /* =========================================================
-   CLOSE DELETE MODAL
-========================================================= */
-
-      function closeDeleteEmployeeModal() {
-        document.getElementById("deleteEmployeeModal").style.display = "none";
-
-        employeeToDelete = null;
-      }
-
-      /* =========================================================
-   CONFIRM DELETE
-========================================================= */
-
-      function confirmDeleteEmployee() {
-        if (!employeeToDelete) return;
-
-        const deletedEmployee = employeeToDelete;
-
-        const rows = document.querySelectorAll("#employeeTable tbody tr");
-
-        rows.forEach(function (row) {
-          if (
-            row.cells[0] &&
-            row.cells[0].textContent.trim() === deletedEmployee
-          ) {
-            row.remove();
-          }
-        });
-
-        closeDeleteEmployeeModal();
-
-        alert(deletedEmployee + " has been deleted.");
-
-        if (typeof applyEmployeeFilters === "function") {
-          applyEmployeeFilters();
-        }
       }
     </script>
 
@@ -2407,272 +2272,6 @@
     </div>
 
     <!-- =========================================================
-     DELETE EMPLOYEE MODAL
-========================================================= -->
-
-    <div class="delete-modal" id="deleteEmployeeModal">
-      <div class="delete-modal-box">
-        <div class="delete-modal-icon">
-          <i class="fa-solid fa-trash"></i>
-        </div>
-
-        <h3>Delete Employee?</h3>
-
-        <p>
-          Are you sure you want to delete
-
-          <strong id="deleteEmployeeID"> OSSP-001 </strong>?
-        </p>
-
-        <small> This action cannot be undone. </small>
-
-        <div class="delete-modal-actions">
-          <button
-            type="button"
-            class="delete-cancel"
-            onclick="closeDeleteEmployeeModal()"
-          >
-            Cancel
-          </button>
-
-          <button
-            type="button"
-            class="delete-confirm"
-            onclick="confirmDeleteEmployee()"
-          >
-            <i class="fa-solid fa-trash"></i>
-
-            Yes, Delete
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- =========================================================
-     EDIT EMPLOYEE MODAL
-========================================================= -->
-
-    <div class="edit-modal-overlay" id="editModal">
-      <div class="edit-modal">
-        <!-- HEADER -->
-
-        <div class="edit-modal-header">
-          <div class="edit-modal-title">
-            <div class="edit-modal-icon">
-              <i class="fa-solid fa-user-pen"></i>
-            </div>
-
-            <div>
-              <h2>Edit Employee</h2>
-
-              <p id="editEmployeeID">OSSP-001</p>
-            </div>
-          </div>
-
-          <button
-            type="button"
-            class="edit-modal-close"
-            onclick="closeEditModal()"
-          >
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
-
-        <!-- BODY -->
-
-        <div class="edit-modal-body">
-          <!-- CONTACT -->
-
-          <div class="edit-form-group">
-            <label for="editContact">
-              <i class="fa-solid fa-phone"></i>
-
-              Contact
-            </label>
-
-            <input
-              type="text"
-              id="editContact"
-              placeholder="Enter contact number"
-            />
-          </div>
-
-          <!-- BIRTHDATE -->
-
-          <div class="edit-form-group">
-            <label for="editBirthdate">
-              <i class="fa-solid fa-calendar-days"></i>
-
-              Birthdate
-            </label>
-
-            <input type="date" id="editBirthdate" />
-          </div>
-
-          <!-- ADDRESS -->
-
-          <div class="edit-form-group edit-full-width">
-            <label for="editAddress">
-              <i class="fa-solid fa-location-dot"></i>
-
-              Address
-            </label>
-
-            <textarea
-              id="editAddress"
-              rows="3"
-              placeholder="Enter complete address"
-            ></textarea>
-          </div>
-
-          <!-- SECTION -->
-
-          <div class="edit-form-group">
-            <label for="editSection">
-              <i class="fa-solid fa-building"></i>
-
-              Section
-            </label>
-
-            <div class="edit-section-dropdown" id="editSectionDropdown">
-              <button
-                type="button"
-                class="edit-section-select"
-                onclick="toggleEditSectionDropdown(event)"
-              >
-                <span id="editSectionText"> Select Division / Section </span>
-
-                <i class="fa-solid fa-chevron-down"></i>
-              </button>
-
-              <div class="edit-section-menu" id="editSectionMenu">
-                <button type="button" data-value="">
-                  Select Division / Section
-                </button>
-
-                <button type="button" data-value="Administrative Division">
-                  Administrative Division
-                </button>
-
-                <button
-                  type="button"
-                  data-value="Record and Correspondence Section"
-                >
-                  Record and Correspondence Section
-                </button>
-
-                <button type="button" data-value="Personnel Section">
-                  Personnel Section
-                </button>
-
-                <button type="button" data-value="General Services Section">
-                  General Services Section
-                </button>
-
-                <button
-                  type="button"
-                  data-value="Finance and Accounting Section"
-                >
-                  Finance and Accounting Section
-                </button>
-
-                <button type="button" data-value="IT Section">
-                  IT Section
-                </button>
-
-                <button type="button" data-value="Journal and Minutes Division">
-                  Journal and Minutes Division
-                </button>
-
-                <button
-                  type="button"
-                  data-value="Journal Transcription Section"
-                >
-                  Journal Transcription Section
-                </button>
-
-                <button type="button" data-value="Minutes Section">
-                  Minutes Section
-                </button>
-
-                <button type="button" data-value="Committee Affairs Section">
-                  Committee Affairs Section
-                </button>
-
-                <button type="button" data-value="Special Committee Section">
-                  Special Committee Section
-                </button>
-
-                <button
-                  type="button"
-                  data-value="Legislative Services Division"
-                >
-                  Legislative Services Division
-                </button>
-
-                <button
-                  type="button"
-                  data-value="Ordinance and Resolution Section"
-                >
-                  Ordinance and Resolution Section
-                </button>
-
-                <button type="button" data-value="Agenda and Briefing Section">
-                  Agenda and Briefing Section
-                </button>
-
-                <button
-                  type="button"
-                  data-value="Reference and Archives Section"
-                >
-                  Reference and Archives Section
-                </button>
-              </div>
-
-              <input type="hidden" id="editSection" value="" />
-            </div>
-          </div>
-
-          <!-- POSITION -->
-
-          <div class="edit-form-group">
-            <label for="editPosition">
-              <i class="fa-solid fa-briefcase"></i>
-
-              Position
-            </label>
-
-            <input type="text" id="editPosition" placeholder="Enter position" />
-          </div>
-        </div>
-
-        <!-- FOOTER -->
-
-        <div class="edit-modal-footer">
-          <button
-            type="button"
-            class="edit-cancel-btn"
-            onclick="closeEditModal()"
-          >
-            <i class="fa-solid fa-xmark"></i>
-
-            Cancel
-          </button>
-
-          <button
-            type="button"
-            class="edit-save-btn"
-            onclick="saveEditEmployee()"
-          >
-            <i class="fa-solid fa-check"></i>
-
-            Save Changes
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- =========================================================
      DIVISION FILTER CSS
 ========================================================= -->
 
@@ -2824,6 +2423,7 @@
       document.addEventListener("keydown", function (event) {
         if (event.key === "Escape") {
           closeLogoutModal();
+          closeAttendanceDetail();
         }
       });
 
@@ -3039,221 +2639,6 @@
       window.addEventListener("scroll", positionDivisionFilter, true);
 
       /* =========================================================
-   EDIT SECTION DROPDOWN
-========================================================= */
-
-      function toggleEditSectionDropdown(event) {
-        event.stopPropagation();
-
-        document
-          .getElementById("editSectionDropdown")
-          .classList.toggle("active");
-      }
-
-      function selectEditSection(value, text) {
-        document.getElementById("editSection").value = value;
-
-        document.getElementById("editSectionText").textContent =
-          text || "Select Division / Section";
-
-        document
-          .getElementById("editSectionDropdown")
-          .classList.remove("active");
-      }
-
-      document
-        .querySelectorAll("#editSectionMenu button")
-        .forEach(function (button) {
-          button.addEventListener("click", function (event) {
-            event.stopPropagation();
-
-            selectEditSection(this.dataset.value, this.textContent.trim());
-          });
-        });
-
-      document.addEventListener("click", function (event) {
-        const dropdown = document.getElementById("editSectionDropdown");
-
-        if (dropdown && !dropdown.contains(event.target)) {
-          dropdown.classList.remove("active");
-        }
-      });
-
-      /* =========================================================
-   EDIT EMPLOYEE
-========================================================= */
-
-      let editingEmployeeId = null;
-
-      function editEmployee(employeeId) {
-        editingEmployeeId = employeeId;
-
-        document.getElementById("editEmployeeID").textContent = employeeId;
-
-        const rows = document.querySelectorAll("#employeeTable tbody tr");
-
-        let employeeRow = null;
-
-        rows.forEach(function (row) {
-          if (row.cells[0] && row.cells[0].textContent.trim() === employeeId) {
-            employeeRow = row;
-          }
-        });
-
-        /* UI ONLY SAMPLE DATA */
-
-        document.getElementById("editContact").value = "0917 123 4567";
-
-        document.getElementById("editBirthdate").value = "1995-05-15";
-
-        document.getElementById("editAddress").value =
-          "Quezon City, Metro Manila";
-
-        if (employeeRow) {
-          const currentSection = employeeRow.cells[4]
-            ? employeeRow.cells[4].textContent.trim()
-            : "";
-
-          const currentPosition = employeeRow.cells[5]
-            ? employeeRow.cells[5].textContent.trim()
-            : "";
-
-          const sectionMap = {
-            "Journal & Minutes Division": "Journal and Minutes Division",
-
-            "Record and Corresposndence Section":
-              "Record and Correspondence Section",
-
-            "SPECIAL COMMITEE SECTION": "Special Committee Section",
-          };
-
-          const selectedSection = sectionMap[currentSection] || currentSection;
-
-          selectEditSection(selectedSection, selectedSection);
-
-          document.getElementById("editPosition").value = currentPosition;
-        } else {
-          selectEditSection("", "Select Division / Section");
-
-          document.getElementById("editPosition").value = "";
-        }
-
-        document.getElementById("editModal").classList.add("active");
-
-        document
-          .querySelectorAll(".action-dropdown")
-          .forEach(function (dropdown) {
-            dropdown.classList.remove("active");
-          });
-      }
-
-      /* =========================================================
-   CLOSE EDIT MODAL
-========================================================= */
-
-      function closeEditModal() {
-        const modal = document.getElementById("editModal");
-
-        if (modal) {
-          modal.classList.remove("active");
-        }
-
-        editingEmployeeId = null;
-      }
-
-      /* =========================================================
-   SAVE EDIT EMPLOYEE
-========================================================= */
-
-      function saveEditEmployee() {
-        if (!editingEmployeeId) return;
-
-        const section = document.getElementById("editSection").value;
-
-        const position = document.getElementById("editPosition").value.trim();
-
-        if (!section) {
-          alert("Please select a Division / Section.");
-
-          return;
-        }
-
-        if (!position) {
-          alert("Please enter a Position.");
-
-          return;
-        }
-
-        const rows = document.querySelectorAll("#employeeTable tbody tr");
-
-        let employeeRow = null;
-
-        rows.forEach(function (row) {
-          if (
-            row.cells[0] &&
-            row.cells[0].textContent.trim() === editingEmployeeId
-          ) {
-            employeeRow = row;
-          }
-        });
-
-        if (employeeRow) {
-          employeeRow.cells[4].textContent = section;
-
-          employeeRow.cells[5].textContent = position;
-        }
-
-        const savedEmployee = editingEmployeeId;
-
-        closeEditModal();
-
-        alert(savedEmployee + " updated successfully.");
-
-        if (typeof applyEmployeeFilters === "function") {
-          applyEmployeeFilters();
-        }
-      }
-
-      /* =========================================================
-   CLOSE EDIT MODAL BY OVERLAY
-========================================================= */
-
-      document.addEventListener("click", function (event) {
-        const modal = document.getElementById("editModal");
-
-        if (modal && event.target === modal) {
-          closeEditModal();
-        }
-      });
-
-      /* =========================================================
-   CLOSE EDIT WITH ESC
-========================================================= */
-
-      document.addEventListener("keydown", function (event) {
-        if (event.key === "Escape") {
-          const modal = document.getElementById("editModal");
-
-          if (modal && modal.classList.contains("active")) {
-            closeEditModal();
-          }
-        }
-      });
-
-      /* =========================================================
-   CLOSE RESULT MODAL WITH OVERLAY
-========================================================= */
-
-      document.getElementById("dtrResultModal") &&
-        document
-          .getElementById("dtrResultModal")
-          .addEventListener("click", function (event) {
-            if (event.target === this) {
-              closeDTRResult();
-            }
-          });
-
-      /* =========================================================
    CLOSE DTR MODALS WITH ESC
 ========================================================= */
 
@@ -3268,6 +2653,272 @@
           }
         }
       });
+
+      /* =========================================================
+   ATTENDANCE REPORT
+   Counts Present / Leave totals overall and per Division/Section,
+   based on each employee row's data-status attribute.
+========================================================= */
+
+      function buildAttendanceReport() {
+        const rows = document.querySelectorAll("#employeeTable tbody tr");
+
+        const divisionTotals = {};
+
+        let totalPresent = 0;
+        let totalLeave = 0;
+
+        rows.forEach(function (row) {
+          const divisionCell = row.cells[4];
+
+          const division = divisionCell
+            ? divisionCell.textContent.trim()
+            : "Unassigned";
+
+          const status = (row.dataset.status || "Present").trim();
+
+          if (!divisionTotals[division]) {
+            divisionTotals[division] = { present: 0, leave: 0 };
+          }
+
+          if (status === "Leave") {
+            divisionTotals[division].leave += 1;
+            totalLeave += 1;
+          } else {
+            divisionTotals[division].present += 1;
+            totalPresent += 1;
+          }
+        });
+
+        const totalEmployees = totalPresent + totalLeave;
+
+        const presentEl = document.getElementById("reportTotalPresent");
+        const leaveEl = document.getElementById("reportTotalLeave");
+        const totalEl = document.getElementById("reportTotalEmployees");
+
+        if (presentEl) presentEl.textContent = totalPresent;
+        if (leaveEl) leaveEl.textContent = totalLeave;
+        if (totalEl) totalEl.textContent = totalEmployees;
+
+        const tbody = document.getElementById("reportDivisionTableBody");
+
+        if (!tbody) return;
+
+        const divisions = Object.keys(divisionTotals).sort();
+
+        if (divisions.length === 0) {
+          tbody.innerHTML =
+            '<tr class="report-empty-row"><td colspan="4">No data available.</td></tr>';
+        } else {
+          tbody.innerHTML = divisions
+            .map(function (division) {
+              const counts = divisionTotals[division];
+
+              const divisionTotal = counts.present + counts.leave;
+
+              return (
+                "<tr>" +
+                "<td>" + division + "</td>" +
+                "<td>" + counts.present + "</td>" +
+                "<td>" + counts.leave + "</td>" +
+                "<td>" + divisionTotal + "</td>" +
+                "</tr>"
+              );
+            })
+            .join("");
+        }
+
+        const updatedEl = document.getElementById("reportUpdatedLabel");
+
+        if (updatedEl) {
+          updatedEl.textContent =
+            "Updated " +
+            new Date().toLocaleTimeString("en-US", {
+              hour: "numeric",
+              minute: "2-digit",
+              hour12: true,
+            });
+        }
+      }
+
+      buildAttendanceReport();
+
+      /* =========================================================
+   ATTENDANCE DETAIL PANEL
+   Clicking a report card (Present / On Leave / Total Employees)
+   opens a panel listing the matching employees by name. Clicking
+   the same card again, the close button, an outside click, or Esc
+   closes it. All three cards share this same behavior.
+========================================================= */
+
+      let activeReportFilter = null;
+
+      /* Escape a value before dropping it into innerHTML. */
+      function escapeHtml(value) {
+        return String(value).replace(/[&<>"']/g, function (ch) {
+          return (
+            {
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            }[ch] || ch
+          );
+        });
+      }
+
+      /* Build the list of employees matching a card's filter,
+         reading directly from the employee table rows. */
+      function collectEmployeesByStatus(filter) {
+        const rows = document.querySelectorAll("#employeeTable tbody tr");
+
+        const employees = [];
+
+        rows.forEach(function (row) {
+          const status = (row.dataset.status || "Present").trim();
+
+          const isLeave = status === "Leave";
+
+          if (filter === "present" && isLeave) return;
+          if (filter === "leave" && !isLeave) return;
+          /* filter === "total" includes every employee */
+
+          const empNo = row.cells[0] ? row.cells[0].textContent.trim() : "";
+
+          const firstName = row.cells[1] ? row.cells[1].textContent.trim() : "";
+
+          const middleName = row.cells[2] ? row.cells[2].textContent.trim() : "";
+
+          const lastName = row.cells[3] ? row.cells[3].textContent.trim() : "";
+
+          const division = row.cells[4] ? row.cells[4].textContent.trim() : "";
+
+          const nameParts = [
+            firstName,
+            middleName && middleName !== "N/A" ? middleName : "",
+            lastName,
+          ].filter(Boolean);
+
+          employees.push({
+            empNo: empNo,
+            name: nameParts.join(" "),
+            division: division,
+            status: isLeave ? "Leave" : "Present",
+          });
+        });
+
+        return employees;
+      }
+
+      /* Open (or toggle closed) the detail panel for a given card. */
+      function toggleAttendanceDetail(filter) {
+        const panel = document.getElementById("reportDetailPanel");
+
+        if (!panel) return;
+
+        /* Clicking the already-open card's own button closes it. */
+        if (activeReportFilter === filter) {
+          closeAttendanceDetail();
+
+          return;
+        }
+
+        activeReportFilter = filter;
+
+        document.querySelectorAll(".report-card").forEach(function (card) {
+          const isActive = card.dataset.filter === filter;
+
+          card.classList.toggle("active", isActive);
+
+          card.setAttribute("aria-pressed", isActive ? "true" : "false");
+        });
+
+        const employees = collectEmployeesByStatus(filter);
+
+        const titles = {
+          present: "Present Employees",
+          leave: "Employees On Leave",
+          total: "All Employees",
+        };
+
+        const titleEl = document.getElementById("reportDetailTitle");
+
+        if (titleEl) {
+          titleEl.textContent =
+            (titles[filter] || "Employees") + " (" + employees.length + ")";
+        }
+
+        const listEl = document.getElementById("reportDetailList");
+
+        if (listEl) {
+          if (employees.length === 0) {
+            listEl.innerHTML =
+              '<li class="report-detail-empty">No employees found.</li>';
+          } else {
+            listEl.innerHTML = employees
+              .map(function (employee) {
+                const meta = [employee.empNo, employee.division]
+                  .filter(Boolean)
+                  .join(" · ");
+
+                return (
+                  "<li>" +
+                  '<span class="report-detail-name">' +
+                  escapeHtml(employee.name || "Unnamed") +
+                  "</span>" +
+                  '<span class="report-detail-meta">' +
+                  escapeHtml(meta) +
+                  "</span>" +
+                  "</li>"
+                );
+              })
+              .join("");
+          }
+        }
+
+        panel.hidden = false;
+
+        /* Let the browser register hidden = false before animating open. */
+        requestAnimationFrame(function () {
+          panel.classList.add("open");
+        });
+      }
+
+      /* Close the detail panel and reset card active states. */
+      function closeAttendanceDetail() {
+        if (activeReportFilter === null) return;
+
+        activeReportFilter = null;
+
+        document.querySelectorAll(".report-card").forEach(function (card) {
+          card.classList.remove("active");
+          card.setAttribute("aria-pressed", "false");
+        });
+
+        const panel = document.getElementById("reportDetailPanel");
+
+        if (panel) {
+          panel.classList.remove("open");
+
+          /* Wait for the collapse transition before hiding for real. */
+          setTimeout(function () {
+            if (!panel.classList.contains("open")) {
+              panel.hidden = true;
+            }
+          }, 250);
+        }
+      }
+
+      /* Report cards are plain <div>s acting as buttons — support
+         Enter / Space the way a real <button> would. */
+      function handleReportCardKeydown(event, filter) {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+
+          toggleAttendanceDetail(filter);
+        }
+      }
 
       /* =========================================================
    PLANTILLA LEAVE APPLICATION
