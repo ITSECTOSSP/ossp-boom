@@ -15,7 +15,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     />
 
-    <title>DASHBOARD</title>
+    <title>ADMIN DASHBOARD</title>
 
     <style id="dashboard-mobile-fix">
       /* =========================================================
@@ -1722,6 +1722,39 @@
         }
       }
     </script>
+
+    <!-- =========================================================
+     FLOATING ACTION CLICK-THROUGH FIX
+     The floating-actions wrapper should not block clicks on the
+     dashboard behind it. Only its actual controls and modals
+     should receive pointer events.
+========================================================= -->
+
+    <style id="floating-actions-click-fix">
+      .floating-actions {
+        pointer-events: none !important;
+      }
+
+      /* Keep the actual floating controls clickable */
+      .floating-actions .floating-menu,
+      .floating-actions .floating-main,
+      .floating-actions .floating-action {
+        pointer-events: auto !important;
+      }
+
+      /* Keep all modals inside the floating-actions wrapper interactive */
+      .floating-actions .edit-modal-overlay,
+      .floating-actions .plantilla-modal-overlay,
+      .floating-actions .plantilla-success-overlay {
+        pointer-events: auto !important;
+      }
+
+      .floating-actions .edit-modal,
+      .floating-actions .plantilla-leave-modal,
+      .floating-actions .plantilla-success-modal {
+        pointer-events: auto !important;
+      }
+    </style>
 
     <!-- =========================================================
      FLOATING ACTION BUTTON

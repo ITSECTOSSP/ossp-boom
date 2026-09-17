@@ -15,7 +15,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     />
 
-    <title>DASHBOARD</title>
+    <title>SUPER ADMIN DASHBOARD</title>
 
     <style id="dashboard-mobile-fix">
       /* =========================================================
@@ -1585,6 +1585,36 @@
         alert("View Details for " + employeeID);
       }
     </script>
+
+    <!-- =========================================================
+     FLOATING ACTION BUTTON CLICK-LAYER FIX
+     The floating container itself must not block controls underneath.
+     Only the actual floating buttons and modal remain clickable.
+========================================================= -->
+    <style id="floating-actions-click-fix">
+      .floating-actions {
+        pointer-events: none !important;
+      }
+
+      .floating-actions .floating-menu,
+      .floating-actions .floating-main {
+        pointer-events: auto !important;
+      }
+
+      .floating-actions .floating-action,
+      .floating-actions .floating-main {
+        pointer-events: auto !important;
+      }
+
+      /* The leave modal must still receive clicks when it is open. */
+      .floating-actions .plantilla-modal-overlay {
+        pointer-events: auto !important;
+      }
+
+      .floating-actions .plantilla-leave-modal {
+        pointer-events: auto !important;
+      }
+    </style>
 
     <!-- =========================================================
      FLOATING ACTION BUTTON
