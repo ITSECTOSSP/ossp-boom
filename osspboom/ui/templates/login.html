@@ -22,7 +22,7 @@
     ====================================================== -->
 
       <div class="form-container sign-up-container">
-        <form action="#" method="POST">
+        <form action="#" method="POST" id="signUpForm">
           {% csrf_token %}
 
           <!-- LOGO -->
@@ -40,69 +40,146 @@
           <!-- SYSTEM NAME -->
           <p class="system-title">OSSP-B.O.O.M</p>
 
-          <span> Register your account </span>
+          <span id="signupSubtitle">
+            Verify your email before creating your account
+          </span>
 
-          <!-- FIRST NAME -->
-          <div class="input-wrapper">
-            <i class="fa-solid fa-user"></i>
+          <!-- =================================================
+               STEP 1: EMAIL VERIFICATION
+          ================================================== -->
 
-            <input
-              type="text"
-              name="firstname"
-              placeholder="Enter First Name"
-              required
-            />
+          <div id="emailVerificationStep">
+
+            <!-- EMAIL -->
+            <div class="input-wrapper">
+              <i class="fa-solid fa-envelope"></i>
+
+              <input
+                type="email"
+                id="signupEmail"
+                name="email"
+                placeholder="Enter Your Email"
+                autocomplete="email"
+                required
+              />
+            </div>
+
+            <!-- SEND VERIFICATION CODE -->
+            <button type="button" id="sendVerificationButton">
+              <i class="fa-solid fa-paper-plane"></i>
+              Send Verification Code
+            </button>
+
+            <!-- VERIFICATION CODE -->
+            <div
+              class="input-wrapper verification-code-wrapper"
+              id="verificationCodeWrapper"
+              style="display: none;"
+            >
+              <i class="fa-solid fa-shield-halved"></i>
+
+              <input
+                type="text"
+                id="verificationCode"
+                placeholder="Enter 6-digit verification code"
+                inputmode="numeric"
+                maxlength="6"
+                autocomplete="one-time-code"
+              />
+            </div>
+
+            <!-- VERIFY EMAIL -->
+            <button
+              type="button"
+              id="verifyEmailButton"
+              class="verify-email-button"
+              style="display: none;"
+            >
+              <i class="fa-solid fa-circle-check"></i>
+              Verify Email
+            </button>
+
+            <p class="verification-message" id="verificationMessage"></p>
+
           </div>
 
-          <!-- MIDDLE NAME -->
-          <div class="input-wrapper">
-            <i class="fa-solid fa-user"></i>
+          <!-- =================================================
+               STEP 2: ACCOUNT CREATION
+               Hidden until email is verified
+          ================================================== -->
 
-            <input
-              type="text"
-              name="middlename"
-              placeholder="Enter Middle Name"
-              required
-            />
+          <div id="accountCreationStep" style="display: none;">
+
+            <!-- VERIFIED EMAIL -->
+            <div class="input-wrapper verified-email-wrapper">
+              <i class="fa-solid fa-envelope-circle-check"></i>
+
+              <input
+                type="email"
+                id="verifiedEmail"
+                name="verified_email"
+                placeholder="Verified Email"
+                readonly
+              />
+            </div>
+
+            <!-- FIRST NAME -->
+            <div class="input-wrapper">
+              <i class="fa-solid fa-user"></i>
+
+              <input
+                type="text"
+                name="firstname"
+                placeholder="Enter First Name"
+                required
+              />
+            </div>
+
+            <!-- MIDDLE NAME -->
+            <div class="input-wrapper">
+              <i class="fa-solid fa-user"></i>
+
+              <input
+                type="text"
+                name="middlename"
+                placeholder="Enter Middle Name"
+                required
+              />
+            </div>
+
+            <!-- LAST NAME -->
+            <div class="input-wrapper">
+              <i class="fa-solid fa-user"></i>
+
+              <input
+                type="text"
+                name="lasttname"
+                placeholder="Enter Last Name"
+                required
+              />
+            </div>
+
+            <!-- PASSWORD -->
+            <div class="input-wrapper">
+              <i class="fa-solid fa-lock"></i>
+
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                required
+              />
+            </div>
+
+            <!-- CREATE ACCOUNT BUTTON -->
+            <button type="submit">
+              <i class="fa-solid fa-user-plus"></i>
+              Create Account
+            </button>
+
           </div>
 
-          <!-- LAST NAME -->
-          <div class="input-wrapper">
-            <i class="fa-solid fa-user"></i>
 
-            <input
-              type="text"
-              name="lasttname"
-              placeholder="Enter Last Name"
-              required
-            />
-          </div>
-
-          <!-- EMAIL -->
-          <div class="input-wrapper">
-            <i class="fa-solid fa-envelope"></i>
-
-            <input type="email" name="email" placeholder="Email" required />
-          </div>
-
-          <!-- PASSWORD -->
-          <div class="input-wrapper">
-            <i class="fa-solid fa-lock"></i>
-
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              required
-            />
-          </div>
-
-          <!-- SIGN UP BUTTON -->
-          <button type="submit">
-            <i class="fa-solid fa-user-plus"></i>
-
-            Sign Up
-          </button>
 
           <!-- =================================================
                  MOBILE: GO TO SIGN IN
@@ -386,6 +463,128 @@
 
       mobileSignIn.addEventListener("click", () => {
         container.classList.remove("right-panel-active");
+      });
+
+      /* =====================================================
+       SIGN-UP EMAIL VERIFICATION
+       UI DEMO FOR NOW
+
+       DEMO VERIFICATION CODE: 123456
+
+       For the real system, Django/backend should generate the
+       verification code and send it to the user's email.
+    ====================================================== */
+
+      const signUpForm = document.getElementById("signUpForm");
+      const emailVerificationStep =
+        document.getElementById("emailVerificationStep");
+      const accountCreationStep =
+        document.getElementById("accountCreationStep");
+
+      const signupEmail = document.getElementById("signupEmail");
+      const verifiedEmail = document.getElementById("verifiedEmail");
+
+      const sendVerificationButton =
+        document.getElementById("sendVerificationButton");
+
+      const verifyEmailButton =
+        document.getElementById("verifyEmailButton");
+
+      const verificationCodeWrapper =
+        document.getElementById("verificationCodeWrapper");
+
+      const verificationCode =
+        document.getElementById("verificationCode");
+
+      const verificationMessage =
+        document.getElementById("verificationMessage");
+
+      const signupSubtitle =
+        document.getElementById("signupSubtitle");
+
+      let verificationSent = false;
+      let emailVerified = false;
+
+      /* SEND VERIFICATION CODE */
+      sendVerificationButton.addEventListener("click", () => {
+        const email = signupEmail.value.trim();
+
+        if (!email || !signupEmail.checkValidity()) {
+          signupEmail.reportValidity();
+          return;
+        }
+
+        verificationSent = true;
+
+        verificationCodeWrapper.style.display = "flex";
+        verifyEmailButton.style.display = "flex";
+
+        verificationMessage.textContent =
+          "Verification code sent. Please check your email.";
+
+        verificationMessage.className =
+          "verification-message success";
+
+        verificationCode.focus();
+      });
+
+      /* VERIFY EMAIL */
+      verifyEmailButton.addEventListener("click", () => {
+        const code = verificationCode.value.trim();
+
+        if (!verificationSent) {
+          return;
+        }
+
+        /* UI TEST CODE */
+        if (code === "123456") {
+          emailVerified = true;
+
+          verifiedEmail.value = signupEmail.value.trim();
+
+          emailVerificationStep.style.display = "none";
+          accountCreationStep.style.display = "block";
+
+          signupSubtitle.textContent =
+            "Email verified. Complete your account information.";
+
+          const firstNameInput =
+            accountCreationStep.querySelector(
+              'input[name="firstname"]'
+            );
+
+          if (firstNameInput) {
+            firstNameInput.focus();
+          }
+
+        } else {
+          verificationMessage.textContent =
+            "Invalid verification code. Please try again.";
+
+          verificationMessage.className =
+            "verification-message error";
+
+          verificationCode.focus();
+        }
+      });
+
+      /* ONLY ALLOW NUMBERS IN VERIFICATION CODE */
+      verificationCode.addEventListener("input", () => {
+        verificationCode.value =
+          verificationCode.value.replace(/\D/g, "").slice(0, 6);
+      });
+
+      /* PREVENT ACCOUNT CREATION WITHOUT EMAIL VERIFICATION */
+      signUpForm.addEventListener("submit", (event) => {
+        if (!emailVerified) {
+          event.preventDefault();
+
+          verificationMessage.textContent =
+            "Please verify your email before creating your account.";
+
+          verificationMessage.className =
+            "verification-message error";
+        }
       });
 
       /* =====================================================
