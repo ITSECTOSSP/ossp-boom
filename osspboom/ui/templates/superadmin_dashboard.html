@@ -498,7 +498,6 @@
 
       /* =========================================================
    ATTENDANCE DETAIL PANEL
-   Shown when a report card (Present / On Leave / Total) is clicked.
 ========================================================= */
 
       .report-detail-panel {
@@ -698,6 +697,199 @@
           max-height: 210px;
         }
       }
+
+      /* =========================================================
+         DAILY / MONTHLY REPORT SECTIONS
+      ========================================================= */
+
+      .report-section {
+        padding: 14px 0 16px;
+        border-top: 1px solid #eef2f6;
+      }
+
+      .report-section:first-of-type {
+        border-top: none;
+        padding-top: 4px;
+      }
+
+      .report-section-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        margin-bottom: 14px;
+      }
+
+      .report-section-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .report-section-title h3 {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 700;
+        color: #1f2937;
+      }
+
+      .report-section-title p {
+        margin: 3px 0 0;
+        font-size: 11px;
+        color: #8a94a3;
+      }
+
+      .report-section-icon {
+        width: 38px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 9px;
+        color: #ffffff;
+        font-size: 15px;
+        flex-shrink: 0;
+      }
+
+      .report-section-icon.daily {
+        background: #075ca8;
+      }
+
+      .report-section-icon.monthly {
+        background: #c92127;
+      }
+
+      .report-date-control {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .report-date-control label {
+        font-size: 11px;
+        font-weight: 600;
+        color: #6b7280;
+      }
+
+      .report-date-control input {
+        height: 34px;
+        padding: 6px 9px;
+        border: 1px solid #dfe5ec;
+        border-radius: 7px;
+        background: #ffffff;
+        color: #1f2937;
+        font: inherit;
+        font-size: 11px;
+        outline: none;
+      }
+
+      .report-date-control input:focus {
+        border-color: #075ca8;
+        box-shadow: 0 0 0 2px rgba(7, 92, 168, 0.08);
+      }
+
+      .report-export-btn {
+        height: 34px;
+        padding: 6px 11px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        border: 1px solid #075ca8;
+        border-radius: 7px;
+        background: #075ca8;
+        color: #ffffff;
+        font: inherit;
+        font-size: 11px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.15s ease, transform 0.15s ease;
+        white-space: nowrap;
+      }
+
+      .report-export-btn:hover {
+        background: #063b73;
+        transform: translateY(-1px);
+      }
+
+      .report-export-btn:active {
+        transform: translateY(0);
+      }
+
+      .report-export-btn.monthly {
+        background: #c92127;
+        border-color: #c92127;
+      }
+
+      .report-export-btn.monthly:hover {
+        background: #9f1b20;
+      }
+
+      .report-header-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      @media screen and (max-width: 700px) {
+        .report-header-actions {
+          width: 100%;
+          justify-content: flex-start;
+        }
+      }
+
+      .report-card.absent i {
+        background: #c92127;
+      }
+
+      .report-card.late i {
+        background: #c92127;
+      }
+
+      .monthly-report-section {
+        margin-top: 2px;
+      }
+
+      @media screen and (max-width: 700px) {
+        .report-section-header {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .report-date-control {
+          width: 100%;
+          justify-content: space-between;
+        }
+
+        .report-date-control input {
+          flex: 1;
+          max-width: 180px;
+        }
+
+        .report-summary-daily {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .report-summary-monthly {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media screen and (max-width: 400px) {
+        .report-summary-daily {
+          grid-template-columns: 1fr;
+        }
+
+        .report-section-title h3 {
+          font-size: 13px;
+        }
+
+        .report-section-title p {
+          font-size: 10px;
+        }
+      }
     </style>
   </head>
 
@@ -805,8 +997,24 @@
 
       <div class="report-container" id="attendanceReportContainer">
         <div class="report-container-header">
-          <h2><i class="fa-solid fa-chart-column"></i>Attendance Report</h2>
-          <span class="report-updated" id="reportUpdatedLabel"></span>
+          <h2><i class="fa-solid fa-calendar-day"></i>Daily Reports</h2>
+
+          <div class="report-header-actions">
+            <div class="report-date-control">
+              <label for="dailyReportDate">Date</label>
+              <input type="date" id="dailyReportDate" />
+            </div>
+
+            <button
+              type="button"
+              class="report-export-btn"
+              onclick="exportDailyReport()"
+              title="Export Daily Report"
+            >
+              <i class="fa-solid fa-file-export"></i>
+              Export
+            </button>
+          </div>
         </div>
 
         <!-- OVERALL SUMMARY -->
@@ -829,6 +1037,23 @@
           </div>
 
           <div
+            class="report-card absent"
+            data-filter="absent"
+            role="button"
+            tabindex="0"
+            aria-pressed="false"
+            title="Show absent employees"
+            onclick="toggleAttendanceDetail('absent')"
+            onkeydown="handleReportCardKeydown(event, 'absent')"
+          >
+            <i class="fa-solid fa-circle-xmark"></i>
+            <div class="report-card-info">
+              <span class="report-card-value" id="reportTotalAbsent">0</span>
+              <span class="report-card-label">Absent</span>
+            </div>
+          </div>
+
+          <div
             class="report-card leave"
             data-filter="leave"
             role="button"
@@ -844,29 +1069,10 @@
               <span class="report-card-label">On Leave</span>
             </div>
           </div>
-
-          <div
-            class="report-card total"
-            data-filter="total"
-            role="button"
-            tabindex="0"
-            aria-pressed="false"
-            title="Show all employees"
-            onclick="toggleAttendanceDetail('total')"
-            onkeydown="handleReportCardKeydown(event, 'total')"
-          >
-            <i class="fa-solid fa-users"></i>
-            <div class="report-card-info">
-              <span class="report-card-value" id="reportTotalEmployees">0</span>
-              <span class="report-card-label">Total Employees</span>
-            </div>
-          </div>
         </div>
 
         <!-- =================================================
              ATTENDANCE DETAIL PANEL
-             Populated by toggleAttendanceDetail() in the script
-             below. Hidden until a report card is clicked.
         ================================================== -->
         <div class="report-detail-panel" id="reportDetailPanel" hidden>
           <div class="report-detail-header">
@@ -892,6 +1098,7 @@
               <tr>
                 <th>Division / Section</th>
                 <th>Present</th>
+                <th>Absent</th>
                 <th>On Leave</th>
                 <th>Total</th>
               </tr>
@@ -904,6 +1111,210 @@
             </tbody>
           </table>
         </div>
+      </div>
+
+
+      <!-- =========================================================
+         MONTHLY REPORT
+      ========================================================= -->
+
+      <div class="report-container" id="attendanceReportsContainer">
+
+        <!-- REPORT HEADER -->
+        <div class="report-container-header">
+          <h2>
+            <i class="fa-solid fa-file-chart-column"></i>
+            Reports
+          </h2>
+
+          <span class="report-updated">
+            Attendance Reports
+          </span>
+        </div>
+
+
+        <!-- =======================================================
+             DAILY REPORT
+        ======================================================== -->
+
+        <div class="report-section monthly-report-section">
+
+          <div class="report-section-header">
+
+            <div class="report-section-title">
+
+              <div class="report-section-icon monthly">
+                <i class="fa-solid fa-calendar-days"></i>
+              </div>
+
+              <div>
+                <h3>Monthly Report</h3>
+                <p>Monthly attendance summary of employees.</p>
+              </div>
+
+            </div>
+
+            <div class="report-header-actions">
+
+              <div class="report-date-control">
+                <label for="monthlyReportMonth">
+                  Month
+                </label>
+
+                <input
+                  type="month"
+                  id="monthlyReportMonth"
+                />
+              </div>
+
+              <button
+                type="button"
+                class="report-export-btn monthly"
+                onclick="exportMonthlyReport()"
+                title="Export Monthly Report"
+              >
+                <i class="fa-solid fa-file-export"></i>
+                Export
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <!-- MONTHLY REPORT CARDS -->
+
+          <div class="report-summary report-summary-monthly">
+
+            <!-- PRESENT -->
+
+            <div
+              class="report-card present"
+              role="button"
+              tabindex="0"
+              aria-pressed="false"
+              onclick="openMonthlyReport('present')"
+              onkeydown="handleMonthlyReportKeydown(event, 'present')"
+            >
+
+              <i class="fa-solid fa-circle-check"></i>
+
+              <div class="report-card-info">
+
+                <span
+                  class="report-card-value"
+                  id="monthlyReportPresent"
+                >
+                  0
+                </span>
+
+                <span class="report-card-label">
+                  Present
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <!-- ABSENT -->
+
+            <div
+              class="report-card absent"
+              role="button"
+              tabindex="0"
+              aria-pressed="false"
+              onclick="openMonthlyReport('absent')"
+              onkeydown="handleMonthlyReportKeydown(event, 'absent')"
+            >
+
+              <i class="fa-solid fa-circle-xmark"></i>
+
+              <div class="report-card-info">
+
+                <span
+                  class="report-card-value"
+                  id="monthlyReportAbsent"
+                >
+                  0
+                </span>
+
+                <span class="report-card-label">
+                  Absent
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <!-- ON LEAVE -->
+
+            <div
+              class="report-card late"
+              role="button"
+              tabindex="0"
+              aria-pressed="false"
+              onclick="openMonthlyReport('on_leave')"
+              onkeydown="handleMonthlyReportKeydown(event, 'on_leave')"
+            >
+
+              <i class="fa-solid fa-person-walking-arrow-right"></i>
+
+              <div class="report-card-info">
+
+                <span
+                  class="report-card-value"
+                  id="monthlyReportOnLeave"
+                >
+                  0
+                </span>
+
+                <span class="report-card-label">
+                  On Leave
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- MONTHLY REPORT DETAILS -->
+
+          <div
+            class="report-detail-panel"
+            id="monthlyReportDetailPanel"
+            hidden
+          >
+
+            <div class="report-detail-header">
+
+              <h3 id="monthlyReportDetailTitle">
+                Monthly Attendance
+              </h3>
+
+              <button
+                type="button"
+                class="report-detail-close"
+                onclick="closeMonthlyReport()"
+                aria-label="Close monthly report"
+              >
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+
+            </div>
+
+            <ul
+              class="report-detail-list"
+              id="monthlyReportDetailList"
+            ></ul>
+
+          </div>
+
+        </div>
+
       </div>
 
       <!-- =========================================================
@@ -2696,6 +3107,7 @@
         const divisionTotals = {};
 
         let totalPresent = 0;
+        let totalAbsent = 0;
         let totalLeave = 0;
 
         rows.forEach(function (row) {
@@ -2705,30 +3117,35 @@
             ? divisionCell.textContent.trim()
             : "Unassigned";
 
-          const status = (row.dataset.status || "Present").trim();
+          const status = (row.dataset.status || "Present").trim().toLowerCase();
 
           if (!divisionTotals[division]) {
-            divisionTotals[division] = { present: 0, leave: 0 };
+            divisionTotals[division] = {
+              present: 0,
+              absent: 0,
+              leave: 0,
+            };
           }
 
-          if (status === "Leave") {
+          if (status === "leave") {
             divisionTotals[division].leave += 1;
             totalLeave += 1;
+          } else if (status === "absent") {
+            divisionTotals[division].absent += 1;
+            totalAbsent += 1;
           } else {
             divisionTotals[division].present += 1;
             totalPresent += 1;
           }
         });
 
-        const totalEmployees = totalPresent + totalLeave;
-
         const presentEl = document.getElementById("reportTotalPresent");
+        const absentEl = document.getElementById("reportTotalAbsent");
         const leaveEl = document.getElementById("reportTotalLeave");
-        const totalEl = document.getElementById("reportTotalEmployees");
 
         if (presentEl) presentEl.textContent = totalPresent;
+        if (absentEl) absentEl.textContent = totalAbsent;
         if (leaveEl) leaveEl.textContent = totalLeave;
-        if (totalEl) totalEl.textContent = totalEmployees;
 
         const tbody = document.getElementById("reportDivisionTableBody");
 
@@ -2738,18 +3155,20 @@
 
         if (divisions.length === 0) {
           tbody.innerHTML =
-            '<tr class="report-empty-row"><td colspan="4">No data available.</td></tr>';
+            '<tr class="report-empty-row"><td colspan="5">No data available.</td></tr>';
         } else {
           tbody.innerHTML = divisions
             .map(function (division) {
               const counts = divisionTotals[division];
 
-              const divisionTotal = counts.present + counts.leave;
+              const divisionTotal =
+                counts.present + counts.absent + counts.leave;
 
               return (
                 "<tr>" +
                 "<td>" + division + "</td>" +
                 "<td>" + counts.present + "</td>" +
+                "<td>" + counts.absent + "</td>" +
                 "<td>" + counts.leave + "</td>" +
                 "<td>" + divisionTotal + "</td>" +
                 "</tr>"
@@ -2775,7 +3194,7 @@
 
       /* =========================================================
    ATTENDANCE DETAIL PANEL
-   Clicking a report card (Present / On Leave / Total Employees)
+   Clicking a report card (Present / Absent / On Leave)
    opens a panel listing the matching employees by name. Clicking
    the same card again, the close button, an outside click, or Esc
    closes it. All three cards share this same behavior.
@@ -2806,22 +3225,16 @@
         const employees = [];
 
         rows.forEach(function (row) {
-          const status = (row.dataset.status || "Present").trim();
+          const status = (row.dataset.status || "Present").trim().toLowerCase();
 
-          const isLeave = status === "Leave";
-
-          if (filter === "present" && isLeave) return;
-          if (filter === "leave" && !isLeave) return;
-          /* filter === "total" includes every employee */
+          if (filter === "present" && status !== "present") return;
+          if (filter === "absent" && status !== "absent") return;
+          if (filter === "leave" && status !== "leave") return;
 
           const empNo = row.cells[0] ? row.cells[0].textContent.trim() : "";
-
           const firstName = row.cells[1] ? row.cells[1].textContent.trim() : "";
-
           const middleName = row.cells[2] ? row.cells[2].textContent.trim() : "";
-
           const lastName = row.cells[3] ? row.cells[3].textContent.trim() : "";
-
           const division = row.cells[4] ? row.cells[4].textContent.trim() : "";
 
           const nameParts = [
@@ -2834,12 +3247,18 @@
             empNo: empNo,
             name: nameParts.join(" "),
             division: division,
-            status: isLeave ? "Leave" : "Present",
+            status:
+              status === "leave"
+                ? "Leave"
+                : status === "absent"
+                ? "Absent"
+                : "Present",
           });
         });
 
         return employees;
       }
+
 
       /* Open (or toggle closed) the detail panel for a given card. */
       function toggleAttendanceDetail(filter) {
@@ -2868,8 +3287,8 @@
 
         const titles = {
           present: "Present Employees",
+          absent: "Absent Employees",
           leave: "Employees On Leave",
-          total: "All Employees",
         };
 
         const titleEl = document.getElementById("reportDetailTitle");
@@ -2950,9 +3369,227 @@
         }
       }
 
+
+      /* =========================================================
+         DAILY / MONTHLY REPORTS
+         UI ONLY — values can later be populated from Django.
+      ========================================================= */
+
+      function setTodayReportDates() {
+        const today = new Date();
+
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, "0");
+        const day = String(today.getDate()).padStart(2, "0");
+
+        const dateValue = `${year}-${month}-${day}`;
+        const monthValue = `${year}-${month}`;
+
+        const dailyDate = document.getElementById("dailyReportDate");
+        const monthlyMonth = document.getElementById("monthlyReportMonth");
+
+        if (dailyDate && !dailyDate.value) {
+          dailyDate.value = dateValue;
+        }
+
+        if (monthlyMonth && !monthlyMonth.value) {
+          monthlyMonth.value = monthValue;
+        }
+      }
+
+      function openReportDetailPanel(panelId, title, listId) {
+        const panel = document.getElementById(panelId);
+        const titleElement = document.getElementById(title.id);
+        const list = document.getElementById(listId);
+
+        if (!panel || !titleElement || !list) return;
+
+        titleElement.textContent = title.text;
+
+        list.innerHTML = `
+          <li class="report-detail-empty">
+            Report data will appear here once attendance records are connected.
+          </li>
+        `;
+
+        panel.hidden = false;
+
+        requestAnimationFrame(function () {
+          panel.classList.add("open");
+        });
+      }
+
+      function closeReportDetailPanel(panelId) {
+        const panel = document.getElementById(panelId);
+
+        if (!panel) return;
+
+        panel.classList.remove("open");
+
+        setTimeout(function () {
+          if (!panel.classList.contains("open")) {
+            panel.hidden = true;
+          }
+        }, 250);
+      }
+
+      function openMonthlyReport(type) {
+        let title = "Monthly Attendance";
+
+        if (type === "present") {
+          title = "Monthly Present Employees";
+        } else if (type === "absent") {
+          title = "Monthly Absent Employees";
+        } else if (type === "late") {
+          title = "Monthly Late Employees";
+        }
+
+        openReportDetailPanel(
+          "monthlyReportDetailPanel",
+          {
+            id: "monthlyReportDetailTitle",
+            text: title,
+          },
+          "monthlyReportDetailList",
+        );
+      }
+
+      function closeMonthlyReport() {
+        closeReportDetailPanel("monthlyReportDetailPanel");
+      }
+
+      function handleMonthlyReportKeydown(event, type) {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          openMonthlyReport(type);
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        setTodayReportDates();
+      });
+
       /* =========================================================
    PLANTILLA LEAVE APPLICATION
 ========================================================= */
+
+      /* =========================================================
+         REPORT EXPORT
+         Exports the currently selected Daily / Monthly report
+         as a CSV file that opens in Excel or Google Sheets.
+      ========================================================= */
+
+      function downloadReportCsv(filename, rows) {
+        const csv = rows
+          .map(function (row) {
+            return row
+              .map(function (cell) {
+                const value =
+                  cell === null || cell === undefined ? "" : String(cell);
+
+                return '"' + value.replace(/"/g, '""') + '"';
+              })
+              .join(",");
+          })
+          .join("\r\n");
+
+        const blob = new Blob(["\uFEFF" + csv], {
+          type: "text/csv;charset=utf-8;",
+        });
+
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+
+        link.href = url;
+        link.download = filename;
+
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        URL.revokeObjectURL(url);
+      }
+
+      function exportDailyReport() {
+        const selectedDate =
+          document.getElementById("dailyReportDate")?.value ||
+          new Date().toISOString().slice(0, 10);
+
+        const present =
+          document.getElementById("reportTotalPresent")?.textContent.trim() || "0";
+
+        const absent =
+          document.getElementById("reportTotalAbsent")?.textContent.trim() || "0";
+
+        const onLeave =
+          document.getElementById("reportTotalLeave")?.textContent.trim() || "0";
+
+        const rows = [
+          ["OSSP BIOMETRICS MANAGEMENT SYSTEM"],
+          ["DAILY ATTENDANCE REPORT"],
+          ["Date", selectedDate],
+          [],
+          ["Attendance Status", "Employee Count"],
+          ["Present", present],
+          ["Absent", absent],
+          ["On Leave", onLeave],
+          [],
+          ["DIVISION / SECTION BREAKDOWN"],
+          ["Division / Section", "Present", "Absent", "On Leave", "Total"],
+        ];
+
+        document
+          .querySelectorAll("#reportDivisionTableBody tr")
+          .forEach(function (row) {
+            const cells = Array.from(row.cells).map(function (cell) {
+              return cell.textContent.trim();
+            });
+
+            if (cells.length === 5) {
+              rows.push(cells);
+            }
+          });
+
+        downloadReportCsv(
+          "OSSP_Daily_Attendance_Report_" +
+            selectedDate.replace(/[^0-9-]/g, "") +
+            ".csv",
+          rows
+        );
+      }
+
+      function exportMonthlyReport() {
+        const selectedMonth =
+          document.getElementById("monthlyReportMonth")?.value ||
+          new Date().toISOString().slice(0, 7);
+
+        const present =
+          document.getElementById("monthlyReportPresent")?.textContent.trim() || "0";
+
+        const absent =
+          document.getElementById("monthlyReportAbsent")?.textContent.trim() || "0";
+
+        const onLeave =
+          document.getElementById("monthlyReportOnLeave")?.textContent.trim() || "0";
+
+        const rows = [
+          ["OSSP BIOMETRICS MANAGEMENT SYSTEM"],
+          ["MONTHLY ATTENDANCE REPORT"],
+          ["Month", selectedMonth],
+          [],
+          ["Attendance Status", "Employee Count"],
+          ["Present", present],
+          ["Absent", absent],
+          ["On Leave", onLeave],
+        ];
+
+        downloadReportCsv(
+          "OSSP_Monthly_Attendance_Report_" +
+            selectedMonth.replace(/[^0-9-]/g, "") +
+            ".csv",
+          rows
+        );
+      }
 
       let currentPlantillaStep = 1;
 
