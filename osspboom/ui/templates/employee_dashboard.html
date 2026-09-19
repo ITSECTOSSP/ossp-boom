@@ -1541,6 +1541,397 @@
           font-size: 10px !important;
         }
       }
+
+
+      /* =========================================================
+         LEAVE HISTORY
+      ========================================================= */
+
+      .leave-history-section {
+        width: 100%;
+        margin-top: 18px;
+      }
+
+      .leave-history-container {
+        width: 100%;
+        background: #ffffff;
+        border: 1px solid #e6eaf0;
+        border-radius: 14px;
+        padding: 18px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+        box-sizing: border-box;
+      }
+
+      .leave-history-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        margin-bottom: 14px;
+      }
+
+      .leave-history-heading {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 0;
+      }
+
+      .leave-history-heading-icon {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        border-radius: 10px;
+        background: #eaf3fb;
+        color: #075ca8;
+        font-size: 16px;
+      }
+
+      .leave-history-heading h2 {
+        margin: 0;
+        color: #063b73;
+        font-size: 17px;
+        font-weight: 800;
+      }
+
+      .leave-history-heading p {
+        margin: 3px 0 0;
+        color: #7d8794;
+        font-size: 11px;
+        line-height: 1.4;
+      }
+
+      .leave-permission-note {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 10px;
+        border-radius: 20px;
+        background: #fff8e6;
+        color: #8a6500;
+        font-size: 10px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .leave-table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+        border: 1px solid #e9edf3;
+        border-radius: 10px;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      #leaveHistoryTable {
+        width: 100%;
+        min-width: 850px;
+        border-collapse: collapse;
+        font-family: "Montserrat", sans-serif;
+        font-size: 12px;
+      }
+
+      #leaveHistoryTable th {
+        padding: 11px 12px;
+        background: #075ca8;
+        color: #ffffff;
+        text-align: left;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      #leaveHistoryTable td {
+        padding: 10px 12px;
+        border-bottom: 1px solid #eef2f6;
+        color: #333f4d;
+        white-space: nowrap;
+        vertical-align: middle;
+      }
+
+      #leaveHistoryTable tbody tr:last-child td {
+        border-bottom: 0;
+      }
+
+      #leaveHistoryTable tbody tr:hover {
+        background: #f8fbfe;
+      }
+
+      .leave-type-cell {
+        font-weight: 700;
+        color: #063b73 !important;
+      }
+
+      .leave-days-cell {
+        text-align: center;
+        font-weight: 700;
+      }
+
+      .leave-action-buttons {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .leave-action-btn {
+        width: 30px;
+        height: 30px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #dfe5ec;
+        border-radius: 7px;
+        background: #ffffff;
+        cursor: pointer;
+        transition:
+          background 0.2s ease,
+          color 0.2s ease,
+          border-color 0.2s ease,
+          transform 0.2s ease;
+      }
+
+      .leave-action-btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .leave-action-btn.view {
+        color: #075ca8;
+      }
+
+      .leave-action-btn.view:hover {
+        background: #eaf3fb;
+        border-color: #b9d6ef;
+      }
+
+      .leave-action-btn.edit {
+        color: #8a6500;
+      }
+
+      .leave-action-btn.edit:hover {
+        background: #fff8e6;
+        border-color: #e7cf83;
+      }
+
+      .leave-action-btn.delete {
+        color: #c92127;
+      }
+
+      .leave-action-btn.delete:hover {
+        background: #fff0f1;
+        border-color: #efb8bb;
+      }
+
+      .leave-action-btn.disabled,
+      .leave-action-btn:disabled {
+        color: #b9c0c8;
+        background: #f4f6f8;
+        border-color: #e6eaf0;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .leave-empty-state {
+        padding: 28px 16px !important;
+        text-align: center !important;
+        color: #97a1ad !important;
+        font-style: italic;
+      }
+
+      .leave-empty-state i {
+        display: block;
+        margin-bottom: 7px;
+        font-size: 22px;
+        color: #b7c0ca;
+      }
+
+      /* =========================================================
+         LEAVE RECORD MODAL
+      ========================================================= */
+
+      .leave-record-modal {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.62);
+        z-index: 100001;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+
+      .leave-record-modal.show {
+        display: flex;
+      }
+
+      .leave-record-modal-box {
+        width: 100%;
+        max-width: 520px;
+        max-height: 92vh;
+        overflow-y: auto;
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 24px;
+        box-sizing: border-box;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+      }
+
+      .leave-record-modal-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+
+      .leave-record-modal-header h3 {
+        margin: 0;
+        color: #063b73;
+        font-size: 20px;
+        font-weight: 800;
+      }
+
+      .leave-record-close {
+        width: 35px;
+        height: 35px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        border-radius: 50%;
+        background: #f1f3f5;
+        color: #444;
+        cursor: pointer;
+      }
+
+      .leave-record-close:hover {
+        background: #c92127;
+        color: #ffffff;
+      }
+
+      .leave-record-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .leave-record-field {
+        min-width: 0;
+      }
+
+      .leave-record-field.full-width {
+        grid-column: 1 / -1;
+      }
+
+      .leave-record-field label {
+        display: block;
+        margin-bottom: 5px;
+        color: #6c7682;
+        font-size: 10px;
+        font-weight: 700;
+      }
+
+      .leave-record-field input {
+        width: 100%;
+        height: 38px;
+        padding: 8px 10px;
+        border: 1px solid #dfe5ec;
+        border-radius: 8px;
+        background: #f8fafc;
+        color: #243041;
+        font-family: "Montserrat", sans-serif;
+        font-size: 11px;
+        box-sizing: border-box;
+        outline: none;
+      }
+
+      .leave-record-field input:not([readonly]):focus {
+        background: #ffffff;
+        border-color: #075ca8;
+        box-shadow: 0 0 0 2px rgba(7, 92, 168, 0.08);
+      }
+
+      .leave-record-modal-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 8px;
+        margin-top: 18px;
+      }
+
+      .leave-record-btn {
+        min-width: 95px;
+        height: 38px;
+        padding: 8px 13px;
+        border-radius: 8px;
+        font-family: "Montserrat", sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .leave-record-btn.cancel {
+        border: 1px solid #dfe5ec;
+        background: #f5f6f8;
+        color: #444;
+      }
+
+      .leave-record-btn.save {
+        border: none;
+        background: #075ca8;
+        color: #ffffff;
+      }
+
+      .leave-record-btn.save:hover {
+        background: #063b73;
+      }
+
+      .leave-record-view-note {
+        margin-top: 14px;
+        padding: 10px 12px;
+        border-radius: 8px;
+        background: #f7f9fc;
+        color: #6d7885;
+        font-size: 10px;
+        line-height: 1.5;
+      }
+
+      @media screen and (max-width: 700px) {
+        .leave-history-container {
+          padding: 14px;
+        }
+
+        .leave-history-header {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .leave-permission-note {
+          white-space: normal;
+        }
+
+        .leave-record-modal {
+          padding: 12px;
+        }
+
+        .leave-record-modal-box {
+          max-width: 100%;
+          max-height: 94vh;
+          padding: 20px;
+          border-radius: 13px;
+        }
+
+        .leave-record-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .leave-record-field.full-width {
+          grid-column: auto;
+        }
+      }
+
     </style>
   </head>
 
@@ -1722,6 +2113,52 @@
 
               <p>Office Aide</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================
+         LEAVE HISTORY
+    ====================================================== -->
+
+      <section class="leave-history-section">
+        <div class="leave-history-container">
+          <div class="leave-history-header">
+            <div class="leave-history-heading">
+              <div class="leave-history-heading-icon">
+                <i class="fa-solid fa-calendar-check"></i>
+              </div>
+
+              <div>
+                <h2>Leave Records</h2>
+                <p>View and manage your personal leave applications.</p>
+              </div>
+            </div>
+
+
+          </div>
+
+          <div class="leave-table-wrapper">
+            <table id="leaveHistoryTable">
+              <thead>
+                <tr>
+                  <th>Date Filed</th>
+                  <th>Inclusive Dates</th>
+                  <th>Working Days</th>
+                  <th>Type of Leave</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+
+              <tbody id="leaveHistoryTableBody">
+                <tr>
+                  <td class="leave-empty-state" colspan="5">
+                    <i class="fa-regular fa-folder-open"></i>
+                    No leave records yet.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </section>
@@ -3281,10 +3718,521 @@
      JAVASCRIPT
 ========================================================= -->
 
+    <!-- =========================================================
+     LEAVE RECORD VIEW / EDIT MODAL
+========================================================= -->
+
+    <div
+      class="leave-record-modal"
+      id="leaveRecordModal"
+      onclick="closeLeaveRecordModal(event)"
+    >
+      <div class="leave-record-modal-box" onclick="event.stopPropagation()">
+        <div class="leave-record-modal-header">
+          <h3 id="leaveRecordModalTitle">Leave Record</h3>
+
+          <button
+            type="button"
+            class="leave-record-close"
+            onclick="closeLeaveRecordModal()"
+            aria-label="Close leave record"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <div class="leave-record-grid">
+          <div class="leave-record-field">
+            <label for="leaveRecordDateFiled">Date Filed</label>
+            <input type="date" id="leaveRecordDateFiled" />
+          </div>
+
+          <div class="leave-record-field">
+            <label for="leaveRecordWorkingDays">Working Days</label>
+            <input type="number" id="leaveRecordWorkingDays" readonly />
+          </div>
+
+          <div class="leave-record-field">
+            <label for="leaveRecordDateFrom">From</label>
+            <input type="date" id="leaveRecordDateFrom" onchange="recalculateLeaveRecordWorkingDays()" />
+          </div>
+
+          <div class="leave-record-field">
+            <label for="leaveRecordDateTo">To</label>
+            <input type="date" id="leaveRecordDateTo" onchange="recalculateLeaveRecordWorkingDays()" />
+          </div>
+
+          <div class="leave-record-field full-width">
+            <label for="leaveRecordType">Type of Leave</label>
+            <input type="text" id="leaveRecordType" />
+          </div>
+        </div>
+
+        <div class="leave-record-view-note" id="leaveRecordViewNote">
+          View your submitted leave information here.
+        </div>
+
+        <div class="leave-record-modal-actions">
+          <button
+            type="button"
+            class="leave-record-btn cancel"
+            onclick="closeLeaveRecordModal()"
+          >
+            Close
+          </button>
+
+          <button
+            type="button"
+            class="leave-record-btn save"
+            id="leaveRecordSaveButton"
+            onclick="saveLeaveRecordEdit()"
+          >
+            Save Changes
+          </button>
+        </div>
+      </div>
+    </div>
+
     <script>
       const EMPLOYEE_NAME = "ROWELL AGRIPA BALUYOT";
 
       const EMPLOYEE_ID = "OSSP-003";
+
+      /* =========================================================
+         LEAVE RECORDS
+         UI/localStorage layer for the employee leave history.
+         The permission window is configurable here.
+      ========================================================= */
+
+      const LEAVE_STORAGE_KEY = `ossp_leave_records_${EMPLOYEE_ID}`;
+
+      /*
+         Number of calendar days after Date Filed during which
+         the employee may Edit or Delete their personal leave.
+         Change this single value later to adjust the permission window.
+      */
+      const LEAVE_EDIT_DELETE_WINDOW_DAYS = 3;
+
+      let leaveRecords = JSON.parse(
+        localStorage.getItem(LEAVE_STORAGE_KEY) || "[]",
+      );
+
+      let activeLeaveRecordId = null;
+      let leaveRecordModalMode = "view";
+
+      function saveLeaveRecords() {
+        localStorage.setItem(LEAVE_STORAGE_KEY, JSON.stringify(leaveRecords));
+      }
+
+      function escapeLeaveHtml(value) {
+        return String(value ?? "").replace(/[&<>"']/g, function (ch) {
+          return (
+            {
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            }[ch] || ch
+          );
+        });
+      }
+
+      function formatLeaveDate(dateString) {
+        if (!dateString) return "—";
+
+        const date = new Date(dateString + "T00:00:00");
+
+        return date.toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        });
+      }
+
+      function formatLeaveDateRange(from, to) {
+        if (!from && !to) return "—";
+        if (from && !to) return formatLeaveDate(from);
+        if (!from && to) return formatLeaveDate(to);
+
+        return formatLeaveDate(from) + " - " + formatLeaveDate(to);
+      }
+
+      function getLeaveWorkingDays(fromValue, toValue) {
+        if (!fromValue || !toValue) return 0;
+
+        const startDate = new Date(fromValue + "T00:00:00");
+        const endDate = new Date(toValue + "T00:00:00");
+
+        if (endDate < startDate) return 0;
+
+        let count = 0;
+        const currentDate = new Date(startDate);
+
+        while (currentDate <= endDate) {
+          const day = currentDate.getDay();
+
+          if (day !== 0 && day !== 6) {
+            count++;
+          }
+
+          currentDate.setDate(currentDate.getDate() + 1);
+        }
+
+        return count;
+      }
+
+      function getTodayDateOnly() {
+        return new Date(getTodayString() + "T00:00:00");
+      }
+
+      function canModifyLeaveRecord(record) {
+        if (!record || !record.dateFiled) return false;
+
+        const filedDate = new Date(record.dateFiled + "T00:00:00");
+
+        const cutoffDate = new Date(filedDate);
+
+        cutoffDate.setDate(
+          cutoffDate.getDate() + LEAVE_EDIT_DELETE_WINDOW_DAYS,
+        );
+
+        return getTodayDateOnly() <= cutoffDate;
+      }
+
+      
+
+      function renderLeaveRecords() {
+        const tbody = document.getElementById("leaveHistoryTableBody");
+        const note = document.getElementById("leavePermissionNoteText");
+
+        if (!tbody) return;
+
+        if (note) {
+          note.textContent = getLeavePermissionMessage();
+        }
+
+        if (!leaveRecords.length) {
+          tbody.innerHTML = `
+            <tr>
+              <td class="leave-empty-state" colspan="5">
+                <i class="fa-regular fa-folder-open"></i>
+                No leave records yet.
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        const sortedRecords = leaveRecords.slice().sort(function (a, b) {
+          return String(b.dateFiled || "").localeCompare(String(a.dateFiled || ""));
+        });
+
+        tbody.innerHTML = sortedRecords
+          .map(function (record) {
+            const canModify = canModifyLeaveRecord(record);
+
+            const editButton = canModify
+              ? `
+                <button
+                  type="button"
+                  class="leave-action-btn edit"
+                  onclick="openLeaveEditModal('${escapeLeaveHtml(record.id)}')"
+                  title="Edit"
+                  aria-label="Edit leave record"
+                >
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+              `
+              : `
+                <button
+                  type="button"
+                  class="leave-action-btn edit disabled"
+                  disabled
+                  title="Edit period has expired"
+                  aria-label="Edit unavailable"
+                >
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+              `;
+
+            const deleteButton = canModify
+              ? `
+                <button
+                  type="button"
+                  class="leave-action-btn delete"
+                  onclick="deleteLeaveRecord('${escapeLeaveHtml(record.id)}')"
+                  title="Delete"
+                  aria-label="Delete leave record"
+                >
+                  <i class="fa-solid fa-trash-can"></i>
+                </button>
+              `
+              : `
+                <button
+                  type="button"
+                  class="leave-action-btn delete disabled"
+                  disabled
+                  title="Delete period has expired"
+                  aria-label="Delete unavailable"
+                >
+                  <i class="fa-solid fa-trash-can"></i>
+                </button>
+              `;
+
+            return `
+              <tr>
+                <td>${escapeLeaveHtml(formatLeaveDate(record.dateFiled))}</td>
+                <td>${escapeLeaveHtml(formatLeaveDateRange(record.dateFrom, record.dateTo))}</td>
+                <td class="leave-days-cell">${escapeLeaveHtml(record.workingDays || 0)}</td>
+                <td class="leave-type-cell">${escapeLeaveHtml(record.leaveType || "—")}</td>
+                <td>
+                  <div class="leave-action-buttons">
+                    <button
+                      type="button"
+                      class="leave-action-btn view"
+                      onclick="openLeaveViewModal('${escapeLeaveHtml(record.id)}')"
+                      title="View"
+                      aria-label="View leave record"
+                    >
+                      <i class="fa-solid fa-eye"></i>
+                    </button>
+
+                    ${editButton}
+                    ${deleteButton}
+                  </div>
+                </td>
+              </tr>
+            `;
+          })
+          .join("");
+      }
+
+      function addLeaveRecord(record) {
+        const completeRecord = Object.assign(
+          {
+            id:
+              "LEAVE-" +
+              Date.now() +
+              "-" +
+              Math.random().toString(36).slice(2, 8),
+            employeeId: EMPLOYEE_ID,
+            employeeName: EMPLOYEE_NAME,
+            dateFiled: "",
+            dateFrom: "",
+            dateTo: "",
+            workingDays: 0,
+            leaveType: "",
+          },
+          record,
+        );
+
+        leaveRecords.push(completeRecord);
+        saveLeaveRecords();
+        renderLeaveRecords();
+      }
+
+      function findLeaveRecord(recordId) {
+        return leaveRecords.find(function (record) {
+          return String(record.id) === String(recordId);
+        }) || null;
+      }
+
+      function openLeaveViewModal(recordId) {
+        const record = findLeaveRecord(recordId);
+
+        if (!record) return;
+
+        leaveRecordModalMode = "view";
+        activeLeaveRecordId = record.id;
+
+        fillLeaveRecordModal(record);
+
+        document.getElementById("leaveRecordModalTitle").textContent =
+          "View Leave Record";
+
+        setLeaveRecordModalEditable(false);
+
+        const note = document.getElementById("leaveRecordViewNote");
+
+        if (note) {
+          note.textContent = canModifyLeaveRecord(record)
+            ? getLeavePermissionMessage()
+            : "This leave record is outside the Edit/Delete permission period.";
+        }
+
+        document.getElementById("leaveRecordModal").classList.add("show");
+        document.body.style.overflow = "hidden";
+      }
+
+      function openLeaveEditModal(recordId) {
+        const record = findLeaveRecord(recordId);
+
+        if (!record) return;
+
+        if (!canModifyLeaveRecord(record)) {
+          alert("The Edit/Delete permission period for this leave has expired.");
+          renderLeaveRecords();
+          return;
+        }
+
+        leaveRecordModalMode = "edit";
+        activeLeaveRecordId = record.id;
+
+        fillLeaveRecordModal(record);
+
+        document.getElementById("leaveRecordModalTitle").textContent =
+          "Edit Leave Record";
+
+        setLeaveRecordModalEditable(true);
+
+        const note = document.getElementById("leaveRecordViewNote");
+
+        if (note) {
+          note.textContent = getLeavePermissionMessage();
+        }
+
+        document.getElementById("leaveRecordModal").classList.add("show");
+        document.body.style.overflow = "hidden";
+      }
+
+      function fillLeaveRecordModal(record) {
+        document.getElementById("leaveRecordDateFiled").value =
+          record.dateFiled || "";
+        document.getElementById("leaveRecordDateFrom").value =
+          record.dateFrom || "";
+        document.getElementById("leaveRecordDateTo").value =
+          record.dateTo || "";
+        document.getElementById("leaveRecordWorkingDays").value =
+          record.workingDays ||
+          getLeaveWorkingDays(record.dateFrom, record.dateTo) ||
+          "";
+        document.getElementById("leaveRecordType").value =
+          record.leaveType || "";
+      }
+
+      function setLeaveRecordModalEditable(isEditable) {
+        const dateFiled = document.getElementById("leaveRecordDateFiled");
+        const dateFrom = document.getElementById("leaveRecordDateFrom");
+        const dateTo = document.getElementById("leaveRecordDateTo");
+        const leaveType = document.getElementById("leaveRecordType");
+        const saveButton = document.getElementById("leaveRecordSaveButton");
+
+        [dateFiled, dateFrom, dateTo, leaveType].forEach(function (field) {
+          if (!field) return;
+          field.readOnly = !isEditable;
+        });
+
+        if (saveButton) {
+          saveButton.style.display = isEditable ? "inline-flex" : "none";
+        }
+      }
+
+      function recalculateLeaveRecordWorkingDays() {
+        const from = document.getElementById("leaveRecordDateFrom");
+        const to = document.getElementById("leaveRecordDateTo");
+        const workingDays = document.getElementById("leaveRecordWorkingDays");
+
+        if (!from || !to || !workingDays) return;
+
+        const value = getLeaveWorkingDays(from.value, to.value);
+
+        workingDays.value = value || "";
+      }
+
+      function saveLeaveRecordEdit() {
+        if (leaveRecordModalMode !== "edit" || !activeLeaveRecordId) {
+          return;
+        }
+
+        const record = findLeaveRecord(activeLeaveRecordId);
+
+        if (!record) return;
+
+        if (!canModifyLeaveRecord(record)) {
+          alert("The Edit/Delete permission period for this leave has expired.");
+          closeLeaveRecordModal();
+          renderLeaveRecords();
+          return;
+        }
+
+        const dateFiled = document.getElementById("leaveRecordDateFiled");
+        const dateFrom = document.getElementById("leaveRecordDateFrom");
+        const dateTo = document.getElementById("leaveRecordDateTo");
+        const leaveType = document.getElementById("leaveRecordType");
+
+        if (!dateFiled.value || !dateFrom.value || !dateTo.value || !leaveType.value.trim()) {
+          alert("Please complete all leave record fields.");
+          return;
+        }
+
+        const startDate = new Date(dateFrom.value + "T00:00:00");
+        const endDate = new Date(dateTo.value + "T00:00:00");
+
+        if (endDate < startDate) {
+          alert("The To date cannot be earlier than the From date.");
+          return;
+        }
+
+        record.dateFiled = dateFiled.value;
+        record.dateFrom = dateFrom.value;
+        record.dateTo = dateTo.value;
+        record.workingDays = getLeaveWorkingDays(dateFrom.value, dateTo.value);
+        record.leaveType = leaveType.value.trim();
+
+        saveLeaveRecords();
+        renderLeaveRecords();
+        closeLeaveRecordModal();
+      }
+
+      function deleteLeaveRecord(recordId) {
+        const record = findLeaveRecord(recordId);
+
+        if (!record) return;
+
+        if (!canModifyLeaveRecord(record)) {
+          alert("The Edit/Delete permission period for this leave has expired.");
+          renderLeaveRecords();
+          return;
+        }
+
+        const confirmed = window.confirm(
+          "Are you sure you want to delete this leave record?",
+        );
+
+        if (!confirmed) return;
+
+        leaveRecords = leaveRecords.filter(function (item) {
+          return String(item.id) !== String(recordId);
+        });
+
+        saveLeaveRecords();
+        renderLeaveRecords();
+      }
+
+      function closeLeaveRecordModal(event) {
+        if (event && event.target !== event.currentTarget) {
+          return;
+        }
+
+        const modal = document.getElementById("leaveRecordModal");
+
+        if (modal) {
+          modal.classList.remove("show");
+        }
+
+        activeLeaveRecordId = null;
+        leaveRecordModalMode = "view";
+        document.body.style.overflow = "";
+      }
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          closeLeaveRecordModal();
+        }
+      });
+
+      renderLeaveRecords();
 
       /* =========================================================
      DTR RECORDS
@@ -5076,6 +6024,33 @@
   ========================================================= */
 
       function submitCOSLeave() {
+        const filingDate = document.getElementById("cosDateOfFiling");
+        const leaveType = document.getElementById("cosLeaveType");
+        const otherLeave = document.getElementById("cosOtherLeave");
+        const dateFrom = document.getElementById("cosDateFrom");
+        const dateTo = document.getElementById("cosDateTo");
+        const workingDays = document.getElementById("cosWorkingDays");
+
+        let finalLeaveType = leaveType ? leaveType.value : "";
+
+        if (finalLeaveType === "Others" && otherLeave && otherLeave.value.trim()) {
+          finalLeaveType = otherLeave.value.trim();
+        }
+
+        addLeaveRecord({
+          dateFiled: filingDate ? filingDate.value : getTodayString(),
+          dateFrom: dateFrom ? dateFrom.value : "",
+          dateTo: dateTo ? dateTo.value : "",
+          workingDays: workingDays && workingDays.value
+            ? Number(workingDays.value)
+            : getLeaveWorkingDays(
+                dateFrom ? dateFrom.value : "",
+                dateTo ? dateTo.value : "",
+              ),
+          leaveType: finalLeaveType,
+          employmentType: "COS",
+        });
+
         const successModal = document.getElementById("cosSuccessModal");
 
         const cosModal = document.getElementById("cosLeaveModal");
@@ -5823,6 +6798,33 @@
       function submitPlantillaLeave() {
         /* Refresh filing date */
         setPlantillaDateOfFiling();
+
+        const filingDate = document.getElementById("plantillaDateOfFiling");
+        const leaveType = document.getElementById("plantillaLeaveType");
+        const otherLeave = document.getElementById("plantillaOtherLeave");
+        const dateFrom = document.getElementById("plantillaDateFrom");
+        const dateTo = document.getElementById("plantillaDateTo");
+        const workingDays = document.getElementById("plantillaWorkingDays");
+
+        let finalLeaveType = leaveType ? leaveType.value : "";
+
+        if (finalLeaveType === "Others" && otherLeave && otherLeave.value.trim()) {
+          finalLeaveType = otherLeave.value.trim();
+        }
+
+        addLeaveRecord({
+          dateFiled: filingDate ? filingDate.value : getTodayString(),
+          dateFrom: dateFrom ? dateFrom.value : "",
+          dateTo: dateTo ? dateTo.value : "",
+          workingDays: workingDays && workingDays.value
+            ? Number(workingDays.value)
+            : getLeaveWorkingDays(
+                dateFrom ? dateFrom.value : "",
+                dateTo ? dateTo.value : "",
+              ),
+          leaveType: finalLeaveType,
+          employmentType: "Plantilla",
+        });
 
         const modal = document.getElementById("plantillaLeaveModal");
 
