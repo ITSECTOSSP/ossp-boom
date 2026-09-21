@@ -1521,16 +1521,18 @@
 
       .leave-history-section {
         width: 100%;
-        margin-top: 18px;
+        max-width: 1500px;
+        margin: 0 auto 30px;
+        box-sizing: border-box;
       }
 
       .leave-history-container {
-        width: 100%;
-        background: #ffffff;
-        border: 1px solid #e6eaf0;
+        width: 100% !important;
+        background: rgba(255, 255, 255, 0.97);
+        border: 1px solid rgba(255, 255, 255, 0.5);
         border-radius: 14px;
-        padding: 18px;
-        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+        padding: 30px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
         box-sizing: border-box;
       }
 
@@ -1858,7 +1860,7 @@
 
       @media screen and (max-width: 700px) {
         .leave-history-container {
-          padding: 14px;
+          padding: 22px;
         }
 
         .leave-history-header {
@@ -1882,6 +1884,19 @@
 
         .leave-record-field.full-width {
           grid-column: auto;
+        }
+      }
+
+      @media screen and (max-width: 600px) {
+        .leave-history-container {
+          padding: 16px;
+          border-radius: 11px;
+        }
+      }
+
+      @media screen and (max-width: 400px) {
+        .leave-history-container {
+          padding: 13px;
         }
       }
 
