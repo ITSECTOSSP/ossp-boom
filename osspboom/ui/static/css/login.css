@@ -1,2040 +1,2137 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800');
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800");
 
 /* =========================================
+
    GLOBAL
+
 ========================================= */
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
-
 
 body {
-    background-image:
-        linear-gradient(
-            135deg,
-            rgba(6, 59, 115, 0.70) 0%,
-            rgba(7, 92, 168, 0.55) 50%,
-            rgba(201, 33, 39, 0.65) 100%
-        ),
-        url("../image/legis.jpg");
+  background-image:
+    linear-gradient(
+      135deg,
+      rgba(6, 59, 115, 0.7) 0%,
 
-    background-size: cover;
+      rgba(7, 92, 168, 0.55) 50%,
 
-    background-position: center center;
+      rgba(201, 33, 39, 0.65) 100%
+    ),
+    url("../image/legis.jpg");
 
-    background-repeat: no-repeat;
+  background-size: cover;
 
-    background-attachment: fixed;
+  background-position: center center;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-repeat: no-repeat;
 
-    font-family: 'Montserrat', sans-serif;
+  background-attachment: fixed;
 
-    min-height: 100vh;
+  display: flex;
 
-    margin: 0;
+  justify-content: center;
+
+  align-items: center;
+
+  font-family: "Montserrat", sans-serif;
+
+  min-height: 100vh;
+
+  margin: 0;
 }
 
-
 /* =========================================
+
    TYPOGRAPHY
+
 ========================================= */
 
 h1 {
-    font-weight: 800;
-    margin: 10px 0;
-    color: #123b6d;
+  font-weight: 800;
+
+  margin: 10px 0;
+
+  color: #123b6d;
 }
 
 p {
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 21px;
-    letter-spacing: 0.3px;
-    margin: 15px 0 25px;
+  font-size: 14px;
+
+  font-weight: 400;
+
+  line-height: 21px;
+
+  letter-spacing: 0.3px;
+
+  margin: 15px 0 25px;
 }
 
 span {
-    font-size: 12px;
-    color: #777;
+  font-size: 12px;
+
+  color: #777;
 }
 
 a {
-    color: #174f8c;
-    font-size: 13px;
-    text-decoration: none;
-    margin: 12px 0;
+  color: #174f8c;
+
+  font-size: 13px;
+
+  text-decoration: none;
+
+  margin: 12px 0;
 }
 
 a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
-
 /* =========================================
+
    MAIN CONTAINER
+
 ========================================= */
 
 .container {
-    background-color: #ffffff;
-    border-radius: 14px;
+  background-color: #ffffff;
 
-    box-shadow:
-        0 15px 35px rgba(0, 0, 0, 0.15),
-        0 5px 15px rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
 
-    position: relative;
-    overflow: hidden;
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.15),
+    0 5px 15px rgba(0, 0, 0, 0.08);
 
-    width: 900px;
-    max-width: 95%;
-    min-height: 560px;
+  position: relative;
+
+  overflow: hidden;
+
+  width: 900px;
+
+  max-width: 95%;
+
+  min-height: 560px;
 }
 
-
 /* =========================================
+
    FORM CONTAINER
+
 ========================================= */
 
 .form-container {
-    position: absolute;
-    top: 0;
+  position: absolute;
 
-    height: 100%;
+  top: 0;
 
-    transition: all 0.6s ease-in-out;
+  height: 100%;
+
+  transition: all 0.6s ease-in-out;
 }
 
-
 /* =========================================
+
    SIGN IN
+
 ========================================= */
 
 .sign-in-container {
-    left: 0;
-    width: 50%;
-    z-index: 2;
+  left: 0;
+
+  width: 50%;
+
+  z-index: 2;
 }
 
-
 /* =========================================
+
    SIGN UP
+
 ========================================= */
 
 .sign-up-container {
-    left: 0;
-    width: 50%;
+  left: 0;
 
-    opacity: 0;
-    z-index: 1;
+  width: 50%;
+
+  opacity: 0;
+
+  z-index: 1;
 }
 
-
 /* =========================================
+
    ACTIVE SIGN UP
+
 ========================================= */
 
 .container.right-panel-active .sign-in-container {
-    transform: translateX(100%);
+  transform: translateX(100%);
 }
 
 .container.right-panel-active .sign-up-container {
-    transform: translateX(100%);
+  transform: translateX(100%);
 
-    opacity: 1;
-    z-index: 5;
+  opacity: 1;
 
-    animation: show 0.6s;
+  z-index: 5;
+
+  animation: show 0.6s;
 }
 
-
 /* =========================================
+
    FORM ANIMATION
+
 ========================================= */
 
 @keyframes show {
+  0%,
+  49.99% {
+    opacity: 0;
 
-    0%,
-    49.99% {
-        opacity: 0;
-        z-index: 1;
-    }
+    z-index: 1;
+  }
 
-    50%,
-    100% {
-        opacity: 1;
-        z-index: 5;
-    }
+  50%,
+  100% {
+    opacity: 1;
+
+    z-index: 5;
+  }
 }
 
-
 /* =========================================
+
    FORM
+
 ========================================= */
 
 form {
-    background-color: #ffffff;
+  background-color: #ffffff;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+  display: flex;
 
-    padding: 35px 55px;
+  align-items: center;
 
-    height: 100%;
+  justify-content: center;
 
-    text-align: center;
+  flex-direction: column;
+
+  padding: 35px 55px;
+
+  height: 100%;
+
+  text-align: center;
 }
 
-
 /* =========================================
+
    LOGO
+
 ========================================= */
 
 .logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
 
-    margin-bottom: 8px;
+  justify-content: center;
+
+  align-items: center;
+
+  margin-bottom: 8px;
 }
 
 .logo-img {
-    width: 75px;
-    height: 75px;
+  width: 75px;
 
-    object-fit: contain;
+  height: 75px;
+
+  object-fit: contain;
 }
 
-
 /* =========================================
+
    SYSTEM TITLE
+
 ========================================= */
 
 .system-title {
-    color: #d62828;
+  color: #d62828;
 
-    font-size: 13px;
-    font-weight: 700;
+  font-size: 13px;
 
-    margin: 2px 0 8px;
+  font-weight: 700;
 
-    letter-spacing: 1px;
+  margin: 2px 0 8px;
+
+  letter-spacing: 1px;
 }
 
-
 /* =========================================
+
    INPUT
+
 ========================================= */
 
 .input-wrapper {
-    position: relative;
+  position: relative;
 
-    width: 100%;
+  width: 100%;
 
-    margin: 7px 0;
+  margin: 7px 0;
 }
-
 
 /* Input icons */
 
 .input-wrapper > i:first-child {
-    position: absolute;
+  position: absolute;
 
-    left: 15px;
-    top: 50%;
+  left: 15px;
 
-    transform: translateY(-50%);
+  top: 50%;
 
-    color: #175a9c;
+  transform: translateY(-50%);
 
-    font-size: 14px;
+  color: #175a9c;
 
-    z-index: 2;
+  font-size: 14px;
+
+  z-index: 2;
 }
-
 
 /* Input fields */
 
 .input-wrapper input {
-    background-color: #f1f4f8;
+  background-color: #f1f4f8;
 
-    border: 1px solid transparent;
-    border-radius: 7px;
+  border: 1px solid transparent;
 
-    padding: 13px 42px;
+  border-radius: 7px;
 
-    margin: 0;
+  padding: 13px 42px;
 
-    width: 100%;
+  margin: 0;
 
-    font-family: 'Montserrat', sans-serif;
-    font-size: 13px;
+  width: 100%;
 
-    outline: none;
+  height: 30px;
 
-    transition:
-        border 0.2s ease,
-        box-shadow 0.2s ease,
-        background-color 0.2s ease;
+  font-family: "Montserrat", sans-serif;
+
+  font-size: 13px;
+
+  outline: none;
+
+  transition:
+    border 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
 }
-
 
 /* Input focus */
 
 .input-wrapper input:focus {
-    background-color: #ffffff;
+  background-color: #ffffff;
 
-    border-color: #1769aa;
+  border-color: #1769aa;
 
-    box-shadow:
-        0 0 0 3px rgba(23, 105, 170, 0.10);
+  box-shadow: 0 0 0 3px rgba(23, 105, 170, 0.1);
 }
-
 
 /* Placeholder */
 
 .input-wrapper input::placeholder {
-    color: #999;
+  color: #999;
 }
 
-
 /* =========================================
+
    PASSWORD TOGGLE
+
 ========================================= */
 
 .password-toggle {
-    position: absolute;
+  position: absolute;
 
-    right: 15px;
-    top: 50%;
+  right: 15px;
 
-    transform: translateY(-50%);
+  top: 50%;
 
-    color: #777;
+  transform: translateY(-50%);
 
-    cursor: pointer;
+  color: #777;
 
-    font-size: 14px;
+  cursor: pointer;
 
-    transition: color 0.2s ease;
+  font-size: 14px;
+
+  transition: color 0.2s ease;
 }
 
 .password-toggle:hover {
-    color: #d62828;
+  color: #d62828;
 }
 
-
 /* =========================================
+
    BUTTON
+
 ========================================= */
 
 button {
-    border-radius: 25px;
+  border-radius: 25px;
 
-    border: none;
+  border: none;
 
-    background: #d62828;
+  background: #d62828;
 
-    color: #ffffff;
+  color: #ffffff;
 
-    cursor: pointer;
+  cursor: pointer;
 
-    font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 
-    font-size: 12px;
-    font-weight: 700;
+  font-size: 12px;
 
-    padding: 13px 42px;
+  font-weight: 700;
 
-    margin-top: 15px;
+  padding: 13px 42px;
 
-    letter-spacing: 0.8px;
+  margin-top: 15px;
 
-    text-transform: uppercase;
+  letter-spacing: 0.8px;
 
-    transition:
-        transform 0.15s ease,
-        background 0.2s ease,
-        box-shadow 0.2s ease;
+  text-transform: uppercase;
+
+  transition:
+    transform 0.15s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
 }
-
 
 /* Button hover */
 
 button:hover {
-    background: #b91f1f;
+  background: #b91f1f;
 
-    box-shadow:
-        0 5px 15px rgba(214, 40, 40, 0.30);
+  box-shadow: 0 5px 15px rgba(214, 40, 40, 0.3);
 
-    transform: translateY(-1px);
+  transform: translateY(-1px);
 }
-
 
 /* Button active */
 
 button:active {
-    transform: scale(0.96);
+  transform: scale(0.96);
 }
-
 
 /* Button focus */
 
 button:focus {
-    outline: none;
+  outline: none;
 }
 
-
 /* =========================================
+
    BUTTON ICON
+
 ========================================= */
 
 button i {
-    margin-right: 7px;
+  margin-right: 7px;
 }
 
-
 /* =========================================
+
    FORGOT PASSWORD
+
 ========================================= */
 
 .forgot-password {
-    color: #666;
+  color: #666;
 
-    font-size: 12px;
+  font-size: 12px;
 
-    margin: 8px 0 3px;
+  margin: 8px 0 3px;
 }
 
 .forgot-password:hover {
-    color: #d62828;
+  color: #d62828;
 }
 
-
 /* =========================================
+
    OVERLAY CONTAINER
+
 ========================================= */
 
 .overlay-container {
-    position: absolute;
+  position: absolute;
 
-    top: 0;
-    left: 50%;
+  top: 0;
 
-    width: 50%;
-    height: 100%;
+  left: 50%;
 
-    overflow: hidden;
+  width: 50%;
 
-    transition: transform 0.6s ease-in-out;
+  height: 100%;
 
-    z-index: 100;
+  overflow: hidden;
+
+  transition: transform 0.6s ease-in-out;
+
+  z-index: 100;
 }
-
 
 /* Move overlay when active */
 
 .container.right-panel-active .overlay-container {
-    transform: translateX(-100%);
+  transform: translateX(-100%);
 }
 
-
 /* =========================================
+
    OVERLAY
+
 ========================================= */
 
 .overlay {
+  /*
 
-    /*
         BLUE → RED
+
         instead of the original
+
         orange → pink
+
     */
 
-    background:
-        radial-gradient(
-            circle at 20% 20%,
-            rgba(255, 255, 255, 0.15),
-            transparent 35%
-        ),
-        linear-gradient(
-            135deg,
-            #063b73 0%,
-            #075ca8 45%,
-            #c92127 100%
-        );
+  background:
+    radial-gradient(
+      circle at 20% 20%,
 
-    background-repeat: no-repeat;
+      rgba(255, 255, 255, 0.15),
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #063b73 0%,
 
-    background-size: cover;
+      #075ca8 45%,
 
-    background-position: center;
+      #c92127 100%
+    );
 
-    color: #ffffff;
+  background-repeat: no-repeat;
 
-    position: relative;
+  background-size: cover;
 
-    left: -100%;
+  background-position: center;
 
-    height: 100%;
+  color: #ffffff;
 
-    width: 200%;
+  position: relative;
 
-    transform: translateX(0);
+  left: -100%;
 
-    transition: transform 0.6s ease-in-out;
+  height: 100%;
+
+  width: 200%;
+
+  transform: translateX(0);
+
+  transition: transform 0.6s ease-in-out;
 }
-
 
 /* Move overlay */
 
 .container.right-panel-active .overlay {
-    transform: translateX(50%);
+  transform: translateX(50%);
 }
 
-
 /* =========================================
+
    OVERLAY PANEL
+
 ========================================= */
 
 .overlay-panel {
+  position: absolute;
 
-    position: absolute;
+  display: flex;
 
-    display: flex;
+  align-items: center;
 
-    align-items: center;
-    justify-content: center;
+  justify-content: center;
 
-    flex-direction: column;
+  flex-direction: column;
 
-    padding: 0 45px;
+  padding: 0 45px;
 
-    text-align: center;
+  text-align: center;
 
-    top: 0;
+  top: 0;
 
-    height: 100%;
+  height: 100%;
 
-    width: 50%;
+  width: 50%;
 
-    transform: translateX(0);
+  transform: translateX(0);
 
-    transition: transform 0.6s ease-in-out;
+  transition: transform 0.6s ease-in-out;
 }
 
-
 /* =========================================
+
    OVERLAY LEFT
+
 ========================================= */
 
 .overlay-left {
-    transform: translateX(-20%);
+  transform: translateX(-20%);
 }
 
 .container.right-panel-active .overlay-left {
-    transform: translateX(0);
+  transform: translateX(0);
 }
 
-
 /* =========================================
+
    OVERLAY RIGHT
+
 ========================================= */
 
 .overlay-right {
-    right: 0;
+  right: 0;
 
-    transform: translateX(0);
+  transform: translateX(0);
 }
 
 .container.right-panel-active .overlay-right {
-    transform: translateX(20%);
+  transform: translateX(20%);
 }
 
-
 /* =========================================
+
    OVERLAY LOGO
+
 ========================================= */
 
 .overlay-logo {
-    width: 100px;
-    height: 100px;
+  width: 100px;
 
-    object-fit: contain;
+  height: 100px;
 
-    margin-bottom: 15px;
+  object-fit: contain;
 
-    /*
+  margin-bottom: 15px;
+
+  /*
+
         White background behind logo
+
         in case your logo has white elements.
+
     */
 
-    border-radius: 50%;
+  border-radius: 50%;
 
-    background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.95);
 
-    padding: 8px;
+  padding: 8px;
 }
 
-
 /* =========================================
+
    OVERLAY TITLE
+
 ========================================= */
 
 .overlay-panel h1 {
-    color: #ffffff;
+  color: #ffffff;
 
-    font-size: 28px;
+  font-size: 28px;
 
-    margin: 10px 0;
+  margin: 10px 0;
 }
 
-
 /* =========================================
+
    OVERLAY TEXT
+
 ========================================= */
 
 .overlay-panel p {
-    color: #ffffff;
+  color: #ffffff;
 
-    font-size: 13px;
+  font-size: 13px;
 
-    line-height: 21px;
+  line-height: 21px;
 
-    max-width: 330px;
+  max-width: 330px;
 
-    margin: 10px 0 25px;
+  margin: 10px 0 25px;
 }
 
-
 /* =========================================
+
    GHOST BUTTON
+
 ========================================= */
 
 button.ghost {
+  background-color: transparent;
 
-    background-color: transparent;
+  border: 1px solid #ffffff;
 
-    border: 1px solid #ffffff;
+  color: #ffffff;
 
-    color: #ffffff;
-
-    padding: 12px 35px;
+  padding: 12px 35px;
 }
 
 button.ghost:hover {
+  background-color: #ffffff;
 
-    background-color: #ffffff;
+  color: #c92127;
 
-    color: #c92127;
-
-    box-shadow:
-        0 5px 15px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
-
 /* =========================================
+
    RESPONSIVE DESIGN
+
 ========================================= */
 
 @media screen and (max-width: 768px) {
+  body {
+    height: auto;
 
-    body {
-        height: auto;
-        min-height: 100vh;
+    min-height: 100vh;
 
-        padding: 20px 0;
-    }
+    padding: 20px 0;
+  }
 
+  .container {
+    width: 95%;
 
-    .container {
+    min-height: 650px;
 
-        width: 95%;
+    border-radius: 12px;
+  }
 
-        min-height: 650px;
+  .form-container {
+    width: 100%;
+  }
 
-        border-radius: 12px;
-    }
+  .sign-in-container {
+    width: 100%;
+  }
 
+  .sign-up-container {
+    width: 100%;
+  }
 
-    .form-container {
+  /*
 
-        width: 100%;
-    }
-
-
-    .sign-in-container {
-
-        width: 100%;
-    }
-
-
-    .sign-up-container {
-
-        width: 100%;
-    }
-
-
-    /*
         Hide sliding overlay on small screens.
+
     */
 
-    .overlay-container {
-        display: none;
-    }
+  .overlay-container {
+    display: none;
+  }
 
+  .container.right-panel-active .sign-in-container {
+    transform: translateX(100%);
+  }
 
-    .container.right-panel-active .sign-in-container {
-        transform: translateX(100%);
-    }
+  .container.right-panel-active .sign-up-container {
+    transform: translateX(0);
 
+    opacity: 1;
 
-    .container.right-panel-active .sign-up-container {
-        transform: translateX(0);
+    z-index: 5;
+  }
 
-        opacity: 1;
-
-        z-index: 5;
-    }
-
-
-    form {
-        padding: 30px;
-    }
-
+  form {
+    padding: 30px;
+  }
 }
 
-
 /* =========================================
+
    SMALL MOBILE
+
 ========================================= */
 
 @media screen and (max-width: 480px) {
+  .container {
+    min-height: 620px;
+  }
 
-    .container {
-        min-height: 620px;
-    }
+  form {
+    padding: 25px 22px;
+  }
 
+  h1 {
+    font-size: 24px;
+  }
 
-    form {
-        padding: 25px 22px;
-    }
+  .logo-img {
+    width: 65px;
 
+    height: 65px;
+  }
 
-    h1 {
-        font-size: 24px;
-    }
+  .input-wrapper input {
+    padding: 12px 40px;
+  }
 
-
-    .logo-img {
-        width: 65px;
-        height: 65px;
-    }
-
-
-    .input-wrapper input {
-        padding: 12px 40px;
-    }
-
-
-    button {
-        padding: 12px 32px;
-    }
-
+  button {
+    padding: 12px 32px;
+  }
 }
 
-
 /* =========================================
+
    LOGIN FOOTER
+
 ========================================= */
 
 .login-footer {
-    position: fixed;
+  position: fixed;
 
-    bottom: 0;
-    left: 0;
+  bottom: 0;
 
-    width: 100%;
+  left: 0;
 
-    padding: 15px 20px;
+  width: 100%;
 
-    text-align: center;
+  padding: 15px 20px;
 
-    color: rgba(255, 255, 255, 0.90);
+  text-align: center;
 
-    font-size: 11px;
+  color: rgba(255, 255, 255, 0.9);
 
-    z-index: 10;
+  font-size: 11px;
+
+  z-index: 10;
 }
 
-
 /* =========================================
+
    LOGIN FOOTER
+
 ========================================= */
 
 .login-footer {
-    position: fixed;
+  position: fixed;
 
-    bottom: 0;
-    left: 0;
+  bottom: 0;
 
-    width: 100%;
+  left: 0;
 
-    box-sizing: border-box;
+  width: 100%;
 
-    padding: 8px 20px;
+  box-sizing: border-box;
 
-    text-align: center;
+  padding: 8px 20px;
 
-    color: rgba(255, 255, 255, 0.90);
+  text-align: center;
 
-    font-size: 11px;
+  color: rgba(255, 255, 255, 0.9);
 
-    z-index: 100;
+  font-size: 11px;
 
-    /* Prevent footer from affecting page layout */
-    pointer-events: none;
+  z-index: 100;
+
+  /* Prevent footer from affecting page layout */
+
+  pointer-events: none;
 }
 
-
 /* =========================================
+
    FOOTER CONTENT
+
 ========================================= */
 
 .footer-content {
-    display: flex;
+  display: flex;
 
-    justify-content: center;
-    align-items: center;
+  justify-content: center;
 
-    flex-wrap: nowrap;
+  align-items: center;
 
-    gap: 10px;
+  flex-wrap: nowrap;
 
-    width: 100%;
+  gap: 10px;
 
-    min-height: 80px;
+  width: 100%;
 
-    box-sizing: border-box;
+  min-height: 80px;
 
-    letter-spacing: 0.3px;
+  box-sizing: border-box;
+
+  letter-spacing: 0.3px;
 }
 
 .footer-content span {
-    display: flex;
+  display: flex;
 
-    align-items: center;
+  align-items: center;
 
-    color: rgba(255, 255, 255, 0.90);
+  color: rgba(255, 255, 255, 0.9);
 
-    font-size: 11px;
+  font-size: 11px;
 
-    white-space: nowrap;
+  white-space: nowrap;
 }
 
-
 /* =========================================
+
    SPONSORED / BRAND IMAGE
+
 ========================================= */
 
 .footer-brand {
+  display: flex;
+
+  align-items: center;
+
+  flex-shrink: 0;
+}
+
+.footer-icon {
+  width: 80px;
+
+  height: 80px;
+
+  object-fit: contain;
+
+  margin-right: 10px;
+
+  flex-shrink: 0;
+
+  /* Gray version matching footer text */
+
+  filter: grayscale(100%) brightness(0) invert(90%);
+
+  opacity: 0.9;
+}
+
+/* =========================================
+
+   ITALIC "EA"
+
+========================================= */
+
+.footer-content em {
+  font-style: italic;
+}
+
+/* =========================================
+
+   FOOTER DIVIDER
+
+========================================= */
+
+.footer-divider {
+  opacity: 0.5;
+
+  flex-shrink: 0;
+}
+
+/* =========================================
+
+   MOBILE FOOTER
+
+========================================= */
+
+@media screen and (max-width: 600px) {
+  .login-footer {
+    padding: 5px 10px;
+  }
+
+  .footer-content {
+    gap: 5px;
+
+    min-height: 55px;
+  }
+
+  .footer-content span {
+    font-size: 9px;
+  }
+
+  .footer-icon {
+    width: 55px;
+
+    height: 55px;
+
+    margin-right: 6px;
+  }
+
+  .footer-divider {
+    display: none;
+  }
+}
+
+/* =========================================================
+
+   MOBILE FRIENDLY ENHANCEMENTS
+
+   =========================================================
+
+   IMPORTANT:
+
+   Nothing above was removed.
+
+   These rules are added AFTER the original CSS so they
+
+   override only the parts that need better mobile behavior.
+
+   ========================================================= */
+
+/* =========================================
+
+   TABLET / MOBILE
+
+   768px AND BELOW
+
+========================================= */
+
+@media screen and (max-width: 768px) {
+  html {
+    width: 100%;
+
+    min-height: 100%;
+
+    overflow-x: hidden;
+  }
+
+  body {
+    width: 100%;
+
+    min-height: 100vh;
+
+    padding: 25px 15px 95px;
+
+    overflow-x: hidden;
+
+    background-attachment: scroll;
+
+    background-position: center center;
+  }
+
+  /* =========================================
+
+       MAIN CONTAINER
+
+    ========================================= */
+
+  .container {
+    width: 100%;
+
+    max-width: 520px;
+
+    min-height: 650px;
+
+    margin: 0 auto;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+  }
+
+  /* =========================================
+
+       FORM CONTAINER
+
+    ========================================= */
+
+  .form-container {
+    width: 100% !important;
+
+    max-width: 100%;
+
+    height: 100%;
+
+    box-sizing: border-box;
+  }
+
+  /* =========================================
+
+       SIGN IN
+
+    ========================================= */
+
+  .sign-in-container {
+    width: 100% !important;
+
+    left: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+  }
+
+  /* =========================================
+
+       SIGN UP
+
+    ========================================= */
+
+  .sign-up-container {
+    width: 100% !important;
+
+    left: 0;
+
+    box-sizing: border-box;
+  }
+
+  /*
+
+       Keep the original sign-in / sign-up system,
+
+       but prevent the mobile page from creating
+
+       horizontal overflow.
+
+    */
+
+  .container.right-panel-active .sign-in-container {
+    transform: translateX(100%);
+
+    max-width: 100%;
+  }
+
+  .container.right-panel-active .sign-up-container {
+    transform: translateX(0);
+
+    max-width: 100%;
+
+    opacity: 1;
+
+    z-index: 5;
+  }
+
+  /* =========================================
+
+       FORM
+
+    ========================================= */
+
+  form {
+    width: 100%;
+
+    min-height: 650px;
+
+    padding: 35px 30px;
+
+    box-sizing: border-box;
+
+    overflow: hidden;
+  }
+
+  /* =========================================
+
+       HEADINGS
+
+    ========================================= */
+
+  h1 {
+    width: 100%;
+
+    font-size: 26px;
+
+    line-height: 1.3;
+
+    text-align: center;
+
+    word-wrap: break-word;
+  }
+
+  p {
+    max-width: 100%;
+
+    font-size: 13px;
+
+    line-height: 20px;
+
+    text-align: center;
+  }
+
+  span {
+    font-size: 11px;
+  }
+
+  a {
+    font-size: 12px;
+  }
+
+  /* =========================================
+
+       LOGO
+
+    ========================================= */
+
+  .logo {
+    width: 100%;
+
+    margin-bottom: 8px;
+  }
+
+  .logo-img {
+    width: 70px;
+
+    height: 70px;
+
+    max-width: 100%;
+  }
+
+  /* =========================================
+
+       SYSTEM TITLE
+
+    ========================================= */
+
+  .system-title {
+    width: 100%;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    letter-spacing: 0.8px;
+
+    text-align: center;
+
+    word-wrap: break-word;
+  }
+
+  /* =========================================
+
+       INPUT WRAPPER
+
+    ========================================= */
+
+  .input-wrapper {
+    width: 100%;
+
+    max-width: 400px;
+
+    margin: 7px auto;
+  }
+
+  /* =========================================
+
+       INPUT
+
+    ========================================= */
+
+  .input-wrapper input {
+    width: 100%;
+
+    min-height: 46px;
+
+    padding: 13px 42px;
+
+    font-size: 13px;
+
+    -webkit-appearance: none;
+
+    appearance: none;
+  }
+
+  .input-wrapper > i:first-child {
+    left: 14px;
+
+    font-size: 14px;
+  }
+
+  .password-toggle {
+    right: 14px;
+
+    font-size: 14px;
+
+    padding: 5px;
+  }
+
+  /* =========================================
+
+       BUTTON
+
+    ========================================= */
+
+  button {
+    min-height: 44px;
+
+    padding: 12px 35px;
+
+    font-size: 11px;
+
+    margin-top: 14px;
+
+    max-width: 100%;
+  }
+
+  button.ghost {
+    padding: 12px 30px;
+  }
+
+  /* =========================================
+
+       OVERLAY
+
+    ========================================= */
+
+  /*
+
+       Original overlay is preserved.
+
+       It remains hidden on mobile as in your
+
+       existing responsive design.
+
+    */
+
+  .overlay-container {
+    display: none;
+  }
+
+  /* =========================================
+
+       FOOTER
+
+    ========================================= */
+
+  .login-footer {
+    width: 100%;
+
+    padding: 5px 10px;
+
+    box-sizing: border-box;
+
+    overflow: hidden;
+  }
+
+  .footer-content {
+    width: 100%;
+
+    min-height: 55px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 5px;
+
+    box-sizing: border-box;
+
+    overflow: hidden;
+  }
+
+  .footer-content span {
+    max-width: 100%;
+
+    font-size: 9px;
+
+    line-height: 1.3;
+
+    white-space: normal;
+
+    text-align: center;
+
+    word-wrap: break-word;
+  }
+
+  .footer-brand {
+    max-width: 100%;
+
     display: flex;
 
     align-items: center;
 
-    flex-shrink: 0;
-}
+    justify-content: center;
 
-.footer-icon {
-    width: 80px;
-    height: 80px;
+    flex-shrink: 1;
+  }
 
-    object-fit: contain;
+  .footer-icon {
+    width: 55px;
 
-    margin-right: 10px;
+    height: 55px;
 
-    flex-shrink: 0;
+    max-width: 55px;
 
-    /* Gray version matching footer text */
-    filter: grayscale(100%) brightness(0) invert(90%);
-
-    opacity: 0.9;
-}
-
-
-/* =========================================
-   ITALIC "EA"
-========================================= */
-
-.footer-content em {
-    font-style: italic;
-}
-
-
-/* =========================================
-   FOOTER DIVIDER
-========================================= */
-
-.footer-divider {
-    opacity: 0.5;
+    margin-right: 6px;
 
     flex-shrink: 0;
+  }
+
+  .footer-divider {
+    display: none;
+  }
 }
 
-
 /* =========================================
-   MOBILE FOOTER
-========================================= */
 
-@media screen and (max-width: 600px) {
-
-    .login-footer {
-        padding: 5px 10px;
-    }
-
-    .footer-content {
-        gap: 5px;
-
-        min-height: 55px;
-    }
-
-    .footer-content span {
-        font-size: 9px;
-    }
-
-    .footer-icon {
-        width: 55px;
-        height: 55px;
-
-        margin-right: 6px;
-    }
-
-    .footer-divider {
-        display: none;
-    }
-
-}
-
-
-/* =========================================================
-   MOBILE FRIENDLY ENHANCEMENTS
-   =========================================================
-   
-   IMPORTANT:
-   Nothing above was removed.
-   These rules are added AFTER the original CSS so they
-   override only the parts that need better mobile behavior.
-   ========================================================= */
-
-
-/* =========================================
-   TABLET / MOBILE
-   768px AND BELOW
-========================================= */
-
-@media screen and (max-width: 768px) {
-
-    html {
-        width: 100%;
-        min-height: 100%;
-        overflow-x: hidden;
-    }
-
-    body {
-        width: 100%;
-        min-height: 100vh;
-
-        padding: 25px 15px 95px;
-
-        overflow-x: hidden;
-
-        background-attachment: scroll;
-        background-position: center center;
-    }
-
-
-    /* =========================================
-       MAIN CONTAINER
-    ========================================= */
-
-    .container {
-        width: 100%;
-        max-width: 520px;
-
-        min-height: 650px;
-
-        margin: 0 auto;
-
-        border-radius: 14px;
-
-        overflow: hidden;
-    }
-
-
-    /* =========================================
-       FORM CONTAINER
-    ========================================= */
-
-    .form-container {
-        width: 100% !important;
-
-        max-width: 100%;
-
-        height: 100%;
-
-        box-sizing: border-box;
-    }
-
-
-    /* =========================================
-       SIGN IN
-    ========================================= */
-
-    .sign-in-container {
-        width: 100% !important;
-
-        left: 0;
-
-        padding: 0;
-
-        box-sizing: border-box;
-    }
-
-
-    /* =========================================
-       SIGN UP
-    ========================================= */
-
-    .sign-up-container {
-        width: 100% !important;
-
-        left: 0;
-
-        box-sizing: border-box;
-    }
-
-
-    /*
-       Keep the original sign-in / sign-up system,
-       but prevent the mobile page from creating
-       horizontal overflow.
-    */
-
-    .container.right-panel-active .sign-in-container {
-        transform: translateX(100%);
-
-        max-width: 100%;
-    }
-
-    .container.right-panel-active .sign-up-container {
-        transform: translateX(0);
-
-        max-width: 100%;
-
-        opacity: 1;
-
-        z-index: 5;
-    }
-
-
-    /* =========================================
-       FORM
-    ========================================= */
-
-    form {
-        width: 100%;
-
-        min-height: 650px;
-
-        padding: 35px 30px;
-
-        box-sizing: border-box;
-
-        overflow: hidden;
-    }
-
-
-    /* =========================================
-       HEADINGS
-    ========================================= */
-
-    h1 {
-        width: 100%;
-
-        font-size: 26px;
-
-        line-height: 1.3;
-
-        text-align: center;
-
-        word-wrap: break-word;
-    }
-
-
-    p {
-        max-width: 100%;
-
-        font-size: 13px;
-
-        line-height: 20px;
-
-        text-align: center;
-    }
-
-
-    span {
-        font-size: 11px;
-    }
-
-
-    a {
-        font-size: 12px;
-    }
-
-
-    /* =========================================
-       LOGO
-    ========================================= */
-
-    .logo {
-        width: 100%;
-
-        margin-bottom: 8px;
-    }
-
-    .logo-img {
-        width: 70px;
-        height: 70px;
-
-        max-width: 100%;
-    }
-
-
-    /* =========================================
-       SYSTEM TITLE
-    ========================================= */
-
-    .system-title {
-        width: 100%;
-
-        font-size: 12px;
-
-        line-height: 1.5;
-
-        letter-spacing: 0.8px;
-
-        text-align: center;
-
-        word-wrap: break-word;
-    }
-
-
-    /* =========================================
-       INPUT WRAPPER
-    ========================================= */
-
-    .input-wrapper {
-        width: 100%;
-
-        max-width: 400px;
-
-        margin: 7px auto;
-    }
-
-
-    /* =========================================
-       INPUT
-    ========================================= */
-
-    .input-wrapper input {
-        width: 100%;
-
-        min-height: 46px;
-
-        padding: 13px 42px;
-
-        font-size: 13px;
-
-        -webkit-appearance: none;
-        appearance: none;
-    }
-
-
-    .input-wrapper > i:first-child {
-        left: 14px;
-
-        font-size: 14px;
-    }
-
-
-    .password-toggle {
-        right: 14px;
-
-        font-size: 14px;
-
-        padding: 5px;
-    }
-
-
-    /* =========================================
-       BUTTON
-    ========================================= */
-
-    button {
-        min-height: 44px;
-
-        padding: 12px 35px;
-
-        font-size: 11px;
-
-        margin-top: 14px;
-
-        max-width: 100%;
-    }
-
-
-    button.ghost {
-        padding: 12px 30px;
-    }
-
-
-    /* =========================================
-       OVERLAY
-    ========================================= */
-
-    /*
-       Original overlay is preserved.
-       It remains hidden on mobile as in your
-       existing responsive design.
-    */
-
-    .overlay-container {
-        display: none;
-    }
-
-
-    /* =========================================
-       FOOTER
-    ========================================= */
-
-    .login-footer {
-        width: 100%;
-
-        padding: 5px 10px;
-
-        box-sizing: border-box;
-
-        overflow: hidden;
-    }
-
-
-    .footer-content {
-        width: 100%;
-
-        min-height: 55px;
-
-        display: flex;
-
-        justify-content: center;
-
-        align-items: center;
-
-        flex-wrap: wrap;
-
-        gap: 5px;
-
-        box-sizing: border-box;
-
-        overflow: hidden;
-    }
-
-
-    .footer-content span {
-        max-width: 100%;
-
-        font-size: 9px;
-
-        line-height: 1.3;
-
-        white-space: normal;
-
-        text-align: center;
-
-        word-wrap: break-word;
-    }
-
-
-    .footer-brand {
-        max-width: 100%;
-
-        display: flex;
-
-        align-items: center;
-
-        justify-content: center;
-
-        flex-shrink: 1;
-    }
-
-
-    .footer-icon {
-        width: 55px;
-        height: 55px;
-
-        max-width: 55px;
-
-        margin-right: 6px;
-
-        flex-shrink: 0;
-    }
-
-
-    .footer-divider {
-        display: none;
-    }
-
-}
-
-
-/* =========================================
    MOBILE PHONES
+
    600px AND BELOW
+
 ========================================= */
 
 @media screen and (max-width: 600px) {
+  body {
+    padding: 15px 10px 80px;
 
-    body {
-        padding: 15px 10px 80px;
+    align-items: center;
+  }
 
-        align-items: center;
-    }
+  .container {
+    width: 100%;
 
+    max-width: 450px;
 
-    .container {
-        width: 100%;
+    min-height: 620px;
+  }
 
-        max-width: 450px;
+  form {
+    min-height: 620px;
 
-        min-height: 620px;
-    }
+    padding: 30px 24px;
+  }
 
+  h1 {
+    font-size: 24px;
 
-    form {
-        min-height: 620px;
+    margin: 8px 0;
+  }
 
-        padding: 30px 24px;
-    }
+  p {
+    font-size: 12px;
 
+    line-height: 18px;
 
-    h1 {
-        font-size: 24px;
+    margin: 12px 0 20px;
+  }
 
-        margin: 8px 0;
-    }
+  .logo-img {
+    width: 65px;
 
+    height: 65px;
+  }
 
-    p {
-        font-size: 12px;
+  .system-title {
+    font-size: 11px;
 
-        line-height: 18px;
+    letter-spacing: 0.7px;
+  }
 
-        margin: 12px 0 20px;
-    }
+  .input-wrapper {
+    width: 100%;
 
+    max-width: 100%;
 
-    .logo-img {
-        width: 65px;
-        height: 65px;
-    }
+    margin: 6px 0;
+  }
 
+  .input-wrapper input {
+    min-height: 45px;
 
-    .system-title {
-        font-size: 11px;
+    padding: 12px 40px;
 
-        letter-spacing: 0.7px;
-    }
+    font-size: 12px;
+  }
 
+  .input-wrapper > i:first-child {
+    left: 13px;
 
-    .input-wrapper {
-        width: 100%;
+    font-size: 13px;
+  }
 
-        max-width: 100%;
+  .password-toggle {
+    right: 12px;
 
-        margin: 6px 0;
-    }
+    font-size: 13px;
+  }
 
+  button {
+    min-height: 43px;
 
-    .input-wrapper input {
-        min-height: 45px;
+    padding: 11px 30px;
 
-        padding: 12px 40px;
+    font-size: 10px;
+  }
 
-        font-size: 12px;
-    }
+  .forgot-password {
+    font-size: 11px;
+  }
 
+  /* FOOTER */
 
-    .input-wrapper > i:first-child {
-        left: 13px;
+  .login-footer {
+    padding: 4px 8px;
+  }
 
-        font-size: 13px;
-    }
+  .footer-content {
+    min-height: 48px;
 
+    gap: 4px;
+  }
 
-    .password-toggle {
-        right: 12px;
+  .footer-content span {
+    font-size: 8px;
 
-        font-size: 13px;
-    }
+    line-height: 1.25;
+  }
 
+  .footer-icon {
+    width: 45px;
 
-    button {
-        min-height: 43px;
+    height: 45px;
 
-        padding: 11px 30px;
-
-        font-size: 10px;
-    }
-
-
-    .forgot-password {
-        font-size: 11px;
-    }
-
-
-    /* FOOTER */
-
-    .login-footer {
-        padding: 4px 8px;
-    }
-
-
-    .footer-content {
-        min-height: 48px;
-
-        gap: 4px;
-    }
-
-
-    .footer-content span {
-        font-size: 8px;
-
-        line-height: 1.25;
-    }
-
-
-    .footer-icon {
-        width: 45px;
-        height: 45px;
-
-        margin-right: 5px;
-    }
-
+    margin-right: 5px;
+  }
 }
 
-
 /* =========================================
+
    SMALL PHONES
+
    480px AND BELOW
+
 ========================================= */
 
 @media screen and (max-width: 480px) {
+  body {
+    padding: 10px 8px 75px;
 
-    body {
-        padding: 10px 8px 75px;
+    min-height: 100svh;
+  }
 
-        min-height: 100svh;
-    }
+  .container {
+    width: 100%;
 
+    max-width: 400px;
 
-    .container {
-        width: 100%;
+    min-height: 590px;
 
-        max-width: 400px;
+    border-radius: 12px;
+  }
 
-        min-height: 590px;
+  form {
+    width: 100%;
 
-        border-radius: 12px;
-    }
+    min-height: 590px;
 
+    padding: 25px 20px;
+  }
 
-    form {
-        width: 100%;
+  h1 {
+    font-size: 22px;
 
-        min-height: 590px;
+    line-height: 1.25;
 
-        padding: 25px 20px;
-    }
+    margin: 6px 0;
+  }
 
+  p {
+    font-size: 11px;
 
-    h1 {
-        font-size: 22px;
+    line-height: 17px;
 
-        line-height: 1.25;
+    margin: 9px 0 16px;
+  }
 
-        margin: 6px 0;
-    }
+  span {
+    font-size: 10px;
+  }
 
+  a {
+    font-size: 11px;
+  }
 
-    p {
-        font-size: 11px;
+  .logo {
+    margin-bottom: 5px;
+  }
 
-        line-height: 17px;
+  .logo-img {
+    width: 60px;
 
-        margin: 9px 0 16px;
-    }
+    height: 60px;
+  }
 
+  .system-title {
+    font-size: 10px;
 
-    span {
-        font-size: 10px;
-    }
+    line-height: 1.4;
 
+    letter-spacing: 0.6px;
 
-    a {
-        font-size: 11px;
-    }
+    margin: 2px 0 7px;
+  }
 
+  .input-wrapper {
+    margin: 5px 0;
+  }
 
-    .logo {
-        margin-bottom: 5px;
-    }
+  .input-wrapper input {
+    min-height: 43px;
 
+    padding: 11px 38px;
 
-    .logo-img {
-        width: 60px;
-        height: 60px;
-    }
+    font-size: 11px;
 
+    border-radius: 7px;
+  }
 
-    .system-title {
-        font-size: 10px;
+  .input-wrapper > i:first-child {
+    left: 12px;
 
-        line-height: 1.4;
+    font-size: 12px;
+  }
 
-        letter-spacing: 0.6px;
+  .password-toggle {
+    right: 11px;
 
-        margin: 2px 0 7px;
-    }
+    font-size: 12px;
 
+    padding: 4px;
+  }
 
-    .input-wrapper {
-        margin: 5px 0;
-    }
+  button {
+    min-height: 41px;
 
+    padding: 10px 26px;
 
-    .input-wrapper input {
-        min-height: 43px;
+    font-size: 10px;
 
-        padding: 11px 38px;
+    margin-top: 11px;
+  }
 
-        font-size: 11px;
+  button i {
+    margin-right: 5px;
+  }
 
-        border-radius: 7px;
-    }
+  .forgot-password {
+    font-size: 10px;
 
+    margin: 7px 0 2px;
+  }
 
-    .input-wrapper > i:first-child {
-        left: 12px;
+  /* FOOTER */
 
-        font-size: 12px;
-    }
+  .login-footer {
+    padding: 3px 6px;
+  }
 
+  .footer-content {
+    min-height: 42px;
 
-    .password-toggle {
-        right: 11px;
+    gap: 3px;
 
-        font-size: 12px;
+    line-height: 1.2;
+  }
 
-        padding: 4px;
-    }
+  .footer-content span {
+    font-size: 7px;
 
+    line-height: 1.2;
+  }
 
-    button {
-        min-height: 41px;
+  .footer-icon {
+    width: 38px;
 
-        padding: 10px 26px;
+    height: 38px;
 
-        font-size: 10px;
-
-        margin-top: 11px;
-    }
-
-
-    button i {
-        margin-right: 5px;
-    }
-
-
-    .forgot-password {
-        font-size: 10px;
-
-        margin: 7px 0 2px;
-    }
-
-
-    /* FOOTER */
-
-    .login-footer {
-        padding: 3px 6px;
-    }
-
-
-    .footer-content {
-        min-height: 42px;
-
-        gap: 3px;
-
-        line-height: 1.2;
-    }
-
-
-    .footer-content span {
-        font-size: 7px;
-
-        line-height: 1.2;
-    }
-
-
-    .footer-icon {
-        width: 38px;
-        height: 38px;
-
-        margin-right: 4px;
-    }
-
+    margin-right: 4px;
+  }
 }
 
-
 /* =========================================
+
    EXTRA SMALL PHONES
+
    360px AND BELOW
+
 ========================================= */
 
 @media screen and (max-width: 360px) {
+  body {
+    padding: 7px 5px 65px;
 
-    body {
-        padding: 7px 5px 65px;
+    min-height: 100svh;
+  }
 
-        min-height: 100svh;
-    }
+  .container {
+    width: 100%;
 
+    max-width: 350px;
 
-    .container {
-        width: 100%;
+    min-height: 550px;
 
-        max-width: 350px;
+    border-radius: 10px;
+  }
 
-        min-height: 550px;
+  form {
+    min-height: 550px;
 
-        border-radius: 10px;
-    }
+    padding: 20px 15px;
+  }
 
+  h1 {
+    font-size: 20px;
 
-    form {
-        min-height: 550px;
+    line-height: 1.2;
+  }
 
-        padding: 20px 15px;
-    }
+  p {
+    font-size: 10px;
 
+    line-height: 15px;
 
-    h1 {
-        font-size: 20px;
+    margin: 7px 0 12px;
+  }
 
-        line-height: 1.2;
-    }
+  .logo-img {
+    width: 52px;
 
+    height: 52px;
+  }
 
-    p {
-        font-size: 10px;
+  .system-title {
+    font-size: 9px;
 
-        line-height: 15px;
+    letter-spacing: 0.4px;
+  }
 
-        margin: 7px 0 12px;
-    }
+  .input-wrapper {
+    margin: 4px 0;
+  }
 
+  .input-wrapper input {
+    min-height: 41px;
 
-    .logo-img {
-        width: 52px;
-        height: 52px;
-    }
+    padding: 10px 35px;
 
+    font-size: 10px;
+  }
 
-    .system-title {
-        font-size: 9px;
+  .input-wrapper > i:first-child {
+    left: 11px;
 
-        letter-spacing: 0.4px;
-    }
+    font-size: 11px;
+  }
 
+  .password-toggle {
+    right: 10px;
 
-    .input-wrapper {
-        margin: 4px 0;
-    }
+    font-size: 11px;
+  }
 
+  button {
+    min-height: 39px;
 
-    .input-wrapper input {
-        min-height: 41px;
+    padding: 9px 22px;
 
-        padding: 10px 35px;
+    font-size: 9px;
+  }
 
-        font-size: 10px;
-    }
+  .forgot-password {
+    font-size: 9px;
+  }
 
+  /* FOOTER */
 
-    .input-wrapper > i:first-child {
-        left: 11px;
+  .login-footer {
+    padding: 2px 5px;
+  }
 
-        font-size: 11px;
-    }
+  .footer-content {
+    min-height: 36px;
 
+    gap: 2px;
+  }
 
-    .password-toggle {
-        right: 10px;
+  .footer-content span {
+    font-size: 6px;
 
-        font-size: 11px;
-    }
+    line-height: 1.15;
+  }
 
+  .footer-icon {
+    width: 30px;
 
-    button {
-        min-height: 39px;
+    height: 30px;
 
-        padding: 9px 22px;
-
-        font-size: 9px;
-    }
-
-
-    .forgot-password {
-        font-size: 9px;
-    }
-
-
-    /* FOOTER */
-
-    .login-footer {
-        padding: 2px 5px;
-    }
-
-
-    .footer-content {
-        min-height: 36px;
-
-        gap: 2px;
-    }
-
-
-    .footer-content span {
-        font-size: 6px;
-
-        line-height: 1.15;
-    }
-
-
-    .footer-icon {
-        width: 30px;
-        height: 30px;
-
-        margin-right: 3px;
-    }
-
+    margin-right: 3px;
+  }
 }
 
-
 /* =========================================
+
    LANDSCAPE MOBILE
+
 ========================================= */
 
 @media screen and (max-width: 768px) and (orientation: landscape) {
+  body {
+    padding: 15px 10px 65px;
 
-    body {
-        padding: 15px 10px 65px;
+    align-items: flex-start;
 
-        align-items: flex-start;
+    overflow-y: auto;
+  }
 
-        overflow-y: auto;
-    }
+  .container {
+    margin-top: 10px;
 
+    min-height: 520px;
 
-    .container {
-        margin-top: 10px;
+    max-width: 600px;
+  }
 
-        min-height: 520px;
+  form {
+    min-height: 520px;
 
-        max-width: 600px;
-    }
+    padding: 20px 30px;
+  }
 
+  .logo-img {
+    width: 50px;
 
-    form {
-        min-height: 520px;
+    height: 50px;
+  }
 
-        padding: 20px 30px;
-    }
+  h1 {
+    font-size: 20px;
 
+    margin: 5px 0;
+  }
 
-    .logo-img {
-        width: 50px;
-        height: 50px;
-    }
+  .system-title {
+    font-size: 9px;
 
+    margin: 2px 0 5px;
+  }
 
-    h1 {
-        font-size: 20px;
+  p {
+    font-size: 10px;
 
-        margin: 5px 0;
-    }
+    line-height: 15px;
 
+    margin: 5px 0 10px;
+  }
 
-    .system-title {
-        font-size: 9px;
+  .input-wrapper {
+    margin: 4px 0;
+  }
 
-        margin: 2px 0 5px;
-    }
+  .input-wrapper input {
+    min-height: 40px;
 
+    padding: 9px 38px;
+  }
 
-    p {
-        font-size: 10px;
+  button {
+    min-height: 38px;
 
-        line-height: 15px;
+    padding: 9px 25px;
 
-        margin: 5px 0 10px;
-    }
+    margin-top: 8px;
+  }
 
+  .login-footer {
+    padding: 2px 8px;
+  }
 
-    .input-wrapper {
-        margin: 4px 0;
-    }
+  .footer-content {
+    min-height: 35px;
+  }
 
+  .footer-content span {
+    font-size: 7px;
+  }
 
-    .input-wrapper input {
-        min-height: 40px;
+  .footer-icon {
+    width: 30px;
 
-        padding: 9px 38px;
-    }
-
-
-    button {
-        min-height: 38px;
-
-        padding: 9px 25px;
-
-        margin-top: 8px;
-    }
-
-
-    .login-footer {
-        padding: 2px 8px;
-    }
-
-
-    .footer-content {
-        min-height: 35px;
-    }
-
-
-    .footer-content span {
-        font-size: 7px;
-    }
-
-
-    .footer-icon {
-        width: 30px;
-        height: 30px;
-    }
-
+    height: 30px;
+  }
 }
 
-
 /* =========================================
+
    TOUCHSCREEN IMPROVEMENTS
+
 ========================================= */
 
 @media (hover: none) and (pointer: coarse) {
+  button {
+    min-height: 44px;
 
-    button {
-        min-height: 44px;
+    cursor: pointer;
+  }
 
-        cursor: pointer;
-    }
+  .password-toggle {
+    min-width: 32px;
 
+    min-height: 32px;
 
-    .password-toggle {
-        min-width: 32px;
-        min-height: 32px;
+    display: flex;
 
-        display: flex;
+    align-items: center;
 
-        align-items: center;
-        justify-content: center;
-    }
+    justify-content: center;
+  }
 
+  .input-wrapper input {
+    min-height: 44px;
+  }
 
-    .input-wrapper input {
-        min-height: 44px;
-    }
+  a {
+    min-height: 30px;
 
+    display: inline-flex;
 
-    a {
-        min-height: 30px;
+    align-items: center;
 
-        display: inline-flex;
-
-        align-items: center;
-        justify-content: center;
-    }
-
+    justify-content: center;
+  }
 }
 
 /* =========================================
+
    MOBILE SIGN UP / SIGN IN BUTTONS
+
    HIDDEN ON DESKTOP
+
 ========================================= */
 
 .mobile-signup,
 .mobile-signin {
-    display: none;
+  display: none;
 }
 
-
 /* =========================================
+
    SHOW ONLY ON MOBILE
+
 ========================================= */
 
 @media screen and (max-width: 768px) {
+  .mobile-signup,
+  .mobile-signin {
+    display: flex;
 
-    .mobile-signup,
-    .mobile-signin {
-        display: flex;
+    flex-direction: column;
 
-        flex-direction: column;
+    align-items: center;
 
-        align-items: center;
-        justify-content: center;
+    justify-content: center;
 
-        width: 100%;
+    width: 100%;
 
-        margin-top: 12px;
+    margin-top: 12px;
 
-        gap: 2px;
-    }
+    gap: 2px;
+  }
 
-    .mobile-signup span,
-    .mobile-signin span {
-        font-size: 10px;
+  .mobile-signup span,
+  .mobile-signin span {
+    font-size: 10px;
 
-        color: #777;
+    color: #777;
 
-        text-align: center;
-    }
+    text-align: center;
+  }
 
-    .mobile-signup-button,
-    .mobile-signin-button {
+  .mobile-signup-button,
+  .mobile-signin-button {
+    display: inline-flex;
 
-        display: inline-flex;
+    align-items: center;
 
-        align-items: center;
-        justify-content: center;
+    justify-content: center;
 
-        background: transparent;
+    background: transparent;
 
-        border: none;
+    border: none;
 
-        color: #175a9c;
+    color: #175a9c;
 
-        font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
 
-        font-size: 10px;
+    font-size: 10px;
 
-        font-weight: 700;
+    font-weight: 700;
 
-        padding: 5px 10px;
+    padding: 5px 10px;
 
-        margin: 0;
+    margin: 0;
 
-        min-height: auto;
+    min-height: auto;
 
-        border-radius: 0;
+    border-radius: 0;
 
-        letter-spacing: 0;
+    letter-spacing: 0;
 
-        text-transform: none;
+    text-transform: none;
 
-        box-shadow: none;
+    box-shadow: none;
 
-        transform: none;
-    }
+    transform: none;
+  }
 
-    .mobile-signup-button:hover,
-    .mobile-signin-button:hover {
+  .mobile-signup-button:hover,
+  .mobile-signin-button:hover {
+    background: transparent;
 
-        background: transparent;
+    color: #d62828;
 
-        color: #d62828;
+    box-shadow: none;
 
-        box-shadow: none;
+    transform: none;
 
-        transform: none;
+    text-decoration: underline;
+  }
 
-        text-decoration: underline;
-    }
-
-    .mobile-signup-button i,
-    .mobile-signin-button i {
-        margin-right: 5px;
-    }
-
+  .mobile-signup-button i,
+  .mobile-signin-button i {
+    margin-right: 5px;
+  }
 }
 
-
 /* =========================================
+
    SMALL PHONES
+
 ========================================= */
 
 @media screen and (max-width: 480px) {
+  .mobile-signup,
+  .mobile-signin {
+    margin-top: 8px;
+  }
 
-    .mobile-signup,
-    .mobile-signin {
-        margin-top: 8px;
-    }
+  .mobile-signup span,
+  .mobile-signin span {
+    font-size: 9px;
+  }
 
-    .mobile-signup span,
-    .mobile-signin span {
-        font-size: 9px;
-    }
+  .mobile-signup-button,
+  .mobile-signin-button {
+    font-size: 9px;
 
-    .mobile-signup-button,
-    .mobile-signin-button {
-        font-size: 9px;
-
-        padding: 4px 8px;
-    }
-
+    padding: 4px 8px;
+  }
 }
 
-
 /* =========================================
+
    VERY SMALL PHONES
+
 ========================================= */
 
 @media screen and (max-width: 360px) {
+  .mobile-signup,
+  .mobile-signin {
+    margin-top: 6px;
+  }
 
-    .mobile-signup,
-    .mobile-signin {
-        margin-top: 6px;
-    }
+  .mobile-signup span,
+  .mobile-signin span {
+    font-size: 8px;
+  }
 
-    .mobile-signup span,
-    .mobile-signin span {
-        font-size: 8px;
-    }
+  .mobile-signup-button,
+  .mobile-signin-button {
+    font-size: 8px;
 
-    .mobile-signup-button,
-    .mobile-signin-button {
-        font-size: 8px;
+    padding: 3px 7px;
+  }
+}
 
-        padding: 3px 7px;
-    }
+/* =========================================================
+   EMAIL VERIFICATION BUTTONS
+   Send Verification Code & Verify Email
+========================================================= */
 
+#sendVerificationButton,
+#verifyEmailButton {
+  width: 100%;
+  min-height: 48px;
+  height: 48px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-sizing: border-box;
+}
+
+#sendVerificationButton i,
+#verifyEmailButton i {
+  margin-right: 0;
+  flex-shrink: 0;
+}
+
+#sendVerificationButton:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+#sendVerificationButton:disabled:hover {
+  background: #d62828;
+  box-shadow: none;
+  transform: none;
+}
+
+@media screen and (max-width: 768px) {
+  #sendVerificationButton,
+  #verifyEmailButton {
+    min-height: 44px;
+    height: 44px;
+    padding: 0 18px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #sendVerificationButton,
+  #verifyEmailButton {
+    min-height: 43px;
+    height: 43px;
+    padding: 0 16px;
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #sendVerificationButton,
+  #verifyEmailButton {
+    min-height: 41px;
+    height: 41px;
+    padding: 0 14px;
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  #sendVerificationButton,
+  #verifyEmailButton {
+    min-height: 39px;
+    height: 39px;
+    padding: 0 12px;
+    font-size: 9px;
+  }
 }

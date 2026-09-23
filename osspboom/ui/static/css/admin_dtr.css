@@ -58,7 +58,7 @@ body {
 
     justify-content: space-between;
 
-    padding: 0 30px;
+    padding: 0 25px;
 
     background: #123B68;
 
@@ -77,11 +77,11 @@ body {
 
 .navbar-brand {
 
-    font-size: 15px;
+    font-size: 25px;
 
-    font-weight: 800;
+    font-weight: 700;
 
-    letter-spacing: 0.8px;
+    letter-spacing: 0.5px;
 
     white-space: nowrap;
 

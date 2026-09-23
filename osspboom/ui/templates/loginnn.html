@@ -629,6 +629,14 @@
     aria-labelledby="privacyConsentTitle"
   >
     <div class="privacy-consent-card">
+      <button
+        type="button"
+        class="privacy-consent-close"
+        id="closePrivacyConsent"
+        aria-label="Close"
+      >
+        <i class="fa-solid fa-xmark"></i>
+      </button>
 
       <h2 id="privacyConsentTitle">Privacy Consent Form</h2>
 
@@ -677,6 +685,14 @@
     aria-labelledby="forgotPasswordTitle"
   >
     <div class="forgot-password-card">
+      <button
+        type="button"
+        class="forgot-password-close"
+        id="closeForgotPassword"
+        aria-label="Close"
+      >
+        <i class="fa-solid fa-xmark"></i>
+      </button>
 
       <div class="modal-icon">
         <i class="fa-solid fa-key"></i>
@@ -931,7 +947,8 @@
     ====================================================== */
     const privacyPolicyLink = document.getElementById("privacyPolicyLink");
     const privacyConsentModal = document.getElementById("privacyConsentModal");
-const privacyConsentOk = document.getElementById("privacyConsentOk");
+    const closePrivacyConsent = document.getElementById("closePrivacyConsent");
+    const privacyConsentOk = document.getElementById("privacyConsentOk");
 
     function openPrivacyConsentModal() {
       privacyConsentModal.classList.add("active");
@@ -946,7 +963,10 @@ const privacyConsentOk = document.getElementById("privacyConsentOk");
       event.stopPropagation(); // prevents the surrounding label from also toggling the checkbox
       openPrivacyConsentModal();
     });
-privacyConsentModal.addEventListener("click", (event) => {
+
+    closePrivacyConsent.addEventListener("click", closePrivacyConsentModal);
+
+    privacyConsentModal.addEventListener("click", (event) => {
       if (event.target === privacyConsentModal) {
         closePrivacyConsentModal();
       }
@@ -973,7 +993,8 @@ privacyConsentModal.addEventListener("click", (event) => {
     ====================================================== */
     const forgotPasswordLink = document.getElementById("forgotPasswordLink");
     const forgotPasswordModal = document.getElementById("forgotPasswordModal");
-const cancelForgotPassword = document.getElementById("cancelForgotPassword");
+    const closeForgotPassword = document.getElementById("closeForgotPassword");
+    const cancelForgotPassword = document.getElementById("cancelForgotPassword");
     const forgotPasswordForm = document.getElementById("forgotPasswordForm");
     const resetEmail = document.getElementById("resetEmail");
     const forgotPasswordMessage = document.getElementById("forgotPasswordMessage");
@@ -995,7 +1016,9 @@ const cancelForgotPassword = document.getElementById("cancelForgotPassword");
       event.preventDefault();
       openForgotPasswordModal();
     });
-cancelForgotPassword.addEventListener("click", closeForgotPasswordModal);
+
+    closeForgotPassword.addEventListener("click", closeForgotPasswordModal);
+    cancelForgotPassword.addEventListener("click", closeForgotPasswordModal);
 
     forgotPasswordModal.addEventListener("click", (event) => {
       if (event.target === forgotPasswordModal) {

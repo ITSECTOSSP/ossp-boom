@@ -15,339 +15,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     />
 
-    <title>DASHBOARD</title>
-
-    <style id="dashboard-mobile-fix">
-      /* =========================================================
-   MOBILE / DESKTOP LOGO + DASHBOARD BACKGROUND FIXES
-========================================================= */
-
-      .dashboard-bg-image {
-        position: absolute !important;
-        inset: 0 !important;
-        z-index: 0 !important;
-
-        background-image:
-          linear-gradient(
-            135deg,
-            rgba(6, 59, 115, 0.7) 0%,
-            rgba(7, 92, 168, 0.58) 50%,
-            rgba(201, 33, 39, 0.65) 100%
-          ),
-          url("{% static 'image/bg.jpg' %}") !important;
-
-        background-size: cover !important;
-        background-position: center center !important;
-        background-repeat: no-repeat !important;
-
-        pointer-events: none !important;
-      }
-
-      /* MOBILE LOGO HIDDEN BY DEFAULT */
-      .mobile-logo {
-        display: none !important;
-      }
-
-      /* =========================================================
-   DESKTOP
-========================================================= */
-
-      @media screen and (min-width: 701px) {
-        .floating-logo {
-          position: absolute !important;
-
-          top: -20px !important;
-          left: 50% !important;
-          transform: translateX(-50%) !important;
-
-          width: 150px !important;
-          height: 100px !important;
-
-          border-radius: 50% !important;
-
-          padding: 10px !important;
-          gap: 8px !important;
-
-          display: flex !important;
-          align-items: center !important;
-          justify-content: center !important;
-
-          z-index: 1500 !important;
-        }
-
-        .floating-logo img {
-          width: 65px !important;
-          height: 65px !important;
-          object-fit: contain !important;
-          display: block !important;
-          flex-shrink: 0 !important;
-        }
-      }
-
-      /* =========================================================
-   MOBILE
-========================================================= */
-
-      @media screen and (max-width: 700px) {
-        .admin-navbar {
-          position: fixed !important;
-
-          top: 0 !important;
-          left: 0 !important;
-
-          width: 100% !important;
-
-          height: 76px !important;
-          min-height: 76px !important;
-
-          padding: 8px 10px !important;
-
-          display: flex !important;
-          flex-direction: row !important;
-
-          align-items: center !important;
-          justify-content: space-between !important;
-
-          flex-wrap: nowrap !important;
-
-          gap: 8px !important;
-
-          box-sizing: border-box !important;
-
-          z-index: 1000 !important;
-        }
-
-        /* SYSTEM NAME */
-
-        .navbar-brand {
-          width: 112px !important;
-          max-width: 112px !important;
-
-          flex: 0 0 112px !important;
-
-          margin: 0 !important;
-          padding: 0 !important;
-
-          font-size: 10px !important;
-          line-height: 1.15 !important;
-
-          text-align: left !important;
-
-          white-space: normal !important;
-        }
-
-        /* RIGHT SIDE */
-
-        .navbar-right {
-          flex: 1 1 auto !important;
-
-          width: auto !important;
-          min-width: 0 !important;
-
-          height: 100% !important;
-
-          display: flex !important;
-
-          align-items: center !important;
-          justify-content: flex-end !important;
-
-          gap: 6px !important;
-
-          flex-wrap: nowrap !important;
-        }
-
-        /* WELCOME */
-
-        .navbar-welcome {
-          font-size: 10px !important;
-          white-space: nowrap !important;
-          line-height: 1.1 !important;
-        }
-
-        /* HIDE DATE/TIME ON MOBILE */
-
-        .navbar-datetime {
-          display: none !important;
-        }
-
-        /* LOGOUT */
-
-        .navbar-logout {
-          min-width: 64px !important;
-          width: 64px !important;
-
-          height: 36px !important;
-
-          padding: 7px 8px !important;
-
-          font-size: 10px !important;
-
-          white-space: nowrap !important;
-
-          justify-content: center !important;
-        }
-
-        /* DESKTOP LOGO HIDDEN ON MOBILE */
-
-        .floating-logo {
-          display: none !important;
-        }
-
-        /* DASHBOARD */
-
-        .admin-dashboard {
-          margin-top: 76px !important;
-
-          padding: 10px 10px 90px !important;
-
-          min-height: calc(100vh - 76px) !important;
-
-          box-sizing: border-box !important;
-        }
-
-        /* HEADER */
-
-        .dashboard-header {
-          display: flex !important;
-
-          flex-direction: column !important;
-
-          gap: 10px !important;
-
-          margin: 0 0 14px !important;
-        }
-
-        /* TITLE */
-
-        .dashboard-title {
-          position: relative !important;
-
-          width: 100% !important;
-
-          min-height: 66px !important;
-
-          padding: 0 88px 0 3px !important;
-
-          box-sizing: border-box !important;
-        }
-
-        .dashboard-title h1 {
-          margin: 0 !important;
-
-          font-size: 22px !important;
-
-          line-height: 1.1 !important;
-        }
-
-        .dashboard-title p {
-          margin: 5px 0 0 !important;
-
-          font-size: 11px !important;
-
-          line-height: 1.3 !important;
-        }
-
-        /* =====================================================
-       MOBILE LOGO
-       NOW INSIDE .dashboard-title
-    ===================================================== */
-
-        .mobile-logo {
-          display: flex !important;
-
-          position: absolute !important;
-
-          top: 0 !important;
-          right: 0 !important;
-
-          width: 82px !important;
-          height: 58px !important;
-
-          margin: 0 !important;
-          padding: 0 !important;
-
-          align-items: center !important;
-          justify-content: center !important;
-
-          gap: 3px !important;
-
-          z-index: 20 !important;
-        }
-
-        .mobile-logo img {
-          display: block !important;
-
-          width: auto !important;
-          height: 34px !important;
-
-          max-width: 39px !important;
-
-          object-fit: contain !important;
-        }
-
-        /* SEARCH */
-
-        .employee-search {
-          width: 100% !important;
-
-          max-width: none !important;
-
-          min-height: 42px !important;
-
-          margin: 0 !important;
-        }
-      }
-
-      /* =========================================================
-   VERY SMALL MOBILE
-========================================================= */
-
-      @media screen and (max-width: 400px) {
-        .navbar-brand {
-          width: 100px !important;
-          max-width: 100px !important;
-
-          flex-basis: 100px !important;
-
-          font-size: 9px !important;
-        }
-
-        .navbar-welcome {
-          font-size: 9px !important;
-        }
-
-        .navbar-logout {
-          min-width: 58px !important;
-          width: 58px !important;
-
-          font-size: 9px !important;
-        }
-
-        .dashboard-title {
-          padding-right: 78px !important;
-
-          min-height: 60px !important;
-        }
-
-        .dashboard-title h1 {
-          font-size: 20px !important;
-        }
-
-        .dashboard-title p {
-          font-size: 10px !important;
-        }
-
-        .mobile-logo {
-          width: 72px !important;
-          height: 52px !important;
-        }
-
-        .mobile-logo img {
-          height: 30px !important;
-          max-width: 34px !important;
-        }
-      }
-    </style>
+    <title>ADMIN DASHBOARD</title>
   </head>
 
   <body>
@@ -492,9 +160,7 @@
 
                     <button
                       type="button"
-                      onclick="
-                        filterDivision('ADMINISTRATIVE DIVISION')
-                      "
+                      onclick="filterDivision('ADMINISTRATIVE DIVISION')"
                     >
                       Administrative Division
                     </button>
@@ -1509,119 +1175,6 @@
     <!-- =========================================================
      EDIT SECTION DROPDOWN CSS
 ========================================================= -->
-
-    <style>
-      .edit-section-dropdown {
-        position: relative;
-        width: 100%;
-      }
-
-      .edit-section-select {
-        width: 100%;
-
-        min-height: 46px;
-
-        padding: 12px 14px;
-
-        border: 1px solid #d9dfe8;
-
-        border-radius: 8px;
-
-        background: #fff;
-
-        color: #333;
-
-        display: flex;
-
-        align-items: center;
-
-        justify-content: space-between;
-
-        gap: 10px;
-
-        cursor: pointer;
-
-        font: inherit;
-
-        text-align: left;
-      }
-
-      .edit-section-select i {
-        transition: transform 0.2s ease;
-
-        flex-shrink: 0;
-      }
-
-      .edit-section-dropdown.active .edit-section-select i {
-        transform: rotate(180deg);
-      }
-
-      .edit-section-menu {
-        position: absolute;
-
-        left: 0;
-        right: 0;
-
-        top: calc(100% + 5px);
-
-        display: none;
-
-        max-height: 210px;
-
-        overflow-y: auto;
-
-        background: #fff;
-
-        border: 1px solid #d9dfe8;
-
-        border-radius: 8px;
-
-        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.15);
-
-        z-index: 10001;
-
-        padding: 5px;
-      }
-
-      .edit-section-dropdown.active .edit-section-menu {
-        display: block;
-      }
-
-      .edit-section-menu button {
-        width: 100%;
-
-        border: 0;
-
-        background: transparent;
-
-        padding: 11px 12px;
-
-        border-radius: 6px;
-
-        text-align: left;
-
-        cursor: pointer;
-
-        font: inherit;
-
-        color: #333;
-      }
-
-      .edit-section-menu button:hover {
-        background: #f0f4f9;
-      }
-
-      .edit-section-menu::-webkit-scrollbar {
-        width: 7px;
-      }
-
-      .edit-section-menu::-webkit-scrollbar-thumb {
-        background: #aeb8c5;
-
-        border-radius: 10px;
-      }
-    </style>
-
     <!-- =========================================================
      EMPLOYEE ACTION FUNCTIONS
 ========================================================= -->
@@ -1723,6 +1276,12 @@
       }
     </script>
 
+    <!-- =========================================================
+     FLOATING ACTION CLICK-THROUGH FIX
+     The floating-actions wrapper should not block clicks on the
+     dashboard behind it. Only its actual controls and modals
+     should receive pointer events.
+========================================================= -->
     <!-- =========================================================
      FLOATING ACTION BUTTON
 ========================================================= -->
@@ -2006,10 +1565,7 @@
                     Committee Affairs Section
                   </button>
 
-                  <button
-                    type="button"
-                    data-value="Special Committee Section"
-                  >
+                  <button type="button" data-value="Special Committee Section">
                     Special Committee Section
                   </button>
 
@@ -2364,7 +1920,6 @@
               <div
                 class="plantilla-field full-width"
                 id="plantillaOtherLeaveContainer"
-                style="display: none"
               >
                 <label> Specify Other Leave </label>
 
@@ -2483,7 +2038,6 @@
                 <div
                   class="plantilla-field full-width"
                   id="plantillaAbroadContainer"
-                  style="display: none"
                 >
                   <label> Specify Place Abroad </label>
 
@@ -2497,11 +2051,7 @@
             </div>
 
             <!-- SICK LEAVE DETAILS -->
-            <div
-              class="plantilla-section"
-              id="plantillaSickSection"
-              style="display: none"
-            >
+            <div class="plantilla-section" id="plantillaSickSection">
               <div class="plantilla-section-title">
                 <i class="fa-solid fa-notes-medical"></i>
 
@@ -2529,7 +2079,6 @@
                 <div
                   class="plantilla-field full-width"
                   id="plantillaSickSpecifyContainer"
-                  style="display: none"
                 >
                   <label> Specify Illness </label>
 
@@ -2843,362 +2392,6 @@
     <!-- =========================================================
      DTR MODAL CSS
 ========================================================= -->
-
-    <style>
-      .dtr-modal-overlay {
-        position: fixed;
-
-        inset: 0;
-
-        display: none;
-
-        align-items: center;
-
-        justify-content: center;
-
-        padding: 20px;
-
-        background: rgba(0, 0, 0, 0.55);
-
-        backdrop-filter: blur(3px);
-
-        z-index: 9999;
-      }
-
-      .dtr-modal,
-      .dtr-result-modal {
-        background: #fff;
-
-        border-radius: 18px;
-
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
-
-        animation: dtrModalIn 0.2s ease-out;
-      }
-
-      .dtr-modal {
-        width: min(520px, 100%);
-
-        overflow: hidden;
-      }
-
-      @keyframes dtrModalIn {
-        from {
-          opacity: 0;
-          transform: translateY(15px) scale(0.98);
-        }
-
-        to {
-          opacity: 1;
-          transform: translateY(0) scale(1);
-        }
-      }
-
-      .dtr-modal-header {
-        display: flex;
-
-        align-items: center;
-
-        justify-content: space-between;
-
-        padding: 22px 24px;
-
-        border-bottom: 1px solid #e9edf2;
-      }
-
-      .dtr-modal-title {
-        display: flex;
-
-        align-items: center;
-
-        gap: 13px;
-      }
-
-      .dtr-modal-icon {
-        width: 45px;
-
-        height: 45px;
-
-        display: flex;
-
-        align-items: center;
-
-        justify-content: center;
-
-        border-radius: 12px;
-
-        background: #075ca8;
-
-        color: #fff;
-
-        font-size: 19px;
-      }
-
-      .dtr-modal-title h2 {
-        margin: 0;
-
-        font-size: 20px;
-
-        color: #063b73;
-      }
-
-      .dtr-modal-title p {
-        margin: 4px 0 0;
-
-        color: #718096;
-
-        font-size: 13px;
-      }
-
-      .dtr-modal-close {
-        border: 0;
-
-        background: transparent;
-
-        color: #718096;
-
-        font-size: 22px;
-
-        cursor: pointer;
-
-        width: 36px;
-
-        height: 36px;
-
-        border-radius: 8px;
-      }
-
-      .dtr-modal-close:hover {
-        background: #f1f4f8;
-
-        color: #c92127;
-      }
-
-      .dtr-modal-body {
-        padding: 25px 24px;
-      }
-
-      .dtr-upload-area {
-        min-height: 230px;
-
-        border: 2px dashed #b9c7d8;
-
-        border-radius: 14px;
-
-        display: flex;
-
-        flex-direction: column;
-
-        align-items: center;
-
-        justify-content: center;
-
-        text-align: center;
-
-        padding: 25px;
-
-        cursor: pointer;
-
-        transition: 0.2s ease;
-      }
-
-      .dtr-upload-area:hover {
-        border-color: #075ca8;
-
-        background: #f6faff;
-      }
-
-      .dtr-upload-area > i {
-        font-size: 42px;
-
-        color: #075ca8;
-
-        margin-bottom: 12px;
-      }
-
-      .dtr-upload-area strong {
-        color: #063b73;
-
-        font-size: 17px;
-      }
-
-      .dtr-upload-area span {
-        margin-top: 5px;
-
-        color: #5f6b7a;
-
-        font-size: 14px;
-      }
-
-      .dtr-upload-area small {
-        margin-top: 10px;
-
-        color: #8a96a3;
-
-        font-size: 12px;
-      }
-
-      .dtr-selected-file {
-        max-width: 100%;
-
-        margin-top: 14px !important;
-
-        padding: 7px 12px;
-
-        border-radius: 7px;
-
-        background: #eef4fa;
-
-        color: #075ca8 !important;
-
-        font-weight: 600;
-
-        overflow: hidden;
-
-        text-overflow: ellipsis;
-
-        white-space: nowrap;
-      }
-
-      .dtr-modal-footer {
-        display: flex;
-
-        justify-content: flex-end;
-
-        gap: 10px;
-
-        padding: 18px 24px;
-
-        border-top: 1px solid #e9edf2;
-      }
-
-      .dtr-cancel-btn,
-      .dtr-submit-btn,
-      .dtr-result-btn {
-        border: 0;
-
-        border-radius: 8px;
-
-        padding: 11px 18px;
-
-        font-weight: 600;
-
-        cursor: pointer;
-
-        transition: 0.2s ease;
-      }
-
-      .dtr-cancel-btn {
-        background: #edf0f4;
-
-        color: #4a5568;
-      }
-
-      .dtr-submit-btn {
-        background: #c92127;
-
-        color: #fff;
-      }
-
-      .dtr-submit-btn:hover {
-        background: #a91c21;
-      }
-
-      .dtr-result-modal {
-        width: min(390px, 100%);
-
-        padding: 32px 28px 28px;
-
-        text-align: center;
-      }
-
-      .dtr-result-icon {
-        width: 68px;
-
-        height: 68px;
-
-        margin: 0 auto 16px;
-
-        border-radius: 50%;
-
-        display: flex;
-
-        align-items: center;
-
-        justify-content: center;
-
-        font-size: 34px;
-      }
-
-      .dtr-result-icon.success {
-        background: #e8f7ee;
-
-        color: #1c9b54;
-      }
-
-      .dtr-result-icon.error {
-        background: #fdebec;
-
-        color: #c92127;
-      }
-
-      .dtr-result-modal h2 {
-        margin: 0;
-
-        color: #063b73;
-
-        font-size: 21px;
-      }
-
-      .dtr-result-modal p {
-        margin: 10px 0 22px;
-
-        color: #687586;
-
-        font-size: 14px;
-
-        line-height: 1.5;
-      }
-
-      .dtr-result-btn {
-        min-width: 100px;
-
-        background: #075ca8;
-
-        color: #fff;
-      }
-
-      .dtr-result-btn:hover {
-        background: #063b73;
-      }
-
-      @media (max-width: 600px) {
-        .dtr-modal-overlay {
-          padding: 12px;
-        }
-
-        .dtr-modal-header,
-        .dtr-modal-body {
-          padding: 18px;
-        }
-
-        .dtr-modal-footer {
-          padding: 15px 18px;
-
-          flex-direction: column-reverse;
-        }
-
-        .dtr-upload-area {
-          min-height: 200px;
-        }
-
-        .dtr-cancel-btn,
-        .dtr-submit-btn {
-          width: 100%;
-        }
-      }
-    </style>
-
     <!-- =========================================================
      DELETE EMPLOYEE MODAL
 ========================================================= -->
@@ -3482,93 +2675,6 @@
     <!-- =========================================================
      DIVISION FILTER CSS
 ========================================================= -->
-
-    <style>
-      .division-filter-menu.floating-filter-open {
-        display: block !important;
-
-        position: fixed !important;
-
-        max-height: 280px !important;
-
-        overflow-y: auto !important;
-
-        overflow-x: hidden !important;
-
-        background: #ffffff;
-
-        border: 1px solid #e5e7eb;
-
-        border-radius: 8px;
-
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-
-        padding: 6px;
-
-        z-index: 999999 !important;
-
-        box-sizing: border-box;
-
-        scrollbar-width: thin;
-
-        scrollbar-color: #075ca8 #eef2f6;
-      }
-
-      .division-filter-menu.floating-filter-open::-webkit-scrollbar {
-        width: 7px;
-      }
-
-      .division-filter-menu.floating-filter-open::-webkit-scrollbar-track {
-        background: #eef2f6;
-
-        border-radius: 10px;
-      }
-
-      .division-filter-menu.floating-filter-open::-webkit-scrollbar-thumb {
-        background: #075ca8;
-
-        border-radius: 10px;
-      }
-
-      .division-filter-menu.floating-filter-open::-webkit-scrollbar-thumb:hover {
-        background: #063b73;
-      }
-
-      .division-filter-menu.floating-filter-open button {
-        width: 100%;
-
-        box-sizing: border-box;
-
-        white-space: normal;
-      }
-
-      @media screen and (max-width: 700px) {
-        .division-filter-menu.floating-filter-open {
-          width: min(280px, calc(100vw - 20px)) !important;
-
-          max-height: 240px !important;
-
-          font-size: 12px;
-        }
-
-        .division-filter-menu.floating-filter-open button {
-          padding: 11px 12px;
-
-          font-size: 12px;
-
-          min-height: 40px;
-        }
-      }
-
-      @media screen and (max-width: 400px) {
-        .division-filter-menu.floating-filter-open {
-          width: calc(100vw - 20px) !important;
-
-          max-height: 220px !important;
-        }
-      }
-    </style>
-
     <!-- =========================================================
      MAIN JAVASCRIPT
 ========================================================= -->
@@ -3807,19 +2913,19 @@
           '<div class="action-menu">' +
           '<button type="button" onclick="viewEmployee(\'' +
           employeeNo +
-          '\')">' +
+          "')\">" +
           '<i class="fa-solid fa-eye"></i>' +
           "<span> View Details </span>" +
           "</button>" +
           '<button type="button" onclick="editEmployee(\'' +
           employeeNo +
-          '\')">' +
+          "')\">" +
           '<i class="fa-solid fa-pen"></i>' +
           "<span> Edit </span>" +
           "</button>" +
           '<button type="button" class="delete-action" onclick="deleteEmployee(\'' +
           employeeNo +
-          '\')">' +
+          "')\">" +
           '<i class="fa-solid fa-trash"></i>' +
           "<span> Delete </span>" +
           "</button>" +
